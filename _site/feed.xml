@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home</title>
+    <title>ShanYJ</title>
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 03 Dec 2015 13:58:01 +0800</pubDate>
-    <lastBuildDate>Thu, 03 Dec 2015 13:58:01 +0800</lastBuildDate>
+    <pubDate>Fri, 04 Dec 2015 05:21:41 +0800</pubDate>
+    <lastBuildDate>Fri, 04 Dec 2015 05:21:41 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -325,11 +325,197 @@ except SystemExit:
 &lt;/code&gt;&lt;/pre&gt;
 </description>
         <pubDate>Tue, 07 Jul 2015 04:14:54 +0800</pubDate>
-        <link>/2015/07/07/Syncing-a-fork/</link>
-        <guid isPermaLink="true">/2015/07/07/Syncing-a-fork/</guid>
+        <link>/2015/07/07/APScheduler/</link>
+        <guid isPermaLink="true">/2015/07/07/APScheduler/</guid>
         
         
         <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>使用Github＋jekyll搭建Blog</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#jekyll&quot; id=&quot;markdown-toc-jekyll&quot;&gt;jekyll&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#ruby&quot; id=&quot;markdown-toc-ruby&quot;&gt;安装ruby&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#gem&quot; id=&quot;markdown-toc-gem&quot;&gt;安装gem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll-1&quot; id=&quot;markdown-toc-jekyll-1&quot;&gt;安装jekyll&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#markdown&quot; id=&quot;markdown-toc-markdown&quot;&gt;本地编写markdown&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;本地启动博客&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git&quot; id=&quot;markdown-toc-git&quot;&gt;推送至Git&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#blog&quot; id=&quot;markdown-toc-blog&quot;&gt;访问Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;遇到的问题&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;jekyll&quot;&gt;jekyll&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;jekyll&lt;/strong&gt; ：将纯文本转化为静态网站和博客。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;ruby&quot;&gt;安装ruby&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过 apt-get 安装ruby&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo apt-get update
+sudo apt-get install ruby
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查看ruby版本&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+ruby -v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;gem&quot;&gt;安装gem&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过 apt-get 安装gem&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo apt-get install ruby-gems
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;更改gem源&lt;/strong&gt; : 在安装gem的过程中会出现找不到资源的error，我们需要从另外一个gem服务器下载安装。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem source -r https://rubygems.org/
+gem source -a https://ruby.taobao.org
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;查看gem源&lt;/strong&gt; : 使用以下命令查看gem源是否更改成功。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem sources -l
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;jekyll-1&quot;&gt;安装jekyll&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;安装jekyll&lt;/strong&gt; :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;安装rdiscount&lt;/strong&gt; : 这个是用来解析Markdown标记的解析包。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem install rdiscount
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;markdown&quot;&gt;本地编写markdown&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;一定要确保你的文章要保存为UTF-8 无 BOM 格式才行。 文件名称不能是中文。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当然也可以去Jekyll themes等网站下载已有模版进行改写。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;本地启动博客&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;编译md文件，启动博客：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;访问http://127.0.0.1:4000 , 即可查看blog效果。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;git&quot;&gt;推送至Git&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在Git上创建新项目，具体步骤此处不再赘述。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将本地工程推送至Git&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;mkdir新文件夹,将工程移入,执行下列语句。&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code&gt;
+git init
+git add .
+git commit -m &quot;up&quot;
+git remote add origin git@github.com:shanyj/shanyj.github.io.git
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;blog&quot;&gt;访问Blog&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;以此项目为例，直接访问shanyj.github.io即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;遇到的问题&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;从jekyll themes上clone的代码，大部分需要在执行 jekyll serve 前执行 bundle install&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;bundle安装：
+        &lt;pre&gt;&lt;code&gt;
+gem install bundle
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;执行：
+        &lt;pre&gt;&lt;code&gt;
+bundle install
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 16 Jun 2015 03:17:45 +0800</pubDate>
+        <link>/2015/06/16/Set-up-Blog/</link>
+        <guid isPermaLink="true">/2015/06/16/Set-up-Blog/</guid>
+        
+        
+        <category>前端杂谈</category>
         
       </item>
     
