@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ShanYJ</title>
-	<meta name="description" content="╭(╯^╰)╮吉吉的博客">
+	<title>Django 扩展manage.py命令</title>
+	<meta name="description" content="Django 扩展manage.py命令">
 	
-	<link rel="canonical" href="/">
+	<link rel="canonical" href="/2015/04/19/Django-manage/">
 	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
 	
 	<!-- <link rel="stylesheet" href="/css/main.css"> -->
@@ -97,160 +97,98 @@
 
 
     <div id="main" class="container main">
-      <div id="index" class="row">
-  <div class="col-sm-9">
-    <div class="post-area">
-      <!-- small button -->
-     <!--  <p class="pull-right visible-xs">
-       <button>toggle</button>
-     </p> -->
-      <div class="post-list-header">
-        Posts
-      </div>
-      <div class="post-list-body">
-        
-        <div class="all-posts" post-cate="All">
-          
-            <a class="post-list-item" href="/2015/07/07/APScheduler/">
-              <h2>
-              Python APScheduler定时任务框架
-              </h2>
-              <span class="">Jul 7, 2015</span>
-            </a>
-          
-            <a class="post-list-item" href="/2015/06/19/Django-Databases/">
-              <h2>
-              Django 多数据库
-              </h2>
-              <span class="">Jun 19, 2015</span>
-            </a>
-          
-            <a class="post-list-item" href="/2015/04/19/Django-manage/">
-              <h2>
-              Django 扩展manage.py命令
-              </h2>
-              <span class="">Apr 19, 2015</span>
-            </a>
-          
-            <a class="post-list-item" href="/2015/04/19/Django-pageinator/">
-              <h2>
-              Django pageinator 分页
-              </h2>
-              <span class="">Apr 19, 2015</span>
-            </a>
-          
-            <a class="post-list-item" href="/2015/04/16/Set-up-Blog/">
-              <h2>
-              使用Github＋jekyll搭建Blog
-              </h2>
-              <span class="">Apr 16, 2015</span>
-            </a>
-          
-        </div>
-        <!-- <div class="posts-in-categories"> -->
-        
-          <div post-cate="前端杂谈">
-            
-              
-                
-              
-            
-              
-                
-                  <a href="/2015/04/16/Set-up-Blog/" class="post-list-item">
-                    <h2>
-                    使用Github＋jekyll搭建Blog
-                    </h2>
-                    <span class="">Apr 16, 2015</span>
-                  </a>
-                
-              
-            
-          </div>
-        
-          <div post-cate="Django">
-            
-              
-                
-              
-            
-              
-                
-                  <a href="/2015/06/19/Django-Databases/" class="post-list-item">
-                    <h2>
-                    Django 多数据库
-                    </h2>
-                    <span class="">Jun 19, 2015</span>
-                  </a>
-                
-              
-                
-                  <a href="/2015/04/19/Django-manage/" class="post-list-item">
-                    <h2>
-                    Django 扩展manage.py命令
-                    </h2>
-                    <span class="">Apr 19, 2015</span>
-                  </a>
-                
-              
-                
-                  <a href="/2015/04/19/Django-pageinator/" class="post-list-item">
-                    <h2>
-                    Django pageinator 分页
-                    </h2>
-                    <span class="">Apr 19, 2015</span>
-                  </a>
-                
-              
-            
-          </div>
-        
-          <div post-cate="Python">
-            
-              
-                
-              
-            
-              
-                
-                  <a href="/2015/07/07/APScheduler/" class="post-list-item">
-                    <h2>
-                    Python APScheduler定时任务框架
-                    </h2>
-                    <span class="">Jul 7, 2015</span>
-                  </a>
-                
-              
-            
-          </div>
-        
-        
-        <!-- </div> -->
-      </div>
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Django 扩展manage.py命令</h1>
+        <p>Apr 19, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#management" id="markdown-toc-management">management</a></li>
+      <li><a href="#basecommand" id="markdown-toc-basecommand">Basecommand类</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">运行</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>由于项目中添加了诸如文档、系统管理员这样的角色，因此需要执行命令来手动创建这些高权限账号，这就需要我们手动扩展manage.py命令，大致流程如下：</p>
+
+<hr />
+
+<h3 id="management">management</h3>
+
+<ul>
+  <li>
+    <p>所有需要扩展的manage命令都放在management的commands文件夹下，因此需要在应用中建立management文件夹，之后在该文件夹下建立commands文件夹</p>
+  </li>
+  <li>
+    <p>management和commands下都需要建立空的__init__.py文件</p>
+  </li>
+  <li>
+    <p>应用必须存在于INSTALLED_APPS中</p>
+  </li>
+  <li>
+    <p>commands下以  命令名.py  建立python文件，一个命令对应一个文件</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="basecommand">Basecommand类</h3>
+
+<ul>
+  <li>
+    <p>命令名.py 文件中编写格式如下：</p>
+
+    <pre><code>
+  from django.core.management.base import BaseCommand
+  class Command(BaseCommand):
+      def handle(self, *args, **options):
+          print args
+          print options
+  </code></pre>
+
+    <ul>
+      <li>注意类名为Command、继承BaseCommand、方法名为handle</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-1">运行</h3>
+
+<ul>
+  <li>进入 manage.py 目录下，运行 python manage.py hello a b c name＝shanyj</li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/04/19/Django-manage" data-title="Django 扩展manage.py命令" data-url="gaohaoyang.github.io/2015/04/19/Django-manage/"></div>
+      
+      <!-- 多说评论框 end -->
     </div>
   </div>
-  <div class="col-sm-3">
-    <div class="shadow-corner-curl hidden-xs">
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
       <div class="categories-list-header">
-        Categories
+        Content
       </div>
-      
-      <a href="javascript:;" class="categories-list-item" cate="All">
-        All<span class="my-badge"> 5</span>
-      </a>
-      
-        <a href="javascript:;" class="categories-list-item" cate="前端杂谈">
-          前端杂谈 <span class="my-badge">1</span>
-        </a>
-      
-        <a href="javascript:;" class="categories-list-item" cate="Django">
-          Django <span class="my-badge">3</span>
-        </a>
-      
-        <a href="javascript:;" class="categories-list-item" cate="Python">
-          Python <span class="my-badge">1</span>
-        </a>
-      
+      <div class="content-text"></div>
     </div>
   </div>
 </div>

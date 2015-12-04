@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Dec 2015 05:16:19 +0800</pubDate>
-    <lastBuildDate>Sat, 05 Dec 2015 05:16:19 +0800</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2015 05:54:58 +0800</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2015 05:54:58 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,79 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 扩展manage.py命令</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#management&quot; id=&quot;markdown-toc-management&quot;&gt;management&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#basecommand&quot; id=&quot;markdown-toc-basecommand&quot;&gt;Basecommand类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;运行&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;由于项目中添加了诸如文档、系统管理员这样的角色，因此需要执行命令来手动创建这些高权限账号，这就需要我们手动扩展manage.py命令，大致流程如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;management&quot;&gt;management&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;所有需要扩展的manage命令都放在management的commands文件夹下，因此需要在应用中建立management文件夹，之后在该文件夹下建立commands文件夹&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;management和commands下都需要建立空的__init__.py文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;应用必须存在于INSTALLED_APPS中&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;commands下以  命令名.py  建立python文件，一个命令对应一个文件&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;basecommand&quot;&gt;Basecommand类&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;命令名.py 文件中编写格式如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  from django.core.management.base import BaseCommand
+  class Command(BaseCommand):
+      def handle(self, *args, **options):
+          print args
+          print options
+  &lt;/code&gt;&lt;/pre&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;注意类名为Command、继承BaseCommand、方法名为handle&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;运行&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;进入 manage.py 目录下，运行 python manage.py hello a b c name＝shanyj&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 19 Apr 2015 05:02:28 +0800</pubDate>
+        <link>/2015/04/19/Django-manage/</link>
+        <guid isPermaLink="true">/2015/04/19/Django-manage/</guid>
         
         
         <category>Django</category>
