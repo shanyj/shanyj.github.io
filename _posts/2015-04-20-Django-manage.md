@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django 扩展manage.py命令"
-date:   2015-04-18 21:02:28
+date:   2015-04-20 19:56:09
 categories: Django
 excerpt: Django 扩展manage.py命令
 ---

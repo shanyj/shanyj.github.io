@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Dec 2015 05:54:58 +0800</pubDate>
-    <lastBuildDate>Sat, 05 Dec 2015 05:54:58 +0800</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2015 06:26:01 +0800</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2015 06:26:01 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -523,6 +523,92 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
       </item>
     
       <item>
+        <title>Django login/lgout 登录和登出</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#loginlgout&quot; id=&quot;markdown-toc-loginlgout&quot;&gt;login/lgout方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;登录模版&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#csrf&quot; id=&quot;markdown-toc-csrf&quot;&gt;CSRF&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;需要做用户登录，于是研究了下Django的登录和登出逻辑，发现还是挺简单实用的。具体的登录和登出实现如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;loginlgout&quot;&gt;login/lgout方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Django已经为我们封装好了login和lgout函数，只需要我们在url.py中直接调用即可，具体使用方法如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  from django.contrib.auth.views import login, logout
+
+  urlpatterns = patterns(&#39;&#39;,
+      (r&#39;^accounts/login/$&#39;, login),
+      (r&#39;^accounts/logout/$&#39;, logout),
+  )
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;按照常规，登录url为accounts/login/，登出为accounts/logout/&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;登录模版&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;login模版地址默认为template／registration／login.html&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;需要在login模版中编写登录表单，格式如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  &amp;lt; form action=&quot;&quot; method=&quot;post&quot;&amp;gt;{ % csrf_token % }
+  &amp;lt; label for=&quot;username&quot;&amp;gt;User name:
+  &amp;lt; input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot; id=&quot;username&quot;&amp;gt;
+  &amp;lt; label for=&quot;password&quot;&amp;gt;Password:
+  &amp;lt; input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; id=&quot;password&quot;&amp;gt;
+  &amp;lt; input type=&quot;submit&quot; value=&quot;login&quot; /&amp;gt;
+  &amp;lt; /form&amp;gt;
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;重定向&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;登录验证成功后，默认会自动重定向到accounts／profile，需要编写该url对应的view函数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;csrf&quot;&gt;CSRF&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;模版表单中通常加入｛％ csrf_token ％｝确保安全，同时在settings中间键中添加csrf中间键&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 24 Apr 2015 04:41:29 +0800</pubDate>
+        <link>/2015/04/24/Django-login-and-lgout/</link>
+        <guid isPermaLink="true">/2015/04/24/Django-login-and-lgout/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
         <title>Django 扩展manage.py命令</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
@@ -586,9 +672,9 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
   &lt;li&gt;进入 manage.py 目录下，运行 python manage.py hello a b c name＝shanyj&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Sun, 19 Apr 2015 05:02:28 +0800</pubDate>
-        <link>/2015/04/19/Django-manage/</link>
-        <guid isPermaLink="true">/2015/04/19/Django-manage/</guid>
+        <pubDate>Tue, 21 Apr 2015 03:56:09 +0800</pubDate>
+        <link>/2015/04/21/Django-manage/</link>
+        <guid isPermaLink="true">/2015/04/21/Django-manage/</guid>
         
         
         <category>Django</category>
