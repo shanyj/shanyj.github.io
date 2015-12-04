@@ -2,9 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a59405db-4732-4960-84ef-0cfe8522ac7e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-04-18-Django-pageinator.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-15-Set-up-Blog.md" afterPath="$PROJECT_DIR$/_posts/2015-04-15-Set-up-Blog.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md" afterPath="$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md" afterPath="$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/16/Set-up-Blog/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/16/Set-up-Blog/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/19/Django-Databases/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/19/Django-Databases/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/07/APScheduler/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/07/APScheduler/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
@@ -26,11 +32,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="2015-06-15-Set-up-Blog.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-06-15-Set-up-Blog.md">
+      <file leaf-file-name="2015-04-15-Set-up-Blog.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-04-15-Set-up-Blog.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-58.333332">
-              <caret line="105" column="4" selection-start-line="105" selection-start-column="4" selection-end-line="111" selection-end-column="17" />
+            <state vertical-scroll-proportion="-15.851851">
+              <caret line="34" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-04-18-Django-pageinator.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-04-18-Django-pageinator.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.46536413">
+              <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-06-18-Django-Databases.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.7777777">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -39,18 +65,8 @@
       <file leaf-file-name="2015-07-06-APScheduler.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2015-06-18-Django-Databases.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.0497336">
-              <caret line="152" column="71" selection-start-line="152" selection-start-column="71" selection-end-line="152" selection-end-column="71" />
+            <state vertical-scroll-proportion="-7.7777777">
+              <caret line="14" column="101" selection-start-line="14" selection-start-column="101" selection-end-line="14" selection-end-column="101" />
               <folding />
             </state>
           </provider>
@@ -67,8 +83,10 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/../../11111111.html" />
-        <option value="$PROJECT_DIR$/_posts/2015-06-15-Set-up-Blog.md" />
         <option value="$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-06-15-Set-up-Blog.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-04-18-Django-pageinator.md" />
       </list>
     </option>
   </component>
@@ -104,7 +122,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -153,6 +170,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -328,7 +346,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -336,7 +353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -344,7 +360,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2920354">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -352,30 +367,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.026548672">
           <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-15-Set-up-Blog.md">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-58.333332">
-          <caret line="105" column="4" selection-start-line="105" selection-start-column="4" selection-end-line="111" selection-end-column="17" />
+        <state vertical-scroll-proportion="-7.7777777">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="3" />
+        <state vertical-scroll-proportion="-7.7777777">
+          <caret line="14" column="101" selection-start-line="14" selection-start-column="101" selection-end-line="14" selection-end-column="101" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-04-15-Set-up-Blog.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.0497336">
-          <caret line="152" column="71" selection-start-line="152" selection-start-column="71" selection-end-line="152" selection-end-column="71" />
+        <state vertical-scroll-proportion="-15.851851">
+          <caret line="34" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-04-18-Django-pageinator.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.46536413">
+          <caret line="62" column="17" selection-start-line="62" selection-start-column="17" selection-end-line="62" selection-end-column="17" />
           <folding />
         </state>
       </provider>

@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>使用Github＋jekyll搭建Blog</title>
-	<meta name="description" content="Github＋jekyll＋markdown搭建Blog。">
+	<title>Django pageinator 分页</title>
+	<meta name="description" content="Django pageinator 分页">
 	
-	<link rel="canonical" href="/2015/06/16/Set-up-Blog/">
+	<link rel="canonical" href="/2015/04/19/Django-pageinator/">
 	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
 	
 	<!-- <link rel="stylesheet" href="/css/main.css"> -->
@@ -101,186 +101,140 @@
   <div id="myArticle" class="col-sm-9">
     <div class="post-area post">
       <header>
-        <h1>使用Github＋jekyll搭建Blog</h1>
-        <p>Jun 16, 2015</p>
+        <h1>Django pageinator 分页</h1>
+        <p>Apr 19, 2015</p>
       </header>
       <hr>
       <article>
         <ul id="markdown-toc">
   <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
-      <li><a href="#ruby" id="markdown-toc-ruby">安装ruby</a></li>
-      <li><a href="#gem" id="markdown-toc-gem">安装gem</a></li>
-      <li><a href="#jekyll" id="markdown-toc-jekyll">安装jekyll</a></li>
-      <li><a href="#markdown" id="markdown-toc-markdown">本地编写markdown</a></li>
-      <li><a href="#section-1" id="markdown-toc-section-1">本地启动博客</a></li>
-      <li><a href="#git" id="markdown-toc-git">推送至Git</a></li>
-      <li><a href="#blog" id="markdown-toc-blog">访问Blog</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">遇到的问题</a></li>
+      <li><a href="#pageinator" id="markdown-toc-pageinator">pageinator类</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">类方法</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">显示</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">翻页</a></li>
     </ul>
   </li>
 </ul>
 
 <h2 id="section">序</h2>
 
-<p>学习过程中，存储在本地的资料、随笔越来越多，碰巧今日无事，便萌生了搭建个blog。早就听闻Github＋jekyll功能强大，埋头研究了一下午终于撘了起来，
-具体过程如下。</p>
+<p>项目中显示文件列表，当文件过多时页面显示不美观，且从数据库读取数据代价很大，就要用到分页的技术，在文档系统项目中测试了下分页技术，感觉挺实用的。具体配置如下：</p>
 
 <hr />
 
-<h3 id="ruby">安装ruby</h3>
+<h3 id="pageinator">pageinator类</h3>
 
 <ul>
-  <li>通过 apt-get 安装ruby</li>
+  <li>分页用到了pageinator类，可以看一下该类的两个例子</li>
 </ul>
 
 <pre><code>
-sudo apt-get update
-sudo apt-get install ruby
+current_page = int(request.GET.get('current_page','1')
+repop=Paginator(repopage,5)
+＃第一个参数是要分页的序列，第二个参数是每页的条目数
+try:
+    repos=repop.page(current_page)
+except:
+    pass
 </code></pre>
 
-<ul>
-  <li>查看ruby版本</li>
-</ul>
-
 <pre><code>
-ruby -v
-</code></pre>
-
-<hr />
-
-<h3 id="gem">安装gem</h3>
-
-<ul>
-  <li>通过 apt-get 安装gem</li>
-</ul>
-
-<pre><code>
-sudo apt-get install ruby-gems
-</code></pre>
-
-<ul>
-  <li><strong>更改gem源</strong> : 在安装gem的过程中会出现找不到资源的error，我们需要从另外一个gem服务器下载安装。</li>
-</ul>
-
-<pre><code>
-gem source -r https://rubygems.org/
-gem source -a https://ruby.taobao.org
-</code></pre>
-
-<ul>
-  <li><strong>查看gem源</strong> : 使用以下命令查看gem源是否更改成功。</li>
-</ul>
-
-<pre><code>
-gem sources -l
+&gt;&gt;&gt; objects = ['john', 'paul', 'george', 'ringo']
+&gt;&gt;&gt; p = Paginator(objects, 2)
+&gt;&gt;&gt; p.count  //总数
+4
+&gt;&gt;&gt; p.num_pages  //几页
+2
+&gt;&gt;&gt; p.page_range  //页的范围
 </code></pre>
 
 <hr />
 
-<h3 id="jekyll">安装jekyll</h3>
+<h3 id="section-1">类方法</h3>
 
 <ul>
-  <li><strong>安装jekyll</strong> :</li>
+  <li>Page</li>
+</ul>
+
+<p>一般由Paginator.page(number)生成，如Page＝Paginator(repopage,5).page(current_page)</p>
+
+<ul>
+  <li>Page.has_next()</li>
+</ul>
+
+<p>如果下一页存在，返回 True。</p>
+
+<ul>
+  <li>Page.has_previous()</li>
+</ul>
+
+<p>如果前一页存在返回 True</p>
+
+<ul>
+  <li>Page.has_other_pages()</li>
+</ul>
+
+<p>如果上一页面或者下一页存在，返回 True</p>
+
+<ul>
+  <li>Page.next_page_number()</li>
+</ul>
+
+<p>返回下一页的索引，这个函数比较傻（不管下一页是否存在，都是简单的+1）</p>
+
+<ul>
+  <li>Page.previous_page_number()</li>
+</ul>
+
+<p>返回上一页的索引，其他同上</p>
+
+<ul>
+  <li>Page.start_index()</li>
+</ul>
+
+<p>返回当前页，第一个对象的索引。</p>
+
+<ul>
+  <li>Page.end_index()</li>
+</ul>
+
+<p>道理同上。</p>
+
+<hr />
+
+<h3 id="section-2">显示</h3>
+
+<ul>
+  <li>使用下列语句可以逐条显示每页中的纪录</li>
 </ul>
 
 <pre><code>
-gem install jekyll
+{ % for blog in repos % }
+ { { blog.name } }
+ { { blog.content } }
+  ......
+{ % endfor % }
 </code></pre>
 
+<hr />
+
+<h3 id="section-3">翻页</h3>
+
 <ul>
-  <li><strong>安装rdiscount</strong> : 这个是用来解析Markdown标记的解析包。</li>
+  <li>通过  &lt; a &gt; 链接跳转实现</li>
 </ul>
 
 <pre><code>
-gem install rdiscount
+{ % if repos.has_previous % }
+&lt; a href="?word={ {word} }&amp;current_page={ { repos.previous_page_number } }" class='paginator' title='上一页'&gt;上一页&lt; /a&gt;
+{ % endif % }
+
+&lt; a href="?word={ {word} }&amp;current_page={ { current_page } }" class='paginator' title=''&gt;{ {current_page} }&lt; /a&gt;
+
+{ % if repos.has_next % }
+&lt; a href="?word={ {word} }&amp;current_page={ { repos.next_page_number } }" class='paginator' title='下一页'&gt;下一页&lt; /a&gt;
+{ % endif % }
 </code></pre>
-
-<hr />
-
-<h3 id="markdown">本地编写markdown</h3>
-
-<ul>
-  <li>
-    <p>一定要确保你的文章要保存为UTF-8 无 BOM 格式才行。 文件名称不能是中文。</p>
-  </li>
-  <li>
-    <p>当然也可以去Jekyll themes等网站下载已有模版进行改写。</p>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="section-1">本地启动博客</h3>
-
-<ul>
-  <li>编译md文件，启动博客：</li>
-</ul>
-
-<pre><code>
-jekyll serve
-</code></pre>
-
-<ul>
-  <li>访问http://127.0.0.1:4000 , 即可查看blog效果。</li>
-</ul>
-
-<hr />
-
-<h3 id="git">推送至Git</h3>
-
-<ul>
-  <li>
-    <p>在Git上创建新项目，具体步骤此处不再赘述。</p>
-  </li>
-  <li>
-    <p>将本地工程推送至Git</p>
-
-    <ul>
-      <li>
-        <p>mkdir新文件夹,将工程移入,执行下列语句。</p>
-
-        <pre><code>
-git init
-git add .
-git commit -m "up"
-git remote add origin git@github.com:shanyj/shanyj.github.io.git
-git push -u origin master
-</code></pre>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="blog">访问Blog</h3>
-
-<ul>
-  <li>以此项目为例，直接访问shanyj.github.io即可。</li>
-</ul>
-
-<hr />
-
-<h3 id="section-2">遇到的问题</h3>
-
-<ul>
-  <li>
-    <p>从jekyll themes上clone的代码，大部分需要在执行 jekyll serve 前执行 bundle install</p>
-
-    <ul>
-      <li>bundle安装：
-        <pre><code>
-gem install bundle
-</code></pre>
-      </li>
-      <li>执行：
-        <pre><code>
-bundle install
-</code></pre>
-      </li>
-    </ul>
-  </li>
-</ul>
 
       </article>
       <hr>
@@ -290,7 +244,7 @@ bundle install
     <div class="post-area post comment">
       <!-- 多说评论框 start -->
       
-      <div class="ds-thread" data-thread-key="/2015/06/16/Set-up-Blog" data-title="使用Github＋jekyll搭建Blog" data-url="gaohaoyang.github.io/2015/06/16/Set-up-Blog/"></div>
+      <div class="ds-thread" data-thread-key="/2015/04/19/Django-pageinator" data-title="Django pageinator 分页" data-url="gaohaoyang.github.io/2015/04/19/Django-pageinator/"></div>
       
       <!-- 多说评论框 end -->
     </div>

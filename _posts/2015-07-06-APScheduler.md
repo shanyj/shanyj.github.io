@@ -10,9 +10,9 @@ excerpt: Python APScheduler定时任务框架。
 {:toc}
 
 
-## APScheduler
+## 序
 
-**APScheduler**一个Python定时任务框架,可以用来实现date、interval和cron操作。
+之前的Django文档管理系统项目中，有文件设置过期时间的功能，其中删除是通过celery定时任务每日凌晨来实现的，今天回过头又找了找定时任务，发现了一个及其简便的定时任务框架：APScheduler。
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "使用Github＋jekyll搭建Blog"
-date:   2015-06-15 19:17:45
+date:   2015-04-15 19:17:45
 categories: 前端杂谈
 excerpt: Github＋jekyll＋markdown搭建Blog。
 ---
@@ -10,10 +10,11 @@ excerpt: Github＋jekyll＋markdown搭建Blog。
 {:toc}
 
 
-## jekyll
+## 序
 
 
-**jekyll** ：将纯文本转化为静态网站和博客。
+学习过程中，存储在本地的资料、随笔越来越多，碰巧今日无事，便萌生了搭建个blog。早就听闻Github＋jekyll功能强大，埋头研究了一下午终于撘了起来，
+具体过程如下。
 
 ---
 

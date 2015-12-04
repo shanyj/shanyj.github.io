@@ -5,32 +5,32 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 04 Dec 2015 05:56:14 +0800</pubDate>
-    <lastBuildDate>Fri, 04 Dec 2015 05:56:14 +0800</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2015 05:09:05 +0800</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2015 05:09:05 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
         <title>Python APScheduler定时任务框架</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#apscheduler&quot; id=&quot;markdown-toc-apscheduler&quot;&gt;APScheduler&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;组件&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;原则&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;常用方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;三种调度&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;时间格式&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;案例&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;组件&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;原则&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;常用方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;三种调度&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;时间格式&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;案例&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;apscheduler&quot;&gt;APScheduler&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;APScheduler&lt;/strong&gt;一个Python定时任务框架,可以用来实现date、interval和cron操作。&lt;/p&gt;
+&lt;p&gt;之前的Django文档管理系统项目中，有文件设置过期时间的功能，其中删除是通过celery定时任务每日凌晨来实现的，今天回过头又找了找定时任务，发现了一个及其简便的定时任务框架：APScheduler。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;安装&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;pip install apscheduler&lt;/li&gt;
@@ -38,7 +38,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;组件&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;组件&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -57,7 +57,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;原则&lt;/h3&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;原则&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -103,7 +103,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;常用方法&lt;/h3&gt;
+&lt;h3 id=&quot;section-4&quot;&gt;常用方法&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -156,7 +156,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()&lt;/li&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-4&quot;&gt;三种调度&lt;/h3&gt;
+&lt;h3 id=&quot;section-5&quot;&gt;三种调度&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -247,7 +247,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()&lt;/li&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;时间格式&lt;/h3&gt;
+&lt;h3 id=&quot;section-6&quot;&gt;时间格式&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Expression	Field	Description
 *	         any	Fire on every value
@@ -263,7 +263,7 @@ x,y,z	     any	Fire on any matching expression
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-6&quot;&gt;案例&lt;/h3&gt;
+&lt;h3 id=&quot;section-7&quot;&gt;案例&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -336,22 +336,24 @@ except SystemExit:
       <item>
         <title>Django 多数据库</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#django&quot; id=&quot;markdown-toc-django&quot;&gt;Django多数据库&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;配置数据库&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;配置数据库&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#class&quot; id=&quot;markdown-toc-class&quot;&gt;配置class&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#classsettings&quot; id=&quot;markdown-toc-classsettings&quot;&gt;将数据库class添加至settings&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;同步数据库&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;同步数据库&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#modelclass-meta&quot; id=&quot;markdown-toc-modelclass-meta&quot;&gt;model的class meta&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#sql&quot; id=&quot;markdown-toc-sql&quot;&gt;使用底层sql&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;django&quot;&gt;Django多数据库&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近发现手头Django项目比较乱，一个单独的数据库貌似已经无法满足需求了，就研究下Django多数据库的配置和操作，自己试了试果然行得通！具体配置要点如下。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;配置数据库&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;配置数据库&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;在settings中进行配置。&lt;/li&gt;
@@ -442,7 +444,7 @@ class appdb(object):
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;同步数据库&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;同步数据库&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;使用下列方法分别同步不同数据库：&lt;/li&gt;
@@ -521,24 +523,166 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
       </item>
     
       <item>
-        <title>使用Github＋jekyll搭建Blog</title>
+        <title>Django pageinator 分页</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#jekyll&quot; id=&quot;markdown-toc-jekyll&quot;&gt;jekyll&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#ruby&quot; id=&quot;markdown-toc-ruby&quot;&gt;安装ruby&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#gem&quot; id=&quot;markdown-toc-gem&quot;&gt;安装gem&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#jekyll-1&quot; id=&quot;markdown-toc-jekyll-1&quot;&gt;安装jekyll&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#markdown&quot; id=&quot;markdown-toc-markdown&quot;&gt;本地编写markdown&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;本地启动博客&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#git&quot; id=&quot;markdown-toc-git&quot;&gt;推送至Git&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#blog&quot; id=&quot;markdown-toc-blog&quot;&gt;访问Blog&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;遇到的问题&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#pageinator&quot; id=&quot;markdown-toc-pageinator&quot;&gt;pageinator类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;类方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;显示&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;翻页&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;jekyll&quot;&gt;jekyll&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;jekyll&lt;/strong&gt; ：将纯文本转化为静态网站和博客。&lt;/p&gt;
+&lt;p&gt;项目中显示文件列表，当文件过多时页面显示不美观，且从数据库读取数据代价很大，就要用到分页的技术，在文档系统项目中测试了下分页技术，感觉挺实用的。具体配置如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;pageinator&quot;&gt;pageinator类&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;分页用到了pageinator类，可以看一下该类的两个例子&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+current_page = int(request.GET.get(&#39;current_page&#39;,&#39;1&#39;)
+repop=Paginator(repopage,5)
+＃第一个参数是要分页的序列，第二个参数是每页的条目数
+try:
+    repos=repop.page(current_page)
+except:
+    pass
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+&amp;gt;&amp;gt;&amp;gt; objects = [&#39;john&#39;, &#39;paul&#39;, &#39;george&#39;, &#39;ringo&#39;]
+&amp;gt;&amp;gt;&amp;gt; p = Paginator(objects, 2)
+&amp;gt;&amp;gt;&amp;gt; p.count  //总数
+4
+&amp;gt;&amp;gt;&amp;gt; p.num_pages  //几页
+2
+&amp;gt;&amp;gt;&amp;gt; p.page_range  //页的范围
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;类方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一般由Paginator.page(number)生成，如Page＝Paginator(repopage,5).page(current_page)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.has_next()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果下一页存在，返回 True。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.has_previous()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果前一页存在返回 True&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.has_other_pages()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果上一页面或者下一页存在，返回 True&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.next_page_number()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;返回下一页的索引，这个函数比较傻（不管下一页是否存在，都是简单的+1）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.previous_page_number()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;返回上一页的索引，其他同上&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.start_index()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;返回当前页，第一个对象的索引。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.end_index()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;道理同上。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;显示&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用下列语句可以逐条显示每页中的纪录&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+{ % for blog in repos % }
+ { { blog.name } }
+ { { blog.content } }
+  ......
+{ % endfor % }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;翻页&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过  &amp;lt; a &amp;gt; 链接跳转实现&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+{ % if repos.has_previous % }
+&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { repos.previous_page_number } }&quot; class=&#39;paginator&#39; title=&#39;上一页&#39;&amp;gt;上一页&amp;lt; /a&amp;gt;
+{ % endif % }
+
+&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { current_page } }&quot; class=&#39;paginator&#39; title=&#39;&#39;&amp;gt;{ {current_page} }&amp;lt; /a&amp;gt;
+
+{ % if repos.has_next % }
+&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { repos.next_page_number } }&quot; class=&#39;paginator&#39; title=&#39;下一页&#39;&amp;gt;下一页&amp;lt; /a&amp;gt;
+{ % endif % }
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Sun, 19 Apr 2015 05:02:28 +0800</pubDate>
+        <link>/2015/04/19/Django-pageinator/</link>
+        <guid isPermaLink="true">/2015/04/19/Django-pageinator/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>使用Github＋jekyll搭建Blog</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#ruby&quot; id=&quot;markdown-toc-ruby&quot;&gt;安装ruby&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#gem&quot; id=&quot;markdown-toc-gem&quot;&gt;安装gem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll&quot; id=&quot;markdown-toc-jekyll&quot;&gt;安装jekyll&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#markdown&quot; id=&quot;markdown-toc-markdown&quot;&gt;本地编写markdown&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;本地启动博客&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git&quot; id=&quot;markdown-toc-git&quot;&gt;推送至Git&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#blog&quot; id=&quot;markdown-toc-blog&quot;&gt;访问Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;遇到的问题&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;学习过程中，存储在本地的资料、随笔越来越多，碰巧今日无事，便萌生了搭建个blog。早就听闻Github＋jekyll功能强大，埋头研究了一下午终于撘了起来，
+具体过程如下。&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -592,7 +736,7 @@ gem sources -l
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;jekyll-1&quot;&gt;安装jekyll&lt;/h3&gt;
+&lt;h3 id=&quot;jekyll&quot;&gt;安装jekyll&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;安装jekyll&lt;/strong&gt; :&lt;/li&gt;
@@ -625,7 +769,7 @@ gem install rdiscount
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;本地启动博客&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;本地启动博客&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;编译md文件，启动博客：&lt;/li&gt;
@@ -676,7 +820,7 @@ git push -u origin master
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;遇到的问题&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;遇到的问题&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -697,9 +841,9 @@ bundle install
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Tue, 16 Jun 2015 03:17:45 +0800</pubDate>
-        <link>/2015/06/16/Set-up-Blog/</link>
-        <guid isPermaLink="true">/2015/06/16/Set-up-Blog/</guid>
+        <pubDate>Thu, 16 Apr 2015 03:17:45 +0800</pubDate>
+        <link>/2015/04/16/Set-up-Blog/</link>
+        <guid isPermaLink="true">/2015/04/16/Set-up-Blog/</guid>
         
         
         <category>前端杂谈</category>

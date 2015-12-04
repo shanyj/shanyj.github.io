@@ -107,22 +107,24 @@
       <hr>
       <article>
         <ul id="markdown-toc">
-  <li><a href="#django" id="markdown-toc-django">Django多数据库</a>    <ul>
-      <li><a href="#section" id="markdown-toc-section">配置数据库</a></li>
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">配置数据库</a></li>
       <li><a href="#class" id="markdown-toc-class">配置class</a></li>
       <li><a href="#classsettings" id="markdown-toc-classsettings">将数据库class添加至settings</a></li>
-      <li><a href="#section-1" id="markdown-toc-section-1">同步数据库</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">同步数据库</a></li>
       <li><a href="#modelclass-meta" id="markdown-toc-modelclass-meta">model的class meta</a></li>
       <li><a href="#sql" id="markdown-toc-sql">使用底层sql</a></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="django">Django多数据库</h2>
+<h2 id="section">序</h2>
+
+<p>最近发现手头Django项目比较乱，一个单独的数据库貌似已经无法满足需求了，就研究下Django多数据库的配置和操作，自己试了试果然行得通！具体配置要点如下。</p>
 
 <hr />
 
-<h3 id="section">配置数据库</h3>
+<h3 id="section-1">配置数据库</h3>
 
 <ul>
   <li>在settings中进行配置。</li>
@@ -213,7 +215,7 @@ class appdb(object):
 
 <hr />
 
-<h3 id="section-1">同步数据库</h3>
+<h3 id="section-2">同步数据库</h3>
 
 <ul>
   <li>使用下列方法分别同步不同数据库：</li>

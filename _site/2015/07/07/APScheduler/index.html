@@ -107,25 +107,25 @@
       <hr>
       <article>
         <ul id="markdown-toc">
-  <li><a href="#apscheduler" id="markdown-toc-apscheduler">APScheduler</a>    <ul>
-      <li><a href="#section" id="markdown-toc-section">安装</a></li>
-      <li><a href="#section-1" id="markdown-toc-section-1">组件</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">原则</a></li>
-      <li><a href="#section-3" id="markdown-toc-section-3">常用方法</a></li>
-      <li><a href="#section-4" id="markdown-toc-section-4">三种调度</a></li>
-      <li><a href="#section-5" id="markdown-toc-section-5">时间格式</a></li>
-      <li><a href="#section-6" id="markdown-toc-section-6">案例</a></li>
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">安装</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">组件</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">原则</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">常用方法</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">三种调度</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">时间格式</a></li>
+      <li><a href="#section-7" id="markdown-toc-section-7">案例</a></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="apscheduler">APScheduler</h2>
+<h2 id="section">序</h2>
 
-<p><strong>APScheduler</strong>一个Python定时任务框架,可以用来实现date、interval和cron操作。</p>
+<p>之前的Django文档管理系统项目中，有文件设置过期时间的功能，其中删除是通过celery定时任务每日凌晨来实现的，今天回过头又找了找定时任务，发现了一个及其简便的定时任务框架：APScheduler。</p>
 
 <hr />
 
-<h3 id="section">安装</h3>
+<h3 id="section-1">安装</h3>
 
 <ul>
   <li>pip install apscheduler</li>
@@ -133,7 +133,7 @@
 
 <hr />
 
-<h3 id="section-1">组件</h3>
+<h3 id="section-2">组件</h3>
 
 <ul>
   <li>
@@ -152,7 +152,7 @@
 
 <hr />
 
-<h3 id="section-2">原则</h3>
+<h3 id="section-3">原则</h3>
 
 <ul>
   <li>
@@ -198,7 +198,7 @@
 
 <hr />
 
-<h3 id="section-3">常用方法</h3>
+<h3 id="section-4">常用方法</h3>
 
 <ul>
   <li>
@@ -251,7 +251,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()</li>
 
 <hr />
 
-<h3 id="section-4">三种调度</h3>
+<h3 id="section-5">三种调度</h3>
 
 <ul>
   <li>
@@ -342,7 +342,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()</li>
 
 <hr />
 
-<h3 id="section-5">时间格式</h3>
+<h3 id="section-6">时间格式</h3>
 
 <div class="highlighter-rouge"><pre class="highlight"><code>Expression	Field	Description
 *	         any	Fire on every value
@@ -358,7 +358,7 @@ x,y,z	     any	Fire on any matching expression
 
 <hr />
 
-<h3 id="section-6">案例</h3>
+<h3 id="section-7">案例</h3>
 
 <ul>
   <li>
