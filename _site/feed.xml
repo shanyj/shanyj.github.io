@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Dec 2015 06:26:01 +0800</pubDate>
-    <lastBuildDate>Sat, 05 Dec 2015 06:26:01 +0800</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2015 21:30:42 +0800</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2015 21:30:42 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,95 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django Auth登陆认证</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;认证函数&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;配置&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;之前研究了登录和登出逻辑，但是具体登陆处理函数没有给出，当不仅仅满足于Django自带的登录函数功能时，需要重写验证模式，自己研究并试用了下，暂时只更改改验证模式，而不更改user的属性，具体方式如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们使用新的model来进行用户验证，而代替Django自带的User model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  def is_authenticated(self):
+       return True
+   &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;认证函数&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;认证过程中使用我们自己编写的model，但是返回时依旧返回User&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;编写AuthBackend类，需要实现get_user和authenticate方法。&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  class AuthBackend(object):
+  def get_user(self,id):
+      try:
+          user=User.objects.get(pk=id)
+      except:
+          user=None
+      return user
+
+  def authenticate(self,username,password):
+      try:
+          user=Account1.objects.get(username=username)
+          if password==user.shanyunji:
+              return User.objects.get(username=username)
+          else:
+              return None
+      except:
+          return None
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;配置&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Mon, 27 Apr 2015 06:03:21 +0800</pubDate>
+        <link>/2015/04/27/Django-Auth/</link>
+        <guid isPermaLink="true">/2015/04/27/Django-Auth/</guid>
         
         
         <category>Django</category>
