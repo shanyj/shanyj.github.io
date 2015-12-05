@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 05 Dec 2015 21:30:42 +0800</pubDate>
-    <lastBuildDate>Sat, 05 Dec 2015 21:30:42 +0800</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2015 22:09:36 +0800</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2015 22:09:36 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -523,12 +523,57 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
       </item>
     
       <item>
+        <title>Django User扩展</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;之前更改登录验证模式时返回的时Django自带的User model，当需要扩展业务而User model已经无法满足要求时，就需要扩展User类，收集后发现大致有三种方法进行User扩展。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们使用新的model来进行用户验证，而代替Django自带的User model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  def is_authenticated(self):
+       return True
+   &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 29 Apr 2015 04:57:51 +0800</pubDate>
+        <link>/2015/04/29/Django-User/</link>
+        <guid isPermaLink="true">/2015/04/29/Django-User/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
         <title>Django Auth登陆认证</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;认证函数&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;配置&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#authenticationbackends&quot; id=&quot;markdown-toc-authenticationbackends&quot;&gt;AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;另一种方法&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -597,10 +642,38 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
     &lt;p&gt;编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。&lt;/p&gt;
+    &lt;h2 id=&quot;authenticationbackends&quot;&gt;AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。&lt;/h2&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;section-3&quot;&gt;另一种方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们只需要更改Django默认登录验证中的authenticate函数即可，具体方法如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  from django.contrib import auth
+
+  def login_view(request):
+  username = request.POST.get(&#39;username&#39;, &#39;&#39;)
+  password = request.POST.get(&#39;password&#39;, &#39;&#39;)
+  user = auth.authenticate(username=username, password=password)
+  if user is not None and user.is_active:
+      auth.login(request, user)
+      return HttpResponseRedirect(&quot;/account/loggedin/&quot;)
+  else:
+      return HttpResponseRedirect(&quot;/account/invalid/&quot;)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;登出方法更为简单：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+          auth.logout(request)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 </description>
         <pubDate>Mon, 27 Apr 2015 06:03:21 +0800</pubDate>
         <link>/2015/04/27/Django-Auth/</link>

@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Django Auth登陆认证</title>
-	<meta name="description" content="Django Auth登陆认证">
+	<title>Django User扩展</title>
+	<meta name="description" content="Django User扩展">
 	
-	<link rel="canonical" href="/2015/04/27/Django-Auth/">
+	<link rel="canonical" href="/2015/04/29/Django-User/">
 	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
 	
 	<!-- <link rel="stylesheet" href="/css/main.css"> -->
@@ -101,27 +101,21 @@
   <div id="myArticle" class="col-sm-9">
     <div class="post-area post">
       <header>
-        <h1>Django Auth登陆认证</h1>
-        <p>Apr 27, 2015</p>
+        <h1>Django User扩展</h1>
+        <p>Apr 29, 2015</p>
       </header>
       <hr>
       <article>
         <ul id="markdown-toc">
   <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
       <li><a href="#model" id="markdown-toc-model">model</a></li>
-      <li><a href="#section-1" id="markdown-toc-section-1">认证函数</a></li>
-      <li><a href="#section-2" id="markdown-toc-section-2">配置</a></li>
-    </ul>
-  </li>
-  <li><a href="#authenticationbackends" id="markdown-toc-authenticationbackends">AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。</a>    <ul>
-      <li><a href="#section-3" id="markdown-toc-section-3">另一种方法</a></li>
     </ul>
   </li>
 </ul>
 
 <h2 id="section">序</h2>
 
-<p>之前研究了登录和登出逻辑，但是具体登陆处理函数没有给出，当不仅仅满足于Django自带的登录函数功能时，需要重写验证模式，自己研究并试用了下，暂时只更改改验证模式，而不更改user的属性，具体方式如下：</p>
+<p>之前更改登录验证模式时返回的时Django自带的User model，当需要扩展业务而User model已经无法满足要求时，就需要扩展User类，收集后发现大致有三种方法进行User扩展。</p>
 
 <hr />
 
@@ -141,80 +135,6 @@
   </li>
 </ul>
 
-<hr />
-
-<h3 id="section-1">认证函数</h3>
-
-<ul>
-  <li>
-    <p>认证过程中使用我们自己编写的model，但是返回时依旧返回User</p>
-  </li>
-  <li>
-    <p>编写AuthBackend类，需要实现get_user和authenticate方法。</p>
-
-    <pre><code>
-  class AuthBackend(object):
-  def get_user(self,id):
-      try:
-          user=User.objects.get(pk=id)
-      except:
-          user=None
-      return user
-
-  def authenticate(self,username,password):
-      try:
-          user=Account1.objects.get(username=username)
-          if password==user.shanyunji:
-              return User.objects.get(username=username)
-          else:
-              return None
-      except:
-          return None
-  </code></pre>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="section-2">配置</h3>
-
-<ul>
-  <li>
-    <p>编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。</p>
-  </li>
-  <li>
-    <h2 id="authenticationbackends">AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。</h2>
-  </li>
-</ul>
-
-<h3 id="section-3">另一种方法</h3>
-
-<ul>
-  <li>
-    <p>我们只需要更改Django默认登录验证中的authenticate函数即可，具体方法如下：</p>
-
-    <pre><code>
-  from django.contrib import auth
-
-  def login_view(request):
-  username = request.POST.get('username', '')
-  password = request.POST.get('password', '')
-  user = auth.authenticate(username=username, password=password)
-  if user is not None and user.is_active:
-      auth.login(request, user)
-      return HttpResponseRedirect("/account/loggedin/")
-  else:
-      return HttpResponseRedirect("/account/invalid/")
-  </code></pre>
-  </li>
-  <li>
-    <p>登出方法更为简单：</p>
-
-    <pre><code>
-          auth.logout(request)
-  </code></pre>
-  </li>
-</ul>
 
       </article>
       <hr>
@@ -224,7 +144,7 @@
     <div class="post-area post comment">
       <!-- 多说评论框 start -->
       
-      <div class="ds-thread" data-thread-key="/2015/04/27/Django-Auth" data-title="Django Auth登陆认证" data-url="gaohaoyang.github.io/2015/04/27/Django-Auth/"></div>
+      <div class="ds-thread" data-thread-key="/2015/04/29/Django-User" data-title="Django User扩展" data-url="gaohaoyang.github.io/2015/04/29/Django-User/"></div>
       
       <!-- 多说评论框 end -->
     </div>

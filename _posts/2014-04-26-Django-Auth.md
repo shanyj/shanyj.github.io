@@ -63,4 +63,28 @@ excerpt: Django Auth登陆认证
 * 编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。
 
 * AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。
+---
 
+### 另一种方法
+
+* 我们只需要更改Django默认登录验证中的authenticate函数即可，具体方法如下：
+
+    <pre><code>
+    from django.contrib import auth
+
+    def login_view(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect("/account/loggedin/")
+    else:
+        return HttpResponseRedirect("/account/invalid/")
+    </code></pre>
+
+* 登出方法更为简单：
+
+    <pre><code>
+            auth.logout(request)
+    </code></pre>
