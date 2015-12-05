@@ -111,9 +111,6 @@
       <li><a href="#model" id="markdown-toc-model">model</a></li>
       <li><a href="#section-1" id="markdown-toc-section-1">认证函数</a></li>
       <li><a href="#section-2" id="markdown-toc-section-2">配置</a></li>
-    </ul>
-  </li>
-  <li><a href="#authenticationbackends" id="markdown-toc-authenticationbackends">AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。</a>    <ul>
       <li><a href="#section-3" id="markdown-toc-section-3">另一种方法</a></li>
     </ul>
   </li>
@@ -183,9 +180,11 @@
     <p>编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。</p>
   </li>
   <li>
-    <h2 id="authenticationbackends">AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。</h2>
+    <p>AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。</p>
   </li>
 </ul>
+
+<hr />
 
 <h3 id="section-3">另一种方法</h3>
 

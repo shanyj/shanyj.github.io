@@ -63,6 +63,7 @@ excerpt: Django Auth登陆认证
 * 编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。
 
 * AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。
+
 ---
 
 ### 另一种方法
