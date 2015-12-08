@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home</title>
+    <title>ShanYJ</title>
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 03 Dec 2015 13:58:01 +0800</pubDate>
-    <lastBuildDate>Thu, 03 Dec 2015 13:58:01 +0800</lastBuildDate>
+    <pubDate>Sat, 05 Dec 2015 22:11:07 +0800</pubDate>
+    <lastBuildDate>Sat, 05 Dec 2015 22:11:07 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
         <title>Python APScheduler定时任务框架</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#apscheduler&quot; id=&quot;markdown-toc-apscheduler&quot;&gt;APScheduler&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;组件&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;原则&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;常用方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;三种调度&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;时间格式&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;案例&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;组件&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;原则&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;常用方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;三种调度&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;时间格式&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;案例&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;apscheduler&quot;&gt;APScheduler&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;APScheduler&lt;/strong&gt;一个Python定时任务框架,可以用来实现date、interval和cron操作。&lt;/p&gt;
+&lt;p&gt;之前的Django文档管理系统项目中，有文件设置过期时间的功能，其中删除是通过celery定时任务每日凌晨来实现的，今天回过头又找了找定时任务，发现了一个及其简便的定时任务框架：APScheduler。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section&quot;&gt;安装&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;pip install apscheduler&lt;/li&gt;
@@ -38,7 +38,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;组件&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;组件&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -57,7 +57,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;原则&lt;/h3&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;原则&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -103,7 +103,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;常用方法&lt;/h3&gt;
+&lt;h3 id=&quot;section-4&quot;&gt;常用方法&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -156,7 +156,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()&lt;/li&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-4&quot;&gt;三种调度&lt;/h3&gt;
+&lt;h3 id=&quot;section-5&quot;&gt;三种调度&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -247,7 +247,7 @@ apscheduler.schedulers.base.BaseScheduler.resume_job()&lt;/li&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;时间格式&lt;/h3&gt;
+&lt;h3 id=&quot;section-6&quot;&gt;时间格式&lt;/h3&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Expression	Field	Description
 *	         any	Fire on every value
@@ -263,7 +263,7 @@ x,y,z	     any	Fire on any matching expression
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-6&quot;&gt;案例&lt;/h3&gt;
+&lt;h3 id=&quot;section-7&quot;&gt;案例&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -325,11 +325,848 @@ except SystemExit:
 &lt;/code&gt;&lt;/pre&gt;
 </description>
         <pubDate>Tue, 07 Jul 2015 04:14:54 +0800</pubDate>
-        <link>/2015/07/07/Syncing-a-fork/</link>
-        <guid isPermaLink="true">/2015/07/07/Syncing-a-fork/</guid>
+        <link>/2015/07/07/APScheduler/</link>
+        <guid isPermaLink="true">/2015/07/07/APScheduler/</guid>
         
         
         <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 多数据库</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;配置数据库&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#class&quot; id=&quot;markdown-toc-class&quot;&gt;配置class&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#classsettings&quot; id=&quot;markdown-toc-classsettings&quot;&gt;将数据库class添加至settings&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;同步数据库&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#modelclass-meta&quot; id=&quot;markdown-toc-modelclass-meta&quot;&gt;model的class meta&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#sql&quot; id=&quot;markdown-toc-sql&quot;&gt;使用底层sql&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近发现手头Django项目比较乱，一个单独的数据库貌似已经无法满足需求了，就研究下Django多数据库的配置和操作，自己试了试果然行得通！具体配置要点如下。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;配置数据库&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在settings中进行配置。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+DATABASES = {
+    #之所以这里仍然保留default数据库，是因为如果要使用Django的Auth应用或者Admin应用
+    #我希望它默认将数据存放在default.db中，而不与其他数据搞混
+     &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: &#39;db/default.db&#39;,
+        &#39;USER&#39;: &#39;&#39;,
+        &#39;PASSWORD&#39;: &#39;&#39;,
+        &#39;HOST&#39;: &#39;&#39;,
+        &#39;PORT&#39;: &#39;&#39;,
+    },
+
+    #提供给userApp使用
+     &#39;userdb&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: &#39;db/user.db&#39;,
+        &#39;USER&#39;: &#39;&#39;,
+        &#39;PASSWORD&#39;: &#39;&#39;,
+        &#39;HOST&#39;: &#39;&#39;,
+        &#39;PORT&#39;: &#39;&#39;,
+    },
+
+     &#39;essaydb&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: &#39;db/essay.db&#39;,
+        &#39;USER&#39;: &#39;&#39;,
+        &#39;PASSWORD&#39;: &#39;&#39;,
+        &#39;HOST&#39;: &#39;&#39;,
+        &#39;PORT&#39;: &#39;&#39;,
+    },
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;class&quot;&gt;配置class&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;新建dbsettings.py , 编写下面 , class一般只改最后一个方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+class appdb(object):
+    def db_for_read(self, model, **hints):
+        #该方法定义读取时从哪一个数据库读取
+        return self.__app_router(model)
+
+    def db_for_write(self, model, **hints):
+        #该方法定义写入时从哪一个数据库读取，如果读写分离，可再额外配置
+        return self.__app_router(model)
+
+    def allow_relation(self, obj1, obj2, **hints):
+        #该方法用于判断传入的obj1和obj2是否允许关联，可用于多对多以及外键
+        #同一个应用同一个数据库
+        if obj1._meta.app_label == obj2._meta.app_label:
+            return True
+        #User和Essay是允许关联的
+        elif obj1._meta.app_label in (&#39;userApp&#39;,&#39;essayApp&#39;) and obj2._meta.app_label in (&#39;userApp&#39;,&#39;essayApp&#39;):
+            return True
+
+    def allow_syncdb(self, db, model):
+        #该方法定义数据库是否能和名为db的数据库同步
+        return self.__app_router(model) == db
+
+   #添加一个私有方法用来判断模型属于哪个应用，并返回应该使用的数据库
+    def __app_router(self, model):
+        if model._meta.app_label == &#39;userApp&#39;:
+            return &#39;userdb&#39;
+        elif model._meta.app_label == &#39;essayApp&#39;:
+            return &#39;essaydb&#39;
+        else :
+            return &#39;default&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;classsettings&quot;&gt;将数据库class添加至settings&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DATABASE_ROUTERS = [‘dbsettings.appdb’]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;同步数据库&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用下列方法分别同步不同数据库：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+python manage.py syncdb #默认同步的数据库为&#39;default&#39;
+python manage.py syncdb --database=userdb  #为userdb同步数据
+python manage.py syncdb --database=essaydb #为essaydb同步数据
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;反向同步数据库&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+python manage.py inspectdb --database=userdb &amp;gt; shanyjuser/models.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;注意database＝后面是settings里的名字&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;modelclass-meta&quot;&gt;model的class meta&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;每个model的class meta
+中 app_label = ‘myapp’
+应和（2）中的最后一个方法相匹配！&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;sql&quot;&gt;使用底层sql&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;除了自带的model之外还可以使用底层sql&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;针对单数据库
+        &lt;pre&gt;&lt;code&gt;
+from django.db import connection, transaction
+    cursor = connection.cursor()
+    # 数据修改操作——提交要求
+    cursor.execute(&quot;UPDATE bar SET foo = 1 WHERE baz = %s&quot;, [self.baz])
+    transaction.commit_unless_managed()
+    # 或者 transaction.set_dirty()
+    # 数据检索操作,不需要提交
+    cursor.execute(&quot;SELECT foo FROM bar WHERE baz = %s&quot;, [self.baz])
+    row = cursor.fetchone()
+    return row
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;针对多数据库
+        &lt;pre&gt;&lt;code&gt;
+from django.db import connections
+cursor = connections[&#39;my_db_alias&#39;].cursor()
+cursor.execute(&quot;UPDATE bar SET foo = 1 WHERE baz = %s&quot;, [self.baz])
+transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
+        <link>/2015/06/19/Django-Databases/</link>
+        <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django User扩展</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;之前更改登录验证模式时返回的时Django自带的User model，当需要扩展业务而User model已经无法满足要求时，就需要扩展User类，收集后发现大致有三种方法进行User扩展。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们使用新的model来进行用户验证，而代替Django自带的User model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  def is_authenticated(self):
+       return True
+   &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 29 Apr 2015 04:57:51 +0800</pubDate>
+        <link>/2015/04/29/Django-User/</link>
+        <guid isPermaLink="true">/2015/04/29/Django-User/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django Auth登陆认证</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;认证函数&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;配置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;另一种方法&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;之前研究了登录和登出逻辑，但是具体登陆处理函数没有给出，当不仅仅满足于Django自带的登录函数功能时，需要重写验证模式，自己研究并试用了下，暂时只更改改验证模式，而不更改user的属性，具体方式如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们使用新的model来进行用户验证，而代替Django自带的User model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  def is_authenticated(self):
+       return True
+   &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;认证函数&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;认证过程中使用我们自己编写的model，但是返回时依旧返回User&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;编写AuthBackend类，需要实现get_user和authenticate方法。&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  class AuthBackend(object):
+  def get_user(self,id):
+      try:
+          user=User.objects.get(pk=id)
+      except:
+          user=None
+      return user
+
+  def authenticate(self,username,password):
+      try:
+          user=Account1.objects.get(username=username)
+          if password==user.shanyunji:
+              return User.objects.get(username=username)
+          else:
+              return None
+      except:
+          return None
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;配置&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;另一种方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;我们只需要更改Django默认登录验证中的authenticate函数即可，具体方法如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  from django.contrib import auth
+
+  def login_view(request):
+  username = request.POST.get(&#39;username&#39;, &#39;&#39;)
+  password = request.POST.get(&#39;password&#39;, &#39;&#39;)
+  user = auth.authenticate(username=username, password=password)
+  if user is not None and user.is_active:
+      auth.login(request, user)
+      return HttpResponseRedirect(&quot;/account/loggedin/&quot;)
+  else:
+      return HttpResponseRedirect(&quot;/account/invalid/&quot;)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;登出方法更为简单：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+          auth.logout(request)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 27 Apr 2015 06:03:21 +0800</pubDate>
+        <link>/2015/04/27/Django-Auth/</link>
+        <guid isPermaLink="true">/2015/04/27/Django-Auth/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django login/lgout 登录和登出</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#loginlgout&quot; id=&quot;markdown-toc-loginlgout&quot;&gt;login/lgout方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;登录模版&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#csrf&quot; id=&quot;markdown-toc-csrf&quot;&gt;CSRF&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;需要做用户登录，于是研究了下Django的登录和登出逻辑，发现还是挺简单实用的。具体的登录和登出实现如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;loginlgout&quot;&gt;login/lgout方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Django已经为我们封装好了login和lgout函数，只需要我们在url.py中直接调用即可，具体使用方法如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  from django.contrib.auth.views import login, logout
+
+  urlpatterns = patterns(&#39;&#39;,
+      (r&#39;^accounts/login/$&#39;, login),
+      (r&#39;^accounts/logout/$&#39;, logout),
+  )
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;按照常规，登录url为accounts/login/，登出为accounts/logout/&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;登录模版&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;login模版地址默认为template／registration／login.html&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;需要在login模版中编写登录表单，格式如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  &amp;lt; form action=&quot;&quot; method=&quot;post&quot;&amp;gt;{ % csrf_token % }
+  &amp;lt; label for=&quot;username&quot;&amp;gt;User name:
+  &amp;lt; input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot; id=&quot;username&quot;&amp;gt;
+  &amp;lt; label for=&quot;password&quot;&amp;gt;Password:
+  &amp;lt; input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; id=&quot;password&quot;&amp;gt;
+  &amp;lt; input type=&quot;submit&quot; value=&quot;login&quot; /&amp;gt;
+  &amp;lt; /form&amp;gt;
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;重定向&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;登录验证成功后，默认会自动重定向到accounts／profile，需要编写该url对应的view函数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;csrf&quot;&gt;CSRF&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;模版表单中通常加入｛％ csrf_token ％｝确保安全，同时在settings中间键中添加csrf中间键&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 24 Apr 2015 04:41:29 +0800</pubDate>
+        <link>/2015/04/24/Django-login-and-lgout/</link>
+        <guid isPermaLink="true">/2015/04/24/Django-login-and-lgout/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 扩展manage.py命令</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#management&quot; id=&quot;markdown-toc-management&quot;&gt;management&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#basecommand&quot; id=&quot;markdown-toc-basecommand&quot;&gt;Basecommand类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;运行&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;由于项目中添加了诸如文档、系统管理员这样的角色，因此需要执行命令来手动创建这些高权限账号，这就需要我们手动扩展manage.py命令，大致流程如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;management&quot;&gt;management&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;所有需要扩展的manage命令都放在management的commands文件夹下，因此需要在应用中建立management文件夹，之后在该文件夹下建立commands文件夹&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;management和commands下都需要建立空的__init__.py文件&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;应用必须存在于INSTALLED_APPS中&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;commands下以  命令名.py  建立python文件，一个命令对应一个文件&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;basecommand&quot;&gt;Basecommand类&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;命令名.py 文件中编写格式如下：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  from django.core.management.base import BaseCommand
+  class Command(BaseCommand):
+      def handle(self, *args, **options):
+          print args
+          print options
+  &lt;/code&gt;&lt;/pre&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;注意类名为Command、继承BaseCommand、方法名为handle&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;运行&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;进入 manage.py 目录下，运行 python manage.py hello a b c name＝shanyj&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 21 Apr 2015 03:56:09 +0800</pubDate>
+        <link>/2015/04/21/Django-manage/</link>
+        <guid isPermaLink="true">/2015/04/21/Django-manage/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django pageinator 分页</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#pageinator&quot; id=&quot;markdown-toc-pageinator&quot;&gt;pageinator类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;类方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;显示&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;翻页&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;项目中显示文件列表，当文件过多时页面显示不美观，且从数据库读取数据代价很大，就要用到分页的技术，在文档系统项目中测试了下分页技术，感觉挺实用的。具体配置如下：&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;pageinator&quot;&gt;pageinator类&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;分页用到了pageinator类，可以看一下该类的两个例子&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+current_page = int(request.GET.get(&#39;current_page&#39;,&#39;1&#39;)
+repop=Paginator(repopage,5)
+＃第一个参数是要分页的序列，第二个参数是每页的条目数
+try:
+    repos=repop.page(current_page)
+except:
+    pass
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+&amp;gt;&amp;gt;&amp;gt; objects = [&#39;john&#39;, &#39;paul&#39;, &#39;george&#39;, &#39;ringo&#39;]
+&amp;gt;&amp;gt;&amp;gt; p = Paginator(objects, 2)
+&amp;gt;&amp;gt;&amp;gt; p.count  //总数
+4
+&amp;gt;&amp;gt;&amp;gt; p.num_pages  //几页
+2
+&amp;gt;&amp;gt;&amp;gt; p.page_range  //页的范围
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;类方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一般由Paginator.page(number)生成，如Page＝Paginator(repopage,5).page(current_page)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.has_next()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果下一页存在，返回 True。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.has_previous()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果前一页存在返回 True&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.has_other_pages()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果上一页面或者下一页存在，返回 True&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.next_page_number()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;返回下一页的索引，这个函数比较傻（不管下一页是否存在，都是简单的+1）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.previous_page_number()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;返回上一页的索引，其他同上&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.start_index()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;返回当前页，第一个对象的索引。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Page.end_index()&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;道理同上。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;显示&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用下列语句可以逐条显示每页中的纪录&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+{ % for blog in repos % }
+ { { blog.name } }
+ { { blog.content } }
+  ......
+{ % endfor % }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;翻页&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过  &amp;lt; a &amp;gt; 链接跳转实现&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+{ % if repos.has_previous % }
+&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { repos.previous_page_number } }&quot; class=&#39;paginator&#39; title=&#39;上一页&#39;&amp;gt;上一页&amp;lt; /a&amp;gt;
+{ % endif % }
+
+&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { current_page } }&quot; class=&#39;paginator&#39; title=&#39;&#39;&amp;gt;{ {current_page} }&amp;lt; /a&amp;gt;
+
+{ % if repos.has_next % }
+&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { repos.next_page_number } }&quot; class=&#39;paginator&#39; title=&#39;下一页&#39;&amp;gt;下一页&amp;lt; /a&amp;gt;
+{ % endif % }
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Sun, 19 Apr 2015 05:02:28 +0800</pubDate>
+        <link>/2015/04/19/Django-pageinator/</link>
+        <guid isPermaLink="true">/2015/04/19/Django-pageinator/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>使用Github＋jekyll搭建Blog</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#ruby&quot; id=&quot;markdown-toc-ruby&quot;&gt;安装ruby&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#gem&quot; id=&quot;markdown-toc-gem&quot;&gt;安装gem&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#jekyll&quot; id=&quot;markdown-toc-jekyll&quot;&gt;安装jekyll&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#markdown&quot; id=&quot;markdown-toc-markdown&quot;&gt;本地编写markdown&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;本地启动博客&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git&quot; id=&quot;markdown-toc-git&quot;&gt;推送至Git&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#blog&quot; id=&quot;markdown-toc-blog&quot;&gt;访问Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;遇到的问题&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;学习过程中，存储在本地的资料、随笔越来越多，碰巧今日无事，便萌生了搭建个blog。早就听闻Github＋jekyll功能强大，埋头研究了一下午终于撘了起来，
+具体过程如下。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;ruby&quot;&gt;安装ruby&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过 apt-get 安装ruby&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo apt-get update
+sudo apt-get install ruby
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查看ruby版本&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+ruby -v
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;gem&quot;&gt;安装gem&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;通过 apt-get 安装gem&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo apt-get install ruby-gems
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;更改gem源&lt;/strong&gt; : 在安装gem的过程中会出现找不到资源的error，我们需要从另外一个gem服务器下载安装。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem source -r https://rubygems.org/
+gem source -a https://ruby.taobao.org
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;查看gem源&lt;/strong&gt; : 使用以下命令查看gem源是否更改成功。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem sources -l
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;jekyll&quot;&gt;安装jekyll&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;安装jekyll&lt;/strong&gt; :&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;安装rdiscount&lt;/strong&gt; : 这个是用来解析Markdown标记的解析包。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem install rdiscount
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;markdown&quot;&gt;本地编写markdown&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;一定要确保你的文章要保存为UTF-8 无 BOM 格式才行。 文件名称不能是中文。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当然也可以去Jekyll themes等网站下载已有模版进行改写。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;本地启动博客&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;编译md文件，启动博客：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;访问http://127.0.0.1:4000 , 即可查看blog效果。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;git&quot;&gt;推送至Git&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在Git上创建新项目，具体步骤此处不再赘述。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;将本地工程推送至Git&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;mkdir新文件夹,将工程移入,执行下列语句。&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code&gt;
+git init
+git add .
+git commit -m &quot;up&quot;
+git remote add origin git@github.com:shanyj/shanyj.github.io.git
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;blog&quot;&gt;访问Blog&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;以此项目为例，直接访问shanyj.github.io即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;遇到的问题&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;从jekyll themes上clone的代码，大部分需要在执行 jekyll serve 前执行 bundle install&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;bundle安装：
+        &lt;pre&gt;&lt;code&gt;
+gem install bundle
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;执行：
+        &lt;pre&gt;&lt;code&gt;
+bundle install
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 16 Apr 2015 03:17:45 +0800</pubDate>
+        <link>/2015/04/16/Set-up-Blog/</link>
+        <guid isPermaLink="true">/2015/04/16/Set-up-Blog/</guid>
+        
+        
+        <category>前端杂谈</category>
         
       </item>
     
