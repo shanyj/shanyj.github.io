@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Dec 2015 17:11:05 +0800</pubDate>
-    <lastBuildDate>Tue, 08 Dec 2015 17:11:05 +0800</lastBuildDate>
+    <pubDate>Tue, 08 Dec 2015 17:29:41 +0800</pubDate>
+    <lastBuildDate>Tue, 08 Dec 2015 17:29:41 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -526,32 +526,106 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <title>Django Signal 信号机制</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#signal&quot; id=&quot;markdown-toc-signal&quot;&gt;Signal类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;发送信号&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;接受信号&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;参数获取&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;之前研究了登录和登出逻辑，但是具体登陆处理函数没有给出，当不仅仅满足于Django自带的登录函数功能时，需要重写验证模式，自己研究并试用了下，暂时只更改改验证模式，而不更改user的属性，具体方式如下：&lt;/p&gt;
+&lt;p&gt;django 包含一个信号机制,用来链接框架中发生的事件与得到通知的应用之间的逻辑。简单地说, 在特定事件发生时, 使用signal发送者能够通知一系列接收者(一个或者多个)来进行相应的操作。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
+&lt;h3 id=&quot;signal&quot;&gt;Signal类&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;我们使用新的model来进行用户验证，而代替Django自带的User model&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数&lt;/p&gt;
+    &lt;p&gt;使用Signal前我们需要实例化一个Signal实例&lt;/p&gt;
 
     &lt;pre&gt;&lt;code&gt;
-  def is_authenticated(self):
-       return True
-   &lt;/code&gt;&lt;/pre&gt;
+ from django.dispatch import Signal
+ signalshan=Signal(providing_args=[&#39;shanyj&#39;])
+  &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;发送信号&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;当需要通知接受者时，首先需要发送者来发送Signal&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在某方法中尽心信号发送使用了send（）方法，同事发送需要传递的格外信息&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ def shanyjsignal(request,hello=&#39;none&#39;):
+     a=&#39;shanyj&#39;
+     signalshan.send(sender=object,shanyj=a)
+     # send方法第一个参数为sender，可以为对象.__class__ ,self（在类中的方法才可以）,或者直接写类名
+     return HttpResponse(request.user)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;接受信号&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;接受信号时，需要与某一特定函数进行绑定，大致有两种方法&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;使用装饰器：&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ from django.dispatch import receiver
+
+ @receiver(signalshan)
+ def what(sender,shanyj,**kwargs):
+     #执行函数第一个参数为sender
+     print shanyj
+  &lt;/code&gt;&lt;/pre&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;使用connect方法：&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ signalshan.connect(what)
+ #可以加第二个参数，只接受该类的sender
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;参数获取&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;参数可以通过**kwargs来进行获取&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+  upload_file_successful.send(sender=None,
+                                    repo_id=repo_id,
+                                    file_path=file_path,
+                                    owner=owner)
+    @receiver(upload_file_successful)
+    def add_upload_file_msg_cb(sender, **kwargs):
+        repo_id = kwargs.get(&#39;repo_id&#39;, None)
+        file_path = kwargs.get(&#39;file_path&#39;, None)
+        owner = kwargs.get(&#39;owner&#39;, None)
+&lt;/code&gt;&lt;/pre&gt;
+
 </description>
         <pubDate>Sat, 02 May 2015 04:24:41 +0800</pubDate>
         <link>/2015/05/02/Django-Signal/</link>
