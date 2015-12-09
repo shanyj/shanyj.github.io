@@ -11,7 +11,7 @@ description: ╭(╯^╰)╮吉吉的博客
 
 # baseurl: "" # the subpath of your site, e.g. /blog/
 # url: "http://yourdomain.com" # the base hostname & protocol for your site
-# twitter_username: jekyllrb
+
 github_username:  shanyj
 permalink: /:year/:month/:day/:title/
 
@@ -20,7 +20,7 @@ markdown: kramdown
 
 # highlight
 # 本地用rouge, github上用pygments
-# highlighter: pygments
+highlighter: pygments
 # highlighter: rouge
 # highlighter: false
 
