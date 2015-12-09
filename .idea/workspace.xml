@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/static/css/index.css" afterPath="$PROJECT_DIR$/_site/static/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/index.css" afterPath="$PROJECT_DIR$/static/css/index.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/16/Set-up-Blog/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/16/Set-up-Blog/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/19/Django-pageinator/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/19/Django-pageinator/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/21/Django-manage/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/21/Django-manage/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/24/Django-login-and-lgout/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/24/Django-login-and-lgout/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/27/Django-Auth/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/27/Django-Auth/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/29/Django-User/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/29/Django-User/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/02/Django-Signal/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/02/Django-Signal/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/05/Django-GenericForeignKey/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/05/Django-GenericForeignKey/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/07/Django-Ootput/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/07/Django-Ootput/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/19/Django-Databases/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/19/Django-Databases/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/07/APScheduler/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/07/APScheduler/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/demo/index.html" afterPath="$PROJECT_DIR$/_site/demo/index.html" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,8 +46,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9677766">
+              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -75,6 +57,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/index.html" />
+      </list>
+    </option>
   </component>
   <component name="NamedScopeManager">
     <order />
@@ -195,8 +184,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.9677766">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding />
         </state>
       </provider>
