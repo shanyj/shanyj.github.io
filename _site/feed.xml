@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Dec 2015 09:41:25 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Dec 2015 09:41:25 +0800</lastBuildDate>
+    <pubDate>Wed, 09 Dec 2015 09:42:32 +0800</pubDate>
+    <lastBuildDate>Wed, 09 Dec 2015 09:42:32 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -535,7 +535,7 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
 
 &lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;最近在项目的一个工作流流程中大量的使用到了GenericForeignKey和 Content Type，主要用于在两个，于是做了如下的小结。&lt;/p&gt;
+&lt;p&gt;最近在项目的一个工作流流程中大量的使用到了GenericForeignKey和 Content Type，主要用于在两个model之间建立一个关联的model，于是做了如下的小结。&lt;/p&gt;
 
 &lt;hr /&gt;
 

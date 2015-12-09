@@ -12,7 +12,7 @@ excerpt: Django GenericForeignKey
 
 ## 序
 
-最近在项目的一个工作流流程中大量的使用到了GenericForeignKey和 Content Type，主要用于在两个，于是做了如下的小结。
+最近在项目的一个工作流流程中大量的使用到了GenericForeignKey和 Content Type，主要用于在两个model之间建立一个关联的model，于是做了如下的小结。
 
 ---
 
