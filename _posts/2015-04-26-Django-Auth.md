@@ -18,9 +18,9 @@ excerpt: Django Auth登陆认证
 
 ### model
 
-* 我们使用新的model来进行用户验证，而代替Django自带的User model
+ * 我们使用新的model来进行用户验证，而代替Django自带的User model
 
-* 在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数
+ * 在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数
 
     <pre><code>
     def is_authenticated(self):
