@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Dec 2015 11:22:00 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Dec 2015 11:22:00 +0800</lastBuildDate>
+    <pubDate>Wed, 09 Dec 2015 13:49:58 +0800</pubDate>
+    <lastBuildDate>Wed, 09 Dec 2015 13:49:58 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,103 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 中间键</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;顺序&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;例子&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;中间键，顾名思义，就是在处理一个Request前后需要执行的一系列函数，以下就是对Django中间键的一些总结&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;顺序&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Django中间键执行顺序为，在request和view阶段从上到下处理，response和异常处理阶段从下到上处理&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;settings中MIDDLEWARE_CLASSES包含了当前使用的中间键&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;方法&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;init&lt;/strong&gt;(self)：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;只在django运行时加载一次，如果抛出异常则将该中间件剔除，不对每个request单独处理，只需要self参数&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;process_request(self,request)：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在接受request后并且view函数运行前执行的，应返回None或者Httpresponse对象，如果返回None继续执行view函数，返回Httpresponse则不执行view函数&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;process_view(self,request,view,args,kwargs)：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;其中args和kwargs是将传入view的参数&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;process_response(self,request,response)：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;view函数执行response之后，必须返回httpresponse对象&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;process_exception(self,request,exception)：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;view函数执行时抛出异常才会进行处理&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;例子&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;
+ class MultiHostMiddleware:
+    def process_request(self, request):
+        try:
+            host = request.user
+            if host == &#39;shanyj&#39;:
+                return HttpResponse(&#39;aaaaa&#39;)
+            response=HttpResponse(&#39;haha&#39;)
+            response.set_cookie(&#39;favorite_color&#39;,&#39;lala&#39;)
+            return response
+        except KeyError:
+            pass
+    def process_response(self, request, response):
+        try:
+            if request.COOKIES[&#39;favorite_color&#39;]:
+                return response
+        except:
+            return response
+        else:
+            return response
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Sun, 10 May 2015 04:18:33 +0800</pubDate>
+        <link>/2015/05/10/Django-MiddleClass/</link>
+        <guid isPermaLink="true">/2015/05/10/Django-MiddleClass/</guid>
         
         
         <category>Django</category>
@@ -1267,147 +1364,6 @@ class owner(models.Model):
         <pubDate>Tue, 21 Apr 2015 03:56:09 +0800</pubDate>
         <link>/2015/04/21/Django-manage/</link>
         <guid isPermaLink="true">/2015/04/21/Django-manage/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django pageinator 分页</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#pageinator&quot; id=&quot;markdown-toc-pageinator&quot;&gt;pageinator类&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;类方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;显示&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;翻页&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;项目中显示文件列表，当文件过多时页面显示不美观，且从数据库读取数据代价很大，就要用到分页的技术，在文档系统项目中测试了下分页技术，感觉挺实用的。具体配置如下：&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;pageinator&quot;&gt;pageinator类&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;分页用到了pageinator类，可以看一下该类的两个例子&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-current_page = int(request.GET.get(&#39;current_page&#39;,&#39;1&#39;)
-repop=Paginator(repopage,5)
-＃第一个参数是要分页的序列，第二个参数是每页的条目数
-try:
-    repos=repop.page(current_page)
-except:
-    pass
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;
-&amp;gt;&amp;gt;&amp;gt; objects = [&#39;john&#39;, &#39;paul&#39;, &#39;george&#39;, &#39;ringo&#39;]
-&amp;gt;&amp;gt;&amp;gt; p = Paginator(objects, 2)
-&amp;gt;&amp;gt;&amp;gt; p.count  //总数
-4
-&amp;gt;&amp;gt;&amp;gt; p.num_pages  //几页
-2
-&amp;gt;&amp;gt;&amp;gt; p.page_range  //页的范围
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;类方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;一般由Paginator.page(number)生成，如Page＝Paginator(repopage,5).page(current_page)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.has_next()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果下一页存在，返回 True。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.has_previous()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果前一页存在返回 True&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.has_other_pages()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果上一页面或者下一页存在，返回 True&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.next_page_number()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;返回下一页的索引，这个函数比较傻（不管下一页是否存在，都是简单的+1）&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.previous_page_number()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;返回上一页的索引，其他同上&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.start_index()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;返回当前页，第一个对象的索引。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Page.end_index()&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;道理同上。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;显示&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用下列语句可以逐条显示每页中的纪录&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-{ % for blog in repos % }
- { { blog.name } }
- { { blog.content } }
-  ......
-{ % endfor % }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;翻页&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过  &amp;lt; a &amp;gt; 链接跳转实现&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-{ % if repos.has_previous % }
-&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { repos.previous_page_number } }&quot; class=&#39;paginator&#39; title=&#39;上一页&#39;&amp;gt;上一页&amp;lt; /a&amp;gt;
-{ % endif % }
-
-&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { current_page } }&quot; class=&#39;paginator&#39; title=&#39;&#39;&amp;gt;{ {current_page} }&amp;lt; /a&amp;gt;
-
-{ % if repos.has_next % }
-&amp;lt; a href=&quot;?word={ {word} }&amp;amp;current_page={ { repos.next_page_number } }&quot; class=&#39;paginator&#39; title=&#39;下一页&#39;&amp;gt;下一页&amp;lt; /a&amp;gt;
-{ % endif % }
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Sun, 19 Apr 2015 05:02:28 +0800</pubDate>
-        <link>/2015/04/19/Django-pageinator/</link>
-        <guid isPermaLink="true">/2015/04/19/Django-pageinator/</guid>
         
         
         <category>Django</category>
