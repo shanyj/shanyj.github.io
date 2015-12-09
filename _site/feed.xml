@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Dec 2015 14:38:04 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Dec 2015 14:38:04 +0800</lastBuildDate>
+    <pubDate>Wed, 09 Dec 2015 14:39:51 +0800</pubDate>
+    <lastBuildDate>Wed, 09 Dec 2015 14:39:51 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -623,6 +623,7 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
     &lt;p&gt;current_site = Site.objects.get_current()可以取出当前站点的site&lt;/p&gt;
 
     &lt;pre&gt;&lt;code&gt;
+ current_site = Site.objects.get_current()
  if current_site.domain == &#39;foo.com&#39;:
       # Do something
  else:

@@ -76,6 +76,7 @@ excerpt: Django Site多站点
  * current_site = Site.objects.get_current()可以取出当前站点的site
 
     <pre><code>
+    current_site = Site.objects.get_current()
     if current_site.domain == 'foo.com':
          # Do something
     else:
