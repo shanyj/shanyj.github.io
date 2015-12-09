@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Dec 2015 09:36:14 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Dec 2015 09:36:14 +0800</lastBuildDate>
+    <pubDate>Wed, 09 Dec 2015 09:41:25 +0800</pubDate>
+    <lastBuildDate>Wed, 09 Dec 2015 09:41:25 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,96 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django GenericForeignKey</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#model-1&quot; id=&quot;markdown-toc-model-1&quot;&gt;中间model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;存储&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近在项目的一个工作流流程中大量的使用到了GenericForeignKey和 Content Type，主要用于在两个，于是做了如下的小结。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;首先我们需要定义两个需要关联的model&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ from django.contrib.contenttypes import generic
+ class music(models.Model):
+     music_url = models.CharField(max_length=20)
+     events = generic.GenericRelation(&#39;owner&#39;)
+     #加这句的目的是在该实例删除时owner中的记录也会删除
+
+ class vedio(models.Model):
+     video_url = models.CharField(max_length=20)
+     events = generic.GenericRelation(&#39;owner&#39;)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model-1&quot;&gt;中间model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;建立与两个model建立联系的新的model&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+class owner(models.Model):
+     user = models.ForeignKey(User)
+     content_type = models.ForeignKey(ContentType)
+     object_id = models.PositiveIntegerField()
+     event_object = generic.GenericForeignKey(&#39;content_type&#39;, &#39;object_id&#39;)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通俗一点的理解，content_type定位了一个表，而object_id定位了一个id，event_object就相当于将’content_type’, ‘object_id’结合起来从而定位了一个model中的实例&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;存储&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;之前讲过Django的signal，django.db.models.signals.pre_save &amp;amp; django.db.models.signals.post_save分别在一个Model的save()方法之前和之后触发，我们可以应用这个来实现自动存储&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ from django.db.models.signals import post_save
+
+ def save_owner(sender, instance, **kwargs):
+     obj = instance
+     publisher=User.objects.all()[0]
+     event = owner(user=publisher,event_object=obj)
+     event.save()
+
+ post_save.connect(save_owner,sender=music)
+ post_save.connect(save_owner,sender=vedio)
+  &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 05 May 2015 03:32:29 +0800</pubDate>
+        <link>/2015/05/05/Django-GenericForeignKey/</link>
+        <guid isPermaLink="true">/2015/05/05/Django-GenericForeignKey/</guid>
         
         
         <category>Django</category>
