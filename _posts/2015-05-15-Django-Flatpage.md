@@ -76,7 +76,7 @@ Django简单页面可以用来进行声明、条款等几乎不许改变内容�
  * 激活个性化数据
 
    * 将django.contrib.humanize加入app中
-   
+
 
  * 使用个性化数据
 

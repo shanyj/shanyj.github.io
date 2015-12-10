@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 10 Dec 2015 10:07:11 +0800</pubDate>
-    <lastBuildDate>Thu, 10 Dec 2015 10:07:11 +0800</lastBuildDate>
+    <pubDate>Thu, 10 Dec 2015 10:40:49 +0800</pubDate>
+    <lastBuildDate>Thu, 10 Dec 2015 10:40:49 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,162 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 安全</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#sql&quot; id=&quot;markdown-toc-sql&quot;&gt;sql注入&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#xss&quot; id=&quot;markdown-toc-xss&quot;&gt;跨站点脚本xss&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#csrf&quot; id=&quot;markdown-toc-csrf&quot;&gt;伪造跨站点请求csrf&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;邮件头部注入&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;暴露错误消息&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;伪造会话&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;安全是在进行项目开发时需要处处注意的问题，下面就总结下Django常见的安全问题的解决方法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;sql&quot;&gt;sql注入&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;为了防止sql注入，Django总是对输入进行自动转义&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当直接使用sql语句时，注意使用sql占位符&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ def user_contacts(request):
+     user = request.GET[&#39;username&#39;]
+     sql = &quot;SELECT * FROM user_contacts WHERE username = %s&quot;
+     cursor = connection.cursor()
+     cursor.execute(sql, [user])
+ &lt;/code&gt;&lt;/pre&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;execute有第二个参数，包含若干占位符，来对sql语句中的占位符赋值，过程中会自动转义&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;xss&quot;&gt;跨站点脚本xss&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在url中进行修改，比如http://example.com/hello/?name=&lt;i&gt;Jacob&lt;/i&gt;  会返回&amp;lt;h1&amp;gt;Hello, &lt;i&gt;Jacob&lt;/i&gt;!&amp;lt;/h1&amp;gt;, 因此可以在url中写上jquery语句来操作数据库&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为此，django总是自动转义&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;csrf&quot;&gt;伪造跨站点请求csrf&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在登陆信任网站且没退出时访问危险网站，导致cookie被盗用,比如在危险网站中插入　&amp;lt;img src=http://www.mybank.com/Transfer.php?toBankId=11&amp;amp;money=1000&amp;gt; 这个get／post请求，只要点击银行账户就少钱了！&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为此，django添加了csrf中间键&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;只针对post请求，get请求需要设计者自己保证没有副作用&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;django.contrib.csrf.middleware.CsrfMiddleware放在中间件中，且在session之后在 GZipMiddleware 之前&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;只有 Content‐Type头部标记为text/html ，application/xml+xhtml的页面才会被保护&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;向所有post表单增加隐藏字段，名称为csrfmiddlewaretoken，值为当前会话id加秘钥&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;对传入的post检查csrfmiddlewaretoken，如不正确或不存在则403&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;仅限于常规方法创建的表单&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;邮件头部注入&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在构建邮件sunject时加上hello\ncc:spamvictim@example.com”（\n是换行符）
+ 就会变成:&lt;/p&gt;
+
+    &lt;p&gt;To: hardcoded@example.com Subject: hello&lt;/p&gt;
+
+    &lt;p&gt;cc: spamvictim@example.com&lt;/p&gt;
+
+    &lt;p&gt;从而利用了别人的邮箱来发送了信息&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;为此，django自带的django.core.mail 中不允许出现换行符,且总是自动转义&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;暴露错误消息&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Django的出错页面总是很详尽的列出出错的原因和代码，容易将内部代码很容易的暴露出去&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;关闭debug&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;伪造会话&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;中间人攻击：监听所有网络&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;伪造会话：利用会话id将自己伪造成用户&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;解决：django会话id存在哈西表中，且用户去访问不存在的会话id时会生成新会话id）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;伪造cookie和会话滞留：获取url中的session来进行盗用&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;解决：首先不要再url中包含session（django自带，只有映射用的session id），不在cookie存数据&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 18 May 2015 05:02:22 +0800</pubDate>
+        <link>/2015/05/18/Django-Security/</link>
+        <guid isPermaLink="true">/2015/05/18/Django-Security/</guid>
         
         
         <category>Django</category>
@@ -1353,126 +1509,6 @@ class owner(models.Model):
         <pubDate>Wed, 29 Apr 2015 04:57:51 +0800</pubDate>
         <link>/2015/04/29/Django-User/</link>
         <guid isPermaLink="true">/2015/04/29/Django-User/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django Auth登陆认证</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;认证函数&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;配置&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;另一种方法&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;之前研究了登录和登出逻辑，但是具体登陆处理函数没有给出，当不仅仅满足于Django自带的登录函数功能时，需要重写验证模式，自己研究并试用了下，暂时只更改改验证模式，而不更改user的属性，具体方式如下：&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;我们使用新的model来进行用户验证，而代替Django自带的User model&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在任意app的model中加入新的账户类如account1类，同时定义一个类中的函数&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- def is_authenticated(self):
-      return True
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;认证函数&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;认证过程中使用我们自己编写的model，但是返回时依旧返回User&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;编写AuthBackend类，需要实现get_user和authenticate方法。&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  class AuthBackend(object):
-  def get_user(self,id):
-      try:
-          user=User.objects.get(pk=id)
-      except:
-          user=None
-      return user
-
-  def authenticate(self,username,password):
-      try:
-          user=Account1.objects.get(username=username)
-          if password==user.shanyunji:
-              return User.objects.get(username=username)
-          else:
-              return None
-      except:
-          return None
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;配置&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;编写好的AuthBackend类需要加入到settings中，在AUTHENTICATION_BACKENDS中加入自己编写好的类。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;AUTHENTICATION_BACKENDS中会依照顺序进行验证，如果第一个验证通过则通过，否则尝试下一个，只有所有认证都失败才失败。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;另一种方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;我们只需要更改Django默认登录验证中的authenticate函数即可，具体方法如下：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  from django.contrib import auth
-
-  def login_view(request):
-  username = request.POST.get(&#39;username&#39;, &#39;&#39;)
-  password = request.POST.get(&#39;password&#39;, &#39;&#39;)
-  user = auth.authenticate(username=username, password=password)
-  if user is not None and user.is_active:
-      auth.login(request, user)
-      return HttpResponseRedirect(&quot;/account/loggedin/&quot;)
-  else:
-      return HttpResponseRedirect(&quot;/account/invalid/&quot;)
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;登出方法更为简单：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-          auth.logout(request)
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 27 Apr 2015 06:03:21 +0800</pubDate>
-        <link>/2015/04/27/Django-Auth/</link>
-        <guid isPermaLink="true">/2015/04/27/Django-Auth/</guid>
         
         
         <category>Django</category>
