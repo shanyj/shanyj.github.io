@@ -3,7 +3,7 @@ title: ShanYJ
 email: shanyunji1@126.com
 description: ╭(╯^╰)╮吉吉的博客
 
-# gems: [jekyll-paginate]
+gems: [jekyll-paginate]
 # > # this means to ignore newlines until "baseurl:"
 #   Write an awesome description for your new site here. You can edit this
 #   line in _config.yml. It will appear in your document head meta (for

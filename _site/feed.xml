@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Dec 2015 14:39:51 +0800</pubDate>
-    <lastBuildDate>Wed, 09 Dec 2015 14:39:51 +0800</lastBuildDate>
+    <pubDate>Thu, 10 Dec 2015 10:07:11 +0800</pubDate>
+    <lastBuildDate>Thu, 10 Dec 2015 10:07:11 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,155 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 简单页面&amp;重定向&amp;个性化设置</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;简单页面&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;个性化数据&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;Django简单页面可以用来进行声明、条款等几乎不许改变内容的页面渲染，重定向负责页面重定向，人性化设置则是为了显示更美观&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;简单页面&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;激活简单页面&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;添加‘django.contrib.sites’，’django.contrib.flatpages’到INSTALLED_APPS&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;添加’django.contrib.flatpages.middleware.FlatpageFallbackMiddleware’到MIDDLEWARE_CLASSES，通常放在列表最后，因为是最后的办法&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;运行python manage.py syncdb生成简单页面表&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;简单页面model&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ class FlatPage(models.Model):
+     url = models.CharField(max_length=100, db_index=True)
+     title = models.CharField(max_length=200)
+     content = models.TextField(blank=True)
+     enable_comments = models.BooleanField()
+     template_name = models.CharField(max_length=70, blank=True)
+     registration_required = models.BooleanField()
+     sites = models.ManyToManyField(Site)
+ &lt;/code&gt;&lt;/pre&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;url：不包含域名，如/about/contact/&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;title：标题&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;content：网页内容&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;enable_comments：是否允许评论&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;template_name：模版名称，如果未知定，则使用flatpages/default.html&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;registration_required：是否需要登陆&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;最后渲染指定template即可，以title为例&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;重定向&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;激活重定向&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;将’django.contrib.redirects’加到INSTALLED_APPS&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;将’django.contrib.redirects.middleware.RedirectFallbackMiddleware’加到MIDDLEWARE_CLASSES&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;运行python manage.py syncdb生成重定向表&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置model&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;重定向model比较简单，只有site、oldpath、newpath三个属性&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;个性化数据&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;激活个性化数据&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;将django.contrib.humanize加入app中&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用个性化数据&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用前需要进行调用{ % load humanize % }&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用apnumber：{ {1|apnumber} }（1 变成 one ）&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用intcomma：{ {1000000|intcomma} }（4500 变成 4,500）&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用intword：{ {1000000000000|intword} }（1000000 变成 1.0 million ）&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用ordinal：{ {1|ordinal} }（1 变成 1st ）&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Sat, 16 May 2015 03:58:09 +0800</pubDate>
+        <link>/2015/05/16/Django-Flatpage/</link>
+        <guid isPermaLink="true">/2015/05/16/Django-Flatpage/</guid>
         
         
         <category>Django</category>
@@ -1324,92 +1473,6 @@ class owner(models.Model):
         <pubDate>Mon, 27 Apr 2015 06:03:21 +0800</pubDate>
         <link>/2015/04/27/Django-Auth/</link>
         <guid isPermaLink="true">/2015/04/27/Django-Auth/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django login/lgout 登录和登出</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#loginlgout&quot; id=&quot;markdown-toc-loginlgout&quot;&gt;login/lgout方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;登录模版&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#csrf&quot; id=&quot;markdown-toc-csrf&quot;&gt;CSRF&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;需要做用户登录，于是研究了下Django的登录和登出逻辑，发现还是挺简单实用的。具体的登录和登出实现如下：&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;loginlgout&quot;&gt;login/lgout方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Django已经为我们封装好了login和lgout函数，只需要我们在url.py中直接调用即可，具体使用方法如下：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  from django.contrib.auth.views import login, logout
-
-  urlpatterns = patterns(&#39;&#39;,
-      (r&#39;^accounts/login/$&#39;, login),
-      (r&#39;^accounts/logout/$&#39;, logout),
-  )
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;按照常规，登录url为accounts/login/，登出为accounts/logout/&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;登录模版&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;login模版地址默认为template／registration／login.html&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;需要在login模版中编写登录表单，格式如下：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  &amp;lt; form action=&quot;&quot; method=&quot;post&quot;&amp;gt;{ % csrf_token % }
-  &amp;lt; label for=&quot;username&quot;&amp;gt;User name:
-  &amp;lt; input type=&quot;text&quot; name=&quot;username&quot; value=&quot;&quot; id=&quot;username&quot;&amp;gt;
-  &amp;lt; label for=&quot;password&quot;&amp;gt;Password:
-  &amp;lt; input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; id=&quot;password&quot;&amp;gt;
-  &amp;lt; input type=&quot;submit&quot; value=&quot;login&quot; /&amp;gt;
-  &amp;lt; /form&amp;gt;
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;重定向&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;登录验证成功后，默认会自动重定向到accounts／profile，需要编写该url对应的view函数&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;csrf&quot;&gt;CSRF&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;模版表单中通常加入｛％ csrf_token ％｝确保安全，同时在settings中间键中添加csrf中间键&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 24 Apr 2015 04:41:29 +0800</pubDate>
-        <link>/2015/04/24/Django-login-and-lgout/</link>
-        <guid isPermaLink="true">/2015/04/24/Django-login-and-lgout/</guid>
         
         
         <category>Django</category>
