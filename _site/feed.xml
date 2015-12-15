@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Dec 2015 13:34:06 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Dec 2015 13:34:06 +0800</lastBuildDate>
+    <pubDate>Tue, 15 Dec 2015 14:21:02 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Dec 2015 14:21:02 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,171 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django Session&amp;Cookie</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#cookie&quot; id=&quot;markdown-toc-cookie&quot;&gt;cookie&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#session&quot; id=&quot;markdown-toc-session&quot;&gt;session&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#cookie-1&quot; id=&quot;markdown-toc-cookie-1&quot;&gt;检测cookie&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#session-1&quot; id=&quot;markdown-toc-session-1&quot;&gt;session操作&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;Django的session框架可以存储和获取访问者的数据信息，并将信息保存在服务器上，同时以 cookies 的方式发送和获取一个包含 session ID的值&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;cookie&quot;&gt;cookie&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;存cookie：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+def cookiew(request):
+     response=HttpResponse(&#39;aa&#39;)
+     response.set_cookie(&#39;favorite_color&#39;,&#39;aaaaa&#39;)
+     return response
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;取cookie：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ def cookier(request):
+     a=request.COOKIES[&#39;favorite_color&#39;]
+     return HttpResponse(a)
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;删除Cookies:&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ response.delete_cookie(&quot;cookie_key&quot;,path=&quot;/&quot;,domain=name)
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;set_cookie参数：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;max_age: cookies的持续有效时间（以秒计），如果设置为 None cookies 在浏览器关闭的时候就失效了。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;expires: cookies的过期时间，格式： “Wdy, DD-Mth-YY HH:MM:SS GMT” 如果设置这个参数，它将覆盖 max_age 参数。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;path: cookie生效的路径前缀，浏览器只会把cookie回传给带有该路径的页面，这样你可以避免将cookie传给站点中的其他的应用。当你的应用不处于站点顶层的时候，这个参数会非常有用。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;domain: cookie生效的站点。你可用这个参数来构造一个跨站cookie。如domain=”.example.com”所构造的cookie对下面这些站点都是可读的： www.example.com 、 www2.example.com 和an.other.sub.domain.example.com 。如果该参数设置为 None ，cookie只能由设置它的站点读取。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;secure: 如果设置为 True ，浏览器将通过HTTPS来回传cookie。&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;session&quot;&gt;session&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置session&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;django.contrib.sessions.middleware.SessionMiddleware 放入中间键中&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;django.contrib.sessions 放入app中&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;python manage.py syncdb&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置session&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;request.session[‘haha’]=’syj’&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;取session：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;s=request.session[‘haha’］或 request.session.get(‘haha’,’’)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;删除session&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;del request.session[“fav_color”]&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;cookie-1&quot;&gt;检测cookie&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用session和cookie前一般需要进行检测&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ def testform(request):
+     if request.method==&#39;GET&#39; and &#39;name&#39; in request.GET:
+         if request.session.test_cookie_worked():
+             request.session.delete_test_cookie()
+             return HttpResponse(&#39;ok!&#39;)
+         else:
+             return HttpResponse(&#39;no cookie&#39;)
+     else:
+         request.session.set_test_cookie()
+         form=canform()
+         return render_to_response(&#39;searchnext.html&#39;,{&#39;form&#39;:form})
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;session-1&quot;&gt;session操作&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;可以通过数据库来取，s=Session.objects.get(pk=’ww6xdvzwtg5qz3ysnju7754b5ypyou3a’)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;获取属性 s.expire_date、s.session_data、s.get_decoded()&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;默认在数据改变时才保存，可以设置SESSION_SAVE_EVERY_REQUEST 为 True，则每次读写都保存&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;默认浏览器关闭时实效，SESSION_EXPIRE_AT_BROWSER_CLOSE 设置为 False,这样,会话cookie可以在用户浏览器中保持 SESSION_COOKIE_AGE&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 03 Jun 2015 03:51:34 +0800</pubDate>
+        <link>/2015/06/03/Django-Session/</link>
+        <guid isPermaLink="true">/2015/06/03/Django-Session/</guid>
         
         
         <category>Django</category>
@@ -1426,103 +1591,6 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Wed, 13 May 2015 05:11:42 +0800</pubDate>
         <link>/2015/05/13/Django-Site/</link>
         <guid isPermaLink="true">/2015/05/13/Django-Site/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 中间键</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;顺序&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;例子&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;中间键，顾名思义，就是在处理一个Request前后需要执行的一系列函数，以下就是对Django中间键的一些总结&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;顺序&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Django中间键执行顺序为，在request和view阶段从上到下处理，response和异常处理阶段从下到上处理&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;settings中MIDDLEWARE_CLASSES包含了当前使用的中间键&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;init&lt;/strong&gt;(self)：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;只在django运行时加载一次，如果抛出异常则将该中间件剔除，不对每个request单独处理，只需要self参数&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;process_request(self,request)：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;在接受request后并且view函数运行前执行的，应返回None或者Httpresponse对象，如果返回None继续执行view函数，返回Httpresponse则不执行view函数&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;process_view(self,request,view,args,kwargs)：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;其中args和kwargs是将传入view的参数&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;process_response(self,request,response)：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;view函数执行response之后，必须返回httpresponse对象&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;process_exception(self,request,exception)：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;view函数执行时抛出异常才会进行处理&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;例子&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;
- class MultiHostMiddleware:
-    def process_request(self, request):
-        try:
-            host = request.user
-            if host == &#39;shanyj&#39;:
-                return HttpResponse(&#39;aaaaa&#39;)
-            response=HttpResponse(&#39;haha&#39;)
-            response.set_cookie(&#39;favorite_color&#39;,&#39;lala&#39;)
-            return response
-        except KeyError:
-            pass
-    def process_response(self, request, response):
-        try:
-            if request.COOKIES[&#39;favorite_color&#39;]:
-                return response
-        except:
-            return response
-        else:
-            return response
- &lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Sun, 10 May 2015 04:18:33 +0800</pubDate>
-        <link>/2015/05/10/Django-MiddleClass/</link>
-        <guid isPermaLink="true">/2015/05/10/Django-MiddleClass/</guid>
         
         
         <category>Django</category>
