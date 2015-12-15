@@ -5,10 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Django 扩展manage.py命令</title>
-	<meta name="description" content="Django 扩展manage.py命令">
+	<title>Django Session&Cookie</title>
+	<meta name="description" content="Django Session&Cookie">
 	
-	<link rel="canonical" href="/2015/04/21/Django-manage/">
+	<link rel="canonical" href="/2015/06/03/Django-Permission/">
 	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
 	
 	<!-- <link rel="stylesheet" href="/css/main.css"> -->
@@ -105,71 +105,35 @@
   <div id="myArticle" class="col-sm-9">
     <div class="post-area post">
       <header>
-        <h1>Django 扩展manage.py命令</h1>
-        <p>Apr 21, 2015</p>
+        <h1>Django Session&Cookie</h1>
+        <p>Jun 3, 2015</p>
       </header>
       <hr>
       <article>
         <ul id="markdown-toc">
   <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
-      <li><a href="#management" id="markdown-toc-management">management</a></li>
-      <li><a href="#basecommand" id="markdown-toc-basecommand">Basecommand类</a></li>
-      <li><a href="#section-1" id="markdown-toc-section-1">运行</a></li>
+      <li><a href="#cookie" id="markdown-toc-cookie">cookie</a></li>
     </ul>
   </li>
 </ul>
 
 <h2 id="section">序</h2>
 
-<p>由于项目中添加了诸如文档、系统管理员这样的角色，因此需要执行命令来手动创建这些高权限账号，这就需要我们手动扩展manage.py命令，大致流程如下：</p>
+<p>Django的session框架可以存储和获取访问者的数据信息，并将信息保存在服务器上，同时以 cookies 的方式发送和获取一个包含 session ID的值</p>
 
 <hr />
 
-<h3 id="management">management</h3>
+<h3 id="cookie">cookie</h3>
 
 <ul>
   <li>
-    <p>所有需要扩展的manage命令都放在management的commands文件夹下，因此需要在应用中建立management文件夹，之后在该文件夹下建立commands文件夹</p>
-  </li>
-  <li>
-    <p>management和commands下都需要建立空的__init__.py文件</p>
-  </li>
-  <li>
-    <p>应用必须存在于INSTALLED_APPS中</p>
-  </li>
-  <li>
-    <p>commands下以  命令名.py  建立python文件，一个命令对应一个文件</p>
-  </li>
-</ul>
-
-<hr />
-
-<h3 id="basecommand">Basecommand类</h3>
-
-<ul>
-  <li>
-    <p>命令名.py 文件中编写格式如下：</p>
+    <p>存cookie：</p>
 
     <pre><code>
-  from django.core.management.base import BaseCommand
-  class Command(BaseCommand):
-      def handle(self, *args, **options):
-          print args
-          print options
-  </code></pre>
-
-    <ul>
-      <li>注意类名为Command、继承BaseCommand、方法名为handle</li>
-    </ul>
+def cookiew(request):
+     response=HttpResponse('aa')
+</code></pre>
   </li>
-</ul>
-
-<hr />
-
-<h3 id="section-1">运行</h3>
-
-<ul>
-  <li>进入 manage.py 目录下，运行 python manage.py hello a b c name＝shanyj</li>
 </ul>
 
       </article>
@@ -180,7 +144,7 @@
     <div class="post-area post comment">
       <!-- 多说评论框 start -->
       
-      <div class="ds-thread" data-thread-key="/2015/04/21/Django-manage" data-title="Django 扩展manage.py命令" data-url="gaohaoyang.github.io/2015/04/21/Django-manage/"></div>
+      <div class="ds-thread" data-thread-key="/2015/06/03/Django-Permission" data-title="Django Session&Cookie" data-url="gaohaoyang.github.io/2015/06/03/Django-Permission/"></div>
       
       <!-- 多说评论框 end -->
     </div>
