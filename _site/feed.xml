@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Dec 2015 13:32:22 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Dec 2015 13:32:22 +0800</lastBuildDate>
+    <pubDate>Tue, 15 Dec 2015 13:34:06 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Dec 2015 13:34:06 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -523,7 +523,7 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
       </item>
     
       <item>
-        <title>Django django-redis 缓存</title>
+        <title>django-redis 缓存</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
