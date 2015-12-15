@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 11 Dec 2015 18:08:25 +0800</pubDate>
-    <lastBuildDate>Fri, 11 Dec 2015 18:08:25 +0800</lastBuildDate>
+    <pubDate>Tue, 15 Dec 2015 09:14:09 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Dec 2015 09:14:09 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -516,6 +516,66 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
         <link>/2015/06/19/Django-Databases/</link>
         <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 整合数据库</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#inspectdb&quot; id=&quot;markdown-toc-inspectdb&quot;&gt;inspectdb&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;注意事项&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;当尝试用Django来重构某一项目时，数据资源的整合十分关键，下面就介绍一下Django是如何进行数据库整合的&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;inspectdb&quot;&gt;inspectdb&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;inspectdb命令可以依据数据库结构来生成新的model&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;python mysite/manage.py inspectdb &amp;gt; mysite/myapp/models.py 重定向输出到models.py&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如：python manage.py inspectdb &amp;gt; models.py&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;注意事项&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;命令不会自动转换manytomany类型&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当没有主键时自动增加id = models.IntegerField(primary_key=True)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;无法检测类型时会用textfield代替&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果列名为django保留字，会做下面处理，以for为例：for_field = models.IntegerField(db_column=’for’), 添加_field 并且db_column设置为原来名字&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;需要手动调节一下model的顺序，比如某一个model引用了另一个model外键，另一个要在前面&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 21 May 2015 05:02:22 +0800</pubDate>
+        <link>/2015/05/21/rebuild-db/</link>
+        <guid isPermaLink="true">/2015/05/21/rebuild-db/</guid>
         
         
         <category>Django</category>
@@ -1326,189 +1386,6 @@ class owner(models.Model):
         <pubDate>Sat, 02 May 2015 04:24:41 +0800</pubDate>
         <link>/2015/05/02/Django-Signal/</link>
         <guid isPermaLink="true">/2015/05/02/Django-Signal/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django User扩展</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#user&quot; id=&quot;markdown-toc-user&quot;&gt;查看User类&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#abstractuser&quot; id=&quot;markdown-toc-abstractuser&quot;&gt;AbstractUser&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#abstractbaseuser&quot; id=&quot;markdown-toc-abstractbaseuser&quot;&gt;AbstractBaseUser&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#user-profile&quot; id=&quot;markdown-toc-user-profile&quot;&gt;User Profile&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;之前更改登录验证模式时返回的时Django自带的User model，当需要扩展业务而User model已经无法满足要求时，就需要扩展User类，收集后发现大致有三种方法进行User扩展。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;user&quot;&gt;查看User类&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用get_user_model()可以查看使用的user类&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在Django shell中执行下列代码，即可查看当前使用的User类&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  from django.contrib.auth import get_user_model
-  get_user_model()
-   &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;abstractuser&quot;&gt;AbstractUser&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用AbstractUser可以在使用Django自带的User类的所有属性前提下进行扩展，具体使用方法如下&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;继承AbstractUser并增加新属性&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  from django.contrib.auth.models import AbstractUser
-  class NewUser(AbstractUser):
-      shanyj = models.CharField(max_length=100)
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在settings中进行设置，AUTH_USER_MODEL = “myapp.NewUser”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;为了在admin界面中，方便使用，可在对应app的admin.py中加入&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- from .models import NewUser
- admin.site.register(NewUser)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;abstractbaseuser&quot;&gt;AbstractBaseUser&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;AbstractBaseUser对User类进行了精简，只含有3个field: password, last_login和is_active. 如果你对django user model默认的first_name, last_name不满意, 或者只想保留默认的密码储存方式, 则可以选择这一方式.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;AbstractBaseUser需要编写User model和UserManager方法&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;User model需要注意一下几点:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;设置UserManager objects = UserManager()，UserManager()编写方法稍后介绍&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;设置USERNAME_FIELD，并且Field要有unique＝True&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;设置get_full_name()方法&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;设置get_short_name()方法&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-     class NextUser(AbstractBaseUser):
-         shanyj = models.CharField(max_length=100,unique=True)
-         a = models.CharField(max_length=25)
-         is_active = models.BooleanField(default=True)
-         is_staff = models.BooleanField(default=True)
-         is_admin = models.BooleanField(default=False)
-
-         objects = UserManager()
-
-         USERNAME_FIELD = &#39;shanyj&#39;
-
-         def get_full_name(self):
-             return self.shanyj
-         def get_short_name(self):
-             return self.shanyj
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;UserManager中需要重写两个方法，注意以下几点：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;save()用到了using=self.db&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;需要有user.set_password(password)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;user = self.model(shanyj=shanyj，…………)&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;需要编写create_user和create_superuser方法&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- class UserManager(BaseUserManager):
-     def create_user(self, shanyj, password=None):
-         if not shanyj:
-           raise ValueError(&#39;Users must have an email address&#39;)
-         user = self.model(
-           shanyj=shanyj,
-         )
-         user.set_password(password)
-         user.save(using=self._db)
-         return user
-
-     def create_superuser(self, shanyj, password=None):
-         user = self.create_user(shanyj,password)
-         user.is_admin = True
-         user.save(using=self._db)
-         return user
-
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在settings中进行设置，AUTH_USER_MODEL = “myapp.NewUser”&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;user-profile&quot;&gt;User Profile&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用外键的方式来对用户的属性进行扩展，增加新的model如下：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- class EasterProfile(models.Model):
-     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-     favorite_ice_cream = models.ForeignKey(Flavor, null=True, blank=True
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;我们可以使用user.easterprofile.favorite_ice_cream获取相应的profile (注意为小写)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 29 Apr 2015 04:57:51 +0800</pubDate>
-        <link>/2015/04/29/Django-User/</link>
-        <guid isPermaLink="true">/2015/04/29/Django-User/</guid>
         
         
         <category>Django</category>
