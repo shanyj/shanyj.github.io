@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Dec 2015 11:25:58 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Dec 2015 11:25:58 +0800</lastBuildDate>
+    <pubDate>Tue, 15 Dec 2015 13:32:22 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Dec 2015 13:32:22 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -519,6 +519,100 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         
         
         <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django django-redis 缓存</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#settings&quot; id=&quot;markdown-toc-settings&quot;&gt;settings配置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;使用&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;其他配置&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;需要频繁对一个字段读取的时一般会将这个字段放入到缓存服务器上，而redis就是一个很好的选择，django-redis为我们使用redis作为缓存奠定了基础&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装Redis服务器端: sudo apt-get install redis-server&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;安装redis for Django的插件: pip install django-redis&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;settings&quot;&gt;settings配置&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在Django的settings中配置&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  CACHES = {
+     &#39;default&#39;: {
+         &#39;BACKEND&#39;: &#39;redis_cache.cache.RedisCache&#39;,
+         &#39;LOCATION&#39;: &#39;redis://127.0.0.1:6379/1&#39;,
+         &quot;OPTIONS&quot;: {
+             &quot;CLIENT_CLASS&quot;: &quot;redis_cache.client.DefaultClient&quot;,
+             },
+         },
+     }
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当时用MemcachedCache时，配置类似&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+  CACHES = {
+     &#39;default&#39;: {
+         &#39;BACKEND&#39;: &#39;django.core.cache.backends.memcached.MemcachedCache&#39;,
+         &#39;LOCATION&#39;: &#39;127.0.0.1:11211&#39;,
+         }
+     }
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;使用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用方法参见 http://shanyj.github.io/2015/05/27/Django-Cache/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;其他配置&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;使用redis作为session后台：&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SESSION_ENGINE = “django.contrib.sessions.backends.cache”      SESSION_CACHE_ALIAS = “default”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 31 May 2015 06:04:15 +0800</pubDate>
+        <link>/2015/05/31/Django-django-redis/</link>
+        <guid isPermaLink="true">/2015/05/31/Django-django-redis/</guid>
+        
+        
+        <category>Django第三方模块</category>
         
       </item>
     
@@ -1429,91 +1523,6 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Sun, 10 May 2015 04:18:33 +0800</pubDate>
         <link>/2015/05/10/Django-MiddleClass/</link>
         <guid isPermaLink="true">/2015/05/10/Django-MiddleClass/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 输出非Html内容</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#stringio&quot; id=&quot;markdown-toc-stringio&quot;&gt;StringIO&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#pdf&quot; id=&quot;markdown-toc-pdf&quot;&gt;输出PDF&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#csv&quot; id=&quot;markdown-toc-csv&quot;&gt;输出CSV&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;实际项目中，通常需要输出非Html内容，比如下载页自动下载等，于是对Django输出非Html内容做了小结。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;stringio&quot;&gt;StringIO&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;StringIO经常被用来作为字符串的缓存，因为StringIO有个好处，他的有些接口和文件操作是一致的，也就是说用同样的代码，可以同时当成文件操作或者StringIO操作。&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- temp=StringIO()
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;pdf&quot;&gt;输出PDF&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;StringIO经常被用来作为字符串的缓存，因为StringIO有个好处，他的有些接口和文件操作是一致的，也就是说用同样的代码，可以同时当成文件操作或者StringIO操作。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;输出非Html内容时，需要对response的mimetype和Content-Disposition进行一些修改。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;输出PDF需要使用canvas来进行内容写入和保存&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- from reportlab.pdfgen import canvas
-
- def showpdf(request):
-     reponse=HttpResponse(mimetype=&#39;application/pdf&#39;)
-     reponse[&#39;Content-Disposition&#39;]=&#39;attachment;filename=a.pdf&#39;
-
-     temp=StringIO()
-
-     p=canvas.Canvas(temp)
-     p.drawString(800,800,&#39;asdhafuhnsdfn&#39;)
-     p.showPage()
-     p.save()
-
-     response.write(temp.getvalue())
-     return response
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;csv&quot;&gt;输出CSV&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;输出其他内容的方法与PDF类似，只需要进行稍微的修改即可，以CSV为例，不在使用canvas，而使用如下代码
-    &lt;pre&gt;&lt;code&gt;
- writer=csv.writer(temp)
- writer.writerow([&#39;aaaaaaaaaa&#39;,&#39;bbbbbbbbbbb&#39;])
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 07 May 2015 05:12:21 +0800</pubDate>
-        <link>/2015/05/07/Django-Ootput/</link>
-        <guid isPermaLink="true">/2015/05/07/Django-Ootput/</guid>
         
         
         <category>Django</category>
