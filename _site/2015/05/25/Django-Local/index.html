@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Django 国际化</title>
+	<meta name="description" content="Django 国际化">
+	
+	<link rel="canonical" href="/2015/05/25/Django-Local/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Django 国际化</h1>
+        <p>May 25, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#py" id="markdown-toc-py">py文件</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">模板代码</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">消息文件</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">语言偏好</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">重定向视图</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>Django有一套规范的国际化和本地化方法，可以方便世界各的用户使用产品，国际化和本地化使用方法如下</p>
+
+<hr />
+
+<h3 id="py">py文件</h3>
+
+<ul>
+  <li>
+    <p>ugettext()</p>
+
+    <ul>
+      <li>
+        <p>使用ugettext() 函数指定要翻译的字符串，惯例用_代替</p>
+      </li>
+      <li>
+        <p>示例：</p>
+      </li>
+    </ul>
+    <pre><code>
+ from django.utils.translation import ugettext as _
+ def translate(request):
+     a = _('Today is %(month)s %(day)s.') % {'month': m, 'day': d}
+     return HttpResponse(a)
+</code></pre>
+  </li>
+  <li>
+    <p>gettext_noop()</p>
+
+    <ul>
+      <li>
+        <p>标记字符串为不翻译</p>
+      </li>
+      <li>
+        <p>django.utils.translation.gettext_noop(),这种情况下会以原始语言存在数据库等地，只在最后展示给用户时翻译</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>gettext_lazy()</p>
+
+    <ul>
+      <li>
+        <p>惰性翻译</p>
+      </li>
+      <li>
+        <p>django.utils.translation.gettext_lazy(),只有当值被访问时才翻译，而不是在gettext_lazy()调用时翻译，同样在数据库等地都不翻译</p>
+      </li>
+      <li>
+        <p>django模型中都使用惰性翻译</p>
+      </li>
+      <li>
+        <p>a=u”Hello %s” % ugettext_lazy(“people”),可以进行unicode插入</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>ungettext()</p>
+
+    <ul>
+      <li>
+        <p>指定复数形势</p>
+      </li>
+      <li>
+        <p>使用django.utils.translation.ungettext()，有三个参数：1.单数形式字符串翻译，2.复数形式的字符串翻译，3.对象的个数</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-1">模板代码</h3>
+
+<ul>
+  <li>
+    <p>trans翻译</p>
+
+    <ul>
+      <li>{ % load i18n % }放在最前面，然后使用{ % trans “pingshen” % }</li>
+    </ul>
+  </li>
+  <li>
+    <p>blocktrans翻译</p>
+
+    <ul>
+      <li>{ % blocktrans % }This string will have { { value } } inside.{ % endblocktrans % }</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-2">消息文件</h3>
+
+<ul>
+  <li>
+    <p>django‐admin.py makemessages ‐l de ‐e html,txt ‐e xml    de为语言代码、-e为需要翻译的文件类型</p>
+  </li>
+  <li>
+    <p>脚本在django根目录 or 项目根目录 or 应用根目录下执行。需要手动创建locale文件夹。</p>
+  </li>
+  <li>
+    <p>编辑.po文件，msgid “”      msgstr “” 分别表示翻译前和翻译后的文字</p>
+  </li>
+  <li>
+    <p>django‐admin.py makemessages ‐a更新语言信息，django‐admin.py compilemessages 编译语言信息</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-3">语言偏好</h3>
+
+<ul>
+  <li>
+    <p>当使用locatemiddleware django.middleware.locale.LocaleMiddleware中间键时， 中间件查找顺序 session的django_language、cookie、http请求头、settings中的language code</p>
+  </li>
+  <li>
+    <p>LANGUAGES = ((‘en’, u’English’),(‘zh-cn’,u’中文’))设置可选语种</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-4">重定向视图</h3>
+
+<ul>
+  <li>
+    <p>url中(r’^i18n/’, include(‘django.conf.urls.i18n’))，使得 /i18n/setlang/有效</p>
+  </li>
+  <li>
+    <p>选择语言时，如果session启动，视图会将语言选择保存在session中，否则以django-language为key保存在cookie中</p>
+  </li>
+  <li>
+    <p>选择完语言后，重定向到post的&lt; input name=”next” &gt;值中，或者html头的refer中，再或者/</p>
+
+    <pre><code>
+ &lt; form action="/i18n/setlang/" method="post" &gt;
+     &lt; input name="next" type="hidden" value="/next/page/"  &gt;
+     &lt; select name="language" &gt;
+     { % for lang in LANGUAGES % }
+     &lt; option value="" &gt; { { lang.1 } } &lt;/ option &gt;
+     { % endfor % }
+     &lt; /select &gt;
+     &lt; input type="submit" value="Go"  &gt;
+ &lt; /form &gt;
+ </code></pre>
+  </li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/05/25/Django-Local" data-title="Django 国际化" data-url="gaohaoyang.github.io/2015/05/25/Django-Local/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Dec 2015 10:55:43 +0800</pubDate>
-    <lastBuildDate>Tue, 15 Dec 2015 10:55:43 +0800</lastBuildDate>
+    <pubDate>Tue, 15 Dec 2015 11:25:58 +0800</pubDate>
+    <lastBuildDate>Tue, 15 Dec 2015 11:25:58 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -523,6 +523,164 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
       </item>
     
       <item>
+        <title>Django 缓存</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;分类&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;站点级缓存&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;视图级缓存&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;模块级缓存&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#api&quot; id=&quot;markdown-toc-api&quot;&gt;底层api&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;当需要从数据库频繁大量读取某一数据时，会导致页面反应时间大幅下降，此时可以采用缓存来进行优化，总结的缓存相关知识如下&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;分类&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;内存缓存&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;需要借助memcached或redis等&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;数据库缓存&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;需要先安装缓存表 即python manage.py createcachetable cache_table&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;文件系统缓存&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;本地缓存&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;只利用内存缓存的优势&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;仿缓存&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;仅供开发使用&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;站点级缓存&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;需要借助中间键，django.middleware.cache.UpdateCacheMiddleware，django.middleware.cache.FetchFromCacheMiddleware分别添加到中间键的第一和靠近最后位置，&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在setting中添加CACHE_MIDDLEWARE_SECONDS（每个页面缓存秒数），CACHE_MIDDLEWARE_KEY_PREFIX（可为空）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;缓存会自动缓存每个没有post和get请求的页面&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;视图级缓存&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;cache_page装饰器&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+ from django.views.decorators.cache import cache_page
+ @cache_page(60 * 15)      //存900秒
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;在url配置页面，(r’^foo/(\d{1,2})/$’, cache_page(my_view, 60 * 15))&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;装饰头&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;@vary_on_headers(‘User‐Agent’, ‘Cookie’)：  根据User‐Agent和Cookie不同来进行分别缓存&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;@vary_on_cookie:  @vary_on_cookie＝  @vary_on_headers(‘Cookie’)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;@cache_control(private=True): 私人缓存，根据用户不同进行不同缓存&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;注意顺序&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+@cache_page(60*2)
+@vary_on_headers(&#39;User-Agent&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;模块级缓存&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;模块级缓存&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;
+    { % load cache % }
+    { % cache 500 sidebar % }
+    { % endcache % }
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;api&quot;&gt;底层api&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;底层API&lt;/p&gt;
+
+    &lt;p&gt;cache.set(‘haha’,1,600)&lt;/p&gt;
+
+    &lt;p&gt;cache.incr(‘haha’) //自增&lt;/p&gt;
+
+    &lt;p&gt;cache.decr(‘haha’,10) //自减10&lt;/p&gt;
+
+    &lt;p&gt;cache.get(‘haha’,’过期了’)  //当获取不到时返回 过期了&lt;/p&gt;
+
+    &lt;p&gt;cache.get_many([‘haha’,’haha1’,’haha2’])  //返回多个&lt;/p&gt;
+
+    &lt;p&gt;cache.delete(‘a’)&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Thu, 28 May 2015 05:58:09 +0800</pubDate>
+        <link>/2015/05/28/Django-Cache/</link>
+        <guid isPermaLink="true">/2015/05/28/Django-Cache/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
         <title>Django 国际化</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
@@ -688,8 +846,8 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 25 May 2015 04:12:35 +0800</pubDate>
-        <link>/2015/05/25/Django-local/</link>
-        <guid isPermaLink="true">/2015/05/25/Django-local/</guid>
+        <link>/2015/05/25/Django-Local/</link>
+        <guid isPermaLink="true">/2015/05/25/Django-Local/</guid>
         
         
         <category>Django</category>
@@ -748,8 +906,8 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 21 May 2015 05:02:22 +0800</pubDate>
-        <link>/2015/05/21/rebuild-db/</link>
-        <guid isPermaLink="true">/2015/05/21/rebuild-db/</guid>
+        <link>/2015/05/21/Django-Rebuild-db/</link>
+        <guid isPermaLink="true">/2015/05/21/Django-Rebuild-db/</guid>
         
         
         <category>Django</category>
@@ -1356,96 +1514,6 @@ transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
         <pubDate>Thu, 07 May 2015 05:12:21 +0800</pubDate>
         <link>/2015/05/07/Django-Ootput/</link>
         <guid isPermaLink="true">/2015/05/07/Django-Ootput/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django GenericForeignKey</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#model-1&quot; id=&quot;markdown-toc-model-1&quot;&gt;中间model&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;存储&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;最近在项目的一个工作流流程中大量的使用到了GenericForeignKey和 Content Type，主要用于在两个model之间建立一个关联的model，于是做了如下的小结。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;model&quot;&gt;model&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;首先我们需要定义两个需要关联的model&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- from django.contrib.contenttypes import generic
- class music(models.Model):
-     music_url = models.CharField(max_length=20)
-     events = generic.GenericRelation(&#39;owner&#39;)
-     #加这句的目的是在该实例删除时owner中的记录也会删除
-
- class vedio(models.Model):
-     video_url = models.CharField(max_length=20)
-     events = generic.GenericRelation(&#39;owner&#39;)
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;model-1&quot;&gt;中间model&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;建立与两个model建立联系的新的model&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-class owner(models.Model):
-     user = models.ForeignKey(User)
-     content_type = models.ForeignKey(ContentType)
-     object_id = models.PositiveIntegerField()
-     event_object = generic.GenericForeignKey(&#39;content_type&#39;, &#39;object_id&#39;)
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;通俗一点的理解，content_type定位了一个表，而object_id定位了一个id，event_object就相当于将’content_type’, ‘object_id’结合起来从而定位了一个model中的实例&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;存储&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;之前讲过Django的signal，django.db.models.signals.pre_save &amp;amp; django.db.models.signals.post_save分别在一个Model的save()方法之前和之后触发，我们可以应用这个来实现自动存储&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- from django.db.models.signals import post_save
-
- def save_owner(sender, instance, **kwargs):
-     obj = instance
-     publisher=User.objects.all()[0]
-     event = owner(user=publisher,event_object=obj)
-     event.save()
-
- post_save.connect(save_owner,sender=music)
- post_save.connect(save_owner,sender=vedio)
-  &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Tue, 05 May 2015 03:32:29 +0800</pubDate>
-        <link>/2015/05/05/Django-GenericForeignKey/</link>
-        <guid isPermaLink="true">/2015/05/05/Django-GenericForeignKey/</guid>
         
         
         <category>Django</category>
