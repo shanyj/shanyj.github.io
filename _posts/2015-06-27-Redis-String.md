@@ -25,7 +25,7 @@ excerpt: Redis随笔（3）-Redis 字符串
    * 格式：SET KEY_NAME VALUE
 
    * 在SET命令有许多可供选项，即修改命令的行为。SET KEY VALUE \[EX seconds\] \[PX milliseconds\] \[NX\|XX\]
-   
+
     EX seconds - 设置指定的到期时间，单位为秒。
 
     PX milliseconds - 设置指定到期时间，单位为毫秒。
