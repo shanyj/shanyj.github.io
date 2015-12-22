@@ -1,0 +1,113 @@
+---
+layout: post
+title:  "Redis随笔（5）-Redis 集合"
+date:   2015-07-01 20:53:19
+categories: Redis
+excerpt: Redis随笔（5）-Redis 集合
+---
+
+* content
+{:toc}
+
+
+## 序
+
+主要记录了redis列表的相关命令，如下
+
+---
+
+### redis列表命令
+
+ * SADD：
+
+   *  用于添加成员设置保存在key。如果成员已经存在，那么它忽略。如果键不存在，那么新的集合创建和成员被添加进去
+
+   * 格式：SADD KEY_NAME VALUE1..VALUEN
+
+ * SCARD:
+
+   *  用于获取存储在集合中的元素的数量
+
+   * 格式：SCARD KEY_NAME
+
+ * SDIFF:
+
+   * 第一组和所有的连续组之间的差异而产生的集合。如果键不存在，那么Redis它看作是空集
+
+   * 格式：SDIFF FIRST_KEY OTHER_KEY1..OTHER_KEYN
+
+ * SDIFFSTORE：
+
+   * 存储区中集合的成员，结果来自第一集合和所有的连续组之间的差转换成在命令中指定的一组集合
+
+   * 格式：SDIFFSTORE DESTINATION_KEY KEY1..KEYN
+
+ * SINTER：
+
+   * 所有指定集合交集后得到一组元素。键不存在被认为是空集
+
+   * 格式：SINTER KEY KEY1..KEYN
+
+ * SINTERSTORE：
+
+   * 存储区中集合的成员，结果来所有指定集合交集后得到一组元素。键不存在被认为是空集
+
+   * 格式：SINTERSTORE DESTINATION_KEY KEY KEY1..KEYN
+
+ * SISMEMBER：
+
+   * 返回元素已经存在于集存储在键的键或不是。
+        1 如果该元素是集合的成员。0 如果该元素不是集合的成员，或者如果键不存在
+
+   * 格式：SISMEMBER KEY VALUE
+
+ * SMEMBERS：
+
+   * 返回所有的元素存在于集存储在指定的键
+
+   * 格式：SSMEMBERS KEY
+
+ * SMOVE：
+
+   * 从集合中一个键移动一个元素，另一个键。如果源集不存在或不包含指定的元素，不进行任何操作，并返回0。
+        1 如果该元素被移动。0 如果该元素不是源中的一员，并没有进行任何操作
+
+   * 格式：SMOVE SOURCE DESTINATION MEMBER
+
+ * SRANDMEMBER：
+
+   * 从一组保存在指定的键随机成员
+
+   * 格式： SRANDMEMBER KEY [count]
+
+ * SPOP：
+
+   * 用于清除和设置存储在指定的键返回一个随机的成员
+
+   * 格式： SPOP KEY
+
+ * SREM：
+
+   * 从所述一组保存在键中删除指定的元素。如果成员不存在，则命令返回0，如果没有设置在关键存储的值，则返回一个错误
+
+   * 格式： SREM KEY MEMBER1..MEMBERN
+
+ * SUNION：
+
+   * 用来得到从所有给定集合的并集产生的成员。不存在键则被认为是空集
+
+   * 格式： SUNION KEY KEY1..KEYN
+
+ * SUNIONSTORE：
+
+   * 存储区中集合的成员，结果来自给定集合的并集产生的成员。不存在键则被认为是空集
+
+   * 格式：  SUNIONSTORE DESTINATION KEY KEY1..KEYN
+
+ * SSCAN：
+
+   * 遍历集合存储在指定的键的元素
+
+   * 格式：SSCAN KEY [MATCH pattern] [COUNT count]
+
+
