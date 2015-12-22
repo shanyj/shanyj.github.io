@@ -41,6 +41,13 @@ excerpt: Redis随笔（6）-Redis 列表
 
  * LINDEX:
 
+   * 用于获取在存储于列表的key索引的元素。索引是从0开始的，所以0表示第一个元素，1第二个元素等等。
+        字符串回复，请求的元素，或者nil当索引超出范围
+
+   * 格式： LINDEX KEY_NAME INDEX_POSITION
+
+ * LINSERT:
+
    *  插入值在存储在key之前或参考值支点后。如果key不存在，它被认为是一个空列表，并没有进行任何操做
 
    * 格式：LINSERT KEY_NAME BEFORE EXISTING_VALUE NEW_VALUE
