@@ -64,3 +64,80 @@ excerpt: django-redis 缓存
  * 使用redis作为session后台：
 
      * SESSION_ENGINE = "django.contrib.sessions.backends.cache"      SESSION_CACHE_ALIAS = "default"
+
+ * timeout超时：
+
+    <pre><code>
+    "OPTIONS": {
+        "SOCKET_CONNECT_TIMEOUT": 5,  # in seconds
+        "SOCKET_TIMEOUT": 5,  # in seconds
+    }
+    </code></pre>
+
+    前者是链接超时。后者是读写超时
+
+ * 压缩支持：
+
+    <pre><code>
+    "OPTIONS": {
+        "COMPRESS_MIN_LEN": 10,
+        "COMPRESS_COMPRESSOR": lzma.compress,
+        "COMPRESS_DECOMPRESSOR": lzma.decompress,
+        "COMPRESS_DECOMPRESSOR_ERROR": lzma.LZMAError
+    }
+    </code></pre>
+
+ * 锁：
+
+    <pre><code>
+    with cache.lock("somekey"):
+        do_some_thing()
+    </code></pre>
+
+ * 生成器：
+
+    <pre><code>
+    >>> from django.core.cache import cache
+    >>> cache.iter_keys("foo_*")
+    <generator object algo at 0x7ffa9c2713a8>
+    >>> next(cache.iter_keys("foo_*"))
+    </code></pre>
+
+ * 模糊匹配与删除：
+
+    <pre><code>
+    >>> from django.core.cache import cache
+    >>> cache.keys("foo_*")
+    ["foo_1", "foo_2"]
+    >>> from django.core.cache import cache
+    >>> cache.delete_pattern("foo_*")
+    </code></pre>
+
+ * 分布式：
+
+    <pre><code>
+    CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": [
+            "redis://127.0.0.1:6379/1",
+            "redis://127.0.0.1:6379/2",
+        ],
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.ShardClient",
+        }
+    }
+    }
+    </code></pre>
+
+ * 主从支持：
+
+    <pre><code>
+    "LOCATION": [
+        "redis://127.0.0.1:6379/1",
+        "redis://127.0.0.1:6378/1",
+    ]
+    </code></pre>
+    这样配置的话第一个是主数据库,第二个是从数据库,要先在redis中配置主从关系
+
+
