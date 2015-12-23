@@ -26,8 +26,18 @@
       <file leaf-file-name="2015-05-30-Django-django-redis.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.87055016">
-              <caret line="140" column="43" selection-start-line="140" selection-start-column="43" selection-end-line="140" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.3883495">
+              <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../git/baseline/secfileServer/seahub/seahub/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="380" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -140,7 +150,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../坏了/redis.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../git/baseline/secfileServer/seahub/seahub/settings.py" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
@@ -547,10 +557,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../git/baseline/secfileServer/seahub/seahub/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="380" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.87055016">
-          <caret line="140" column="43" selection-start-line="140" selection-start-column="43" selection-end-line="140" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.3883495">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
           <folding />
         </state>
       </provider>

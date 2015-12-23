@@ -29,15 +29,15 @@ excerpt: django-redis 缓存
  * 在Django的settings中配置
 
     <pre><code>
-     CACHES = {
-        'default': {
-            'BACKEND': 'redis_cache.cache.RedisCache',
-            'LOCATION': 'redis://127.0.0.1:6379/1',
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": "redis://127.0.0.1:6379/3",
             "OPTIONS": {
-                "CLIENT_CLASS": "redis_cache.client.DefaultClient",
-                },
-            },
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            }
         }
+    }
     </code></pre>
 
  * 当时用MemcachedCache时，配置类似
