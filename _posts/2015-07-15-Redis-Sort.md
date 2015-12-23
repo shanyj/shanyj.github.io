@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（9）-排序"
+title:  "Redis随笔（9）-Redis排序"
 date:   2015-07-15 21:11:43
 categories: Redis
-excerpt: Redis随笔（9）-排序
+excerpt: Redis随笔（9）-Redis排序
 ---
 
 * content
