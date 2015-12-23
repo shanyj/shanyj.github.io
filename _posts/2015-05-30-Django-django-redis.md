@@ -55,7 +55,7 @@ excerpt: django-redis 缓存
 
 ### 使用
 
- * 使用方法参见 http://shanyj.github.io/2015/05/27/Django-Cache/
+ * 使用方法参见 <a href=http://shanyj.github.io/2015/05/27/Django-Cache/>http://shanyj.github.io/2015/05/27/Django-Cache/</a>
 
 ---
 
