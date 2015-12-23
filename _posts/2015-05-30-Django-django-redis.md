@@ -62,8 +62,10 @@ excerpt: django-redis 缓存
 ### 其他配置
 
  * 使用redis作为session后台：
-
-     * SESSION_ENGINE = "django.contrib.sessions.backends.cache"      SESSION_CACHE_ALIAS = "default"
+    <pre><code>
+     SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+     SESSION_CACHE_ALIAS = "default"
+    </code></pre>
 
  * timeout超时：
 
