@@ -27,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.33656958">
-              <caret line="57" column="71" selection-start-line="57" selection-start-column="71" selection-end-line="57" selection-end-column="71" />
+              <caret line="57" column="15" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -568,7 +568,7 @@
     <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33656958">
-          <caret line="57" column="71" selection-start-line="57" selection-start-column="71" selection-end-line="57" selection-end-column="71" />
+          <caret line="57" column="15" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
           <folding />
         </state>
       </provider>
