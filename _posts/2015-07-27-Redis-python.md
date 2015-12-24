@@ -120,7 +120,7 @@ True
    * 想要持续监听有两种方法,listen方法或者while循环
 
    * listen方法:
-    <pre><code>
+       <pre><code>
 for message in p.listen():
     print message
   </code></pre>
