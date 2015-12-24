@@ -48,7 +48,7 @@ True
  * 除了管道与订阅的大部分方法与redis命令相同，但有以下几点例外
    * DEL：’del’ 是 Python 语法的保留关键字。因此redis-py 使用 “delete” 代替
 
-   * CONFIG GET|SET：分别用 config_get 和 config_set 实现
+   * CONFIG GET\|SET：分别用 config_get 和 config_set 实现
 
    * MULTI/EXEC：作为 Pipeline 类的一部分来实现。Pipeline执行时默认包含了MULTI 和 EXEC 语句。设置transaction=False可以关闭该功能。参见下面 Pipeline 部分
 
