@@ -28,7 +28,7 @@ excerpt: Python
     print driver.title
     driver.quit()
     </code></pre>
-    
+
 ---
 
 ### 元素定位
@@ -116,6 +116,7 @@ excerpt: Python
  * submit:
 
     * 清除对象的内容,如果可以的话
+    
 ---
 
 ### 键盘&鼠标事件
