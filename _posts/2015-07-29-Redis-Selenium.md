@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Python Selenium"
+title:  "Python "
 date:   2015-07-27 21:18:28
-categories:Python
-excerpt: Python Selenium
+categories: Python
+excerpt: Python
 ---
 
 * content
@@ -12,7 +12,7 @@ excerpt: Python Selenium
 
 ## 序
 
-最近写了个自动打卡的脚本，用来上下班自动打oa，用到了selenium来进行自动加载、点击等任务，于是总结了下selenium的用法
+在python中调用redis十分easy，因为几乎大部分命令都与原生redis命令类似，但也有诸如pipeline和订阅等命令需要着重关注
 
 ---
 
