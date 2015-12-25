@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（10）-Redis HyperLogLog&订阅&事务"
+title:  "Redis HyperLogLog&订阅&事务"
 date:   2015-07-18 21:31:01
 categories: Redis
-excerpt: Redis随笔（10）-Redis HyperLogLog&订阅&事务
+excerpt: Redis HyperLogLog&订阅&事务
 ---
 
 * content

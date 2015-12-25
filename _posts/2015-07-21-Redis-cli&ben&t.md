@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（11）-Redis 链接&基准&管道&淘汰"
+title:  "Redis 链接&基准&管道&淘汰"
 date:   2015-07-21 20:54:19
 categories: Redis
-excerpt: Redis随笔（11）-Redis 链接&基准&管道&淘汰
+excerpt: Redis 链接&基准&管道&淘汰
 ---
 
 * content

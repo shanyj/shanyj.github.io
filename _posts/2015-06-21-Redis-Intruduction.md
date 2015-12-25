@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（1）-Redis简介"
+title:  "Redis简介"
 date:   2015-06-21 20:39:12
 categories: Redis
-excerpt: Redis随笔（1）-Redis简介
+excerpt: Redis简介
 ---
 
 * content

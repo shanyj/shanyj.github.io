@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（4）-Redis 哈希"
+title:  "Redis 哈希"
 date:   2015-06-30 20:45:21
 categories: Redis
-excerpt: Redis随笔（4）-Redis 哈希
+excerpt: Redis 哈希
 ---
 
 * content

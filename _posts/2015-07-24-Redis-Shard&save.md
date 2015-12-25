@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（12）-Redis 持久化&主从"
+title:  "Redis 持久化&主从"
 date:   2015-07-24 22:11:53
 categories: Redis
-excerpt: Redis随笔（12）-Redis 持久化&主从
+excerpt: Redis 持久化&主从
 ---
 
 * content

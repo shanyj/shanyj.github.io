@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（3）-Redis 字符串"
+title:  "Redis 字符串"
 date:   2015-06-27 21:11:46
 categories: Redis
-excerpt: Redis随笔（3）-Redis 字符串
+excerpt: Redis 字符串
 ---
 
 * content

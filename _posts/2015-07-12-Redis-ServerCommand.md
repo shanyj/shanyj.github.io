@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis随笔（8）-Redis服务器命令"
+title:  "Redis服务器命令"
 date:   2015-07-12 20:31:22
 categories: Redis
-excerpt: Redis随笔（8）-Redis服务器命令
+excerpt: Redis服务器命令
 ---
 
 * content

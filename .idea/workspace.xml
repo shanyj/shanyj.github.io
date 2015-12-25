@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" afterPath="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-06-21-Redis-Intruduction.md" afterPath="$PROJECT_DIR$/_posts/2015-06-21-Redis-Intruduction.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-06-24-Redis-key.md" afterPath="$PROJECT_DIR$/_posts/2015-06-24-Redis-key.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-06-27-Redis-String.md" afterPath="$PROJECT_DIR$/_posts/2015-06-27-Redis-String.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-06-30-Redis-Hash.md" afterPath="$PROJECT_DIR$/_posts/2015-06-30-Redis-Hash.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-01-Redis-Set.md" afterPath="$PROJECT_DIR$/_posts/2015-07-01-Redis-Set.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-04-Redis-List.md" afterPath="$PROJECT_DIR$/_posts/2015-07-04-Redis-List.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-09-Redis-ZSet.md" afterPath="$PROJECT_DIR$/_posts/2015-07-09-Redis-ZSet.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md" afterPath="$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md" afterPath="$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-18-Redis-HY&amp;ML&amp;S.md" afterPath="$PROJECT_DIR$/_posts/2015-07-18-Redis-HY&amp;ML&amp;S.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" afterPath="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-24-Redis-Shard&amp;save.md" afterPath="$PROJECT_DIR$/_posts/2015-07-24-Redis-Shard&amp;save.md" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,31 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="redis.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="redis.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../坏了/redis.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-63.791668">
+            <state vertical-scroll-proportion="6.428571">
               <caret line="399" column="0" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2015-05-30-Django-django-redis.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06472492">
-              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2015-07-21-Redis-cli&amp;ben&amp;t.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.5">
-              <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -96,11 +85,20 @@
         <option value="$PROJECT_DIR$/_posts/2015-06-02-Django-Session.md" />
         <option value="$PROJECT_DIR$/_posts/2015-06-05-Django-Permission.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-Muti&amp;Sub.md" />
+        <option value="$PROJECT_DIR$/../../project/学习笔记2.html" />
+        <option value="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-06-21-Redis-Intruduction.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-06-24-Redis-key.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-06-27-Redis-String.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-06-30-Redis-Hash.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-07-01-Redis-Set.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-07-04-Redis-List.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-07-09-Redis-ZSet.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md" />
-        <option value="$PROJECT_DIR$/../../project/学习笔记2.html" />
+        <option value="$PROJECT_DIR$/_posts/2015-07-18-Redis-HY&amp;ML&amp;S.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" />
-        <option value="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-07-24-Redis-Shard&amp;save.md" />
       </list>
     </option>
   </component>
@@ -593,20 +591,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-24-Redis-key.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-21-Redis-Intruduction.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5825243">
-          <caret line="36" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习redis.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.4178302">
@@ -614,32 +598,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-07-09-Redis-ZSet.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22653721">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../git/baseline/secfileServer/seahub/seahub/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14136125">
           <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="380" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.53571427">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -652,26 +614,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-07-18-Redis-HY&amp;ML&amp;S.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30744338">
-          <caret line="19" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../坏了/11111111.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2083781">
           <caret line="75" column="40" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.5">
-          <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -684,18 +630,130 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../坏了/redis.html">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-63.791668">
-          <caret line="399" column="0" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.79611653">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-06-21-Redis-Intruduction.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06472492">
-          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        <state vertical-scroll-proportion="-2.6785715">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-06-24-Redis-key.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-06-27-Redis-String.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6785715">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-06-30-Redis-Hash.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-01-Redis-Set.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-04-Redis-List.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6785715">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-09-Redis-ZSet.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6785715">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-18-Redis-HY&amp;ML&amp;S.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-24-Redis-Shard&amp;save.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.080906145">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-27-Redis-python.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../坏了/redis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="6.428571">
+          <caret line="399" column="0" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
           <folding />
         </state>
       </provider>
