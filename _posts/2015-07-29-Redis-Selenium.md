@@ -83,7 +83,7 @@ excerpt: Python selenium模块
 
 ### 休眠
 
- *
+ * 普通休眠
      <pre><code>
     import time
     time.sleep(3)
