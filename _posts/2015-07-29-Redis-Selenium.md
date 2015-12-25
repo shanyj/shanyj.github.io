@@ -57,7 +57,7 @@ excerpt: Python selenium模块
 
  * tag name
 
-    *browser.find_element_by_tag_name( "input" )
+    * browser.find_element_by_tag_name( "input" )
 
  * xpath
 
