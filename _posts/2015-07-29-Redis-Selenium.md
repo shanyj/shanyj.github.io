@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Python "
-date:   2015-07-27 21:18:28
+title:  "Python Selenium"
+date:   2015-07-29 20:11:01
 categories: Python
-excerpt: Python
+excerpt: Python Selenium
 ---
 
 * content
@@ -12,7 +12,7 @@ excerpt: Python
 
 ## 序
 
-在python中调用redis十分easy，因为几乎大部分命令都与原生redis命令类似，但也有诸如pipeline和订阅等命令需要着重关注
+最近写了个自动打卡脚本，可是在上下班自动打oa，其中用到了selenium模块，所以就做了个小总结
 
 ---
 
@@ -116,7 +116,7 @@ excerpt: Python
  * submit:
 
     * 清除对象的内容,如果可以的话
-    
+
 ---
 
 ### 键盘&鼠标事件
