@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" afterPath="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" afterPath="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
@@ -27,18 +28,28 @@
       <file leaf-file-name="redis.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../坏了/redis.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75">
-              <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="161" selection-end-column="21" />
+            <state vertical-scroll-proportion="-63.791668">
+              <caret line="399" column="0" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-07-21-Redis-cli&amp;ben&amp;t.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-05-30-Django-django-redis.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.06472492">
+              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-07-21-Redis-cli&amp;ben&amp;t.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8543689">
-              <caret line="95" column="3" selection-start-line="95" selection-start-column="3" selection-end-line="95" selection-end-column="3" />
+            <state vertical-scroll-proportion="-16.5">
+              <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -47,7 +58,7 @@
       <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="909" column="0" selection-start-line="909" selection-start-column="0" selection-end-line="909" selection-end-column="0" />
               <folding />
             </state>
@@ -86,10 +97,10 @@
         <option value="$PROJECT_DIR$/_posts/2015-06-05-Django-Permission.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-Muti&amp;Sub.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md" />
-        <option value="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md" />
         <option value="$PROJECT_DIR$/../../project/学习笔记2.html" />
         <option value="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
       </list>
     </option>
   </component>
@@ -408,6 +419,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -617,13 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.428572">
-          <caret line="40" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.53571427">
@@ -635,14 +640,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="909" column="0" selection-start-line="909" selection-start-column="0" selection-end-line="909" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -671,18 +668,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../坏了/redis.html">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75">
-          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="161" selection-end-column="21" />
+        <state vertical-scroll-proportion="-16.5">
+          <caret line="70" column="6" selection-start-line="70" selection-start-column="6" selection-end-line="70" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md">
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8543689">
-          <caret line="95" column="3" selection-start-line="95" selection-start-column="3" selection-end-line="95" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="909" column="0" selection-start-line="909" selection-start-column="0" selection-end-line="909" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../坏了/redis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-63.791668">
+          <caret line="399" column="0" selection-start-line="399" selection-start-column="0" selection-end-line="399" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06472492">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
           <folding />
         </state>
       </provider>

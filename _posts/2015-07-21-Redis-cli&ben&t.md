@@ -93,6 +93,6 @@ excerpt: Redis随笔（11）-Redis 链接&基准&管道&淘汰
    * allkeys-random    删除随机一个键
 
    * volatile-ttl   删除沈村时间最近的一个键盘
-   
+
    * noeviction  不删除，只返回错误
 
