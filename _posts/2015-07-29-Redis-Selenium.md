@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Python Selenium"
+title:  "Python"
 date:   2015-07-29 20:11:01
 categories: Python
-excerpt: Python Selenium
+excerpt: Python
 ---
 
 * content
