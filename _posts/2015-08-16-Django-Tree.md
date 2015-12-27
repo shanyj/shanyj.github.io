@@ -73,9 +73,9 @@ class MPTTFood(MPTTModel):
         returnself.title
 </code></pre>
 
-   * 实际上MPTTModel隐藏了四个变量：level，lft，rght和tree_id。大多数时候我们是用不到这几个变量的
+    * 实际上MPTTModel隐藏了四个变量：level，lft，rght和tree_id。大多数时候我们是用不到这几个变量的
 
-   * 如果你的Model中parent变量名字不是"parent"时，应当在Model类中MPTT元类中指明
+    * 如果你的Model中parent变量名字不是"parent"时，应当在Model类中MPTT元类中指明
   <pre><code>
 class MPTTFood(MPTTModel):
     title= models.CharField(max_length=50)
