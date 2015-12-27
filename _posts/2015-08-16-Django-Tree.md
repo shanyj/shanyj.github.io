@@ -104,12 +104,12 @@ def shanyjhello(request):
      <pre><code>
     { % load mptt_tags % }
     { % recursetree nodes % }
-    <li>
+     < li >
             { { node.title } }
-            <ul>
+            < ul >
                 { { children } }
-            </ul>
+            < /ul >
         { % endif % }
-    </li>
+    < /li >
     { % endrecursetree % }
     </code></pre>
