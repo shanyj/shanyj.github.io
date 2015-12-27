@@ -46,12 +46,12 @@ def display(foods):
 def shanyjhello(request):
     foods= Food.objects.filter(parent=None)
     var= display(foods)
-    return render_to_response('syj.html', \{'var': var\})
+    return render_to_response('syj.html', {'var': var})
         </code></pre>
 
  * 模板显示：
        <pre><code>
-{{ var|unordered_list }}
+{{ var\|unordered_list }}
         </code></pre>
 
 
