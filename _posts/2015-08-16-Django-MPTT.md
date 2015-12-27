@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Django MPTT"
+title:  "Django Tree表"
 date:   2015-08-16 19:51:39
 categories: Django
-excerpt: Django MPTT
+excerpt: Django Tree表
 ---
 
 * content
