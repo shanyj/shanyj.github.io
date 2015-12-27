@@ -2,7 +2,7 @@
 layout: post
 title:  "使用Github＋jekyll搭建Blog"
 date:   2015-04-15 19:17:45
-categories: 前端杂谈
+categories: 杂谈
 excerpt: Github＋jekyll＋markdown搭建Blog。
 ---
 
