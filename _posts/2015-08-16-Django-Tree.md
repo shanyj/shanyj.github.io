@@ -101,3 +101,15 @@ def shanyjhello(request):
     </code></pre>
 
  * 模板
+     <pre><code>
+    { % load mptt_tags % }
+    { % recursetree nodes % }
+    <li>
+            { { node.title } }
+            <ul>
+                { { children } }
+            </ul>
+        { % endif % }
+    </li>
+    { % endrecursetree % }
+    </code></pre>
