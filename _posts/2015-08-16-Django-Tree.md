@@ -51,7 +51,7 @@ def shanyjhello(request):
 
  * 模板显示：
        <pre><code>
-{ { var\|unordered_list } }
+{{ var|unordered_list }}
         </code></pre>
 
 
