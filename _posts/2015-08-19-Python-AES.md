@@ -44,7 +44,7 @@ python 的PyCryto模块可以为我们提供包括ECB,CBC等方式的加解密,�
 
 # 加密算法
 
- *ECB
+ * ECB
 
     * 简单；
 
