@@ -16,7 +16,7 @@ Django 大致有两种方法处理tree表,下面就简略介绍下这两种方�
 
 ---
 
-# 迭代法
+### 迭代法
 
  * 定义模型
      <pre><code>
@@ -54,7 +54,7 @@ def shanyjhello(request):
 
 ---
 
-# MPTT法
+### MPTT法
 
  * 安装和配置：
 

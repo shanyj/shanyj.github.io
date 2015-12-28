@@ -16,7 +16,7 @@ Django  的redisboard可以让我们很方便的控制Redis数据库，他在Dja
 
 ---
 
-# 安装与运行
+### 安装与运行
 
  * 安装
      <pre><code>
@@ -36,15 +36,15 @@ manage.py collectstatic
 
 ---
 
-# 配置
+### 配置
 
  * 过滤：REDISBOARD_DETAIL_FILTERS可以过滤需要获取的资源
 
  * EDISBOARD_DETAIL_FILTERS = ['.*']则表示获取所有资源
- 
+
 ---
 
-# 连接数据库
+### 连接数据库
 
  * 在admin页面添加redis相关的host和port即可查看相应的redis
 

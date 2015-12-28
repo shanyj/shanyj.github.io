@@ -16,7 +16,7 @@ python 的PyCryto模块可以为我们提供包括ECB,CBC等方式的加解密,�
 
 ---
 
-# 安装与调用
+### 安装与调用
 
  * 安装:pip install PyCrypto
 
@@ -29,7 +29,7 @@ python 的PyCryto模块可以为我们提供包括ECB,CBC等方式的加解密,�
 
 ---
 
-# 参数介绍
+### 参数介绍
 
  * key:16\24\32位的密钥
 
@@ -42,7 +42,7 @@ python 的PyCryto模块可以为我们提供包括ECB,CBC等方式的加解密,�
 
 ---
 
-# 加密算法
+### 加密算法
 
  * ECB
 
@@ -82,7 +82,7 @@ python 的PyCryto模块可以为我们提供包括ECB,CBC等方式的加解密,�
 
 ---
 
-# 例子
+### 例子
 
 <pre><code>
 from Crypto.Cipher import AES
