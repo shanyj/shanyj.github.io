@@ -12,7 +12,7 @@ excerpt: Elasticsearch 搜索&分布式
 
 ## 序
 
-这里主要介绍下Elasticsearch 搜索的一些基础只是和分布式
+这里主要介绍下Elasticsearch 搜索的一些基础知识和分布式
 
 ---
 
