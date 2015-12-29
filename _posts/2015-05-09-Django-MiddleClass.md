@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Django 中间键"
+title:  "Django 中间件"
 date:   2015-05-09 20:18:33
 categories: Django
-excerpt: Django 中间键
+excerpt: Django 中间件
 ---
 
 * content
@@ -12,15 +12,15 @@ excerpt: Django 中间键
 
 ## 序
 
-中间键，顾名思义，就是在处理一个Request前后需要执行的一系列函数，以下就是对Django中间键的一些总结
+中间件，顾名思义，就是在处理一个Request前后需要执行的一系列函数，以下就是对Django中间件的一些总结
 
 ---
 
 ### 顺序
 
- * Django中间键执行顺序为，在request和view阶段从上到下处理，response和异常处理阶段从下到上处理
+ * Django中间件执行顺序为，在request和view阶段从上到下处理，response和异常处理阶段从下到上处理
 
- * settings中MIDDLEWARE_CLASSES包含了当前使用的中间键
+ * settings中MIDDLEWARE_CLASSES包含了当前使用的中间件
 
 ---
 
