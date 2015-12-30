@@ -26,7 +26,7 @@
       <file leaf-file-name="学习elasticsearch.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="12.208333">
+            <state vertical-scroll-proportion="-4.6666665">
               <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
               <folding />
             </state>
@@ -36,8 +36,8 @@
       <file leaf-file-name="2015-09-15-Elasticsearch-shard.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2015-09-15-Elasticsearch-shard.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77540106">
-              <caret line="129" column="52" selection-start-line="129" selection-start-column="52" selection-end-line="129" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.4171123">
+              <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -165,7 +165,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project/学习elasticsearch.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project/学习笔记2.html" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
@@ -638,13 +638,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1435" column="0" selection-start-line="1435" selection-start-column="0" selection-end-line="1459" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-08-19-Python-AES.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.0">
@@ -708,9 +701,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.6179295">
+          <caret line="1036" column="34" selection-start-line="1036" selection-start-column="34" selection-end-line="1036" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="12.208333">
+        <state vertical-scroll-proportion="-4.6666665">
           <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
           <folding />
         </state>
@@ -718,8 +719,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-09-15-Elasticsearch-shard.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77540106">
-          <caret line="129" column="52" selection-start-line="129" selection-start-column="52" selection-end-line="129" selection-end-column="52" />
+        <state vertical-scroll-proportion="0.4171123">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
           <folding />
         </state>
       </provider>
