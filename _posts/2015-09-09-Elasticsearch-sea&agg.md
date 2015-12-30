@@ -64,7 +64,7 @@ excerpt: Elasticsearch 分布式搜索&聚合
     * preference:
         preference参数允许你控制使用哪个分片或节点来处理搜索请求,她接受如下一些参数,_primary， _primary_first， _local， _only_node:xyz， _prefer_node:xyz和_shards:2,3。
 
-    *结果震荡：
+    * 结果震荡：
         用户每次刷新页面，结果顺序会发生变化。避免这个问题方法是对于同一个用户总是使用同一个分片。
         方法就是使用一个随机字符串例如用户的会话ID（session ID）来设置preference参数。
 
