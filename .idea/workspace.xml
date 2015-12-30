@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-09-09-Elasticsearch-sea&amp;agg.md" afterPath="$PROJECT_DIR$/_posts/2015-09-09-Elasticsearch-sea&amp;agg.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-09-15-Elasticsearch-shard.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,31 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="学习elasticsearch.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="学习elasticsearch.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.916667">
-              <caret line="1029" column="58" selection-start-line="1029" selection-start-column="58" selection-end-line="1029" selection-end-column="58" />
+            <state vertical-scroll-proportion="-0.3127001">
+              <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-09-09-Elasticsearch-sea&amp;agg.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-09-09-Elasticsearch-sea&amp;agg.md">
+      <file leaf-file-name="2015-09-15-Elasticsearch-shard.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-09-15-Elasticsearch-shard.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8181818">
-              <caret line="66" column="6" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2015-09-12-Elasticsearch-index.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-09-12-Elasticsearch-index.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-28.461538">
-              <caret line="244" column="7" selection-start-line="244" selection-start-column="7" selection-end-line="244" selection-end-column="7" />
+            <state vertical-scroll-proportion="-29.615385">
+              <caret line="132" column="23" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -100,6 +91,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-09-06-Elasticsearch-search&amp;sort.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-12-Elasticsearch-index.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-09-Elasticsearch-sea&amp;agg.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-09-15-Elasticsearch-shard.md" />
       </list>
     </option>
   </component>
@@ -135,8 +127,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -374,13 +366,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/2015-05-15-Django-Flatpage.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-05-17-Django-Security.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -658,7 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1435" column="0" selection-start-line="1435" selection-start-column="0" selection-end-line="1459" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -666,7 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.0">
           <caret line="62" column="14" selection-start-line="62" selection-start-column="14" selection-end-line="62" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -674,7 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -682,7 +664,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3630363">
           <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -690,7 +671,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.692308">
           <caret line="94" column="19" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -698,7 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.884615">
           <caret line="89" column="44" selection-start-line="89" selection-start-column="44" selection-end-line="89" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -706,7 +685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -714,23 +692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-09-12-Elasticsearch-index.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.461538">
-          <caret line="244" column="7" selection-start-line="244" selection-start-column="7" selection-end-line="244" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.916667">
-          <caret line="1029" column="58" selection-start-line="1029" selection-start-column="58" selection-end-line="1029" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -738,6 +699,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8181818">
           <caret line="66" column="6" selection-start-line="66" selection-start-column="6" selection-end-line="66" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-09-12-Elasticsearch-index.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-09-15-Elasticsearch-shard.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.615385">
+          <caret line="132" column="23" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.3127001">
+          <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
           <folding />
         </state>
       </provider>
