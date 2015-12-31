@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Elasticsearch 简介与文档基本命令"
-date:   2015-08-25 21:13:45
+date:   2015-08-26 21:13:45
 categories: Elasticsearch
 excerpt: Elasticsearch 简介与文档基本命令
 ---

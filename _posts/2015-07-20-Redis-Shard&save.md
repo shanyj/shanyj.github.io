@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Redis 持久化&主从"
-date:   2015-07-24 22:11:53
+date:   2015-07-20 22:11:53
 categories: Redis
 excerpt: Redis 持久化&主从
 ---

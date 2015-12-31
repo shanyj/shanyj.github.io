@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django User扩展"
-date:   2015-04-28 20:57:51
+date:   2015-09-25 20:57:51
 categories: Django
 excerpt: Django User扩展
 ---

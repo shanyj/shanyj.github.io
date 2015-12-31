@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django Redisboard"
-date:   2015-05-30 22:03:14
+date:   2015-05-29 22:03:14
 categories: Django Redis
 excerpt: Django Redisboard
 ---

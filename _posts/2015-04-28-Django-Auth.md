@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django Auth登陆认证"
-date:   2015-04-26 22:03:21
+date:   2015-04-28 22:03:21
 categories: Django
 excerpt: Django Auth登陆认证
 ---

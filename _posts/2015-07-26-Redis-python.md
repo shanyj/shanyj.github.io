@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python Redis模块"
-date:   2015-07-27 21:18:28
+date:   2015-07-26 21:18:28
 categories: Redis Python
 excerpt: Python Redis模块
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Redis 哈希"
-date:   2015-06-30 20:45:21
+date:   2015-06-21 20:45:21
 categories: Redis
 excerpt: Redis 哈希
 ---

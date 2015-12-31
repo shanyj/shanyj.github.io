@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django GenericForeignKey"
-date:   2015-05-04 19:32:29
+date:   2015-05-02 19:32:29
 categories: Django
 excerpt: Django GenericForeignKey
 ---

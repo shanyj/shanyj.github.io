@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Redis服务器命令"
-date:   2015-07-12 20:31:22
+date:   2015-07-07 20:31:22
 categories: Redis
 excerpt: Redis服务器命令
 ---

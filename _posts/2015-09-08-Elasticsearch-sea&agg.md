@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Elasticsearch 分布式搜索&聚合"
-date:   2015-09-09 20:01:23
+date:   2015-09-08 20:01:23
 categories: Elasticsearch
 excerpt: Elasticsearch 分布式搜索&聚合
 ---

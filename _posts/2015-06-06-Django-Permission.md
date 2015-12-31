@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django 权限限制"
-date:   2015-06-05 20:41:33
+date:   2015-06-06 20:41:33
 categories: Django
 excerpt: Django 权限限制
 ---

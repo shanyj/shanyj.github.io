@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Elasticsearch 映射&分析"
-date:   2015-09-03 20:53:32
+date:   2015-09-02 20:53:32
 categories: Elasticsearch
 excerpt: Elasticsearch 映射&分析
 ---

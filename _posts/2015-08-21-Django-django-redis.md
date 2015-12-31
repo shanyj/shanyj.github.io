@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "django-redis 缓存"
-date:   2015-08-22 22:04:15
+date:   2015-08-21 22:04:15
 categories: Redis Django
 excerpt: django-redis 缓存
 ---

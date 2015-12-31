@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django 中间件"
-date:   2015-05-09 20:18:33
+date:   2015-05-11 20:18:33
 categories: Django
 excerpt: Django 中间件
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Redis简介"
-date:   2015-06-21 20:39:12
+date:   2015-06-13 20:39:12
 categories: Redis
 excerpt: Redis简介
 ---

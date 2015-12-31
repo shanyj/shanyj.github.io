@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Django 多数据库"
-date:   2015-06-18 21:30:27
+date:   2015-06-11 21:30:27
 categories: Django
 excerpt: Django 多数据库
 ---

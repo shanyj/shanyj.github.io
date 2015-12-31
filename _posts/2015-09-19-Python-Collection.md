@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python Collection模块"
-date:   2015-09-18 21:13:20
+date:   2015-09-19 21:13:20
 categories: Python
 excerpt: Python Collection模块
 ---
