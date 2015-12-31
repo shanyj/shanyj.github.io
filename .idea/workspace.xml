@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" afterPath="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,7 +36,7 @@
       <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.791667">
+            <state vertical-scroll-proportion="92.208336">
               <caret line="1368" column="0" selection-start-line="1368" selection-start-column="0" selection-end-line="1371" selection-end-column="26" />
               <folding />
             </state>
@@ -47,8 +46,8 @@
       <file leaf-file-name="2015-09-29-Python-requests.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9197861">
-              <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.080213904">
+              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -776,7 +775,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.791667">
+        <state vertical-scroll-proportion="92.208336">
           <caret line="1368" column="0" selection-start-line="1368" selection-start-column="0" selection-end-line="1371" selection-end-column="26" />
           <folding />
         </state>
@@ -784,8 +783,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9197861">
-          <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.080213904">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
           <folding />
         </state>
       </provider>

@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Python Requssts模块"
+title:  "Python Requests模块"
 date:   2015-09-29 21:02:18
 categories: Python
-excerpt: Django Requssts模块
+excerpt: Django Requests模块
 ---
 
 * content
