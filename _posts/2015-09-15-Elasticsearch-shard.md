@@ -12,7 +12,7 @@ excerpt: Elasticsearch 段&结构化搜索
 
 ## 序
 
-这里主要介绍下Elasticsearch 段和结构化搜索的一些知识
+这里主要介绍下Elasticsearch 段和一些搜索的一些知识
 
 ---
 
