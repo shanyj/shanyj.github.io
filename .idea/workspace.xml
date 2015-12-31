@@ -2,37 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-04-26-Django-Auth.md" afterPath="$PROJECT_DIR$/_posts/2015-04-28-Django-Auth.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-04-28-Django-User.md" afterPath="$PROJECT_DIR$/_posts/2015-09-25-Django-User.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-05-04-Django-GenericForeignKey.md" afterPath="$PROJECT_DIR$/_posts/2015-05-02-Django-GenericForeignKey.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-05-09-Django-MiddleClass.md" afterPath="$PROJECT_DIR$/_posts/2015-05-11-Django-MiddleClass.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-05-30-Django-RedisBoard.md" afterPath="$PROJECT_DIR$/_posts/2015-05-29-Django-RedisBoard.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-05-Django-Permission.md" afterPath="$PROJECT_DIR$/_posts/2015-06-06-Django-Permission.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-18-Django-Databases.md" afterPath="$PROJECT_DIR$/_posts/2015-06-11-Django-Databases.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-21-Redis-Intruduction.md" afterPath="$PROJECT_DIR$/_posts/2015-06-13-Redis-Intruduction.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-24-Redis-key.md" afterPath="$PROJECT_DIR$/_posts/2015-06-16-Redis-key.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-27-Redis-String.md" afterPath="$PROJECT_DIR$/_posts/2015-06-20-Redis-String.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-06-30-Redis-Hash.md" afterPath="$PROJECT_DIR$/_posts/2015-06-21-Redis-Hash.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-01-Redis-Set.md" afterPath="$PROJECT_DIR$/_posts/2015-06-24-Redis-Set.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-04-Redis-List.md" afterPath="$PROJECT_DIR$/_posts/2015-06-28-Redis-List.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-06-APScheduler.md" afterPath="$PROJECT_DIR$/_posts/2015-07-03-APScheduler.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-09-Redis-ZSet.md" afterPath="$PROJECT_DIR$/_posts/2015-07-04-Redis-ZSet.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-12-Redis-ServerCommand.md" afterPath="$PROJECT_DIR$/_posts/2015-07-07-Redis-ServerCommand.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-15-Redis-Sort.md" afterPath="$PROJECT_DIR$/_posts/2015-07-11-Redis-Sort.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-18-Redis-HY&amp;ML&amp;S.md" afterPath="$PROJECT_DIR$/_posts/2015-07-13-Redis-HY&amp;ML&amp;S.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-21-Redis-cli&amp;ben&amp;t.md" afterPath="$PROJECT_DIR$/_posts/2015-07-18-Redis-cli&amp;ben&amp;t.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-24-Redis-Shard&amp;save.md" afterPath="$PROJECT_DIR$/_posts/2015-07-20-Redis-Shard&amp;save.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-27-Redis-python.md" afterPath="$PROJECT_DIR$/_posts/2015-07-26-Redis-python.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-07-29-Redis-Selenium.md" afterPath="$PROJECT_DIR$/_posts/2015-07-30-Python-Selenium.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-08-10-Git-Base.md" afterPath="$PROJECT_DIR$/_posts/2015-08-11-Git-Base.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-08-13-Git-Super.md" afterPath="$PROJECT_DIR$/_posts/2015-08-12-Git-Super.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-08-16-Django-Tree.md" afterPath="$PROJECT_DIR$/_posts/2015-08-15-Django-Tree.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-08-22-Django-django-redis.md" afterPath="$PROJECT_DIR$/_posts/2015-08-21-Django-django-redis.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-08-25-Elasticsearch-base.md" afterPath="$PROJECT_DIR$/_posts/2015-08-26-Elasticsearch-base.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-09-03-Elasticsearch-Mapping.md" afterPath="$PROJECT_DIR$/_posts/2015-09-02-Elasticsearch-Mapping.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-09-06-Elasticsearch-search&amp;sort.md" afterPath="$PROJECT_DIR$/_posts/2015-09-07-Elasticsearch-search&amp;sort.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-09-09-Elasticsearch-sea&amp;agg.md" afterPath="$PROJECT_DIR$/_posts/2015-09-08-Elasticsearch-sea&amp;agg.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2015-09-18-Python-Collection.md" afterPath="$PROJECT_DIR$/_posts/2015-09-19-Python-Collection.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,11 +24,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="学习elasticsearch.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="学习elasticsearch.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.02347919">
+            <state vertical-scroll-proportion="-17.791666">
               <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.791667">
+              <caret line="1368" column="0" selection-start-line="1368" selection-start-column="0" selection-end-line="1371" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-09-29-Python-requests.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.9197861">
+              <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -71,7 +62,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/2015-05-24-Django-local.md" />
         <option value="$PROJECT_DIR$/_posts/2015-05-27-Django-Cache.md" />
         <option value="$PROJECT_DIR$/_posts/2015-06-02-Django-Session.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-Muti&amp;Sub.md" />
@@ -122,6 +112,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-09-12-Elasticsearch-index.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-18-Python-Collection.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-23-Django-User.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
       </list>
     </option>
   </component>
@@ -196,7 +187,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project/学习笔记2.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../git/baseline/secfileServer" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
@@ -396,13 +387,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_includes/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.041666">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/works/bootstrap-zhihu/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2965404">
@@ -435,14 +419,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.048335124">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.6179295">
-          <caret line="1036" column="34" selection-start-line="1036" selection-start-column="34" selection-end-line="1036" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -766,14 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-09-25-Django-User.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04812834">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-09-21-Django-pageinator.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04812834">
@@ -792,8 +760,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02347919">
+        <state vertical-scroll-proportion="-17.791666">
           <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-09-25-Django-User.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.791667">
+          <caret line="1368" column="0" selection-start-line="1368" selection-start-column="0" selection-end-line="1371" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9197861">
+          <caret line="142" column="14" selection-start-line="142" selection-start-column="14" selection-end-line="142" selection-end-column="14" />
           <folding />
         </state>
       </provider>
