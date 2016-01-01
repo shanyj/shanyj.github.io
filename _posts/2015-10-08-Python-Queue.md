@@ -66,7 +66,7 @@ Queue类
 
 　* 示例
 
-     <pre><code>
+ <pre><code>
     def worker():
         while True:
             item = q.get()
@@ -80,5 +80,5 @@ Queue类
     for item in source():
         q.put(item)
     q.join()
-     </code></pre>
+ </code></pre>
 
