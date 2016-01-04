@@ -147,6 +147,5 @@ msg: hello 2
 end
 msg: hello 3
 end
-Mark~ Mark~ Mark~~~~~~~~~~~~~~~~~~~~~~
 Sub-process(es) done.
  </code></pre>
