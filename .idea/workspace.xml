@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" afterPath="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,31 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="学习elasticsearch.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../project/学习elasticsearch.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.791666">
-              <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="92.208336">
-              <caret line="1368" column="0" selection-start-line="1368" selection-start-column="0" selection-end-line="1371" selection-end-column="26" />
+            <state vertical-scroll-proportion="-19.666666">
+              <caret line="884" column="0" selection-start-line="884" selection-start-column="0" selection-end-line="888" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-09-29-Python-requests.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
+      <file leaf-file-name="2015-10-11-Django-normal.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.080213904">
-              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.85561496">
+              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -61,7 +52,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/2015-05-27-Django-Cache.md" />
         <option value="$PROJECT_DIR$/_posts/2015-06-02-Django-Session.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-Muti&amp;Sub.md" />
         <option value="$PROJECT_DIR$/../../project/学习笔记2.html" />
@@ -112,6 +102,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-09-18-Python-Collection.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-23-Django-User.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md" />
       </list>
     </option>
   </component>
@@ -386,13 +377,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/works/bootstrap-zhihu/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2965404">
-          <caret line="148" column="7" selection-start-line="148" selection-start-column="7" selection-end-line="148" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习笔记.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33216783">
@@ -773,18 +757,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="92.208336">
-          <caret line="1368" column="0" selection-start-line="1368" selection-start-column="0" selection-end-line="1371" selection-end-column="26" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="24" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md">
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.080213904">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        <state vertical-scroll-proportion="-19.666666">
+          <caret line="884" column="0" selection-start-line="884" selection-start-column="0" selection-end-line="888" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.85561496">
+          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
           <folding />
         </state>
       </provider>
