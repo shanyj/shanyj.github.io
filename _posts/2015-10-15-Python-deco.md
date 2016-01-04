@@ -3,7 +3,7 @@ layout: post
 title:  "Python 装饰器"
 date:   2015-10-15 19:43:42
 categories: Python
-excerpt:Python 装饰器
+excerpt: Python 装饰器
 ---
 
 * content
@@ -29,7 +29,7 @@ excerpt:Python 装饰器
         print("deco")
         return func
 
-    \@deco
+    @deco
     def foo():
         print("foo")
     </code></pre>
@@ -48,7 +48,7 @@ excerpt:Python 装饰器
         print(argv)
         return decorator
 
-    \@deco("123")
+    @deco("123")
     def foo():
         print("foo")
     </code></pre>
@@ -72,7 +72,7 @@ excerpt:Python 装饰器
         print(argv)
         return decorator
 
-    \@deco("123")
+    @deco("123")
     def foo(data):
         "this is foo"
         print("foo")
@@ -85,6 +85,6 @@ excerpt:Python 装饰器
 
  * 注意多个装饰器的执行顺序，应该是先执行下面的，然后是上面的。这里应先执行deco1，然后是deco2
  <pre><code>
-    \@deco2
-    \@deco1
+    @deco2
+    @deco1
  </code></pre>
