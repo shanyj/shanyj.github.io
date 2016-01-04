@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
@@ -27,18 +27,18 @@
       <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.666666">
-              <caret line="884" column="0" selection-start-line="884" selection-start-column="0" selection-end-line="888" selection-end-column="16" />
+            <state vertical-scroll-proportion="-17.166666">
+              <caret line="955" column="10" selection-start-line="953" selection-start-column="4" selection-end-line="955" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-10-11-Django-normal.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md">
+      <file leaf-file-name="2015-10-15-Python-deco.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.85561496">
-              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.96791446">
+              <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -52,7 +52,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/2015-06-02-Django-Session.md" />
         <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-Muti&amp;Sub.md" />
         <option value="$PROJECT_DIR$/../../project/学习笔记2.html" />
         <option value="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
@@ -103,6 +102,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-09-23-Django-User.md" />
         <option value="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
         <option value="$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md" />
       </list>
     </option>
   </component>
@@ -377,13 +377,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33216783">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习curl.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.77759475">
@@ -765,18 +758,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.666666">
-          <caret line="884" column="0" selection-start-line="884" selection-start-column="0" selection-end-line="888" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.46524063">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md">
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.85561496">
-          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+        <state vertical-scroll-proportion="-17.166666">
+          <caret line="955" column="10" selection-start-line="953" selection-start-column="4" selection-end-line="955" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.96791446">
+          <caret line="89" column="13" selection-start-line="89" selection-start-column="13" selection-end-line="89" selection-end-column="13" />
           <folding />
         </state>
       </provider>
