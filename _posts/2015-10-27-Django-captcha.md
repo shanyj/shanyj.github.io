@@ -101,16 +101,16 @@ def some_view(request):
     <pre><code>
     { % load staticfiles % }
 
-    <form action='.' method='POST'>{% csrf_token %}
-        {{ form1 }}
-        {% if form.captcha %}
-        {{ form.captcha }}
-        {% endif %}
-        <input type="submit" />
-        <button class='captcha-refresh'>刷新</button>
-        {% if form.captcha.errors %}
-        <p>{{ form.captcha.errors }}</p>
-        {% endif %}
+    < form action='.' method='POST' >{ % csrf_token % }
+        { { form1 } }
+        { % if form.captcha % }
+        { { form.captcha } }
+        { % endif % }
+        < input type="submit" />
+        < button class='captcha-refresh'>刷新< /button>
+        { % if form.captcha.errors % }
+        <p>{ { form.captcha.errors } }</p>
+        { % endif % }
     </form>
 
     <script type="text/javascript" src='{% static "js/jquery.js" %}'></script>
