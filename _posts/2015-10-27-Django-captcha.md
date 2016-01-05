@@ -40,7 +40,6 @@ excerpt: Django captcha 验证码
 from django.core.cache import cache
 from django import forms
 from captcha.fields import CaptchaField
-
 class TestForm(forms.Form):
     name=forms.CharField()
     def clean_name(self):
@@ -49,7 +48,6 @@ class TestForm(forms.Form):
             return clean_name
         else:
             raise forms.ValidationError("aaaa!")
-
 class CForm(forms.Form):
     captcha = CaptchaField()
     </code></pre>
