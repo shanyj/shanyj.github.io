@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Python 静态文件"
+title:  "Django 静态文件"
 date:   2015-10-22 19:43:42
-categories: Python
-excerpt: Python 静态文件
+categories: Django
+excerpt: Django 静态文件
 ---
 
 * content
