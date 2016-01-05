@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md" afterPath="$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-10-22-Python-static.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,18 +27,28 @@
       <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.166666">
-              <caret line="955" column="10" selection-start-line="953" selection-start-column="4" selection-end-line="955" selection-end-column="10" />
+            <state vertical-scroll-proportion="-15.291667">
+              <caret line="1288" column="0" selection-start-line="1288" selection-start-column="0" selection-end-line="1289" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-10-15-Python-deco.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md">
+      <file leaf-file-name="2015-10-22-Python-static.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-10-22-Python-static.md">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.88770056">
-              <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+              <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="学习oauth.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../project/学习oauth.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-45.291668">
+              <caret line="107" column="91" selection-start-line="107" selection-start-column="91" selection-end-line="107" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -51,7 +62,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/2015-07-12-Redis-Muti&amp;Sub.md" />
         <option value="$PROJECT_DIR$/../../project/学习笔记2.html" />
         <option value="$PROJECT_DIR$/_posts/2015-05-30-Django-django-redis.md" />
         <option value="$PROJECT_DIR$/_includes/head.html" />
@@ -102,6 +112,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-09-29-Python-requests.md" />
         <option value="$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md" />
         <option value="$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-10-22-Python-static.md" />
       </list>
     </option>
   </component>
@@ -176,7 +187,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../git/baseline/secfileServer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../shanyjoauth" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
@@ -376,20 +387,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../project/学习curl.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77759475">
-          <caret line="78" column="2" selection-start-line="78" selection-start-column="2" selection-end-line="78" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-08-01-Curl.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.049751244">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习git.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.048335124">
@@ -757,14 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.166666">
-          <caret line="955" column="10" selection-start-line="953" selection-start-column="4" selection-end-line="955" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.46524063">
@@ -775,8 +764,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-10-15-Python-deco.md">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习oauth.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-45.291668">
+          <caret line="107" column="91" selection-start-line="107" selection-start-column="91" selection-end-line="107" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.291667">
+          <caret line="1288" column="0" selection-start-line="1288" selection-start-column="0" selection-end-line="1289" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-10-22-Python-static.md">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.88770056">
-          <caret line="88" column="4" selection-start-line="88" selection-start-column="4" selection-end-line="88" selection-end-column="4" />
+          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
           <folding />
         </state>
       </provider>
