@@ -113,8 +113,8 @@ def some_view(request):
         { % endif % }
     </form>
 
-    <script type="text/javascript" src='{% static "js/jquery.js" %}'></script>
-    <script type="text/javascript">
+    < script type="text/javascript" src='{ % static "js/jquery.js" % }'></script>
+    < script type="text/javascript">
     $('.captcha-refresh').click(function(){
         form = $(this).parents('form');
         $.getJSON('/captcha/refresh/', {}, function(json) {
@@ -124,5 +124,5 @@ def some_view(request):
         });
         return false;
     });
-    </script>
+    < /script>
     </code></pre>
