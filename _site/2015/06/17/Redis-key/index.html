@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Redis Key</title>
+	<meta name="description" content="Redis Key">
+	
+	<link rel="canonical" href="/2015/06/17/Redis-key/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Redis Key</h1>
+        <p>Jun 17, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#redis" id="markdown-toc-redis">redis键命令</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>Redis的keys命令用于管理redis中的键，格式为COMMAND KEY_NAME，主要命令如下</p>
+
+<hr />
+
+<h3 id="redis">redis键命令</h3>
+
+<ul>
+  <li>
+    <p>DEL：</p>
+
+    <ul>
+      <li>
+        <p>删除redis中现有键，返回被删除的键的数目</p>
+      </li>
+      <li>
+        <p>格式：DEL KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>DUMP：</p>
+
+    <ul>
+      <li>
+        <p>获取存储在redis的指定键数据的序列化版本，返回序列化的值(字符串)</p>
+      </li>
+      <li>
+        <p>格式：DUMP KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>EXISTS：</p>
+
+    <ul>
+      <li>
+        <p>EXISTS命令被用来检查键是否存在于redis。返回1, 如果键存在。0, 如果键不存在</p>
+      </li>
+      <li>
+        <p>格式：EXISTS KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Expire：</p>
+
+    <ul>
+      <li>
+        <p>设定键有效期。返回1, 如果设置的键超时。0, 如果键不存在，或者未设置超时</p>
+      </li>
+      <li>
+        <p>格式：Expire KEY_NAME TIME_IN_SECONDS</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Expireat：</p>
+
+    <ul>
+      <li>
+        <p>以Unix时间戳格式设置键的到期时间。1, 如果设置的键超时。0, 如果键不存在，或者未设置超时</p>
+      </li>
+      <li>
+        <p>格式：Expireat KEY_NAME TIME_IN_UNIX_TIMESTAMP</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>KEYS：</p>
+
+    <ul>
+      <li>
+        <p>搜索与键的匹配模式。返回键匹配模式的列表(数组)</p>
+      </li>
+      <li>
+        <p>格式：KEYS PATTERN</p>
+      </li>
+    </ul>
+    <pre><code>
+ redis 127.0.0.1:6379&gt; KEYS tutorial*
+ 1) "tutorial3"
+ 2) "tutorial1"
+ 3) "tutorial2"
+</code></pre>
+  </li>
+  <li>
+    <p>MOVE：</p>
+
+    <ul>
+      <li>
+        <p>从当前选择的数据库键移动到指定的目标数据库。1, 如果键被移动。0, 如果键没有被移动</p>
+      </li>
+      <li>
+        <p>格式：MOVE KEY_NAME DESTINATION_DATABASE</p>
+      </li>
+    </ul>
+    <pre><code>
+ redis 127.0.0.1:6379&gt; MOVE tutorial1 1
+ 1) (integer) 1
+</code></pre>
+  </li>
+  <li>
+    <p>PERSIST：</p>
+
+    <ul>
+      <li>
+        <p>删除到期的键。1, 如果超时则删除键。0, 如果key不存在或不具备相关的超时时间</p>
+      </li>
+      <li>
+        <p>格式：PERSIST KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>TTL：</p>
+
+    <ul>
+      <li>
+        <p>获取键到期的剩余时间(秒)</p>
+      </li>
+      <li>
+        <p>格式：TTL KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>RANDOMKEY：</p>
+
+    <ul>
+      <li>
+        <p>获取Redis数据库的随机键。返回一个随机键(字符串)或nil，如果数据库是空</p>
+      </li>
+      <li>
+        <p>格式：RANDOMKEY</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>RENAME：</p>
+
+    <ul>
+      <li>
+        <p>改变一个键的名称。回复OK或error。它会返回一个错误，如果旧的key和新的key名称相同或者key不存在。如果新的键已经存在，则覆盖现有的key</p>
+      </li>
+      <li>
+        <p>格式：RENAME OLD_KEY_NAME NEW_KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>RENAMENX：</p>
+
+    <ul>
+      <li>
+        <p>改变一个键的名称，如果新的键不存在。1, 如果键被重命名为新的键。0, 如果新的键已经存在</p>
+      </li>
+      <li>
+        <p>格式：RENAMENX OLD_KEY_NAME NEW_KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>TYPE：</p>
+
+    <ul>
+      <li>
+        <p>获取存储在键值的数据类型。字符串回复，存储在键值的数据类型或none</p>
+      </li>
+      <li>
+        <p>格式：TYPE KEY_NAME</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/06/17/Redis-key" data-title="Redis Key" data-url="gaohaoyang.github.io/2015/06/17/Redis-key/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

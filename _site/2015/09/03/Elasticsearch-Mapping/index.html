@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Elasticsearch 映射&分析</title>
+	<meta name="description" content="Elasticsearch 映射&分析">
+	
+	<link rel="canonical" href="/2015/09/03/Elasticsearch-Mapping/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Elasticsearch 映射&分析</h1>
+        <p>Sep 3, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">映射和分析</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>这里主要介绍下Elasticsearch 映射和分析的一些概念</p>
+
+<hr />
+
+<h3 id="section-1">映射和分析</h3>
+
+<ul>
+  <li>
+    <p>术语</p>
+
+    <ul>
+      <li>
+        <p>映射(mapping)机制用于进行字段类型确认，将每个字段匹配为一种确定的数据类型(string, number, booleans, date等)</p>
+      </li>
+      <li>
+        <p>分析(analysis)机制用于进行全文文本(Full Text)的分词，以建立供搜索用的反向索引</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>映射</p>
+
+    <ul>
+      <li>
+        <p>我们的数据在_all字段的索引方式和在date字段的索引方式不同</p>
+      </li>
+      <li>
+        <p>GET /gb/_mapping/tweet</p>
+      </li>
+      <li>
+        <p>Elasticsearch为对字段类型进行猜测，动态生成了字段和类型的映射关系</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>全文文本(Full text)</p>
+
+    <ul>
+      <li>为了方便在全文文本字段中进行这些类型的查询，Elasticsearch首先对文本分析(analyzes)，然后使用结果建立一个倒排索引</li>
+    </ul>
+  </li>
+  <li>
+    <p>倒排索引</p>
+
+    <ul>
+      <li>倒排索引由在文档中出现的唯一的单词列表，以及对于每个单词在文档中的位置组成</li>
+    </ul>
+  </li>
+  <li>
+    <p>分析</p>
+
+    <ul>
+      <li>
+        <p>表征化和标准化的过程叫做分词(analysis)</p>
+      </li>
+      <li>
+        <p>一个分析器(analyzer)只是一个包装用于将三个功能放到一个包里：字符过滤器、分词器、表征过滤</p>
+      </li>
+      <li>
+        <p>当我们索引(index)一个文档，全文字段会被分析为单独的词来创建倒排索引</p>
+      </li>
+      <li>
+        <p>当你查询全文(full text)字段，查询将使用相同的分析器来分析查询字符串，以产生正确的词列表</p>
+      </li>
+      <li>
+        <p>当你查询一个确切值(exact value)字段，查询将不分析查询字符串，但是你可以自己指定</p>
+      </li>
+      <li>
+        <p>例如:date字段包含一个确切值：单独的一个词”2014-09-15”。
+ _all字段是一个全文字段，所以分析过程将日期转为三个词：”2014”、”09”和”15”</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>测试分析器</p>
+
+    <ul>
+      <li>
+        <p>GET /_analyze?analyzer=standard</p>
+      </li>
+      <li>
+        <p>返回值中token是一个实际被存储在索引中的词。position指明词在原文本中是第几个出现的。start_offset和end_offset表示词在原文本中占据的位置</p>
+      </li>
+      <li>
+        <p>当Elasticsearch在你的文档中探测到一个新的字符串字段，它将自动设置它为全文string字段并用standard分析器分析</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Elasticsearch字段类型</p>
+
+    <ul>
+      <li>
+        <p>String : string</p>
+      </li>
+      <li>
+        <p>Whole number : byte, short, integer, long</p>
+      </li>
+      <li>
+        <p>Floating point : float, double</p>
+      </li>
+      <li>
+        <p>Boolean : boolean</p>
+      </li>
+      <li>
+        <p>Date : date</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>对于string字段，两个最重要的映射参数是index和analyer</p>
+
+    <ul>
+      <li>
+        <p>index参数控制字符串以何种方式被索引，包含以下三种:</p>
+      </li>
+      <li>
+        <p>analyzed	首先分析这个字符串，然后索引。换言之，以全文形式索引此字段。</p>
+      </li>
+      <li>
+        <p>not_analyzed	索引这个字段，使之可以被搜索，但是索引内容和指定值一样。不分析此字段。</p>
+      </li>
+      <li>
+        <p>no 不索引这个字段。这个字段不能为搜索到。</p>
+      </li>
+      <li>
+        <p>其他简单类型——long、double、date等等——也接受index参数，但相应的值只能是no和not_analyzed，它们的值不能被分析</p>
+      </li>
+      <li>
+        <p>使用analyzer参数来指定哪一种分析器将在搜索和索引的时候使用</p>
+      </li>
+      <li>
+        <p>默认的，Elasticsearch使用standard分析器，但是你可以通过指定一个内建的分析器来更改它</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>更新映射</p>
+
+    <ul>
+      <li>
+        <p>你可以在第一次创建索引的时候指定映射的类型。此外，你也可以晚些时候为新类型添加映射（或者为已有的类型更新映射）</p>
+      </li>
+      <li>
+        <p>你可以向已有映射中增加字段，但你不能修改它。如果一个字段在映射中已经存在，这可能意味着那个字段的数据已经被索引。
+ 如果你改变了字段映射，那已经被索引的数据将错误并且不能被正确的搜索到</p>
+      </li>
+      <li>
+        <p>在tweet的映射中增加一个新的not_analyzed类型的文本字段，叫做tag</p>
+      </li>
+    </ul>
+    <pre><code>
+ PUT /gb/_mapping/tweet
+ {
+   "properties" : {
+     "tag" : {
+       "type" :    "string",
+       "index":    "not_analyzed"
+     }
+   }
+ }
+ </code></pre>
+  </li>
+  <li>
+    <p>复合字段</p>
+
+    <ul>
+      <li>
+        <p>数组中所有值必须为同一类型。不能把日期和字符串混合</p>
+      </li>
+      <li>
+        <p>如果你创建一个新字段，这个字段索引了一个数组，Elasticsearch将使用第一个值的类型来确定这个新字段的类型</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>空字段</p>
+
+    <ul>
+      <li>
+        <p>这四个字段将被识别为空字段而不被索引：</p>
+      </li>
+      <li>
+        <p>“empty_string”:             “”,</p>
+      </li>
+      <li>
+        <p>“null_value”:               null,</p>
+      </li>
+      <li>
+        <p>“empty_array”:              [],</p>
+      </li>
+      <li>
+        <p>“array_with_null_value”:    [ null ]</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Elasticsearch 会动态的检测新对象的字段，并且映射它们为 object 类型，将每个字段加到 properties 字段下</p>
+  </li>
+</ul>
+
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/09/03/Elasticsearch-Mapping" data-title="Elasticsearch 映射&分析" data-url="gaohaoyang.github.io/2015/09/03/Elasticsearch-Mapping/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

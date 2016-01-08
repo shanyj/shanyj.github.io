@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Python Collection模块</title>
+	<meta name="description" content="Python Collection模块">
+	
+	<link rel="canonical" href="/2015/09/20/Python-Collection/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Python Collection模块</h1>
+        <p>Sep 20, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#namedtuple" id="markdown-toc-namedtuple">namedtuple</a></li>
+      <li><a href="#deque" id="markdown-toc-deque">deque</a></li>
+      <li><a href="#defaultdict" id="markdown-toc-defaultdict">defaultdict</a></li>
+      <li><a href="#ordereddict" id="markdown-toc-ordereddict">OrderedDict</a></li>
+      <li><a href="#counter" id="markdown-toc-counter">Counter</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>python 的Collection有一些处理列表、元组、字典的有趣方法，就在这里mark一下</p>
+
+<hr />
+
+<h3 id="namedtuple">namedtuple</h3>
+
+<ul>
+  <li>
+    <p>namedtuple是一个函数，它用来创建一个自定义的tuple对象，并且规定了tuple元素的个数，并可以用属性而不是索引来引用tuple的某个元素</p>
+  </li>
+  <li>
+    <p>使用namedtuple可以很好的定义诸如坐标、圆之类的东西</p>
+  </li>
+</ul>
+<pre><code>
+    &gt;&gt;&gt; from collections import namedtuple
+    &gt;&gt;&gt; Point = namedtuple('Point', ['x', 'y'])
+    &gt;&gt;&gt; p = Point(1, 2)
+    &gt;&gt;&gt; p.x
+    1
+    &gt;&gt;&gt; p.y
+    2
+ </code></pre>
+
+<hr />
+
+<h3 id="deque">deque</h3>
+
+<ul>
+  <li>
+    <p>deque是为了高效实现插入和删除操作的双向列表，适合用于队列和栈</p>
+  </li>
+  <li>
+    <p>deque的使用方法如下</p>
+  </li>
+</ul>
+<pre><code>
+    &gt;&gt;&gt; from collections import deque
+    &gt;&gt;&gt; q = deque(['a', 'b', 'c'])
+    &gt;&gt;&gt; q.append('x')
+    &gt;&gt;&gt; q.appendleft('y')
+    &gt;&gt;&gt; q
+    deque(['y', 'a', 'b', 'c', 'x'])
+ </code></pre>
+
+<hr />
+
+<h3 id="defaultdict">defaultdict</h3>
+
+<ul>
+  <li>使用dict时，如果引用的Key不存在，就会抛出KeyError。如果希望key不存在时，返回一个默认值，就可以用defaultdict</li>
+</ul>
+<pre><code>
+&gt;&gt;&gt; from collections import defaultdict
+&gt;&gt;&gt; dd = defaultdict(lambda: 'N/A')
+&gt;&gt;&gt; dd['key1'] = 'abc'
+&gt;&gt;&gt; dd['key1'] # key1存在
+'abc'
+&gt;&gt;&gt; dd['key2'] # key2不存在，返回默认值
+'N/A'
+ </code></pre>
+
+<hr />
+
+<h3 id="ordereddict">OrderedDict</h3>
+
+<ul>
+  <li>使用dict时，Key是无序的。在对dict做迭代时，我们无法确定Key的顺序</li>
+</ul>
+<pre><code>
+&gt;&gt;&gt; from collections import OrderedDict
+&gt;&gt;&gt; d = dict([('a', 1), ('b', 2), ('c', 3)])
+&gt;&gt;&gt; d # dict的Key是无序的
+{'a': 1, 'c': 3, 'b': 2}
+ </code></pre>
+
+<ul>
+  <li>如果要保持Key的顺序，可以用OrderedDict</li>
+</ul>
+<pre><code>
+&gt;&gt;&gt; from collections import OrderedDict
+&gt;&gt;&gt; od = OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+&gt;&gt;&gt; od # OrderedDict的Key是有序的
+OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+ </code></pre>
+
+<ul>
+  <li>OrderedDict可以实现一个FIFO（先进先出）的dict，当容量超出限制时，先删除最早添加的Key</li>
+</ul>
+
+<hr />
+
+<h3 id="counter">Counter</h3>
+
+<ul>
+  <li>Counter是一个简单的计数器，例如，统计字符出现的个数
+counter[1,1,1,2,2,3,3,3,3,4,4,4,44]</li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/09/20/Python-Collection" data-title="Python Collection模块" data-url="gaohaoyang.github.io/2015/09/20/Python-Collection/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

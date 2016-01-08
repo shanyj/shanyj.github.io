@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Elasticsearch 索引管理</title>
+	<meta name="description" content="Elasticsearch 索引管理">
+	
+	<link rel="canonical" href="/2015/09/13/Elasticsearch-index/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Elasticsearch 索引管理</h1>
+        <p>Sep 13, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">索引管理</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>这里主要介绍下Elasticsearch 索引管理的一些知识</p>
+
+<hr />
+
+<h3 id="section-1">索引管理</h3>
+
+<ul>
+  <li>
+    <p>删除索引</p>
+
+    <ul>
+      <li>
+        <p>DELETE /index_*     删除以index_开头的索引</p>
+      </li>
+      <li>
+        <p>删除所有索引 DELETE /_all</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>配置分析器</p>
+
+    <ul>
+      <li>
+        <p>standard 分析器是用于全文字段的默认分析器,他包含:</p>
+      </li>
+      <li>
+        <p>• standard 分词器,在词层级上分割输入的文本。</p>
+      </li>
+      <li>
+        <p>• standard 表征过滤器,被设计用来整理分词器触发的所有表征。 • lowercase 表征过滤器,将所有表征转换为小写。</p>
+      </li>
+      <li>
+        <p>• stop 表征过滤器,删除所有可能会造成搜索歧义的停用词,如 a , the , and , is</p>
+      </li>
+      <li>
+        <p>默认情况下,停用词过滤器是被禁用的。如需启用它,你可以通过建一个基于 standard 分析器的自定义分析器,并且设置 stopwords 参数</p>
+      </li>
+    </ul>
+    <pre><code>
+ {
+   "settings": {
+     "analysis": {
+       "analyzer": {
+         "es_std": {
+           "type": "standard",
+           "stopwords": "_spanish_"
+         }
+       }
+     }
+   }
+ }
+ </code></pre>
+  </li>
+  <li>
+    <p>自定义分析器</p>
+
+    <ul>
+      <li>分析器 是三个顺序执行的组件的结合(字符过滤器,分词器,表征过滤器)</li>
+    </ul>
+    <pre><code>
+ PUT /my_index
+ {
+   "settings": {
+     "analysis": {
+       "char_filter": {
+         "&amp;_to_and": {
+           "type": "mapping",
+           "mappings": [
+             "&amp;=&gt; and "
+           ]
+         }
+       },
+       "filter": {
+         "my_stopwords": {
+           "type": "stop",
+           "stopwords": [
+             "the",
+             "a"
+           ]
+         }
+       },
+       "analyzer": {
+         "my_analyzer": {
+           "type": "custom",
+           "char_filter": [
+             "html_strip",
+             "&amp;_to_and"
+           ],
+           "tokenizer": "standard",
+           "filter": [
+             "lowercase",
+             "my_stopwords"
+           ]
+         }
+       }
+     }
+   }
+ }
+ </code></pre>
+
+    <ul>
+      <li>除非我们告诉 Elasticsearch 在哪里使用,否则分析器不会起作用。我们可以通过下面的映射将它应用在一个 string 类型的字段上</li>
+    </ul>
+    <pre><code>
+ PUT /my_index/_mapping/my_type
+ {
+   "properties": {
+     "title": {
+       "type": "string",
+       "analyzer": "my_analyzer"
+     }
+   }
+ }
+ </code></pre>
+  </li>
+  <li>
+    <p>类型陷阱</p>
+
+    <ul>
+      <li>log_en 表示英语版的博客, blog_es 表示西班牙语版的博客。
+ 两种类型 都有 title 字段,但是其中一种类型使用 english 分析器,另一种使用 spanish 分析器
+ 这样就不能单纯使用match
+ 只能在查询中明确包含各自的类型名</li>
+    </ul>
+    <pre><code>
+ {
+   "query": {
+     "multi_match": {
+       "query": "The quick brown fox",
+       "fields": [
+         "blog_en.title",
+         "blog_es.title"
+       ]
+     }
+   }
+ }
+ </code></pre>
+
+    <ul>
+      <li>为了保证你不会遇到这些冲突,建议在同一个索引的每一个类型中,确保用同样的方式映射同名的字段</li>
+    </ul>
+  </li>
+  <li>
+    <p>元数据</p>
+
+    <ul>
+      <li>_source</li>
+    </ul>
+    <pre><code>
+     GET /_search
+     {
+       "query": {
+         "match_all": {}
+       },
+       "_source": [
+         "title",
+         "created"
+       ]
+     }
+ </code>&gt;</pre>
+
+    <ul>
+      <li>_all</li>
+    </ul>
+    <pre><code>
+ #如果你决定不再使用 _all 字段,你可以通过下面的映射禁用它
+     PUT /my_index/_mapping/my_type
+     {
+       "my_type": {
+         "_all": {
+           "enabled": false
+         }
+       }
+     }
+ </code></pre>
+    <pre><code>
+ #可以配置 _all 字段使用的分析器
+     {
+       "my_type": {
+         "_all": {
+           "analyzer": "whitespace"
+         }
+       }
+     }
+ </code></pre>
+  </li>
+  <li>
+    <p>文档id</p>
+
+    <ul>
+      <li>
+        <p>_id :文档的字符串 ID
+ _type :文档的类型名
+ _index :文档所在的索引
+ _uid : _type 和 _id 连接成的 type#id</p>
+      </li>
+      <li>
+        <p>默认情况下, _uid 是被保存(可取回)和索引(可搜索)的。
+ _type 字段被索引但是没有保存, _id 和 _index 字段既没有索引也没有储存,它们并不是真实存在的</p>
+      </li>
+      <li>
+        <p>path 设置告诉 Elasticsearch 它需要从文档本身的哪个字段中生成 _id</p>
+      </li>
+    </ul>
+    <pre><code>
+ PUT /my_index
+ {
+   "mappings": {
+     "my_type": {
+       "_id": {
+         "path": "doc_id"
+       },
+       "properties": {
+         "doc_id": {
+           "type": "string",
+           "index": "not_analyzed"
+         }
+       }
+     }
+   }
+ }
+ </code></pre>
+  </li>
+  <li>
+    <p>动态映射</p>
+
+    <ul>
+      <li>
+        <p>当遭遇一个位置的字段时,它通过动态映射来确定字段的数据类型且自动将该字段加到类型映射中</p>
+      </li>
+      <li>
+        <p>可以通过 dynamic 设置来控制这些行为,它接受下面几个选项:
+ true :自动添加字段(默认),
+ false :忽略字段,
+ strict :当遇到未知字段时抛出异常</p>
+      </li>
+    </ul>
+    <pre><code>
+ {
+   "mappings": {
+     "my_type": {
+       "dynamic": "strict",
+       "properties": {
+         "title": {
+           "type": "string"
+         },
+         "stash": {
+           "type": "object",
+           "dynamic": true
+         }
+       }
+     }
+   }
+ }
+ </code></pre>
+
+    <ul>
+      <li>将 dynamic 设置成 false 完全不会修改 _source 字段的内容。
+ _source 将仍旧保持你索引时的完整 JSON 文档。然而,没有被添加到映射的未知字段将不可被搜索</li>
+    </ul>
+  </li>
+  <li>
+    <p>自定义动态索引</p>
+
+    <ul>
+      <li>日期检测:日期检测可以通过在根对象上设置 date_detection 为 false 来关闭</li>
+    </ul>
+    <pre><code>
+     PUT /my_index {
+     "mappings": { "my_type": {
+     "date_detection": false }
+     } }
+ </code></pre>
+    <p>使用这个映射,字符串将始终是 string 类型。假如你需要一个 date 字段,你得手动添加它</p>
+
+    <ul>
+      <li>重新索引数据:修改在已存在的数据最简单的方法是重新索引:建一个新配置好的索引,然后将所有的文档从旧的索引复制到新的上。
+ 为了更高效的索引旧索引中的文档,使用【scan-scoll】来批量读取旧索引的文档,然后将通过【bulk API】来将它们推送给新的索引</li>
+    </ul>
+  </li>
+  <li>
+    <p>索引别名</p>
+
+    <ul>
+      <li>
+        <p>索引别名就像一个快捷方式或软连接,可以指向一个或多个索引,PUT /my_index_v1/_alias/my_index</p>
+      </li>
+      <li>
+        <p>你可以检测这个别名指向哪个索引:
+ GET /<em>/_alias/my_index
+ 或哪些别名指向这个索引:
+ GET /my_index_v1/_alias/</em></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/09/13/Elasticsearch-index" data-title="Elasticsearch 索引管理" data-url="gaohaoyang.github.io/2015/09/13/Elasticsearch-index/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

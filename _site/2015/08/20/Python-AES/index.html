@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Python AES加解密</title>
+	<meta name="description" content="Python AES加解密">
+	
+	<link rel="canonical" href="/2015/08/20/Python-AES/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Python AES加解密</h1>
+        <p>Aug 20, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">安装与调用</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">参数介绍</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">加密算法</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">例子</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>python 的PyCryto模块可以为我们提供包括ECB,CBC等方式的加解密,下面就来简单的介绍一下</p>
+
+<hr />
+
+<h3 id="section-1">安装与调用</h3>
+
+<ul>
+  <li>
+    <p>安装:pip install PyCrypto</p>
+  </li>
+  <li>
+    <p>调用:</p>
+    <pre><code>
+ from Crypto.Cipher import AES
+ cryptor=AES.new(key, AES.MODE_CFB, iv)
+ cryptor.encrypt(text)
+</code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-2">参数介绍</h3>
+
+<ul>
+  <li>
+    <p>key:16\24\32位的密钥</p>
+  </li>
+  <li>
+    <p>model:加解密的方式,有MODE_ECB MODE_CBC MODE_CFB</p>
+  </li>
+  <li>
+    <p>iv:ecb和ctr模式不需要,是一个初始化加解密向量,默认是一堆block_size大小的0
+     且为binary型(block_size可以使用AES.block_size查看)</p>
+  </li>
+  <li>
+    <p>text必须为16的整数倍,不足补0</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-3">加密算法</h3>
+
+<ul>
+  <li>
+    <p>ECB</p>
+
+    <ul>
+      <li>
+        <p>简单；</p>
+      </li>
+      <li>
+        <p>有利于并行计算；</p>
+      </li>
+      <li>
+        <p>误差不会被传送；</p>
+      </li>
+      <li>
+        <p>不能隐藏明文的模式；</p>
+      </li>
+      <li>
+        <p>可能对明文进行主动攻击；</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>CBC</p>
+
+    <ul>
+      <li>
+        <p>不容易主动攻击,安全性好于ECB,适合传输长度长的报文,是SSL、IPSec的标准。</p>
+      </li>
+      <li>
+        <p>不利于并行计算；</p>
+      </li>
+      <li>
+        <p>误差传递；</p>
+      </li>
+      <li>
+        <p>需要初始化向量IV;</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>CFB</p>
+
+    <ul>
+      <li>
+        <p>隐藏了明文模式;</p>
+      </li>
+      <li>
+        <p>分组密码转化为流模式;</p>
+      </li>
+      <li>
+        <p>可以及时加密传送小于分组的数据;</p>
+      </li>
+      <li>
+        <p>不利于并行计算;</p>
+      </li>
+      <li>
+        <p>误差传送：一个明文单元损坏影响多个单元;</p>
+      </li>
+      <li>
+        <p>唯一的IV;</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-4">例子</h3>
+
+<pre><code>
+from Crypto.Cipher import AES
+from binascii import b2a_hex, a2b_hex
+class AESCrypto():
+    def __init__(self,key):
+        self.key = key
+        self.mode = AES.MODE_CBC
+	print AES.block_size
+
+    def encrypt(self,text):
+        if len(text)%16!=0:
+            text=text+str((16-len(text)%16)*'0')
+        cryptor = AES.new(self.key,self.mode,b'0000000000000000')
+        self.ciphertext = cryptor.encrypt(text)
+        return b2a_hex(self.ciphertext)
+
+    def decrypt(self,text):
+        cryptor = AES.new(self.key,self.mode,b'0000000000000000')
+        plain_text  = cryptor.decrypt(a2b_hex(text))
+        return plain_text.rstrip('\0')
+if __name__ == '__main__':
+    pc = AESCrypto('1111111111111111') #初始化密钥
+    e = pc.encrypt('shanyj')
+    d = pc.decrypt(e) #解密
+    print "加密:",e
+    print "解密:",d
+</code></pre>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/08/20/Python-AES" data-title="Python AES加解密" data-url="gaohaoyang.github.io/2015/08/20/Python-AES/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>
