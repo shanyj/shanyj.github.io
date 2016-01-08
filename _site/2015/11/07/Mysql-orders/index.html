@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mysql 库&表&属性命令</title>
+	<meta name="description" content="Mysql 库&表&属性命令">
+	
+	<link rel="canonical" href="/2015/11/07/Mysql-orders/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Mysql 库&表&属性命令</h1>
+        <p>Nov 7, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">库&amp;表&amp;属性命令</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>这里主要记录下Mysql中的Mysql库&amp;表&amp;属性命令的一些用法</p>
+
+<hr />
+
+<h3 id="section-1">库&amp;表&amp;属性命令</h3>
+
+<ul>
+  <li>
+    <p><strong>SELECT INTO</strong></p>
+
+    <ul>
+      <li>
+        <p>SELECT INTO 语句从一个表中选取数据，然后把数据插入另一个表中</p>
+      </li>
+      <li>
+        <p>SELECT column_name(s) INTO new_table_name [IN externaldatabase] FROM old_tablename</p>
+      </li>
+      <li>
+        <p>IN 子句可用于向另一个数据库中拷贝表</p>
+      </li>
+      <li>
+        <p>SELECT * INTO Persons IN ‘Backup.mdb’ FROM Persons</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>CREATE DATABASE</strong></p>
+
+    <ul>
+      <li>
+        <p>CREATE DATABASE 用于创建数据库</p>
+      </li>
+      <li>
+        <p>CREATE DATABASE database_name</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>CREATE TABLE</strong></p>
+
+    <ul>
+      <li>CREATE DATABASE 用于创建数据库
+        <pre><code>
+ CREATE TABLE 表名称
+ (
+ 列名称1 数据类型,
+ 列名称2 数据类型,
+ 列名称3 数据类型,
+ ....
+ )
+ </code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>NOT NULL</strong></p>
+
+    <ul>
+      <li>NOT NULL 约束强制列不接受 NULL 值
+        <pre><code>
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ LastName varchar(255) NOT NULL,
+ FirstName varchar(255),
+ Address varchar(255),
+ City varchar(255)
+ )
+ </code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>UNIQUE</strong></p>
+
+    <ul>
+      <li>UNIQUE 约束唯一标识数据库表中的每条记录
+        <pre><code>
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ UNIQUE (Id_P)
+ )
+ </code></pre>
+      </li>
+      <li>如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束
+        <pre><code>
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)
+ )
+ </code></pre>
+      </li>
+      <li>
+        <p>当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：</p>
+
+        <p>ALTER TABLE Persons ADD UNIQUE (Id_P)</p>
+      </li>
+      <li>
+        <p>如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：</p>
+
+        <p>ALTER TABLE Persons ADD CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)</p>
+      </li>
+      <li>
+        <p>如需撤销 UNIQUE 约束，请使用下面的 SQL:</p>
+
+        <p>ALTER TABLE Persons DROP INDEX uc_PersonID</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>PRIMARY KEY</strong></p>
+
+    <ul>
+      <li>PRIMARY KEY 约束唯一标识数据库表中的每条记录
+        <pre><code>
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ PRIMARY KEY (Id_P)
+ )
+ </code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>FOREIGN KEY</strong></p>
+
+    <ul>
+      <li>一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY
+        <pre><code>
+ CREATE TABLE Orders
+ (
+ Id_O int NOT NULL,
+ Id_P int,
+ PRIMARY KEY (Id_O),
+ FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
+ )
+ </code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>CHECK</strong></p>
+
+    <ul>
+      <li>CHECK 约束用于限制列中的值的范围
+        <pre><code>
+CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ CHECK (Id_P&gt;0)
+ )
+ </code></pre>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>DEFAULT</strong></p>
+
+    <ul>
+      <li>创建 DEFAULT 约束
+        <pre><code>
+CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255) DEFAULT 'Sandnes'
+ )
+ </code></pre>
+      </li>
+      <li>
+        <p>如果在表已存在的情况下为 “City” 列创建 DEFAULT 约束，请使用下面的 SQL</p>
+
+        <p>ALTER TABLE Persons
+ ALTER City SET DEFAULT ‘SANDNES’</p>
+      </li>
+      <li>
+        <p>如需撤销 DEFAULT 约束，请使用下面的 SQL</p>
+
+        <p>ALTER TABLE Persons
+ ALTER City DROP DEFAULT</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>CREATE INDEX</strong></p>
+
+    <ul>
+      <li>
+        <p>在表上创建一个简单的索引</p>
+
+        <p>CREATE INDEX index_name
+ ON table_name (column_name)</p>
+      </li>
+      <li>
+        <p>在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。</p>
+
+        <p>CREATE UNIQUE INDEX index_name
+ ON table_name (column_name)</p>
+      </li>
+      <li>
+        <p>假如您希望索引不止一个列，您可以在括号中列出这些列的名称，用逗号隔开：</p>
+
+        <p>CREATE INDEX PersonIndex
+ ON Person (LastName, FirstName)</p>
+      </li>
+      <li>
+        <p>删除</p>
+
+        <p>ALTER TABLE table_name DROP INDEX index_name</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>DROP</strong></p>
+
+    <ul>
+      <li>
+        <p>DROP TABLE 语句用于删除表（表的结构、属性以及索引也会被删除）：</p>
+
+        <p>DROP TABLE 表名称</p>
+      </li>
+      <li>
+        <p>DROP DATABASE 语句用于删除数据库:</p>
+
+        <p>DROP DATABASE 数据库名称</p>
+      </li>
+      <li>
+        <p>SQL TRUNCATE TABLE 语句</p>
+
+        <p>如果我们仅仅需要除去表内的数据</p>
+
+        <p>TRUNCATE TABLE 表名称</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>ALTER</strong></p>
+
+    <ul>
+      <li>
+        <p>如需在表中添加列，请使用下列语法</p>
+
+        <p>ALTER TABLE table_name
+ ADD column_name datatype</p>
+      </li>
+      <li>
+        <p>要删除表中的列，请使用下列语法</p>
+
+        <p>ALTER TABLE table_name
+ DROP COLUMN column_name</p>
+      </li>
+      <li>
+        <p>要改变表中列的数据类型，请使用下列语法</p>
+
+        <p>ALTER TABLE table_name
+ ALTER COLUMN column_name datatype</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>AUTO INCREMENT</strong></p>
+
+    <ul>
+      <li>通常希望在每次插入新记录时，自动地创建主键字段的值
+        <pre><code>
+CREATE TABLE Persons
+ (
+ P_Id int NOT NULL AUTO_INCREMENT,
+ LastName varchar(255) NOT NULL,
+ FirstName varchar(255),
+ Address varchar(255),
+ City varchar(255),
+ PRIMARY KEY (P_Id)
+ )
+ </code></pre>
+      </li>
+      <li>
+        <p>默认地，AUTO_INCREMENT 的开始值是 1，每条新记录递增 1</p>
+      </li>
+      <li>
+        <p>要让 AUTO_INCREMENT 序列以其他的值起始，请使用下列 SQL 语法：</p>
+
+        <p>ALTER TABLE Persons AUTO_INCREMENT=100</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>VIEW</strong></p>
+
+    <ul>
+      <li>
+        <p>视图是基于 SQL 语句的结果集的可视化的表</p>
+
+        <p>CREATE VIEW view_name AS
+ SELECT column_name(s)
+ FROM table_name
+ WHERE condition</p>
+      </li>
+      <li>
+        <p>使用下面的语法来更新视图</p>
+
+        <p>CREATE OR REPLACE VIEW view_name AS
+ SELECT column_name(s)
+ FROM table_name
+ WHERE condition</p>
+      </li>
+      <li>
+        <p>删除</p>
+
+        <p>DROP VIEW view_name</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/11/07/Mysql-orders" data-title="Mysql 库&表&属性命令" data-url="gaohaoyang.github.io/2015/11/07/Mysql-orders/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

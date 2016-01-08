@@ -5,9 +5,350 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Jan 2016 11:02:27 +0800</pubDate>
-    <lastBuildDate>Fri, 08 Jan 2016 11:02:27 +0800</lastBuildDate>
+    <pubDate>Fri, 08 Jan 2016 17:01:00 +0800</pubDate>
+    <lastBuildDate>Fri, 08 Jan 2016 17:01:00 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Mysql 库&amp;表&amp;属性命令</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;库&amp;amp;表&amp;amp;属性命令&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这里主要记录下Mysql中的Mysql库&amp;amp;表&amp;amp;属性命令的一些用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;库&amp;amp;表&amp;amp;属性命令&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;SELECT INTO&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT INTO 语句从一个表中选取数据，然后把数据插入另一个表中&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s) INTO new_table_name [IN externaldatabase] FROM old_tablename&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;IN 子句可用于向另一个数据库中拷贝表&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT * INTO Persons IN ‘Backup.mdb’ FROM Persons&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CREATE DATABASE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;CREATE DATABASE 用于创建数据库&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;CREATE DATABASE database_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CREATE TABLE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CREATE DATABASE 用于创建数据库
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE 表名称
+ (
+ 列名称1 数据类型,
+ 列名称2 数据类型,
+ 列名称3 数据类型,
+ ....
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;NOT NULL&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;NOT NULL 约束强制列不接受 NULL 值
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ LastName varchar(255) NOT NULL,
+ FirstName varchar(255),
+ Address varchar(255),
+ City varchar(255)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;UNIQUE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;UNIQUE 约束唯一标识数据库表中的每条记录
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ UNIQUE (Id_P)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons ADD UNIQUE (Id_P)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons ADD CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需撤销 UNIQUE 约束，请使用下面的 SQL:&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons DROP INDEX uc_PersonID&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;PRIMARY KEY&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;PRIMARY KEY 约束唯一标识数据库表中的每条记录
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ PRIMARY KEY (Id_P)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;FOREIGN KEY&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Orders
+ (
+ Id_O int NOT NULL,
+ Id_P int,
+ PRIMARY KEY (Id_O),
+ FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CHECK&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CHECK 约束用于限制列中的值的范围
+        &lt;pre&gt;&lt;code&gt;
+CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ CHECK (Id_P&amp;gt;0)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DEFAULT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;创建 DEFAULT 约束
+        &lt;pre&gt;&lt;code&gt;
+CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255) DEFAULT &#39;Sandnes&#39;
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如果在表已存在的情况下为 “City” 列创建 DEFAULT 约束，请使用下面的 SQL&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons
+ ALTER City SET DEFAULT ‘SANDNES’&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需撤销 DEFAULT 约束，请使用下面的 SQL&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons
+ ALTER City DROP DEFAULT&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CREATE INDEX&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;在表上创建一个简单的索引&lt;/p&gt;
+
+        &lt;p&gt;CREATE INDEX index_name
+ ON table_name (column_name)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。&lt;/p&gt;
+
+        &lt;p&gt;CREATE UNIQUE INDEX index_name
+ ON table_name (column_name)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;假如您希望索引不止一个列，您可以在括号中列出这些列的名称，用逗号隔开：&lt;/p&gt;
+
+        &lt;p&gt;CREATE INDEX PersonIndex
+ ON Person (LastName, FirstName)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;删除&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name DROP INDEX index_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DROP&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;DROP TABLE 语句用于删除表（表的结构、属性以及索引也会被删除）：&lt;/p&gt;
+
+        &lt;p&gt;DROP TABLE 表名称&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;DROP DATABASE 语句用于删除数据库:&lt;/p&gt;
+
+        &lt;p&gt;DROP DATABASE 数据库名称&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SQL TRUNCATE TABLE 语句&lt;/p&gt;
+
+        &lt;p&gt;如果我们仅仅需要除去表内的数据&lt;/p&gt;
+
+        &lt;p&gt;TRUNCATE TABLE 表名称&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;ALTER&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需在表中添加列，请使用下列语法&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name
+ ADD column_name datatype&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;要删除表中的列，请使用下列语法&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name
+ DROP COLUMN column_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;要改变表中列的数据类型，请使用下列语法&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name
+ ALTER COLUMN column_name datatype&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;AUTO INCREMENT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;通常希望在每次插入新记录时，自动地创建主键字段的值
+        &lt;pre&gt;&lt;code&gt;
+CREATE TABLE Persons
+ (
+ P_Id int NOT NULL AUTO_INCREMENT,
+ LastName varchar(255) NOT NULL,
+ FirstName varchar(255),
+ Address varchar(255),
+ City varchar(255),
+ PRIMARY KEY (P_Id)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;默认地，AUTO_INCREMENT 的开始值是 1，每条新记录递增 1&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;要让 AUTO_INCREMENT 序列以其他的值起始，请使用下列 SQL 语法：&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons AUTO_INCREMENT=100&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;VIEW&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;视图是基于 SQL 语句的结果集的可视化的表&lt;/p&gt;
+
+        &lt;p&gt;CREATE VIEW view_name AS
+ SELECT column_name(s)
+ FROM table_name
+ WHERE condition&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用下面的语法来更新视图&lt;/p&gt;
+
+        &lt;p&gt;CREATE OR REPLACE VIEW view_name AS
+ SELECT column_name(s)
+ FROM table_name
+ WHERE condition&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;删除&lt;/p&gt;
+
+        &lt;p&gt;DROP VIEW view_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 07 Nov 2015 03:52:26 +0800</pubDate>
+        <link>/2015/11/07/Mysql-orders/</link>
+        <guid isPermaLink="true">/2015/11/07/Mysql-orders/</guid>
+        
+        
+        <category>Mysql</category>
+        
+      </item>
     
       <item>
         <title>Mysql Join</title>
@@ -1375,210 +1716,6 @@ if __name__ == &quot;__main__&quot;:
         <pubDate>Fri, 09 Oct 2015 04:21:12 +0800</pubDate>
         <link>/2015/10/09/Python-Queue/</link>
         <guid isPermaLink="true">/2015/10/09/Python-Queue/</guid>
-        
-        
-        <category>Python</category>
-        
-      </item>
-    
-      <item>
-        <title>Python Requests模块</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;基本用法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#dataparams&quot; id=&quot;markdown-toc-dataparams&quot;&gt;data&amp;amp;params&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#response&quot; id=&quot;markdown-toc-response&quot;&gt;response处理&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#herder&quot; id=&quot;markdown-toc-herder&quot;&gt;添加herder&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#post&quot; id=&quot;markdown-toc-post&quot;&gt;post文件&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#cookie&quot; id=&quot;markdown-toc-cookie&quot;&gt;添加cookie&amp;amp;过期时间&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#session&quot; id=&quot;markdown-toc-session&quot;&gt;使用session&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;下载文件&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;python的requests模块是一个HTTP客户端库,跟urlli,urlli2类似，这里就讲解一下它的大致用法&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;安装&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- pip install requests
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;基本用法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;get方法：r = requests.get(‘https://api.github.com/events’)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;post方法：r = requests.post(“http://httpbin.org/post”, data = {“key”:”value”})&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;put方法：r = requests.put(“http://httpbin.org/put”, data = {“key”:”value”})&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;delete方法：r = requests.delete(“http://httpbin.org/delete”)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;head方法：r = requests.head(“http://httpbin.org/get”)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;options方法：r = requests.options(“http://httpbin.org/get”)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;dataparams&quot;&gt;data&amp;amp;params&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;data是传输的参数&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;params是用？追加到url后的&lt;/p&gt;
-    &lt;pre&gt;&lt;code&gt;
- &amp;gt;&amp;gt;&amp;gt; payload = {&#39;key1&#39;: &#39;value1&#39;, &#39;key2&#39;: [&#39;value2&#39;, &#39;value3&#39;]}
- &amp;gt;&amp;gt;&amp;gt; r = requests.get(&quot;http://httpbin.org/get&quot;, params=payload)
- &amp;gt;&amp;gt;&amp;gt; print(r.url)
- http://httpbin.org/get?key1=value1&amp;amp;key2=value2&amp;amp;key2=value3
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;response&quot;&gt;response处理&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;r = requests.post(“http://httpbin.org/post”, data = {“key”:”value”})&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看url： print r.url&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看普通返回结果：r.text&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看二进制返回结果：r.content&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;json形式：r.json(),注意有括号&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看返回码：r.status_code&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看headers：r.headers&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;查看cookie：r.cookies[‘example_cookie_name’]&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;herder&quot;&gt;添加herder&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;相当与curl命令的-H
-    &lt;pre&gt;&lt;code&gt;
- &amp;gt;&amp;gt;&amp;gt; url = &#39;https://api.github.com/some/endpoint&#39;
- &amp;gt;&amp;gt;&amp;gt; headers = {&#39;user-agent&#39;: &#39;my-app/0.0.1&#39;}
- &amp;gt;&amp;gt;&amp;gt; r = requests.get(url, headers=headers)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;post&quot;&gt;post文件&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;files的第一个参数文件名，第二个是文件，第三个是headers&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- &amp;gt;&amp;gt;&amp;gt; url = &#39;http://httpbin.org/post&#39;
- &amp;gt;&amp;gt;&amp;gt; files = {&#39;file&#39;: (&#39;report.xls&#39;, open(&#39;report.xls&#39;, &#39;rb&#39;), &#39;application/vnd.ms-excel&#39;, {&#39;Expires&#39;: &#39;0&#39;})}
- &amp;gt;&amp;gt;&amp;gt; r = requests.post(url, files=files)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;cookie&quot;&gt;添加cookie&amp;amp;过期时间&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;cookies&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-    &amp;gt;&amp;gt;&amp;gt; url = &#39;http://httpbin.org/cookies&#39;
-    &amp;gt;&amp;gt;&amp;gt; cookies = dict(cookies_are=&#39;working&#39;)
-    &amp;gt;&amp;gt;&amp;gt; r = requests.get(url, cookies=cookies)
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;过期时间：requests.get(‘http://github.com’, timeout=0.001)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;session&quot;&gt;使用session&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;访问过程使用session&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-    url = r&#39;http://www.renren.com/ajaxLogin&#39;
-    user = {&#39;email&#39;:&#39;email&#39;,&#39;password&#39;:&#39;pass&#39;}
-    s = requests.Session()
-    r = s.post(url,data = user)
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用session验证&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-    s = requests.Session()
-    s.auth = (&#39;user&#39;, &#39;pass&#39;)
-    s.headers.update({&#39;x-test&#39;: &#39;true&#39;})
-    s.get(&#39;http://httpbin.org/headers&#39;, headers={&#39;x-test2&#39;: &#39;true&#39;})
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;下载文件&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;下载文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-url = &#39;http://www.pythontab.com/test/demo.zip&#39;
-r = requests.get(url)
-with open(&quot;demo3.zip&quot;, &quot;wb&quot;) as code:
-     code.write(r.content)
-  &lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Wed, 30 Sep 2015 05:02:18 +0800</pubDate>
-        <link>/2015/09/30/Python-requests/</link>
-        <guid isPermaLink="true">/2015/09/30/Python-requests/</guid>
         
         
         <category>Python</category>
