@@ -2,26 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-11-01-Mysql-base.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dump.rdb" afterPath="$PROJECT_DIR$/dump.rdb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-11-02-Mysql-join.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/16/Set-up-Blog/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/16/Set-up-Blog/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/21/Django-manage/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/21/Django-manage/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/24/Django-login-and-lgout/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/24/Django-login-and-lgout/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/02/Django-Signal/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/02/Django-Signal/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/07/Django-Ootput/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/07/Django-Ootput/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/13/Django-Site/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/13/Django-Site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/16/Django-Flatpage/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/16/Django-Flatpage/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/18/Django-Security/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/18/Django-Security/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/21/Django-Rebuild-db/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/21/Django-Rebuild-db/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/25/Django-Local/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/25/Django-Local/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/28/Django-Cache/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/28/Django-Cache/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/03/Django-Session/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/03/Django-Session/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/demo/index.html" afterPath="$PROJECT_DIR$/_site/demo/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="$PROJECT_DIR$/_site/page2/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page3/index.html" afterPath="$PROJECT_DIR$/_site/page3/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page4/index.html" afterPath="$PROJECT_DIR$/_site/page4/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page5/index.html" afterPath="$PROJECT_DIR$/_site/page5/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page6/index.html" afterPath="$PROJECT_DIR$/_site/page6/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page7/index.html" afterPath="$PROJECT_DIR$/_site/page7/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
@@ -43,41 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="学习笔记2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.0">
-              <caret line="1500" column="18" selection-start-line="1500" selection-start-column="18" selection-end-line="1500" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="学习restful.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../../project/学习restful.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="263" column="46" selection-start-line="263" selection-start-column="46" selection-end-line="263" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="学习mysql.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习mysql.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125">
-              <caret line="100" column="121" selection-start-line="96" selection-start-column="3" selection-end-line="100" selection-end-column="121" />
+            <state vertical-scroll-proportion="-22.75">
+              <caret line="142" column="4" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="30" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-11-01-Mysql-base.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-11-01-Mysql-base.md">
+      <file leaf-file-name="2015-11-02-Mysql-join.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-11-02-Mysql-join.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9037433">
-              <caret line="127" column="6" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.96791446">
+              <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -91,7 +60,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_includes/head.html" />
         <option value="$PROJECT_DIR$/works/bootstrap-zhihu/index.html" />
         <option value="$PROJECT_DIR$/_posts/2015-07-29-Redis-Selenium.md" />
         <option value="$PROJECT_DIR$/_posts/2015-08-01-Curl.md" />
@@ -142,6 +110,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-10-22-Python-static.md" />
         <option value="$PROJECT_DIR$/_posts/2015-10-27-Django-captcha.md" />
         <option value="$PROJECT_DIR$/_posts/2015-11-01-Mysql-base.md" />
+        <option value="$PROJECT_DIR$/_posts/2015-11-02-Mysql-join.md" />
       </list>
     </option>
   </component>
@@ -416,13 +385,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/2015-04-20-Django-manage.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-05-15-Django-Flatpage.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -738,18 +700,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.0">
-          <caret line="1500" column="18" selection-start-line="1500" selection-start-column="18" selection-end-line="1500" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-10-27-Django-captcha.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28877005">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="30" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38420492">
+          <caret line="1500" column="18" selection-start-line="1500" selection-start-column="18" selection-end-line="1500" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -762,18 +724,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习mysql.html">
+    <entry file="file://$PROJECT_DIR$/_posts/2015-11-01-Mysql-base.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.125">
-          <caret line="100" column="121" selection-start-line="96" selection-start-column="3" selection-end-line="100" selection-end-column="121" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-11-01-Mysql-base.md">
+    <entry file="file://$PROJECT_DIR$/../../project/学习mysql.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9037433">
-          <caret line="127" column="6" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
+        <state vertical-scroll-proportion="-22.75">
+          <caret line="142" column="4" selection-start-line="142" selection-start-column="4" selection-end-line="142" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-11-02-Mysql-join.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.96791446">
+          <caret line="74" column="31" selection-start-line="74" selection-start-column="31" selection-end-line="74" selection-end-column="31" />
           <folding />
         </state>
       </provider>
