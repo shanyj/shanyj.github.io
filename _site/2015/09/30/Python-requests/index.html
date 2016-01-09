@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Python Requests模块</title>
+	<meta name="description" content="Django Requests模块">
+	
+	<link rel="canonical" href="/2015/09/30/Python-requests/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Python Requests模块</h1>
+        <p>Sep 30, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">安装</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">基本用法</a></li>
+      <li><a href="#dataparams" id="markdown-toc-dataparams">data&amp;params</a></li>
+      <li><a href="#response" id="markdown-toc-response">response处理</a></li>
+      <li><a href="#herder" id="markdown-toc-herder">添加herder</a></li>
+      <li><a href="#post" id="markdown-toc-post">post文件</a></li>
+      <li><a href="#cookie" id="markdown-toc-cookie">添加cookie&amp;过期时间</a></li>
+      <li><a href="#session" id="markdown-toc-session">使用session</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">下载文件</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>python的requests模块是一个HTTP客户端库,跟urlli,urlli2类似，这里就讲解一下它的大致用法</p>
+
+<hr />
+
+<h3 id="section-1">安装</h3>
+
+<ul>
+  <li>
+    <p>安装</p>
+
+    <pre><code>
+ pip install requests
+ </code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-2">基本用法</h3>
+
+<ul>
+  <li>
+    <p>get方法：r = requests.get(‘https://api.github.com/events’)</p>
+  </li>
+  <li>
+    <p>post方法：r = requests.post(“http://httpbin.org/post”, data = {“key”:”value”})</p>
+  </li>
+  <li>
+    <p>put方法：r = requests.put(“http://httpbin.org/put”, data = {“key”:”value”})</p>
+  </li>
+  <li>
+    <p>delete方法：r = requests.delete(“http://httpbin.org/delete”)</p>
+  </li>
+  <li>
+    <p>head方法：r = requests.head(“http://httpbin.org/get”)</p>
+  </li>
+  <li>
+    <p>options方法：r = requests.options(“http://httpbin.org/get”)</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="dataparams">data&amp;params</h3>
+
+<ul>
+  <li>
+    <p>data是传输的参数</p>
+  </li>
+  <li>
+    <p>params是用？追加到url后的</p>
+    <pre><code>
+ &gt;&gt;&gt; payload = {'key1': 'value1', 'key2': ['value2', 'value3']}
+ &gt;&gt;&gt; r = requests.get("http://httpbin.org/get", params=payload)
+ &gt;&gt;&gt; print(r.url)
+ http://httpbin.org/get?key1=value1&amp;key2=value2&amp;key2=value3
+ </code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="response">response处理</h3>
+
+<ul>
+  <li>
+    <p>r = requests.post(“http://httpbin.org/post”, data = {“key”:”value”})</p>
+  </li>
+  <li>
+    <p>查看url： print r.url</p>
+  </li>
+  <li>
+    <p>查看普通返回结果：r.text</p>
+  </li>
+  <li>
+    <p>查看二进制返回结果：r.content</p>
+  </li>
+  <li>
+    <p>json形式：r.json(),注意有括号</p>
+  </li>
+  <li>
+    <p>查看返回码：r.status_code</p>
+  </li>
+  <li>
+    <p>查看headers：r.headers</p>
+  </li>
+  <li>
+    <p>查看cookie：r.cookies[‘example_cookie_name’]</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="herder">添加herder</h3>
+
+<ul>
+  <li>相当与curl命令的-H
+    <pre><code>
+ &gt;&gt;&gt; url = 'https://api.github.com/some/endpoint'
+ &gt;&gt;&gt; headers = {'user-agent': 'my-app/0.0.1'}
+ &gt;&gt;&gt; r = requests.get(url, headers=headers)
+ </code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="post">post文件</h3>
+
+<ul>
+  <li>
+    <p>files的第一个参数文件名，第二个是文件，第三个是headers</p>
+
+    <pre><code>
+ &gt;&gt;&gt; url = 'http://httpbin.org/post'
+ &gt;&gt;&gt; files = {'file': ('report.xls', open('report.xls', 'rb'), 'application/vnd.ms-excel', {'Expires': '0'})}
+ &gt;&gt;&gt; r = requests.post(url, files=files)
+ </code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="cookie">添加cookie&amp;过期时间</h3>
+
+<ul>
+  <li>cookies</li>
+</ul>
+<pre><code>
+    &gt;&gt;&gt; url = 'http://httpbin.org/cookies'
+    &gt;&gt;&gt; cookies = dict(cookies_are='working')
+    &gt;&gt;&gt; r = requests.get(url, cookies=cookies)
+ </code></pre>
+
+<ul>
+  <li>过期时间：requests.get(‘http://github.com’, timeout=0.001)</li>
+</ul>
+
+<hr />
+
+<h3 id="session">使用session</h3>
+
+<ul>
+  <li>访问过程使用session</li>
+</ul>
+<pre><code>
+    url = r'http://www.renren.com/ajaxLogin'
+    user = {'email':'email','password':'pass'}
+    s = requests.Session()
+    r = s.post(url,data = user)
+ </code></pre>
+
+<ul>
+  <li>使用session验证</li>
+</ul>
+<pre><code>
+    s = requests.Session()
+    s.auth = ('user', 'pass')
+    s.headers.update({'x-test': 'true'})
+    s.get('http://httpbin.org/headers', headers={'x-test2': 'true'})
+ </code></pre>
+
+<hr />
+
+<h3 id="section-3">下载文件</h3>
+
+<ul>
+  <li>下载文件</li>
+</ul>
+<pre><code>
+url = 'http://www.pythontab.com/test/demo.zip'
+r = requests.get(url)
+with open("demo3.zip", "wb") as code:
+     code.write(r.content)
+  </code></pre>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/09/30/Python-requests" data-title="Python Requests模块" data-url="gaohaoyang.github.io/2015/09/30/Python-requests/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

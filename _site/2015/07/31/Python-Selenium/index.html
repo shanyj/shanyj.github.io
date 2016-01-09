@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Python selenium模块</title>
+	<meta name="description" content="Python selenium模块">
+	
+	<link rel="canonical" href="/2015/07/31/Python-Selenium/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Python selenium模块</h1>
+        <p>Jul 31, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">简单示例</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">元素定位</a></li>
+      <li><a href="#section-3" id="markdown-toc-section-3">休眠</a></li>
+      <li><a href="#section-4" id="markdown-toc-section-4">元素操作</a></li>
+      <li><a href="#section-5" id="markdown-toc-section-5">键盘&amp;鼠标事件</a></li>
+      <li><a href="#section-6" id="markdown-toc-section-6">框架/窗口定位</a></li>
+      <li><a href="#js" id="markdown-toc-js">js</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>最近写了个网页测试脚本，用到了python的selenium模块，因此作了下小结</p>
+
+<hr />
+
+<h3 id="section-1">简单示例</h3>
+
+<ul>
+  <li>
+    <p>示例</p>
+
+    <ul>
+      <li>对于不同类型的webdriver需要安装不同的webdriver</li>
+    </ul>
+    <pre><code>
+ from selenium import webdriver
+ driver =webdriver.Chrome()
+ driver.get('http://radar.kuaibo.com')
+ print driver.title
+ driver.quit()
+ </code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-2">元素定位</h3>
+
+<ul>
+  <li>
+    <p>id:</p>
+
+    <ul>
+      <li>browser.find_element_by_id( “kw” )</li>
+    </ul>
+  </li>
+  <li>
+    <p>name</p>
+
+    <ul>
+      <li>browser.find_element_by_name( “wd” )</li>
+    </ul>
+  </li>
+  <li>
+    <p>class name</p>
+
+    <ul>
+      <li>browser.find_element_by_class_name( “s_ipt” )</li>
+    </ul>
+  </li>
+  <li>
+    <p>link text</p>
+
+    <ul>
+      <li>
+        <p>有时候不是一个输入框也不是一个按钮,而是一个文字链接,我们可以通过 link</p>
+      </li>
+      <li>
+        <p>browser.find_element_by_link_text(“贴 吧”).click()</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>partial link text</p>
+
+    <ul>
+      <li>browser.find_element_by_partial_link_text(“贴”)</li>
+    </ul>
+  </li>
+  <li>
+    <p>tag name</p>
+
+    <ul>
+      <li>browser.find_element_by_tag_name( “input” )</li>
+    </ul>
+  </li>
+  <li>
+    <p>xpath</p>
+
+    <ul>
+      <li>
+        <p>browser.find_element_by_xpath( “//input[@id=’kw’]” )</p>
+      </li>
+      <li>
+        <p>browser.find_element_by_xpath(“//tr[@id=’check’]/td[2]”)</p>
+      </li>
+      <li>
+        <p>driver.find_element_by_xpath(“//tr[7]/td[2]”)</p>
+      </li>
+      <li>
+        <p>driver.find_element_by_xpath(“//div[@id=’fm’]/form/span/input”)</p>
+      </li>
+      <li>
+        <p>driver.find_element_by_xpath(“//a[contains(text(),’网页’)]”)</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>css selector</p>
+
+    <ul>
+      <li>
+        <p>browser.find_element_by_css_selector( “#kw” )</p>
+      </li>
+      <li>
+        <p>browser.find_element_by_css_selector(“a[name=’tj_news’]”)</p>
+      </li>
+      <li>
+        <p>driver.find_element_by_css_selector(“a.RecycleBin”)</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-3">休眠</h3>
+
+<ul>
+  <li>普通休眠
+    <pre><code>
+ import time
+ time.sleep(3)
+ </code></pre>
+  </li>
+  <li>
+    <p>implicitly_wait() :</p>
+
+    <ul>
+      <li>
+        <p>方法就可以方便的实现智能等待，可以在一个时间范围内智能的等待。
+隐式地等待一个无素被发现或一个命令完成;这个方法每次会话只需要调用一次</p>
+      </li>
+      <li>
+        <p>browser.implicitly_wait(30)</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-4">元素操作</h3>
+
+<ul>
+  <li>
+    <p>click:</p>
+
+    <ul>
+      <li>点击对象</li>
+    </ul>
+  </li>
+  <li>
+    <p>send_keys:</p>
+
+    <ul>
+      <li>在对象上模拟按键输入</li>
+    </ul>
+  </li>
+  <li>
+    <p>clear:</p>
+
+    <ul>
+      <li>清除对象的内容,如果可以的话，用于清除输入框的内容,比如百度输入框里默认有个“请输入关键
+字”的信息,再比如我们的登陆框一般默认会有“账号”“密码”这样的默认信息</li>
+    </ul>
+  </li>
+  <li>
+    <p>submit:</p>
+
+    <ul>
+      <li>清除对象的内容,如果可以的话</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-5">键盘&amp;鼠标事件</h3>
+
+<ul>
+  <li>
+    <p>键盘组合事件:</p>
+
+    <ul>
+      <li>
+        <p>.send_keys(Keys.CONTROL,’a’)</p>
+      </li>
+      <li>
+        <p>相当于ctrl+a</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>上传文件:</p>
+
+    <ul>
+      <li>send_keys(‘D:\selenium_use_case\upload_file.txt’)</li>
+    </ul>
+  </li>
+  <li>
+    <p>右击:</p>
+
+    <ul>
+      <li>ActionChains(driver).context_click(qqq).perform()</li>
+    </ul>
+  </li>
+  <li>
+    <p>双击:</p>
+
+    <ul>
+      <li>ActionChains(driver).double_click(qqq).perform()</li>
+    </ul>
+  </li>
+  <li>
+    <p>移动:</p>
+
+    <ul>
+      <li>ActionChains(driver).drag_and_drop(element, target).perform()</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-6">框架/窗口定位</h3>
+
+<ul>
+  <li>
+    <p>browser.switch_to_frame(“f1”) 跳到指定frame</p>
+  </li>
+  <li>
+    <p>driver.switch_to_window(“windowName”) 跳到指定window</p>
+  </li>
+  <li>
+    <p>driver.switch_to_alert().accept() 跳到弹出框并点击确定</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="js">js</h3>
+
+<ul>
+  <li>
+    <p>执行 js 一般有两种,
+一种是在页面上直接执行 JS,
+另一种是在某个已经定位的元素上执行 JS</p>
+  </li>
+  <li>
+    <p>第一种：driver.execute_script(‘$(“#tooltip”).fadeOut();’)</p>
+  </li>
+  <li>
+    <p>第二种：</p>
+    <pre><code>
+ button = driver.find_element_by_class_name('btn')
+ driver.execute_script('$(arguments[0]).fadeOut()',button)
+  </code></pre>
+  </li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/07/31/Python-Selenium" data-title="Python selenium模块" data-url="gaohaoyang.github.io/2015/07/31/Python-Selenium/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

@@ -5,767 +5,826 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 16 Dec 2015 14:21:27 +0800</pubDate>
-    <lastBuildDate>Wed, 16 Dec 2015 14:21:27 +0800</lastBuildDate>
+    <pubDate>Fri, 08 Jan 2016 17:01:00 +0800</pubDate>
+    <lastBuildDate>Fri, 08 Jan 2016 17:01:00 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>Python APScheduler定时任务框架</title>
+        <title>Mysql 库&amp;表&amp;属性命令</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;组件&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;原则&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;常用方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-5&quot; id=&quot;markdown-toc-section-5&quot;&gt;三种调度&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-6&quot; id=&quot;markdown-toc-section-6&quot;&gt;时间格式&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-7&quot; id=&quot;markdown-toc-section-7&quot;&gt;案例&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;库&amp;amp;表&amp;amp;属性命令&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;之前的Django文档管理系统项目中，有文件设置过期时间的功能，其中删除是通过celery定时任务每日凌晨来实现的，今天回过头又找了找定时任务，发现了一个及其简便的定时任务框架：APScheduler。&lt;/p&gt;
+&lt;p&gt;这里主要记录下Mysql中的Mysql库&amp;amp;表&amp;amp;属性命令的一些用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;库&amp;amp;表&amp;amp;属性命令&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;SELECT INTO&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT INTO 语句从一个表中选取数据，然后把数据插入另一个表中&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s) INTO new_table_name [IN externaldatabase] FROM old_tablename&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;IN 子句可用于向另一个数据库中拷贝表&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT * INTO Persons IN ‘Backup.mdb’ FROM Persons&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CREATE DATABASE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;CREATE DATABASE 用于创建数据库&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;CREATE DATABASE database_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CREATE TABLE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CREATE DATABASE 用于创建数据库
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE 表名称
+ (
+ 列名称1 数据类型,
+ 列名称2 数据类型,
+ 列名称3 数据类型,
+ ....
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;NOT NULL&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;NOT NULL 约束强制列不接受 NULL 值
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ LastName varchar(255) NOT NULL,
+ FirstName varchar(255),
+ Address varchar(255),
+ City varchar(255)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;UNIQUE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;UNIQUE 约束唯一标识数据库表中的每条记录
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ UNIQUE (Id_P)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons ADD UNIQUE (Id_P)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons ADD CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需撤销 UNIQUE 约束，请使用下面的 SQL:&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons DROP INDEX uc_PersonID&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;PRIMARY KEY&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;PRIMARY KEY 约束唯一标识数据库表中的每条记录
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ PRIMARY KEY (Id_P)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;FOREIGN KEY&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY
+        &lt;pre&gt;&lt;code&gt;
+ CREATE TABLE Orders
+ (
+ Id_O int NOT NULL,
+ Id_P int,
+ PRIMARY KEY (Id_O),
+ FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CHECK&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CHECK 约束用于限制列中的值的范围
+        &lt;pre&gt;&lt;code&gt;
+CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255),
+ CHECK (Id_P&amp;gt;0)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DEFAULT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;创建 DEFAULT 约束
+        &lt;pre&gt;&lt;code&gt;
+CREATE TABLE Persons
+ (
+ Id_P int NOT NULL,
+ City varchar(255) DEFAULT &#39;Sandnes&#39;
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如果在表已存在的情况下为 “City” 列创建 DEFAULT 约束，请使用下面的 SQL&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons
+ ALTER City SET DEFAULT ‘SANDNES’&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需撤销 DEFAULT 约束，请使用下面的 SQL&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons
+ ALTER City DROP DEFAULT&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CREATE INDEX&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;在表上创建一个简单的索引&lt;/p&gt;
+
+        &lt;p&gt;CREATE INDEX index_name
+ ON table_name (column_name)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。&lt;/p&gt;
+
+        &lt;p&gt;CREATE UNIQUE INDEX index_name
+ ON table_name (column_name)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;假如您希望索引不止一个列，您可以在括号中列出这些列的名称，用逗号隔开：&lt;/p&gt;
+
+        &lt;p&gt;CREATE INDEX PersonIndex
+ ON Person (LastName, FirstName)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;删除&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name DROP INDEX index_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DROP&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;DROP TABLE 语句用于删除表（表的结构、属性以及索引也会被删除）：&lt;/p&gt;
+
+        &lt;p&gt;DROP TABLE 表名称&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;DROP DATABASE 语句用于删除数据库:&lt;/p&gt;
+
+        &lt;p&gt;DROP DATABASE 数据库名称&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SQL TRUNCATE TABLE 语句&lt;/p&gt;
+
+        &lt;p&gt;如果我们仅仅需要除去表内的数据&lt;/p&gt;
+
+        &lt;p&gt;TRUNCATE TABLE 表名称&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;ALTER&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需在表中添加列，请使用下列语法&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name
+ ADD column_name datatype&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;要删除表中的列，请使用下列语法&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name
+ DROP COLUMN column_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;要改变表中列的数据类型，请使用下列语法&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE table_name
+ ALTER COLUMN column_name datatype&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;AUTO INCREMENT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;通常希望在每次插入新记录时，自动地创建主键字段的值
+        &lt;pre&gt;&lt;code&gt;
+CREATE TABLE Persons
+ (
+ P_Id int NOT NULL AUTO_INCREMENT,
+ LastName varchar(255) NOT NULL,
+ FirstName varchar(255),
+ Address varchar(255),
+ City varchar(255),
+ PRIMARY KEY (P_Id)
+ )
+ &lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;默认地，AUTO_INCREMENT 的开始值是 1，每条新记录递增 1&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;要让 AUTO_INCREMENT 序列以其他的值起始，请使用下列 SQL 语法：&lt;/p&gt;
+
+        &lt;p&gt;ALTER TABLE Persons AUTO_INCREMENT=100&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;VIEW&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;视图是基于 SQL 语句的结果集的可视化的表&lt;/p&gt;
+
+        &lt;p&gt;CREATE VIEW view_name AS
+ SELECT column_name(s)
+ FROM table_name
+ WHERE condition&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用下面的语法来更新视图&lt;/p&gt;
+
+        &lt;p&gt;CREATE OR REPLACE VIEW view_name AS
+ SELECT column_name(s)
+ FROM table_name
+ WHERE condition&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;删除&lt;/p&gt;
+
+        &lt;p&gt;DROP VIEW view_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sat, 07 Nov 2015 03:52:26 +0800</pubDate>
+        <link>/2015/11/07/Mysql-orders/</link>
+        <guid isPermaLink="true">/2015/11/07/Mysql-orders/</guid>
+        
+        
+        <category>Mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>Mysql Join</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#join&quot; id=&quot;markdown-toc-join&quot;&gt;join语句&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这里主要记录下Mysql中的Join语句的一些用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;join&quot;&gt;join语句&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;JOIN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;我们需要从两个或更多的表中获取结果。我们就需要执行 join&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT Persons.LastName, Persons.FirstName, Orders.OrderNo
+ FROM Persons
+ JOIN Orders
+ ON Persons.Id_P = Orders.Id_P
+ ORDER BY Persons.LastName&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;INNER JOIN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;INNER JOIN 与 JOIN 是相同的&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;LEFT JOIN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;LEFT JOIN 关键字会从左表 (table_name1) 那里返回所有的行，即使在右表 (table_name2) 中没有匹配的行&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s)
+ FROM table_name1
+ LEFT JOIN table_name2
+ ON table_name1.column_name=table_name2.column_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;只要左边表有column_name就取出，如右边表有一样的column_name则合并，没有则留空&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;RIGHT JOIN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;RIGHT JOIN 关键字会从右表 (table_name2) 那里返回所有的行，即使在左表 (table_name1) 中没有匹配的行&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s)
+ FROM table_name1
+ RIGHT JOIN table_name2
+ ON table_name1.column_name=table_name2.column_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;FULL JOIN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;FULL JOIN关键字会从左右表那里返回所有的行&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s)
+ FROM table_name1
+ FULL JOIN table_name2
+ ON table_name1.column_name=table_name2.column_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;UNION&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s) FROM table_name1
+ UNION
+ SELECT column_name(s) FROM table_name2&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使增加了结果的行数，并没有增加列数，所以列数必须相同&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Tue, 03 Nov 2015 04:13:46 +0800</pubDate>
+        <link>/2015/11/03/Mysql-join/</link>
+        <guid isPermaLink="true">/2015/11/03/Mysql-join/</guid>
+        
+        
+        <category>Mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>Mysql 基础语句&amp;限制语句</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;基础语句&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;基础语句&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这里主要记录下Mysql中的基础操作语句和一些限制语句&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;基础语句&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;SELECT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT 列名称 FROM 表名称&lt;/p&gt;
+
+        &lt;p&gt;SELECT LastName,FirstName FROM Persons&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT 列名称 FROM 表名称 WHERE 列 运算符 值&lt;/p&gt;
+
+        &lt;p&gt;SQL使用单引号来环绕文本值,如果是数值，不使用引号。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;文本值：&lt;/p&gt;
+
+        &lt;p&gt;这是正确的：&lt;/p&gt;
+
+        &lt;p&gt;SELECT * FROM Persons WHERE FirstName=’Bush’&lt;/p&gt;
+
+        &lt;p&gt;这是错误的：&lt;/p&gt;
+
+        &lt;p&gt;SELECT * FROM Persons WHERE FirstName=Bush&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;数值：&lt;/p&gt;
+
+        &lt;p&gt;这是正确的：&lt;/p&gt;
+
+        &lt;p&gt;SELECT * FROM Persons WHERE Year&amp;gt;1965&lt;/p&gt;
+
+        &lt;p&gt;这是错误的：&lt;/p&gt;
+
+        &lt;p&gt;SELECT * FROM Persons WHERE Year&amp;gt;’1965’&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;AND 和 OR 可在 WHERE 子语句中把两个或多个条件结合起来&lt;/p&gt;
+
+        &lt;p&gt;SELECT * FROM Persons WHERE (FirstName=’Thomas’ OR FirstName=’William’)
+ AND LastName=’Carter&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;INSERT INTO&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;INSERT INTO 表名称 VALUES (值1, 值2,….)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;INSERT INTO table_name (列1, 列2,…) VALUES (值1, 值2,….) AND LastName=’Carter&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;更新某一行中的若干列&lt;/p&gt;
+
+        &lt;p&gt;UPDATE Person SET Address = ‘Zhongshan 23’, City = ‘Nanjing’
+ WHERE LastName = ‘Wilson’&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DELETE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;DELETE FROM 表名称 WHERE 列名称 = 值&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;删除整个表数据&lt;/p&gt;
+
+        &lt;p&gt;DELETE * FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;DISTINCT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;关键词 DISTINCT 用于返回唯一不同的值&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT DISTINCT 列名称 FROM 表名称&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;ORDER BY&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;ORDER BY 语句用于根据指定的列对结果集进行排序&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;以逆字母顺序显示公司名称，并以数字顺序显示顺序号：&lt;/p&gt;
+
+        &lt;p&gt;SELECT Company, OrderNumber FROM Orders ORDER BY Company DESC, OrderNumber ASC&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;基础语句&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;LIMIT&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT column_name(s) FROM table_name LIMIT number setp&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;LIKE&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;pattern格式：    %	： 替代一个或多个字符，
+ _ ： 仅替代一个字符，
+ [charlist] ： 字符列中的任何单一字符，
+ [^charlist]或[!charlist] ： 不在字符列中的任何单一字符&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;IN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,…)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;BETWEEN&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如需使用上面的例子显示范围之外的人，请使用 NOT 操作符：&lt;/p&gt;
+
+        &lt;p&gt;SELECT * FROM Persons WHERE LastName NOT BETWEEN ‘Adams’ AND ‘Carter’&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;AS&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;为列名称和表名称指定别名&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;列的 SQL Alias 语法&lt;/p&gt;
+
+        &lt;p&gt;SELECT column_name AS alias_name FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用表名称别名&lt;/p&gt;
+
+        &lt;p&gt;SELECT po.OrderID, p.LastName FROM Persons AS p, Product_Orders AS po WHERE p.LastName=’Adams’ AND p.FirstName=’John’&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 02 Nov 2015 05:23:41 +0800</pubDate>
+        <link>/2015/11/02/Mysql-base/</link>
+        <guid isPermaLink="true">/2015/11/02/Mysql-base/</guid>
+        
+        
+        <category>Mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>Django captcha 验证码</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;建立表单&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;验证表单&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;模板显示&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;登录功能中验证码是十分重要的，在这里就简单的介绍Django中验证码的实现&lt;/p&gt;
 
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;pip install apscheduler&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;组件&lt;/h3&gt;
-
-&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;触发器(trigger)&lt;/strong&gt;:包含调度逻辑，每一个作业有它自己的触发器，用于决定接下来哪一个作业会运行。&lt;/p&gt;
+    &lt;p&gt;pip install  django-simple-captcha&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;作业存储(job store)&lt;/strong&gt;:存储被调度的作业，默认的作业存储是简单地把作业保存在内存中，其他的作业存储是将作业保存在数据库中。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;执行器(executor)&lt;/strong&gt;:处理作业的运行，他们通常通过在作业中提交制定的可调用对象到一个线程或者进城池来进行。当作业完成时，执行器将会通知调度器。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;调度器(scheduler)&lt;/strong&gt;:是其他的组成部分。你通常在应用只有一个调度器，应用的开发者通常不会直接处理作业存储、调度器和触发器，相反，调度器提供了处理这些的合适的接口。配置作业存储和执行器可以在调度器中完成，例如添加、修改和移除作业。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;原则&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;调度器选择&lt;/strong&gt;:这取决于你的应用环境和你使用APScheduler的目的。通常最常用的两个：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;–BlockingScheduler: 当调度器是你应用中唯一要运行的东西时使用。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;–BackgroundScheduler: 当你不运行任何其他框架时使用，并希望调度器在你应用的后台执行。&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;作业存储选择&lt;/strong&gt;:你需要决定是否需要作业持久化。&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;如果你总是在应用开始时重建job，你可以直接使用默认的作业存储（MemoryJobStore).&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如果你需要将你的作业持久化，以避免应用崩溃和调度器重启时，你可以根据你的应用环境来选择具体的作业存储。例如：使用Mongo或者SQLAlchemyJobStore （用于支持大多数RDBMS）&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;执行器选择&lt;/strong&gt;:通常有两种:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;默认为ThreadPoolExecutor 通常用于大多数用途。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如果你的工作负载中有较大的CPU密集型操作，你可以考虑用ProcessPoolExecutor来使用更多的CPU核。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;你也可以在同一时间使用两者，将进程池调度器作为第二执行器。&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;常用方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;添加作业&lt;/strong&gt;：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用add_job():
-scheduler.add_job(myfunc, ‘interval’, minutes=2)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用装饰器：@sched.scheduled_job(‘cron’, id=’my_job_id’, day=’last sun’)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;add_job的第二个参数是trigger，它管理着作业的调度方式。它可以为date, interval或者cron。对于不同的trigger，对应的参数也相同。&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;移除作业&lt;/strong&gt;：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;scheduler.remove_job(‘my_job_id’)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;暂停和继续作业&lt;/strong&gt;:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;apscheduler.schedulers.base.BaseScheduler.pause_job()
-apscheduler.schedulers.base.BaseScheduler.resume_job()&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;获得job列表&lt;/strong&gt;：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;scheduler.get_jobs()&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;关闭调度器&lt;/strong&gt;：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;scheduler.shutdown(wait=False)
-默认情况下调度器会等待所有正在运行的作业完成后，关闭所有的调度器和作业存储。如果你不想等待，可以将wait选项设置为False。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;三种调度&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;cron  定时调度&lt;/strong&gt;:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;year: 4位数字&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;month: 月 (1-12)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;day: 天 (1-31)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;week: 标准周 (1-53)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;day_of_week: 周中某天 (0-6 or mon,tue,wed,thu,fri,sat,sun)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;hour: 小时 (0-23)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;minute:分钟 (0-59)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;second: 秒 (0-59)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;start_date: 最早执行时间&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;end_date: 最晚执行时间&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;timezone: 执行时间区间&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;interval  间隔调度&lt;/strong&gt;:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;weeks: 每隔几周执行一次&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;days: 每隔几天执行一次&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;hours: 每隔几小时执行一次&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;minutes: 每隔几分执行一次&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;seconds: 每隔几秒执行一次&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;start_date: 最早执行时间&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;end_date: 最晚执行时间&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;timezone: 执行时间区间&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;date  定时调度&lt;/strong&gt;:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;最基本的一种调度，作业只会执行一次。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;run_date: 在某天执行任务&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;timezone: 在某段时间执行任务&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;时间格式&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Expression	Field	Description
-*	         any	Fire on every value
-*/a	         any	Fire everyavalues, starting from the minimum
-a-b	         any	Fire on any value within thea-brange (a must be smaller than b)
-a-b/c	     any	Fire everycvalues within thea-brange
-xthy	     day	Fire on thex-th occurrence of weekdayywithin the month
-lastx	     day	Fire on the last occurrence of weekdayxwithin the month
-last	     day	Fire on the last day within the month
-x,y,z	     any	Fire on any matching expression
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;案例&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;可以先创建调度器，再配置和添加作业，这样你可以在不同的环境中得到更大的灵活性。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;下面是一个简单使用BlockingScheduler，并使用默认内存存储和默认执行器。
-(默认选项分别是MemoryJobStore和ThreadPoolExecutor，其中线程池的最大线程数为10)。配置完成后使用start()方法来启动。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-def my_job():
-    print &#39;shanyj&#39;
-sched = BlockingScheduler()
-sched.add_job(my_job, &#39;interval&#39;, seconds=5)
-sched.start()
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;复杂的配置：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-from pymongo import MongoClient
-from apscheduler.schedulers.blocking import BlockingScheduler
-from apscheduler.jobstores.mongodb import MongoDBJobStore
-from apscheduler.jobstores.memory import MemoryJobStore
-from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
-def my_job():
-    print &#39;shanyj&#39;
-
-host = &#39;127.0.0.1&#39;
-port = 27017
-client = MongoClient(host, port)
-
-jobstores = {
-&#39;mongo&#39;: MongoDBJobStore(collection=&#39;job&#39;, database=&#39;test&#39;, client=client),
-&#39;default&#39;: MemoryJobStore()
-}
-
-executors = {
-&#39;default&#39;: ThreadPoolExecutor(10),
-&#39;processpool&#39;: ProcessPoolExecutor(3)
-}
-
-job_defaults = {
-&#39;coalesce&#39;: False,
-&#39;max_instances&#39;: 3
-}
-
-scheduler = BlockingScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults)
-scheduler.add_job(my_job, &#39;interval&#39;, seconds=5)
-try:
-    scheduler.start()
-except SystemExit:
-    scheduler.shutdown()
-    client.close()
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Tue, 07 Jul 2015 04:14:54 +0800</pubDate>
-        <link>/2015/07/07/APScheduler/</link>
-        <guid isPermaLink="true">/2015/07/07/APScheduler/</guid>
-        
-        
-        <category>Python</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 多数据库</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;配置数据库&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#class&quot; id=&quot;markdown-toc-class&quot;&gt;配置class&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#classsettings&quot; id=&quot;markdown-toc-classsettings&quot;&gt;将数据库class添加至settings&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;同步数据库&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#modelclass-meta&quot; id=&quot;markdown-toc-modelclass-meta&quot;&gt;model的class meta&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#sql&quot; id=&quot;markdown-toc-sql&quot;&gt;使用底层sql&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;最近发现手头Django项目比较乱，一个单独的数据库貌似已经无法满足需求了，就研究下Django多数据库的配置和操作，自己试了试果然行得通！具体配置要点如下。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;配置数据库&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在settings中进行配置。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-DATABASES = {
-    #之所以这里仍然保留default数据库，是因为如果要使用Django的Auth应用或者Admin应用
-    #我希望它默认将数据存放在default.db中，而不与其他数据搞混
-     &#39;default&#39;: {
-        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
-        &#39;NAME&#39;: &#39;db/default.db&#39;,
-        &#39;USER&#39;: &#39;&#39;,
-        &#39;PASSWORD&#39;: &#39;&#39;,
-        &#39;HOST&#39;: &#39;&#39;,
-        &#39;PORT&#39;: &#39;&#39;,
-    },
-
-    #提供给userApp使用
-     &#39;userdb&#39;: {
-        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
-        &#39;NAME&#39;: &#39;db/user.db&#39;,
-        &#39;USER&#39;: &#39;&#39;,
-        &#39;PASSWORD&#39;: &#39;&#39;,
-        &#39;HOST&#39;: &#39;&#39;,
-        &#39;PORT&#39;: &#39;&#39;,
-    },
-
-     &#39;essaydb&#39;: {
-        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
-        &#39;NAME&#39;: &#39;db/essay.db&#39;,
-        &#39;USER&#39;: &#39;&#39;,
-        &#39;PASSWORD&#39;: &#39;&#39;,
-        &#39;HOST&#39;: &#39;&#39;,
-        &#39;PORT&#39;: &#39;&#39;,
-    },
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;class&quot;&gt;配置class&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;新建dbsettings.py , 编写下面 , class一般只改最后一个方法&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-class appdb(object):
-    def db_for_read(self, model, **hints):
-        #该方法定义读取时从哪一个数据库读取
-        return self.__app_router(model)
-
-    def db_for_write(self, model, **hints):
-        #该方法定义写入时从哪一个数据库读取，如果读写分离，可再额外配置
-        return self.__app_router(model)
-
-    def allow_relation(self, obj1, obj2, **hints):
-        #该方法用于判断传入的obj1和obj2是否允许关联，可用于多对多以及外键
-        #同一个应用同一个数据库
-        if obj1._meta.app_label == obj2._meta.app_label:
-            return True
-        #User和Essay是允许关联的
-        elif obj1._meta.app_label in (&#39;userApp&#39;,&#39;essayApp&#39;) and obj2._meta.app_label in (&#39;userApp&#39;,&#39;essayApp&#39;):
-            return True
-
-    def allow_syncdb(self, db, model):
-        #该方法定义数据库是否能和名为db的数据库同步
-        return self.__app_router(model) == db
-
-   #添加一个私有方法用来判断模型属于哪个应用，并返回应该使用的数据库
-    def __app_router(self, model):
-        if model._meta.app_label == &#39;userApp&#39;:
-            return &#39;userdb&#39;
-        elif model._meta.app_label == &#39;essayApp&#39;:
-            return &#39;essaydb&#39;
-        else :
-            return &#39;default&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;classsettings&quot;&gt;将数据库class添加至settings&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;DATABASE_ROUTERS = [‘dbsettings.appdb’]&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;同步数据库&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用下列方法分别同步不同数据库：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-python manage.py syncdb #默认同步的数据库为&#39;default&#39;
-python manage.py syncdb --database=userdb  #为userdb同步数据
-python manage.py syncdb --database=essaydb #为essaydb同步数据
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;反向同步数据库&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-python manage.py inspectdb --database=userdb &amp;gt; shanyjuser/models.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;注意database＝后面是settings里的名字&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;modelclass-meta&quot;&gt;model的class meta&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;每个model的class meta
-中 app_label = ‘myapp’
-应和（2）中的最后一个方法相匹配！&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;sql&quot;&gt;使用底层sql&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;除了自带的model之外还可以使用底层sql&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;针对单数据库
-        &lt;pre&gt;&lt;code&gt;
-from django.db import connection, transaction
-    cursor = connection.cursor()
-    # 数据修改操作——提交要求
-    cursor.execute(&quot;UPDATE bar SET foo = 1 WHERE baz = %s&quot;, [self.baz])
-    transaction.commit_unless_managed()
-    # 或者 transaction.set_dirty()
-    # 数据检索操作,不需要提交
-    cursor.execute(&quot;SELECT foo FROM bar WHERE baz = %s&quot;, [self.baz])
-    row = cursor.fetchone()
-    return row
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;针对多数据库
-        &lt;pre&gt;&lt;code&gt;
-from django.db import connections
-cursor = connections[&#39;my_db_alias&#39;].cursor()
-cursor.execute(&quot;UPDATE bar SET foo = 1 WHERE baz = %s&quot;, [self.baz])
-transaction.commit_unless_managed(using=&#39;my_db_alias&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Fri, 19 Jun 2015 05:30:27 +0800</pubDate>
-        <link>/2015/06/19/Django-Databases/</link>
-        <guid isPermaLink="true">/2015/06/19/Django-Databases/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 权限限制</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;登陆限制&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;权限限制&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;Django有着多种多样的权限限制方法来保证特定的用户才能执行特点的方法，下面就是一些小结&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;登陆限制&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;@login_required：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;@login_required 的方法，当未登陆会跳转到登陆页面，已登陆则继续执行&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;权限限制&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;user_passes_test：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;from django.contrib.auth.decorators import user_passes_test&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;装饰器有两个参数,@user_passes_test(user_can_vote, login_url=”/login/”),第一个是验证方法，第二个login_url是验证失败的跳转地址&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;验证方法返回true 或 false，参数为User&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
+    &lt;p&gt;配置&lt;/p&gt;
 
     &lt;pre&gt;&lt;code&gt;
- from django.contrib.auth.decorators import user_passes_test
+ INSTALLED_APPS中加入captcha
 
- def user_can_vote(user):
-     a=False
-     if user.zm==&#39;haha&#39;:
-         a=True
-     return a
-
- @user_passes_test(user_can_vote, login_url=&quot;/login/&quot;)
- def userallow(request):
-     return HttpResponse(&#39;ha!&#39;)
+ urlpatterns += patterns(&#39;&#39;,
+ url(r&#39;^captcha/&#39;, include(&#39;captcha.urls&#39;)),
+ )
  &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;permission_required:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;@permission_required(‘polls.can_vote’, login_url=”/login/”)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;其中第一个参数为，user.has_perm(“polls.can_vote”)里的权限名&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 06 Jun 2015 04:41:33 +0800</pubDate>
-        <link>/2015/06/06/Django-Permission/</link>
-        <guid isPermaLink="true">/2015/06/06/Django-Permission/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django Session&amp;Cookie</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#cookie&quot; id=&quot;markdown-toc-cookie&quot;&gt;cookie&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#session&quot; id=&quot;markdown-toc-session&quot;&gt;session&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#cookie-1&quot; id=&quot;markdown-toc-cookie-1&quot;&gt;检测cookie&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#session-1&quot; id=&quot;markdown-toc-session-1&quot;&gt;session操作&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;Django的session框架可以存储和获取访问者的数据信息，并将信息保存在服务器上，同时以 cookies 的方式发送和获取一个包含 session ID的值&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;cookie&quot;&gt;cookie&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;存cookie：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-def cookiew(request):
-     response=HttpResponse(&#39;aa&#39;)
-     response.set_cookie(&#39;favorite_color&#39;,&#39;aaaaa&#39;)
-     return response
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;取cookie：&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- def cookier(request):
-     a=request.COOKIES[&#39;favorite_color&#39;]
-     return HttpResponse(a)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;删除Cookies:&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- response.delete_cookie(&quot;cookie_key&quot;,path=&quot;/&quot;,domain=name)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;set_cookie参数：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;max_age: cookies的持续有效时间（以秒计），如果设置为 None cookies 在浏览器关闭的时候就失效了。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;expires: cookies的过期时间，格式： “Wdy, DD-Mth-YY HH:MM:SS GMT” 如果设置这个参数，它将覆盖 max_age 参数。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;path: cookie生效的路径前缀，浏览器只会把cookie回传给带有该路径的页面，这样你可以避免将cookie传给站点中的其他的应用。当你的应用不处于站点顶层的时候，这个参数会非常有用。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;domain: cookie生效的站点。你可用这个参数来构造一个跨站cookie。如domain=”.example.com”所构造的cookie对下面这些站点都是可读的： www.example.com 、 www2.example.com 和an.other.sub.domain.example.com 。如果该参数设置为 None ，cookie只能由设置它的站点读取。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;secure: 如果设置为 True ，浏览器将通过HTTPS来回传cookie。&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;session&quot;&gt;session&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;建立表单&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;设置session&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;django.contrib.sessions.middleware.SessionMiddleware 放入中间键中&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;django.contrib.sessions 放入app中&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;python manage.py syncdb&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;设置session&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;request.session[‘haha’]=’syj’&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;取session：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;s=request.session[‘haha’］或 request.session.get(‘haha’,’’)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;删除session&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;del request.session[“fav_color”]&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;cookie-1&quot;&gt;检测cookie&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用session和cookie前一般需要进行检测&lt;/p&gt;
+    &lt;p&gt;建立表单&lt;/p&gt;
 
     &lt;pre&gt;&lt;code&gt;
- def testform(request):
-     if request.method==&#39;GET&#39; and &#39;name&#39; in request.GET:
-         if request.session.test_cookie_worked():
-             request.session.delete_test_cookie()
-             return HttpResponse(&#39;ok!&#39;)
-         else:
-             return HttpResponse(&#39;no cookie&#39;)
+from django.core.cache import cache
+from django import forms
+from captcha.fields import CaptchaField
+class TestForm(forms.Form):
+ name=forms.CharField()
+ def clean_name(self):
+     clean_name=self.cleaned_data[&#39;name&#39;]
+     if clean_name==&#39;shanyj&#39;:
+         return clean_name
      else:
-         request.session.set_test_cookie()
-         form=canform()
-         return render_to_response(&#39;searchnext.html&#39;,{&#39;form&#39;:form})
+         raise forms.ValidationError(&quot;aaaa!&quot;)
+class CForm(forms.Form):
+ captcha = CaptchaField()
  &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;session-1&quot;&gt;session操作&lt;/h3&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;验证表单&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;可以通过数据库来取，s=Session.objects.get(pk=’ww6xdvzwtg5qz3ysnju7754b5ypyou3a’)&lt;/p&gt;
+    &lt;p&gt;验证表单&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+def some_view(request):
+ form2=&#39;&#39;
+ if request.POST:
+     if request.POST.get(&#39;captcha_0&#39;,&#39;na&#39;)!=&#39;na&#39;:
+         form1=TestForm(request.POST)
+         form2=CForm(request.POST)
+         if form1.is_valid() and form2.is_valid():
+             cache.delete(&#39;pass&#39;)
+             return HttpResponse(&#39;ok&#39;)
+         else:
+             try:
+                 cache.incr(&#39;pass&#39;)
+             except:
+                 cache.set(&#39;pass&#39;,1,3600)
+     else:
+         form1=TestForm(request.POST)
+         if form1.is_valid():
+             cache.delete(&#39;pass&#39;)
+             return HttpResponse(&#39;ok&#39;)
+         else:
+             try:
+                 cache.incr(&#39;pass&#39;)
+             except:
+                 cache.set(&#39;pass&#39;,1,3600)
+ else:
+     form1=TestForm()
+ if cache.get(&#39;pass&#39;)&amp;gt;3:
+     form2=CForm()
+ return render_to_response(&#39;template.html&#39;,RequestContext(request,{&#39;form1&#39;:form1,&#39;form&#39;:form2}))
+ &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;模板显示&lt;/h3&gt;
+
+&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;获取属性 s.expire_date、s.session_data、s.get_decoded()&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;默认在数据改变时才保存，可以设置SESSION_SAVE_EVERY_REQUEST 为 True，则每次读写都保存&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;默认浏览器关闭时实效，SESSION_EXPIRE_AT_BROWSER_CLOSE 设置为 False,这样,会话cookie可以在用户浏览器中保持 SESSION_COOKIE_AGE&lt;/p&gt;
+    &lt;p&gt;模板显示&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ { % load staticfiles % }
+
+ &amp;lt; form action=&#39;.&#39; method=&#39;POST&#39; &amp;gt;{ % csrf_token % }
+     { { form1 } }
+     { % if form.captcha % }
+     { { form.captcha } }
+     { % endif % }
+     &amp;lt; input type=&quot;submit&quot; /&amp;gt;
+     &amp;lt; button class=&#39;captcha-refresh&#39;&amp;gt;刷新&amp;lt; /button&amp;gt;
+     { % if form.captcha.errors % }
+     &lt;p&gt;{ { form.captcha.errors } }&lt;/p&gt;
+     { % endif % }
+ 
+
+ &amp;lt; script type=&quot;text/javascript&quot; src=&#39;{ % static &quot;js/jquery.js&quot; % }&#39;&amp;gt;
+ &amp;lt; script type=&quot;text/javascript&quot;&amp;gt;
+ $(&#39;.captcha-refresh&#39;).click(function(){
+     form = $(this).parents(&#39;form&#39;);
+     $.getJSON(&#39;/captcha/refresh/&#39;, {}, function(json) {
+         $(&#39;.captcha&#39;).attr(&#39;url&#39;,json.image_url);
+         $(&#39;.captcha&#39;).attr(&#39;src&#39;,json.image_url);
+         $(&#39;#id_captcha_0&#39;).attr(&#39;value&#39;,json.image_url.split(&#39;/&#39;)[3]);
+     });
+     return false;
+ });
+ &amp;lt; /script&amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>Wed, 03 Jun 2015 03:51:34 +0800</pubDate>
-        <link>/2015/06/03/Django-Session/</link>
-        <guid isPermaLink="true">/2015/06/03/Django-Session/</guid>
+        <pubDate>Wed, 28 Oct 2015 04:23:34 +0800</pubDate>
+        <link>/2015/10/28/Django-captcha/</link>
+        <guid isPermaLink="true">/2015/10/28/Django-captcha/</guid>
         
         
         <category>Django</category>
@@ -773,65 +832,78 @@ def cookiew(request):
       </item>
     
       <item>
-        <title>django-redis 缓存</title>
+        <title>Django 静态文件</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#settings&quot; id=&quot;markdown-toc-settings&quot;&gt;settings配置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装和调用&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mediastatic&quot; id=&quot;markdown-toc-mediastatic&quot;&gt;media&amp;amp;static&lt;/a&gt;&lt;/li&gt;
       &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;使用&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;其他配置&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;需要频繁对一个字段读取的时一般会将这个字段放入到缓存服务器上，而redis就是一个很好的选择，django-redis为我们使用redis作为缓存奠定了基础&lt;/p&gt;
+&lt;p&gt;静态文件指像css,js,images之类的文件,在Django里面静态文件的处理十分简单，这里就mark一下&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;安装和调用&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;安装Redis服务器端: sudo apt-get install redis-server&lt;/p&gt;
+    &lt;p&gt;installapp中加入 django.contrib.staticfiles&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;安装redis for Django的插件: pip install django-redis&lt;/p&gt;
+    &lt;p&gt;TEMPLATE_CONTEXT_PROCESSORS中加入’django.core.context_processors.media’&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;settings&quot;&gt;settings配置&lt;/h3&gt;
+&lt;h3 id=&quot;mediastatic&quot;&gt;media&amp;amp;static&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;在Django的settings中配置&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-  CACHES = {
-     &#39;default&#39;: {
-         &#39;BACKEND&#39;: &#39;redis_cache.cache.RedisCache&#39;,
-         &#39;LOCATION&#39;: &#39;redis://127.0.0.1:6379/1&#39;,
-         &quot;OPTIONS&quot;: {
-             &quot;CLIENT_CLASS&quot;: &quot;redis_cache.client.DefaultClient&quot;,
-             },
-         },
-     }
- &lt;/code&gt;&lt;/pre&gt;
+    &lt;p&gt;静态文件的处理又包括STATIC和MEDIA两类&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;当时用MemcachedCache时，配置类似&lt;/p&gt;
+    &lt;p&gt;MEDIA:&lt;/p&gt;
 
-    &lt;pre&gt;&lt;code&gt;
-  CACHES = {
-     &#39;default&#39;: {
-         &#39;BACKEND&#39;: &#39;django.core.cache.backends.memcached.MemcachedCache&#39;,
-         &#39;LOCATION&#39;: &#39;127.0.0.1:11211&#39;,
-         }
-     }
- &lt;/code&gt;&lt;/pre&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;指用户上传的文件，比如在Model里面的FileFIeld，ImageField上传的文件&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如果定义MEDIA_ROOT=c:\temp\media，那么File=models.FileField(upload_to=”abc/”)，上传的文件就会被保存到c:\temp\media\abc&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;MEDIA_ROOT必须是本地路径的绝对路径,MEDIA_ROOT=os.path.join(PROJECT_PATH,’media/’).replace(‘\’,’/’)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;MEDIA_URL是指从浏览器访问时的地址前缀，MEDIA_URL=”/media/”&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;STATIC:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;主要指的是如css,js,images这样文件&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;STATIC_ROOT与MEDIA_ROOT位置不能一样&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;在每个app所在文夹均可以建立一个static文件夹，
+         然后当运行collectstatic时，Django会遍历INSTALL_APPS里面所有app的static文件夹，
+         将里面所有的文件复制到STATIC_ROOT&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;一般在和templates相同的位置上建立static和media目录&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -840,726 +912,813 @@ def cookiew(request):
 &lt;h3 id=&quot;section-2&quot;&gt;使用&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;使用方法参见 http://shanyj.github.io/2015/05/27/Django-Cache/&lt;/li&gt;
+  &lt;li&gt;settings配置&lt;/li&gt;
 &lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    MEDIA_URL=&quot;/media/&quot;
+    STATIC_URL=&quot;/static/&quot;
+    STATICFILES_DIRS = (
+        os.path.join(os.path.dirname(__file__), &quot;static&quot;),
+    )
 
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;其他配置&lt;/h3&gt;
+ &lt;/code&gt;&lt;/pre&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;使用redis作为session后台：&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SESSION_ENGINE = “django.contrib.sessions.backends.cache”      SESSION_CACHE_ALIAS = “default”&lt;/li&gt;
-    &lt;/ul&gt;
+    &lt;p&gt;view调用：render_to_response(‘hello.html’,RequestContext(request))&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;模板调用&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+     { % load staticfiles % }
+    &amp;lt; img src=&quot;{ % static &#39;images/hi.jpg&#39; % }&quot; / &amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
 </description>
-        <pubDate>Sun, 31 May 2015 06:04:15 +0800</pubDate>
-        <link>/2015/05/31/Django-django-redis/</link>
-        <guid isPermaLink="true">/2015/05/31/Django-django-redis/</guid>
+        <pubDate>Fri, 23 Oct 2015 03:43:42 +0800</pubDate>
+        <link>/2015/10/23/Python-static/</link>
+        <guid isPermaLink="true">/2015/10/23/Python-static/</guid>
         
         
-        <category>Django第三方模块</category>
+        <category>Django</category>
         
       </item>
     
       <item>
-        <title>Django 缓存</title>
+        <title>Python 进程间通信</title>
         <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;分类&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;站点级缓存&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;视图级缓存&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;模块级缓存&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#api&quot; id=&quot;markdown-toc-api&quot;&gt;底层api&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#queue&quot; id=&quot;markdown-toc-queue&quot;&gt;Queue&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pipe&quot; id=&quot;markdown-toc-pipe&quot;&gt;Pipe&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#pool&quot; id=&quot;markdown-toc-pool&quot;&gt;Pool&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
 
-&lt;p&gt;当需要从数据库频繁大量读取某一数据时，会导致页面反应时间大幅下降，此时可以采用缓存来进行优化，总结的缓存相关知识如下&lt;/p&gt;
+&lt;p&gt;这里主要讲解下python中进程间通信的一些手段&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;分类&lt;/h3&gt;
+&lt;h3 id=&quot;queue&quot;&gt;Queue&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;内存缓存&lt;/p&gt;
+    &lt;p&gt;put方法用以插入数据到队列中，put方法还有两个可选参数：blocked和timeout。
+如果blocked为True（默认值），并且timeout为正值，该方法会阻塞timeout指定的时间，直到该队列有剩余的空间。
+如果超时，会抛出Queue.Full异常。如果blocked为False，但该Queue已满，会立即抛出Queue.Full异常&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;get方法可以从队列读取并且删除一个元素。同样，get方法有两个可选参数：blocked和timeout。
+如果blocked为True（默认值），并且timeout为正值，那么在等待时间内没有取到任何元素，会抛出Queue.Empty异常。
+如果blocked为False，有两种情况存在，如果Queue有一个值可用，则立即返回该值，否则，如果队列为空，则立即抛出Queue.Empty异常&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+import multiprocessing
+def writer_proc(q):
+    try:
+        q.put(1, block = False)
+    except:
+        pass
+def reader_proc(q):
+    try:
+        print q.get(block = False)
+    except:
+        pass
+if __name__ == &quot;__main__&quot;:
+    q = multiprocessing.Queue()
+    writer = multiprocessing.Process(target=writer_proc, args=(q,))
+    writer.start()
+    reader = multiprocessing.Process(target=reader_proc, args=(q,))
+    reader.start()
+    reader.join()
+    writer.join()
+ &lt;/code&gt;&lt;/pre&gt;
 
-    &lt;ul&gt;
-      &lt;li&gt;需要借助memcached或redis等&lt;/li&gt;
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;pipe&quot;&gt;Pipe&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pipe方法返回(conn1, conn2)代表一个管道的两个端&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pipe方法有duplex参数，如果duplex参数为True(默认值)，那么这个管道是全双工模式，也就是说conn1和conn2均可收发。
+duplex为False，conn1只负责接受消息，conn2只负责发送消息&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;send和recv方法分别是发送和接受消息的方法。
+例如，在全双工模式下，可以调用conn1.send发送消息，conn1.recv接收消息。
+如果没有消息可接收，recv方法会一直阻塞。如果管道已经被关闭，那么recv方法会抛出EOFError&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+def proc1(pipe):
+    while True:
+        for i in xrange(10000):
+            print &quot;send: %s&quot; %(i)
+            pipe.send(i)
+            time.sleep(1)
+
+def proc2(pipe):
+    while True:
+        print &quot;proc2 rev:&quot;, pipe.recv()
+        time.sleep(1)
+
+if __name__ == &quot;__main__&quot;:
+    pipe = multiprocessing.Pipe()
+    p1 = multiprocessing.Process(target=proc1, args=(pipe[0],))
+    p2 = multiprocessing.Process(target=proc2, args=(pipe[1],))
+    p1.start()
+    p2.start()
+    p1.join()
+    p2.join()
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;pool&quot;&gt;Pool&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pool可以提供指定数量的进程，供用户调用，当有新的请求提交到pool中时，如果池还没有满，
+那么就会创建一个新的进程用来执行该请求；但如果池中的进程数已经达到规定最大值，那么该请求就会等待，直到池中有进程结束，才会创建新的进程来它&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;apply_async(func[, args[, kwds[, callback]]]) 它是非阻塞，apply(func[, args[, kwds]])是阻塞的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;close() : 关闭pool，使其不在接受新的任务。只接受apply_async(func, (msg, ))剩余的&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;terminate() : 结束工作进程，不在处理未完成的任务&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;join() : 主进程阻塞，等待子进程的退出， join方法要在close或terminate之后使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;非阻塞例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+import multiprocessing
+import time
+def func(msg):
+    print &quot;msg:&quot;, msg
+    time.sleep(3)
+    print &quot;end&quot;
+
+if __name__ == &quot;__main__&quot;:
+    pool = multiprocessing.Pool(processes = 3)
+    for i in xrange(4):
+        msg = &quot;hello %d&quot; %(i)
+        pool.apply_async(func, (msg, ))   #维持执行的进程总数为processes，当一个进程执行完毕后会添加新的进程进去
+
+    pool.close()
+    pool.join()   #调用join之前，先调用close函数，否则会出错。执行完close后不会有新的进程加入到pool,join函数等待所有子进程结束
+    print &quot;Sub-process(es) done.&quot;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;阻塞例子&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+def func(msg):
+    print &quot;msg:&quot;, msg
+    time.sleep(3)
+    print &quot;end&quot;
+
+if __name__ == &quot;__main__&quot;:
+    pool = multiprocessing.Pool(processes = 3)
+    for i in xrange(4):
+        msg = &quot;hello %d&quot; %(i)
+        pool.apply(func, (msg, ))
+
+    pool.close()
+    pool.join()
+    print &quot;Sub-process(es) done.&quot;
+
+结果:
+msg: hello 0
+end
+msg: hello 1
+end
+msg: hello 2
+end
+msg: hello 3
+end
+Sub-process(es) done.
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Tue, 20 Oct 2015 06:03:33 +0800</pubDate>
+        <link>/2015/10/20/Python-Procon/</link>
+        <guid isPermaLink="true">/2015/10/20/Python-Procon/</guid>
+        
+        
+        <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>Python 进程及同步</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;进程模块&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#with&quot; id=&quot;markdown-toc-with&quot;&gt;with语句&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#lock&quot; id=&quot;markdown-toc-lock&quot;&gt;lock&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#semaphore&quot; id=&quot;markdown-toc-semaphore&quot;&gt;Semaphore&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#event&quot; id=&quot;markdown-toc-event&quot;&gt;Event&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;数据库缓存&lt;/p&gt;
+&lt;/ul&gt;
 
-    &lt;ul&gt;
-      &lt;li&gt;需要先安装缓存表 即python manage.py createcachetable cache_table&lt;/li&gt;
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这里主要讲解下python中进程和进程同步的一些知识&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;进程模块&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建进程的类：Process([group [, target [, name [, args [, kwargs]]]]])，target表示调用对象，args表示调用对象的位置参数元组。
+kwargs表示调用对象的字典。name为别名&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;方法：is_alive()、join([timeout])、run()、start()、terminate()&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;属性：authkey、daemon（要通过start()设置）、exitcode(进程在运行时为None、如果为–N，表示被信号N结束）、name、pid&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+import multiprocessing
+import time
+def worker(interval):
+    n = 5
+    while n &amp;gt; 0:
+        print(&quot;The time is {0}&quot;.format(time.ctime()))
+        time.sleep(interval)
+        n -= 1
+if __name__ == &quot;__main__&quot;:
+    p = multiprocessing.Process(target = worker, args = (3,))
+    p.start()
+    print &quot;p.pid:&quot;, p.pid
+    print &quot;p.name:&quot;, p.name
+    print &quot;p.is_alive:&quot;, p.is_alive()
+
+print(&quot;The number of CPU is:&quot; + str(multiprocessing.cpu_count()))
+for p in multiprocessing.active_children():
+    print(&quot;child   p.name:&quot; + p.name + &quot;\tp.id&quot; + str(p.pid))
+print &quot;END!!!!!!!!!!!!!!!!!&quot;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将进程定义为类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+import multiprocessing
+import time
+class ClockProcess(multiprocessing.Process):
+    def __init__(self, interval):
+        multiprocessing.Process.__init__(self)
+        self.interval = interval
+
+    def run(self):
+        n = 5
+        while n &amp;gt; 0:
+            print(&quot;the time is {0}&quot;.format(time.ctime()))
+            time.sleep(self.interval)
+            n -= 1
+if __name__ == &#39;__main__&#39;:
+    p = ClockProcess(3)
+    p.start()
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当子进程设置了daemon=True属性，主进程结束，它们就随着结束了&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;with&quot;&gt;with语句&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;with 语句适用于对资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，
+释放资源，比如文件使用后自动关闭、线程中锁的自动获取和释放等&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;with所求值的对象必须有一个__enter__()方法，一个__exit__()方法。
+紧跟with后面的语句被求值后，返回对象的__enter__()方法被调用，这个方法的返回值将被赋值给as后面的变量。
+当with后面的代码块全部被执行完之后，将调用前面返回对象的__exit__()方法&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+class Sample:
+    def __enter__(self):
+        print &quot;In&quot;
+        return &quot;Foo&quot;
+    def __exit__(self, type,value, trace):
+        print &quot;out&quot;
+def get_sample():
+    return Sample()
+with get_sample() as sample:
+    print &quot;sample:&quot;
+    print sample
+
+结果
+In
+sample:
+Foo
+out
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;lock&quot;&gt;lock&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Lock对象的状态可以为locked和unlocked
+使用acquire()设置为locked状态；
+使用release()设置为unlocked状态&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果当前的状态为unlocked，则acquire()会将状态改为locked然后立即返回。
+当状态为locked的时候，acquire()将被阻塞直到另一个线程中调用release()来将状态改为unlocked，然后acquire()才可以再次将状态置为locked&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+import multiprocessing
+import sys
+def worker_with(lock, f):
+    with lock:
+        fs = open(f, &#39;a+&#39;)
+        n = 10
+        while n &amp;gt; 1:
+            fs.write(&quot;Lockd acquired via with\n&quot;)
+            n -= 1
+        fs.close()
+
+def worker_no_with(lock, f):
+    lock.acquire()
+    try:
+        fs = open(f, &#39;a+&#39;)
+        n = 10
+        while n &amp;gt; 1:
+            fs.write(&quot;Lock acquired directly\n&quot;)
+            n -= 1
+        fs.close()
+    finally:
+        lock.release()
+
+if __name__ == &quot;__main__&quot;:
+    lock = multiprocessing.Lock()
+    f = &quot;file.txt&quot;
+    w = multiprocessing.Process(target = worker_with, args=(lock, f))
+    nw = multiprocessing.Process(target = worker_no_with, args=(lock, f))
+    w.start()
+    nw.start()
+    print &quot;end&quot;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Lock.acquire(blocking=True, timeout=-1),blocking参数表示是否阻塞当前线程等待，timeout表示阻塞时的等待时间 。
+如果成功地获得lock，则acquire()函数返回True，否则返回False，timeout超时时如果还没有获得lock仍然返回False&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;semaphore&quot;&gt;Semaphore&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Semaphore管理一个内置的计数器，
+每当调用acquire()时内置计数器-1；
+调用release() 时内置计数器+1&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;计数器不能小于0；当计数器为0时，acquire()将阻塞线程直到其他线程调用release()&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+def worker(s, i):
+    s.acquire()
+    print(multiprocessing.current_process().name + &quot;acquire&quot;);
+    time.sleep(i)
+    print(multiprocessing.current_process().name + &quot;release\n&quot;);
+    s.release()
+
+if __name__ == &quot;__main__&quot;:
+    s = multiprocessing.Semaphore(2)
+    for i in range(5):
+        p = multiprocessing.Process(target = worker, args=(s, i*2))
+        p.start()
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;event&quot;&gt;Event&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Event内部包含了一个标志位，初始的时候为false。
+可以使用使用set()来将其设置为true；
+或者使用clear()将其从新设置为false&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;可以使用is_set()来检查标志位的状态&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;另一个最重要的函数就是wait(timeout=None)，用来阻塞当前线程，直到event的内部标志位被设置为true或者timeout超时&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+def wait_for_event_timeout(e, t):
+    print(&quot;wait_for_event_timeout:starting&quot;)
+    e.wait(t)  //或e.wait()
+    print(&quot;wait_for_event_timeout:e.is_set-&amp;gt;&quot; + str(e.is_set()))
+
+if __name__ == &quot;__main__&quot;:
+    e = multiprocessing.Event()
+    w2 = multiprocessing.Process(name = &quot;non-block&quot;,
+            target = wait_for_event_timeout,
+            args = (e, 2))
+    w2.start()
+    time.sleep(3)
+    e.set()
+    print(&quot;main: event is set&quot;)
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Mon, 19 Oct 2015 05:02:32 +0800</pubDate>
+        <link>/2015/10/19/Python-Pro/</link>
+        <guid isPermaLink="true">/2015/10/19/Python-Pro/</guid>
+        
+        
+        <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>Python 装饰器</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;使用方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;其他&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;装饰器可以对一个函数、方法或者类进行加工,个人理解为一个闭包，下面就来看一下装饰器的几种使用方法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;使用方法&lt;/h3&gt;
+
+&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;文件系统缓存&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;本地缓存&lt;/p&gt;
+    &lt;p&gt;无参数装饰器&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;只利用内存缓存的优势&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;相当于foo=deco(foo)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ def deco(func):
+     print(&quot;deco&quot;)
+     return func
+
+ @deco
+ def foo():
+     print(&quot;foo&quot;)
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;装饰器有参，函数无参&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;相当于foo = deco(argv)(foo)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ def deco(argv):
+     def decorator(func):
+         print(&quot;decorator&quot;)
+         return func
+     print(argv)
+     return decorator
+
+ @deco(&quot;123&quot;)
+ def foo():
+     print(&quot;foo&quot;)
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;装饰器、函数都有参&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;相当于foo = deco(argv)(foo)(data)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;使用&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ from functools import wraps
+
+ def deco(argv):
+     def decorator(func):
+         @wraps(func)
+         def wrapper(*args, **kwargs):
+             return func(*args, **kwargs)
+         print(&quot;decorator&quot;)
+         return wrapper
+     print(argv)
+     return decorator
+
+ @deco(&quot;123&quot;)
+ def foo(data):
+     &quot;this is foo&quot;
+     print(&quot;foo&quot;)
+     print(data)
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;其他&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;注意多个装饰器的执行顺序，应该是先执行下面的，然后是上面的。这里应先执行deco1，然后是deco2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    @deco2
+    @deco1
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Fri, 16 Oct 2015 03:43:42 +0800</pubDate>
+        <link>/2015/10/16/Python-deco/</link>
+        <guid isPermaLink="true">/2015/10/16/Python-deco/</guid>
+        
+        
+        <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>Django 通用视图</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;显示model&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这次mark一下Django通用视图的一些基本用法和简单地配置&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;重定向&lt;/h3&gt;
+
+&lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;仿缓存&lt;/p&gt;
+    &lt;p&gt;直接重定向&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ from django.views.generic import TemplateView
+ url(&#39;^about/$&#39;,TemplateView.as_view(template_name=&quot;hello.html&quot;))
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重定向并赋值&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ url(&#39;^about1/$&#39;,HomePageView.as_view())
+
+ class HomePageView(TemplateView):
+     template_name = &quot;hello.html&quot;
+
+     #设置格外参数
+     def get_context_data(self, **kwargs):
+         context = super(HomePageView, self).get_context_data(**kwargs)
+         context[&#39;next&#39;]=&#39;aaaaaaaaaaa&#39;
+         return context
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;显示model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;显示model&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ url(&#39;^showpub/$&#39;,PubDetailView.as_view())
+
+ from django.views.generic.list import ListView
+ # 默认渲染 应用名/类名_list.html即books/publisher_list（小写）
+
+ class PubDetailView(ListView):
+     model=Publisher
+     # model指定模型 queryset处理 因此可以在url中传任意参数供queryset处理
+     queryset=Publisher.objects.filter(name=&#39;name&#39;)
+
+     template_name = &#39;hello.html&#39;
+     #模版中对应model的是object_list
+
+     def get_context_data(self, **kwargs):
+         context=super(PubDetailView,self).get_context_data(**kwargs)
+         context[&#39;next&#39;]=Publisher.objects.all
+         # Publisher.objects.all 后面没有括号;这表示这是一个函数的调用,并没有真正调用它(通用视图将渲染时调用它)
+         return context
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;模板显示&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;
+ { % for object in object_list % }
+ &amp;lt; h1 &amp;gt;标题：{ { object.name } }&amp;lt; /h1 &amp;gt;
+ &amp;lt; p &amp;gt;内容：{ { object.address } }&amp;lt; /p &amp;gt;
+ &amp;lt; p &amp;gt;发表人: { { object.city } }&amp;lt; /p &amp;gt;
+ { % endfor % }
+ &lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 12 Oct 2015 05:02:18 +0800</pubDate>
+        <link>/2015/10/12/Django-normal/</link>
+        <guid isPermaLink="true">/2015/10/12/Django-normal/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Python Queue模块</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;三种队列&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;队列存取&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;其他方法&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;　示例&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;Queue类
+是一个队列的同步实现,
+队列长度可为无限或者有限,下面就mark一下具体的使用方法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;三种队列&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;queue模块有三种队列&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;仅供开发使用&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;python queue模块的FIFO队列先进先出。Queue.Queue(maxsize)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;LIFO类似于堆。即先进后出。Queue.LifoQueue(maxsize)&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;还有一种是优先级队列级别越低越先出来。Queue.PriorityQueue(maxsize)&lt;/p&gt;
+      &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;站点级缓存&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;队列存取&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;需要借助中间键，django.middleware.cache.UpdateCacheMiddleware，django.middleware.cache.FetchFromCacheMiddleware分别添加到中间键的第一和靠近最后位置，&lt;/p&gt;
+    &lt;p&gt;q.put(10)：
+调用队列对象的put()方法在队尾插入一个项目。put()有两个参数，第一个item为必需的，为插入项目的值；第二个block为可选参数，默认为
+1。如果队列当前为满且block为1，put()方法就使调用线程暂停,直到空出一个数据单元。如果block为0，put方法将引发Full异常&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;在setting中添加CACHE_MIDDLEWARE_SECONDS（每个页面缓存秒数），CACHE_MIDDLEWARE_KEY_PREFIX（可为空）&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;缓存会自动缓存每个没有post和get请求的页面&lt;/p&gt;
+    &lt;p&gt;q.get()：
+调用队列对象的get()方法从队头删除并返回一个项目。可选参数为block，默认为True。如果队列为空且block为True，get()就使调用线程暂停，直至有项目可用。
+如果队列为空且block为False，队列将引发Empty异常&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;视图级缓存&lt;/h3&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;其他方法&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;cache_page装饰器&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.qsize() : 返回队列的大小&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.empty() : 如果队列为空,返回True,反之False&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.full() : 如果队列满了,返回True,反之False&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.get_nowait() : 相当Queue.get(False)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.put_nowait(item) : 相当Queue.put(item, False)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.task_done() : 在完成一项工作之后,Queue.task_done() 函数向任务已经完成的队列发送一个信号Queue.join() 实际上意味着等到队列为空,再执行别的操作.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Queue.join() : 保持阻塞状态，直到处理了队列中的所有项目为止。在将一个项目添加到该队列时，未完成的任务的总数就会增加。
+当使用者线程调用 task_done() 以表示检索了该项目、并完成了所有的工作时，那么未完成的任务的总数就会减少。
+当未完成的任务的总数减少到零时，join() 就会结束阻塞状态。&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;　示例&lt;/h3&gt;
+
+&lt;p&gt;　* 示例&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;
- from django.views.decorators.cache import cache_page
- @cache_page(60 * 15)      //存900秒
+    def worker():
+        while True:
+            item = q.get()
+            do_work(item)
+            q.task_done()
+    q = Queue()
+    for i in range(num_worker_threads):
+         t = Thread(target=worker)
+         t.daemon = True
+         t.start()
+    for item in source():
+        q.put(item)
+    q.join()
  &lt;/code&gt;&lt;/pre&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;在url配置页面，(r’^foo/(\d{1,2})/$’, cache_page(my_view, 60 * 15))&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;装饰头&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;@vary_on_headers(‘User‐Agent’, ‘Cookie’)：  根据User‐Agent和Cookie不同来进行分别缓存&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;@vary_on_cookie:  @vary_on_cookie＝  @vary_on_headers(‘Cookie’)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;@cache_control(private=True): 私人缓存，根据用户不同进行不同缓存&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;注意顺序&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-@cache_page(60*2)
-@vary_on_headers(&#39;User-Agent&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;模块级缓存&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;模块级缓存&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code&gt;
-    { % load cache % }
-    { % cache 500 sidebar % }
-    { % endcache % }
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;api&quot;&gt;底层api&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;底层API&lt;/p&gt;
-
-    &lt;p&gt;cache.set(‘haha’,1,600)&lt;/p&gt;
-
-    &lt;p&gt;cache.incr(‘haha’) //自增&lt;/p&gt;
-
-    &lt;p&gt;cache.decr(‘haha’,10) //自减10&lt;/p&gt;
-
-    &lt;p&gt;cache.get(‘haha’,’过期了’)  //当获取不到时返回 过期了&lt;/p&gt;
-
-    &lt;p&gt;cache.get_many([‘haha’,’haha1’,’haha2’])  //返回多个&lt;/p&gt;
-
-    &lt;p&gt;cache.delete(‘a’)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
 </description>
-        <pubDate>Thu, 28 May 2015 05:58:09 +0800</pubDate>
-        <link>/2015/05/28/Django-Cache/</link>
-        <guid isPermaLink="true">/2015/05/28/Django-Cache/</guid>
+        <pubDate>Fri, 09 Oct 2015 04:21:12 +0800</pubDate>
+        <link>/2015/10/09/Python-Queue/</link>
+        <guid isPermaLink="true">/2015/10/09/Python-Queue/</guid>
         
         
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 国际化</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#py&quot; id=&quot;markdown-toc-py&quot;&gt;py文件&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;模板代码&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;消息文件&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;语言偏好&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;重定向视图&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;Django有一套规范的国际化和本地化方法，可以方便世界各的用户使用产品，国际化和本地化使用方法如下&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;py&quot;&gt;py文件&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;ugettext()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用ugettext() 函数指定要翻译的字符串，惯例用_代替&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;示例：&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;pre&gt;&lt;code&gt;
- from django.utils.translation import ugettext as _
- def translate(request):
-     a = _(&#39;Today is %(month)s %(day)s.&#39;) % {&#39;month&#39;: m, &#39;day&#39;: d}
-     return HttpResponse(a)
-&lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;gettext_noop()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;标记字符串为不翻译&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;django.utils.translation.gettext_noop(),这种情况下会以原始语言存在数据库等地，只在最后展示给用户时翻译&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;gettext_lazy()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;惰性翻译&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;django.utils.translation.gettext_lazy(),只有当值被访问时才翻译，而不是在gettext_lazy()调用时翻译，同样在数据库等地都不翻译&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;django模型中都使用惰性翻译&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;a=u”Hello %s” % ugettext_lazy(“people”),可以进行unicode插入&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ungettext()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;指定复数形势&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用django.utils.translation.ungettext()，有三个参数：1.单数形式字符串翻译，2.复数形式的字符串翻译，3.对象的个数&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;模板代码&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;trans翻译&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;{ % load i18n % }放在最前面，然后使用{ % trans “pingshen” % }&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;blocktrans翻译&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;{ % blocktrans % }This string will have { { value } } inside.{ % endblocktrans % }&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;消息文件&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;django‐admin.py makemessages ‐l de ‐e html,txt ‐e xml    de为语言代码、-e为需要翻译的文件类型&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;脚本在django根目录 or 项目根目录 or 应用根目录下执行。需要手动创建locale文件夹。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;编辑.po文件，msgid “”      msgstr “” 分别表示翻译前和翻译后的文字&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;django‐admin.py makemessages ‐a更新语言信息，django‐admin.py compilemessages 编译语言信息&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;语言偏好&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;当使用locatemiddleware django.middleware.locale.LocaleMiddleware中间键时， 中间件查找顺序 session的django_language、cookie、http请求头、settings中的language code&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LANGUAGES = ((‘en’, u’English’),(‘zh-cn’,u’中文’))设置可选语种&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;重定向视图&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;url中(r’^i18n/’, include(‘django.conf.urls.i18n’))，使得 /i18n/setlang/有效&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;选择语言时，如果session启动，视图会将语言选择保存在session中，否则以django-language为key保存在cookie中&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;选择完语言后，重定向到post的&amp;lt; input name=”next” &amp;gt;值中，或者html头的refer中，再或者/&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- &amp;lt; form action=&quot;/i18n/setlang/&quot; method=&quot;post&quot; &amp;gt;
-     &amp;lt; input name=&quot;next&quot; type=&quot;hidden&quot; value=&quot;/next/page/&quot;  &amp;gt;
-     &amp;lt; select name=&quot;language&quot; &amp;gt;
-     { % for lang in LANGUAGES % }
-     &amp;lt; option value=&quot;&quot; &amp;gt; { { lang.1 } } &amp;lt;/ option &amp;gt;
-     { % endfor % }
-     &amp;lt; /select &amp;gt;
-     &amp;lt; input type=&quot;submit&quot; value=&quot;Go&quot;  &amp;gt;
- &amp;lt; /form &amp;gt;
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 25 May 2015 04:12:35 +0800</pubDate>
-        <link>/2015/05/25/Django-Local/</link>
-        <guid isPermaLink="true">/2015/05/25/Django-Local/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 整合数据库</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#inspectdb&quot; id=&quot;markdown-toc-inspectdb&quot;&gt;inspectdb&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;注意事项&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;当尝试用Django来重构某一项目时，数据资源的整合十分关键，下面就介绍一下Django是如何进行数据库整合的&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;inspectdb&quot;&gt;inspectdb&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;inspectdb命令可以依据数据库结构来生成新的model&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;python mysite/manage.py inspectdb &amp;gt; mysite/myapp/models.py 重定向输出到models.py&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如：python manage.py inspectdb &amp;gt; models.py&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;注意事项&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;命令不会自动转换manytomany类型&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;当没有主键时自动增加id = models.IntegerField(primary_key=True)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;无法检测类型时会用textfield代替&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果列名为django保留字，会做下面处理，以for为例：for_field = models.IntegerField(db_column=’for’), 添加_field 并且db_column设置为原来名字&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;需要手动调节一下model的顺序，比如某一个model引用了另一个model外键，另一个要在前面&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 21 May 2015 05:02:22 +0800</pubDate>
-        <link>/2015/05/21/Django-Rebuild-db/</link>
-        <guid isPermaLink="true">/2015/05/21/Django-Rebuild-db/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 安全</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#sql&quot; id=&quot;markdown-toc-sql&quot;&gt;sql注入&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#xss&quot; id=&quot;markdown-toc-xss&quot;&gt;跨站点脚本xss&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#csrf&quot; id=&quot;markdown-toc-csrf&quot;&gt;伪造跨站点请求csrf&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;邮件头部注入&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;暴露错误消息&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;伪造会话&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;安全是在进行项目开发时需要处处注意的问题，下面就总结下Django常见的安全问题的解决方法&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;sql&quot;&gt;sql注入&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;为了防止sql注入，Django总是对输入进行自动转义&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;当直接使用sql语句时，注意使用sql占位符&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- def user_contacts(request):
-     user = request.GET[&#39;username&#39;]
-     sql = &quot;SELECT * FROM user_contacts WHERE username = %s&quot;
-     cursor = connection.cursor()
-     cursor.execute(sql, [user])
- &lt;/code&gt;&lt;/pre&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;execute有第二个参数，包含若干占位符，来对sql语句中的占位符赋值，过程中会自动转义&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;xss&quot;&gt;跨站点脚本xss&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;在url中进行修改，比如http://example.com/hello/?name=&lt;i&gt;Jacob&lt;/i&gt;  会返回&amp;lt;h1&amp;gt;Hello, &lt;i&gt;Jacob&lt;/i&gt;!&amp;lt;/h1&amp;gt;, 因此可以在url中写上jquery语句来操作数据库&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;为此，django总是自动转义&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;csrf&quot;&gt;伪造跨站点请求csrf&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;在登陆信任网站且没退出时访问危险网站，导致cookie被盗用,比如在危险网站中插入　&amp;lt;img src=http://www.mybank.com/Transfer.php?toBankId=11&amp;amp;money=1000&amp;gt; 这个get／post请求，只要点击银行账户就少钱了！&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;为此，django添加了csrf中间键&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;只针对post请求，get请求需要设计者自己保证没有副作用&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;django.contrib.csrf.middleware.CsrfMiddleware放在中间件中，且在session之后在 GZipMiddleware 之前&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;只有 Content‐Type头部标记为text/html ，application/xml+xhtml的页面才会被保护&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;向所有post表单增加隐藏字段，名称为csrfmiddlewaretoken，值为当前会话id加秘钥&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;对传入的post检查csrfmiddlewaretoken，如不正确或不存在则403&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;仅限于常规方法创建的表单&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;邮件头部注入&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;在构建邮件sunject时加上hello\ncc:spamvictim@example.com”（\n是换行符）
- 就会变成:&lt;/p&gt;
-
-    &lt;p&gt;To: hardcoded@example.com Subject: hello&lt;/p&gt;
-
-    &lt;p&gt;cc: spamvictim@example.com&lt;/p&gt;
-
-    &lt;p&gt;从而利用了别人的邮箱来发送了信息&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;为此，django自带的django.core.mail 中不允许出现换行符,且总是自动转义&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;暴露错误消息&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Django的出错页面总是很详尽的列出出错的原因和代码，容易将内部代码很容易的暴露出去&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;关闭debug&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;伪造会话&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;中间人攻击：监听所有网络&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;伪造会话：利用会话id将自己伪造成用户&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;解决：django会话id存在哈西表中，且用户去访问不存在的会话id时会生成新会话id）&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;伪造cookie和会话滞留：获取url中的session来进行盗用&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;解决：首先不要再url中包含session（django自带，只有映射用的session id），不在cookie存数据&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 18 May 2015 05:02:22 +0800</pubDate>
-        <link>/2015/05/18/Django-Security/</link>
-        <guid isPermaLink="true">/2015/05/18/Django-Security/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 简单页面&amp;重定向&amp;个性化设置</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;简单页面&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;个性化数据&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;Django简单页面可以用来进行声明、条款等几乎不许改变内容的页面渲染，重定向负责页面重定向，人性化设置则是为了显示更美观&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;简单页面&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;激活简单页面&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;添加‘django.contrib.sites’，’django.contrib.flatpages’到INSTALLED_APPS&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;添加’django.contrib.flatpages.middleware.FlatpageFallbackMiddleware’到MIDDLEWARE_CLASSES，通常放在列表最后，因为是最后的办法&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;运行python manage.py syncdb生成简单页面表&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;简单页面model&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- class FlatPage(models.Model):
-     url = models.CharField(max_length=100, db_index=True)
-     title = models.CharField(max_length=200)
-     content = models.TextField(blank=True)
-     enable_comments = models.BooleanField()
-     template_name = models.CharField(max_length=70, blank=True)
-     registration_required = models.BooleanField()
-     sites = models.ManyToManyField(Site)
- &lt;/code&gt;&lt;/pre&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;url：不包含域名，如/about/contact/&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;title：标题&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;content：网页内容&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;enable_comments：是否允许评论&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;template_name：模版名称，如果未知定，则使用flatpages/default.html&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;registration_required：是否需要登陆&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;最后渲染指定template即可，以title为例&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;重定向&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;激活重定向&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;将’django.contrib.redirects’加到INSTALLED_APPS&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;将’django.contrib.redirects.middleware.RedirectFallbackMiddleware’加到MIDDLEWARE_CLASSES&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;运行python manage.py syncdb生成重定向表&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;设置model&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;重定向model比较简单，只有site、oldpath、newpath三个属性&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;个性化数据&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;激活个性化数据&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;将django.contrib.humanize加入app中&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;使用个性化数据&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用前需要进行调用{ % load humanize % }&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用apnumber：{ {1|apnumber} }（1 变成 one ）&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用intcomma：{ {1000000|intcomma} }（4500 变成 4,500）&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用intword：{ {1000000000000|intword} }（1000000 变成 1.0 million ）&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用ordinal：{ {1|ordinal} }（1 变成 1st ）&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Sat, 16 May 2015 03:58:09 +0800</pubDate>
-        <link>/2015/05/16/Django-Flatpage/</link>
-        <guid isPermaLink="true">/2015/05/16/Django-Flatpage/</guid>
-        
-        
-        <category>Django</category>
+        <category>Python</category>
         
       </item>
     

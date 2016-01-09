@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Redis简介</title>
+	<meta name="description" content="Redis简介">
+	
+	<link rel="canonical" href="/2015/06/14/Redis-Intruduction/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Redis简介</h1>
+        <p>Jun 14, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#redis" id="markdown-toc-redis">redis的优势</a></li>
+      <li><a href="#redis-1" id="markdown-toc-redis-1">redis数据类型</a></li>
+      <li><a href="#redis-2" id="markdown-toc-redis-2">redis的启动和安装</a></li>
+      <li><a href="#redis-3" id="markdown-toc-redis-3">redis的一些术语</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>之前讲到了使用django-redis作为项目缓存，其实redis的作用不仅仅只有缓存，诸如消息队列、关系等都可以通过redis来实现，下面主要是redis的一些简介和基础知识</p>
+
+<hr />
+
+<h3 id="redis">redis的优势</h3>
+
+<ul>
+  <li>
+    <p>Redis主要特点如下：</p>
+
+    <ul>
+      <li>
+        <p>Redis数据库完全在内存中，使用磁盘仅用于持久性</p>
+      </li>
+      <li>
+        <p>相比许多键值数据存储，Redis拥有一套较为丰富的数据类型</p>
+      </li>
+      <li>
+        <p>Redis可以将数据复制到任意数量的从服务器</p>
+      </li>
+      <li>
+        <p>Redis的速度非常快，每秒能执行约11万集合，每秒约81000+条记录</p>
+      </li>
+      <li>
+        <p>所有Redis操作是原子的，这保证了如果两个客户端同时访问的Redis服务器将获得更新后的值</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="redis-1">redis数据类型</h3>
+
+<ul>
+  <li>
+    <p><strong>字符串</strong>：Redis字符串是二进制安全的，这意味着他们有一个已知的长度没有任何特殊字符终止，所以你可以存储任何东西，512兆为上限。</p>
+  </li>
+  <li>
+    <p><strong>哈西</strong>：Redis的哈希是键值对的集合。 Redis的哈希值是字符串字段和字符串值之间的映射，因此它们被用来表示对象。</p>
+  </li>
+  <li>
+    <p><strong>列表</strong>：Redis的列表是简单的字符串列表，排序插入顺序。您可以添加元素到Redis的列表的头部或尾部。列表的最大长度为 2^32 - 1 个元素。</p>
+  </li>
+  <li>
+    <p><strong>集合</strong>：Redis的集合是字符串的无序集合。</p>
+  </li>
+  <li>
+    <p><strong>有序集合</strong>：Redis的有序集合类似于Redis的集合，字符串不重复的集合。不同的是，虽然成员具有唯一性，分数可能会重复。</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="redis-2">redis的启动和安装</h3>
+
+<ul>
+  <li>
+    <p>安装：</p>
+
+    <ul>
+      <li>
+        <p>下载页面： http://redis.io/</p>
+      </li>
+      <li>
+        <p>sudo make test</p>
+      </li>
+      <li>
+        <p>sudo make install</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>服务器启动：</p>
+
+    <ul>
+      <li>
+        <p>普通启动：redis-server</p>
+      </li>
+      <li>
+        <p>传递参数配置文件,并覆盖某些参数：redis-server path/to/redis/confug.conf –loglevel warning</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>客户端启动：</p>
+
+    <ul>
+      <li>
+        <p>本地：redis-cli</p>
+      </li>
+      <li>
+        <p>redis-cli -h host -p port -a password 远程启动</p>
+      </li>
+      <li>
+        <p>检查是否处于工作状态：</p>
+
+        <pre><code>
+  $redis-cli
+  redis 127.0.0.1:6379&gt; ping
+  PONG
+  </code></pre>
+        <p>或者使用echo命令检测</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>多数据库</p>
+
+    <ul>
+      <li>默认支持16个数据库，建立连接后自动选择0，可通过select 1进行切换，不支持单独为某一数据库设置密码。尽量保证某一应用只针对在某一数据库。</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="redis-3">redis的一些术语</h3>
+
+<ul>
+  <li>
+    <p><strong>事务</strong>： 在一个事务中的所有命令按顺序执行作为单个隔离操作。通过另一个客户端发出的请求在Redis的事务的过程中执行，这是不可能的。
+ Redis的事务具有原子性。原子意味着要么所有的命令都执行或都不执行</p>
+  </li>
+  <li>
+    <p><strong>链接</strong>：Redis的连接命令基本上都是用于管理与Redis的服务器客户端连接。</p>
+  </li>
+  <li>
+    <p><strong>还原</strong>：要恢复Redis的数据只需移动 Redis 的备份文件（dump.rdb）到 Redis 目录，然后启动服务器。</p>
+  </li>
+  <li>
+    <p><strong>基准</strong>：Redis基准是公用工具同时运行Ñ命令检查Redis的性能。</p>
+  </li>
+  <li>
+    <p><strong>客户端连接</strong>：Redis接受配置监听TCP端口和Unix套接字客户端的连接。 客户端套接字置于非阻塞状态，因为Redis使用复用和非阻塞I/O操作。</p>
+  </li>
+  <li>
+    <p><strong>管道传输</strong>：客户端可以发送多个请求给服务器，而无需等待答复所有，并最后读取在单个步骤中的答复。这种技术的好处是极大地改善协议的性能。通过管道将慢互联网连接速度从5倍的连接速度提高到localhost至少达到百过倍</p>
+  </li>
+  <li>
+    <p><strong>分区</strong>：
+ 好处：</p>
+
+    <ul>
+      <li>
+        <p>它允许更大的数据库，使用的多台计算机的存储器的总和。如果不分区，一台计算机的内存可支数量有限。</p>
+      </li>
+      <li>
+        <p>它允许以大规模的计算能力，以多个内核和多个计算机，以及网络带宽向多台计算机和网络适配器。</p>
+      </li>
+    </ul>
+
+    <p>缺点：</p>
+
+    <ul>
+      <li>
+        <p>通常不支持涉及多个键的操作。涉及多个键的Redis事务不能被使用。</p>
+      </li>
+      <li>
+        <p>当分区时，数据处理比较复杂，比如要处理多个RDB/AOF文件，使数据备份需要从多个实例和主机聚集持久性文件。</p>
+      </li>
+      <li>
+        <p>添加和删除的能力可能很复杂。</p>
+      </li>
+    </ul>
+
+    <p>分类：</p>
+
+    <ul>
+      <li>
+        <p>范围分区：范围分区被映射对象转化为具体的Redis实例的范围内实现。假定在本例中用户ID0〜ID10000将进入实例R0，而用户形成ID10001至20000号将进入实例R1等等。</p>
+      </li>
+      <li>
+        <p>散列分区：在这种类型的分区，一个散列函数（例如，模数函数）被用于转换键成数字，然后数据被存储在不同redis的实例</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/06/14/Redis-Intruduction" data-title="Redis简介" data-url="gaohaoyang.github.io/2015/06/14/Redis-Intruduction/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

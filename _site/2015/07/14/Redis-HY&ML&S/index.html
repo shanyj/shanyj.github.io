@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Redis HyperLogLog&订阅&事务</title>
+	<meta name="description" content="Redis HyperLogLog&订阅&事务">
+	
+	<link rel="canonical" href="/2015/07/14/Redis-HY&ML&S/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Redis HyperLogLog&订阅&事务</h1>
+        <p>Jul 14, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#hyperloglog" id="markdown-toc-hyperloglog">HyperLogLog</a></li>
+      <li><a href="#section-1" id="markdown-toc-section-1">订阅</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">事务</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>主要记录了Redis的HyperLogLog&amp;订阅&amp;事务相关的一些命令</p>
+
+<hr />
+
+<h3 id="hyperloglog">HyperLogLog</h3>
+
+<ul>
+  <li>
+    <p>简介：Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的
+ 每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基 数
+ HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素</p>
+  </li>
+  <li>
+    <p>PFADD：</p>
+
+    <ul>
+      <li>
+        <p>PFADD命令将所有元素的参数保存在指定为第一个参数的键名的HyperLogLog数据结构</p>
+      </li>
+      <li>
+        <p>格式：PFADD KEY_NAME ELEMENTS_TO_BE_ADDED</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>PFCOUNT：</p>
+
+    <ul>
+      <li>
+        <p>PFCOUNT命令用于获得近似的基数由存储在指定变量的HyperLogLog数据结构进行计算</p>
+      </li>
+      <li>
+        <p>当PFCOUNT命令使用多个键，则返回HyperLogLog联合近似基数</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>PPFMERGE：</p>
+
+    <ul>
+      <li>
+        <p>PFMERGE命令用于将多个HyperLogLog值转换成一个唯一的值将接近源HyperLogLog结构遵守集合并集的基数</p>
+      </li>
+      <li>
+        <p>PFMERGE KEY1 KEY@… KEYN</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>实例：</p>
+
+    <pre><code>
+ redis 127.0.0.1:6379&gt; PFADD tutorials "redis"
+ 1) (integer) 1
+ redis 127.0.0.1:6379&gt; PFADD tutorials "mongodb"
+ 1) (integer) 1
+ redis 127.0.0.1:6379&gt; PFADD tutorials "mysql"
+ 1) (integer) 1
+ redis 127.0.0.1:6379&gt; PFCOUNT tutorials
+ (integer) 3
+ </code></pre>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-1">订阅</h3>
+
+<ul>
+  <li>
+    <p>PSUBSCRIBE：</p>
+
+    <ul>
+      <li>
+        <p>PSUBSCRIBE命令用于订阅频道匹配给定的模式</p>
+      </li>
+      <li>
+        <p>格式： PSUBSCRIBE CHANNEL_NAME_OR_PATTERN [PATTERN…]</p>
+      </li>
+      <li>
+        <p>下面列出了一些Redis的支持模式</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>h\?llo匹配了hello, hallo和hxllo</p>
+
+<p>h*llo 匹配了hllo和heeeello</p>
+
+<p>h[ae]llo 匹配了 hello 和 hallo, 但不是hillo</p>
+
+<ul>
+  <li>
+    <p>PUBLISH：</p>
+
+    <ul>
+      <li>
+        <p>发布消息，返回整数：该接收到的消息的客户端数</p>
+      </li>
+      <li>
+        <p>格式：PUBLISH channel message</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>PUNSUBSCRIBE：</p>
+
+    <ul>
+      <li>
+        <p>PUNSUBSCRIBE命令从给定的模式退订客户端，或从所有如果没有给出。如果未指定任何模式，客户端是从所有先前认阅的模式退订</p>
+      </li>
+      <li>
+        <p>格式：PUNSUBSCRIBE [pattern [pattern …]]</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>SUBSCRIBE：</p>
+
+    <ul>
+      <li>
+        <p>SUBSCRIBE命令所预订客户的指定的通道</p>
+      </li>
+      <li>
+        <p>格式：SUBSCRIBE channel [channel …]</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>UNSUBSCRIBE:</p>
+
+    <ul>
+      <li>
+        <p>UNSUBSCRIBE指令从给定的信道退订客户端，或者退订所有(如果没有给出)</p>
+      </li>
+      <li>
+        <p>格式：UNSUBSCRIBE channel [channel …]</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-2">事务</h3>
+
+<ul>
+  <li>
+    <p>简介： Redis事务让一组命令在单个步骤中执行。事务中有两个属性，这说明如下：
+     在一个事务中所有命令按顺序执行作为一个单一独立的操作。
+     Redis事务也是原子的。原子就意味着要么所有命令都执行，要么都不进行处理</p>
+  </li>
+  <li>
+    <p>MULTI：</p>
+
+    <ul>
+      <li>MULTI命令标志着一个事务块的开始。后续将使用EXEC命令执行排队等待原子</li>
+    </ul>
+  </li>
+  <li>
+    <p>WATCH：</p>
+
+    <ul>
+      <li>
+        <p>watch命令标记要关注事务给定键的条件执行</p>
+      </li>
+      <li>
+        <p>格式：WATCH key [key …]</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>UNWATCH：</p>
+
+    <ul>
+      <li>UNWATCH命令为事务刷新所有以前关注过的键</li>
+    </ul>
+  </li>
+  <li>
+    <p>EXEC：</p>
+
+    <ul>
+      <li>EXEC命令执行所有先前排队在一个事务中的命令，并恢复连接状态正常</li>
+    </ul>
+  </li>
+  <li>
+    <p>DISCARD ：</p>
+
+    <ul>
+      <li>发出命令后，MULTI后丢弃所有</li>
+    </ul>
+  </li>
+</ul>
+
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/07/14/Redis-HY&ML&S" data-title="Redis HyperLogLog&订阅&事务" data-url="gaohaoyang.github.io/2015/07/14/Redis-HY&ML&S/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>
