@@ -117,6 +117,7 @@ excerpt: Django rest_framework（1）
 ### request&response
 
  *  request.POST  # Only works for 'POST' method.
+ 
     request.data  # Works for 'POST', 'PUT' and 'PATCH' methods.
 
  * 例子
