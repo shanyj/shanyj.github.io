@@ -141,6 +141,6 @@ excerpt: Mysql 函数
    * SELECT DATEDIFF('2008-12-30','2008-12-29') AS DiffDate
 
  * DATE_FORMAT()	用不同的格式显示日期/时间
- 
+
    * DATE_FORMAT(date,format) date 参数是合法的日期。format 规定日期/时间的输出格式。
 
