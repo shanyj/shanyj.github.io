@@ -1,4 +1,4 @@
- ---
+---
 layout: post
 title:  "Django rest_framework 外键&perm"
 date:   2015-12-01 20:51:36
