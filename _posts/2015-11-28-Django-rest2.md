@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Django rest_framework（2）"
+title:  "Django rest_framework apiview"
 date:   2015-11-28 21:09:56
 categories: Django
-excerpt: Django rest_framework（2）
+excerpt: Django rest_framework apiview
 ---
 
 * content

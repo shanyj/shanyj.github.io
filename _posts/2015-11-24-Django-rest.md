@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Django rest_framework（1）"
+title:  "Django rest_framework基础&序列化"
 date:   2015-11-24 20:23:34
 categories: Django
-excerpt: Django rest_framework（1）
+excerpt: Django rest_framework基础&序列化
 ---
 
 * content
