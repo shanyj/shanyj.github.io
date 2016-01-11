@@ -5,9 +5,1232 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Jan 2016 17:01:00 +0800</pubDate>
-    <lastBuildDate>Fri, 08 Jan 2016 17:01:00 +0800</lastBuildDate>
+    <pubDate>Mon, 11 Jan 2016 09:31:57 +0800</pubDate>
+    <lastBuildDate>Mon, 11 Jan 2016 09:31:57 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Django rest_framework 其他技巧</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#restframework&quot; id=&quot;markdown-toc-restframework&quot;&gt;rest_framework使用&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近对产品api进行rest改造完毕，就记录下Django中rest-framework的一些基本用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;restframework&quot;&gt;rest_framework使用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;显示api入口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    from rest_framework.decorators import api_view
+    from rest_framework.reverse import reverse
+    @api_view([&#39;GET&#39;])
+    def api_root(request, format=None):
+        return Response({&#39;users&#39;: reverse(&#39;user-list&#39;, request=request, format=format),
+            &#39;snippets&#39;: reverse(&#39;snippet-list&#39;, request=request, format=format)})
+
+    url(r&#39;^$&#39;,api_root),
+    url(r&#39;^xuliehua/$&#39;,hellolist.as_view(),name=&#39;snippet-list&#39;),
+    url(r&#39;^users/$&#39;, UserList.as_view(),name=&#39;user-list&#39;),
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;利用html显示实例的某个属性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    from rest_framework import renderers
+    class SnippetHighlight(generics.GenericAPIView):
+        queryset = Snippet.objects.all()
+        renderer_classes = (renderers.StaticHTMLRenderer,)      #使用html静态页面来渲染
+        def get(self, request, *args, **kwargs):
+            snippet = self.get_object()
+            return Response(&#39;&lt;b&gt;&#39;+snippet.title+&#39;&lt;/b&gt;&#39;)
+
+    url(r&#39;^hello/(?P&lt;pk&gt;\d+)/highlight/$&#39;,SnippetHighlight.as_view()),
+ 
+
+ *  超链接显示属性or详情
+ &lt;pre&gt;&lt;code&gt;
+    class SuserSerializer(serializers.ModelSerializer):
+        snippet = serializers.HyperlinkedRelatedField(many= True,read_only=True,view_name=&#39;snippet-detail&#39;)
+        class Meta:
+            model=Suser
+            fields=(&#39;name&#39;,&#39;ok&#39;,&#39;snippet&#39;)
+ &lt;/code&gt;&lt;/pre&gt;
+
+ &lt;pre&gt;&lt;code&gt;
+    class SnippetSerializer(serializers.ModelSerializer):
+        title=serializers.HyperlinkedIdentityField(view_name=&#39;snippet-highlight&#39;,format=&#39;html&#39;)
+        class Meta:
+            model = Snippet
+            fields = (&#39;id&#39;, &#39;title&#39;, &#39;code&#39;)
+ &lt;/code&gt;&lt;/pre&gt;
+
+ * 使用viewsets
+ &lt;pre&gt;&lt;code&gt;
+        class UserViewSet(viewsets.ReadOnlyModelViewSet):
+            queryset = Suser.objects.all()
+            serializer_class = SuserSerializer
+        class SnippetViewSet(viewsets.ModelViewSet):
+            queryset = Snippet.objects.all()
+            serializer_class = SnippetSerializer
+            permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+            @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
+            def highlight(self, request, *args, **kwargs):
+                snippet = self.get_object()
+                return Response(snippet.title)
+
+        snippet_list = SnippetViewSet.as_view({
+            &#39;get&#39;: &#39;list&#39;,
+            &#39;post&#39;: &#39;create&#39;
+        })
+        snippet_detail = SnippetViewSet.as_view({
+            &#39;get&#39;: &#39;retrieve&#39;,
+            &#39;put&#39;: &#39;update&#39;,
+            &#39;delete&#39;: &#39;destroy&#39;
+        })
+        snippet_highlight = SnippetViewSet.as_view({
+            &#39;get&#39;: &#39;highlight&#39;
+        }, renderer_classes=[renderers.StaticHTMLRenderer])
+        user_list = UserViewSet.as_view({
+            &#39;get&#39;: &#39;list&#39;
+        })
+        user_detail = UserViewSet.as_view({
+            &#39;get&#39;: &#39;retrieve&#39;
+        })
+
+        url(r&#39;^xuliehua/$&#39;,snippet_list,name=&#39;snippet-list&#39;),
+        url(r&#39;^hello/(?P&lt;pk&gt;\d+)/$&#39;,snippet_detail,name=&#39;snippet-detail&#39;),
+        url(r&#39;^hello/(?P&lt;pk&gt;\d+)/highlight/$&#39;,snippet_highlight,name=&#39;snippet-highlight&#39;),
+        url(r&#39;^users/$&#39;, user_list,name=&#39;user-list&#39;),
+        url(r&#39;^users/(?P&lt;pk&gt;[0-9]+)/$&#39;, user_detail,name=&#39;suser-detail&#39;),
+ 
+&lt;/pk&gt;&lt;/pk&gt;&lt;/pk&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/pk&gt;&lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Sun, 06 Dec 2015 05:01:59 +0800</pubDate>
+        <link>/2015/12/06/Django-rest4/</link>
+        <guid isPermaLink="true">/2015/12/06/Django-rest4/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django rest_framework 外键&amp;perm</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;外键&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#permission&quot; id=&quot;markdown-toc-permission&quot;&gt;permission&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;改变存取数据的形式&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近对产品api进行rest改造完毕，就记录下Django中rest-framework的一些基本用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;外键&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;外键使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    class Suser(models.Model):
+        name=models.CharField(max_length=100)
+        ok=models.CharField(max_length=100)
+    class Snippet(models.Model):
+        created = models.DateTimeField(auto_now_add=True)
+        title = models.CharField(max_length=100, blank=True, default=&#39;&#39;)
+        code = models.TextField()
+        suser=models.ForeignKey(&#39;Suser&#39;,related_name=&#39;snippet&#39;)   #注意related_name要和序列化中的一样
+        class Meta:
+            ordering = (&#39;created&#39;,)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+    class SuserSerializer(serializers.ModelSerializer):
+        snippet = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())   #在querset中找存在外键是该user的，相当于user.snipprt_set
+        class Meta:
+            model=Suser
+            fields=(&#39;name&#39;,&#39;ok&#39;,&#39;snippet&#39;)
+
+    class UserList(generics.ListAPIView):
+        queryset = Suser.objects.all()
+        serializer_class = SuserSerializer
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;显示外键信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    class SnippetSerializer(serializers.ModelSerializer):
+        suser=serializers.ReadOnlyField(source=&#39;suser.ok&#39;)  #注意有source
+        class Meta:
+            model = Snippet
+            fields = (&#39;id&#39;, &#39;title&#39;, &#39;code&#39;,&#39;suser&#39;)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;格外存储&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    class hellolist(generics.ListCreateAPIView):
+        queryset = Snippet.objects.all()
+        serializer_class = SnippetSerializer
+        def perform_create(self, serializer):
+            serializer.save(suser=Suser.objects.get(ok=&#39;10&#39;))
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;permission&quot;&gt;permission&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;添加permission：&lt;/p&gt;
+
+    &lt;p&gt;permission_classes = (permissions.IsAuthenticated,)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;自定义permission&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    class BasePermission(object):
+        def has_permission(self, request, view):     #注意有三个参数，是访问所有数据的前提
+            return True
+        def has_object_permission(self, request, view, obj):  #注意有四个参数，限制单个实例的访问即retrie update delete
+            return True
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在rest页面增加logonin：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    url(r&#39;^api-auth/&#39;, include(&#39;rest_framework.urls&#39;,
+                               namespace=&#39;rest_framework&#39;))
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;改变存取数据的形式&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;改变存取数据的形式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    class SnippetSerializer(serializers.ModelSerializer):
+        suser=serializers.ReadOnlyField(source=&#39;suser.ok&#39;)
+        title=serializers.SerializerMethodField(&#39;hello&#39;,read_only=True)
+        def hello(self,instance):
+            return &#39;huohuohuo&#39;
+        class Meta:
+            model = Snippet
+            fields = (&#39;id&#39;, &#39;title&#39;, &#39;code&#39;,&#39;suser&#39;)
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Wed, 02 Dec 2015 04:51:36 +0800</pubDate>
+        <link>/2015/12/02/Django-rest3/</link>
+        <guid isPermaLink="true">/2015/12/02/Django-rest3/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django rest_framework apiview</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#apiview&quot; id=&quot;markdown-toc-apiview&quot;&gt;apiview&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#mixin&quot; id=&quot;markdown-toc-mixin&quot;&gt;mixin&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#genertic&quot; id=&quot;markdown-toc-genertic&quot;&gt;genertic&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近对产品api进行rest改造完毕，就记录下Django中rest-framework的一些基本用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;apiview&quot;&gt;apiview&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;apiview使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+class hellolist(APIView):
+    def get(self,request):
+        sni=Snippet.objects.all()
+        serializer=SnippetSerializer(sni,many=True)
+        return Response(serializer.data)
+    def post(self,request):
+        serializer=SnippetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+class hellodetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Snippet.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            raise Http404
+    def get(self,request,pk):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet)
+        return Response(serializer.data)
+    def delete(self, request, pk):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;mixin&quot;&gt;mixin&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mixin使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+class hellolist(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    def get(self,request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)   //注意为list
+    def post(self,request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)   //注意为create 不为post！
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+class hellodetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,mixins.DestroyModelMixin,generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;genertic&quot;&gt;genertic&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;genertic使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+class hellolist(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+class hellodetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Sun, 29 Nov 2015 05:09:56 +0800</pubDate>
+        <link>/2015/11/29/Django-rest2/</link>
+        <guid isPermaLink="true">/2015/11/29/Django-rest2/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Django rest_framework基础&amp;序列化</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&amp;amp;配置&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;简单的示例&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;序列化&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#requestresponse&quot; id=&quot;markdown-toc-requestresponse&quot;&gt;request&amp;amp;response&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近对产品api进行rest改造完毕，就记录下Django中rest-framework的一些基本用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;安装&amp;amp;配置&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    pip install djangorestframework
+    pip install markdown       # Markdown support for the browsable API.
+    pip install django-filter  # Filtering support
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    INSTALLED_APPS = (
+        ...
+        &#39;rest_framework&#39;,
+    )
+
+    url(r&#39;^api-auth/&#39;, include(&#39;rest_framework.urls&#39;, namespace=&#39;rest_framework&#39;))
+        #当需要使用browsable API时添加
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;简单的示例&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;简单的示例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    from django.conf.urls import patterns, include, url
+    from django.contrib.auth.models import User
+    from rest_framework import routers, serializers, viewsets
+
+    class UserSerializer(serializers.HyperlinkedModelSerializer):
+        class Meta:
+            model = User
+            fields = (&#39;url&#39;, &#39;username&#39;, &#39;email&#39;, &#39;is_staff&#39;)
+
+    class UserViewSet(viewsets.ModelViewSet):
+        queryset = User.objects.all()
+        serializer_class = UserSerializer
+
+    router = routers.DefaultRouter()
+    router.register(r&#39;users&#39;, UserViewSet)
+
+    urlpatterns = patterns(&#39;&#39;,
+        url(r&#39;^admin/&#39;, include(admin.site.urls)),
+        url(r&#39;^rest1/$&#39;, include(router.urls)),
+    )
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;序列化&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;序列化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    #model.py
+    class Snippet(models.Model):
+        created = models.DateTimeField(auto_now_add=True)
+        title = models.CharField(max_length=100, blank=True, default=&#39;&#39;)
+        code = models.TextField()
+        class Meta:
+            ordering = (&#39;created&#39;,)
+ &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;
+    #serializers.py
+    class SnippetSerializer(serializers.ModelSerializer):
+        class Meta:
+            model = Snippet
+            fields = (&#39;id&#39;, &#39;title&#39;, &#39;code&#39;)             #fields决定显示哪些
+ &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;
+    #views.py
+    from rest_framework.renderers import JSONRenderer
+    def hello(request):
+        snippet = Snippet(code=&#39;foo = &quot;bar&quot;\n&#39;)
+        snippet.save()
+
+        serializer = SnippetSerializer(snippet)    #转化为python的列表模式
+        print serializer.data
+        serializer = SnippetSerializer(Snippet.objects.all(), many=True) #many=true可以转化多个
+
+        content = JSONRenderer().render(serializer.data)    #转化为json,注意JSONRenderer有括号
+        print content
+
+        stream = BytesIO(content)               #反序列化，先放在bytesio中
+        data=JSONParser().parse(stream)
+        serializer1 = SnippetSerializer(data=data)
+        if serializer1.is_valid():
+            val=serializer1.validated_data
+            print val
+            serializer1.save()     #会存在数据库中
+        else:
+            print &#39;aaaaaaaaaa&#39;
+        return HttpResponse(serializer.data)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;requestresponse&quot;&gt;request&amp;amp;response&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;request.POST  # Only works for ‘POST’ method.&lt;/p&gt;
+
+    &lt;p&gt;request.data  # Works for ‘POST’, ‘PUT’ and ‘PATCH’ methods.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    from rest_framework import status
+    from rest_framework.decorators import api_view
+    from rest_framework.response import Response
+    @api_view([&#39;GET&#39;, &#39;POST&#39;])
+    def hellolist(request):
+         if request.method == &#39;GET&#39;:
+            snippets = Snippet.objects.all()
+            serializer = SnippetSerializer(snippets, many=True)
+            return Response(serializer.data)
+         if request.method == &#39;POST&#39;:
+            serializer = SnippetSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;
+    @api_view([&#39;GET&#39;, &#39;PUT&#39;, &#39;DELETE&#39;])
+    def hellodetail(request,pk):
+        try:
+            snippet = Snippet.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        if request.method == &#39;GET&#39;:
+            serializer = SnippetSerializer(snippet)
+            return Response(serializer.data)
+        elif request.method == &#39;DELETE&#39;:
+            snippet.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        elif request.method == &#39;PUT&#39;:
+            serializer = SnippetSerializer(snippet, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Wed, 25 Nov 2015 04:23:34 +0800</pubDate>
+        <link>/2015/11/25/Django-rest/</link>
+        <guid isPermaLink="true">/2015/11/25/Django-rest/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
+    
+      <item>
+        <title>Python 迭代器&amp;生成器</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;迭代器&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;生成器&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;在这里记录一下python迭代器与生成器的一些基本概念和用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;迭代器&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;迭代器是访问集合元素的一种方式。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;迭代器只能往前不会后退,对于原生支持随机访问的数据结构（如tuple、list），迭代器和经典for循环的索引访问相比并无优势，反而丢失了索引值（可以使用内建函数enumerate()找回这个索引值）。但对于无法随机访问的数据结构（比如set）而言，迭代器是唯一的访问元素的方式。
+ 另外，迭代器的一大优点是不要求事先准备好整个迭代过程中所有的元素&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;迭代器仅仅在迭代到某个元素时才计算该元素，而在这之前或之后，元素可以不存在或者被销毁。这个特点使得它特别适合用于遍历一些巨大的或是无限的集合，比如几个G的文件，或是斐波那契数列等等&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;迭代器有两个基本的方法&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;next方法：返回迭代器的下一个元素&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;__iter__方法：返回迭代器对象本身&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+ class Fab(object):
+    def __init__(self, max):
+        self.max = max
+        self.n, self.a, self.b = 0, 0, 1
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self.n &amp;lt; self.max:
+            r = self.b
+            self.a, self.b = self.b, self.a + self.b
+            self.n = self.n + 1
+            return r
+        raise StopIteration()
+ print Fabs(5)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用next()方法可以访问下一个元素：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+&amp;gt;&amp;gt;&amp;gt; it.next()
+0
+&amp;gt;&amp;gt;&amp;gt; it.next()
+1
+&amp;gt;&amp;gt;&amp;gt; it.next()
+2
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;python处理迭代器越界是抛出StopIteration异常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+lst = range(5)
+it = iter(lst)
+try:
+    while True:
+        val = it.next()
+        print val
+except StopIteration:
+    pass
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;事实上，因为迭代器如此普遍，python专门为for关键字做了迭代器的语法糖。在for循环中，Python将自动调用工厂函数iter()获得迭代器，自动调用next()获取元素，还完成了检查StopIteration异常的工作&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;生成器&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;带有 yield 的函数在 Python 中被称之为 generator（生成器）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;简单地讲，yield 的作用就是把一个函数变成一个 generator，带有 yield 的函数不再是一个普通函数，Python 解释器会将其视为一个 generator，
+ 调用时不会执行函数，而是返回一个 iterable 对象！
+ 在 for 循环执行时，每次循环都会执行 fab 函数内部的代码，执行到 yield  时， 函数就返回一个迭代值，下次迭代时，
+ 代码从 yield 的下一条语句继续执行，而函数的本地变量看起来和上次中断执行前是完全一样的，
+ 于是函数继续执行，直到再次遇到 yield。看起来就好像一个函数在正常执行的过程中被 yield 中断了数次，每次中断都会通过 yield 返回当前的迭代值。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;例子：&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+  def read_file(fpath):
+    BLOCK_SIZE = 1024
+    with open(fpath, &#39;rb&#39;) as f:
+        while True:
+            block = f.read(BLOCK_SIZE)
+            if block:
+                yield block
+            else:
+                return
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果直接对文件对象调用 read() 方法，会导致不可预测的内存占用。好的方法是利用固定长度的缓冲区来不断读取文件内容。通过 yield，我们不再需要编写读文件的迭代类，就可以轻松实现文件读取&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Fri, 20 Nov 2015 04:41:18 +0800</pubDate>
+        <link>/2015/11/20/Python-yield/</link>
+        <guid isPermaLink="true">/2015/11/20/Python-yield/</guid>
+        
+        
+        <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>Python Urllib2模块</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#urllib2&quot; id=&quot;markdown-toc-urllib2&quot;&gt;urllib2&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;urllib2是一个HTTP 客户端库。这里总结了一些 urllib2 库的使用细节&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;urllib2&quot;&gt;urllib2&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    import urllib2
+    response=urllib2.urlopen(&#39;http://www.douban.com&#39;)
+    html=response.read()
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;提交数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    import urllib
+    import urllib2
+    url = &#39;http://shanyj.github.io&#39;
+    info = {&#39;name&#39; : &#39;syj&#39;&#39;,
+              &#39;location&#39; : &#39;shanghai&#39;}
+    data = urllib.urlencode(info)  #info 需要被编码为urllib2能理解的格式，这里用到的是urllib
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;headers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    url = &#39;http://sssss&#39;
+    user_agent = &#39;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&#39;# 将user_agent写入头信息
+    values = {&#39;name&#39; : &#39;syj&#39;,
+              &#39;location&#39; : &#39;sh&#39;,
+              &#39;language&#39; : &#39;Python&#39; }
+    headers = { &#39;User-Agent&#39; : user_agent }
+    data = urllib.urlencode(values)
+    req = urllib2.Request(url, data, headers)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;timeout&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    import urllib2
+    response = urllib2.urlopen(&#39;http://www.google.com&#39;, timeout=10)
+    response.geturl()  ＃获取访问后的url 以查看是否重定向
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;禁止重定向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    class RedirectHandler(urllib2.HTTPRedirectHandler):
+        def http_error_301(self, req, fp, code, msg, headers):
+            pass
+        def http_error_302(self, req, fp, code, msg, headers):
+            pass
+    opener = urllib2.build_opener(RedirectHandler)
+    opener.open(&#39;http://www.google.cn&#39;)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;cookie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    cookie = cookielib.CookieJar()
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+    response = opener.open(&#39;http://www.google.com&#39;)
+    for item in cookie:
+        if item.name == &#39;some_cookie_item_name&#39;:
+            print item.value
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PUT 和 DELETE 方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    request = urllib2.Request(uri, data=data)
+    request.get_method = lambda: &#39;PUT&#39; # or &#39;DELETE&#39;
+    response = urllib2.urlopen(request)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;http返回码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+    try:
+        response = urllib2.urlopen(&#39;http://restrict.web.com&#39;)
+    except urllib2.HTTPError, e:
+        print e.code
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Tue, 17 Nov 2015 05:03:16 +0800</pubDate>
+        <link>/2015/11/17/Python-urllib2/</link>
+        <guid isPermaLink="true">/2015/11/17/Python-urllib2/</guid>
+        
+        
+        <category>Python</category>
+        
+      </item>
+    
+      <item>
+        <title>Mysql 特殊函数</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;其他函数&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这里主要记录下Mysql其他函数的一些用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;其他函数&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;LEAST&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;LEAST（值1,值2,…值n），其中值n表示参数列表中有n个值。在有两个或多个参数的情况下，返回最小值&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;GREATEST&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;GREATEST(值1，值2，…值n)，其中n表示参数列表中有n个值。在有两个或多个参数的情况下，返回最大值&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;MOD(X,Y)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;求余函数&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;TRUNCATE(X,Y)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;TRUNCATE(X,Y)返回被舍去至小数点后y位的数字x。若y的值为0，则结果不带有小数点或不带有小数&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;HEX(X)&amp;amp;UNHEX（X)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;二进制转化函数HEX(X)和其反函数&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;CONCAT_WS（x,s1,s2,……）&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;CONCAT_WS(‘-‘,’1st’,’2nd’,’3rd’)使用分隔符‘-’将3个字符串连接成一个字符串，结果为“1st-2nd-3rd”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;LPAD(S1,LEN,S2)&amp;amp;RPAD(S1,LEN,S2)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;LPAD(S1,LEN,S2)返回字符串s1，其左边由字符串s2填补到len字符串长度。假如s1的长度大于len，则返回值被缩短至len字符rd”&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;TRIM(S)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;删除空格的函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;TRIM(S1 FROM S)删除字符串s中两端所有的子字符串s1。
+ s1为可选项，在未指定情况下，删除空格&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;STRCMP(S1,S2)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;STRCMP(S1,S2)若所有的字符串均相同，则返回0；若根据当前分类次序，第一个参数小于第二个，则返回-1，其他情况返回1&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;LOCATE(STR1,STR）&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;匹配子串开始位置的函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT LOCATE(‘ball’,’football’)&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;ELT(N,字符串1,字符串2,字符串3,…,)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;返回指定位置的字符串的函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;若N小于1或大于参数的数目，则返回值为NULL&lt;/p&gt;
+
+        &lt;p&gt;SELECT ELT(3,’1st’,’2nd’,’3rd’)&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;FIELD(S,S1,S2,…)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;返回指定字符串位置的函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;FIELD(S,S1,S2,…)返回字符串s在列表s1，s2，……中第一次出现的位置，在找不到s的情况下，返回值为0&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;如果s为NULL，则返回值为0，原因是NULL不能同任何值进行同等比较&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;FIND_IN_SET(S1,S2)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;返回子串位置的函数&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;FIND_IN_SET(S1,S2)返回字符串s1在字符串列表s2中出现的位置，字符串列表是一个由多个逗号&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT FIND_IN_SET(‘hi’,’hihi,hey,hi,bas’)&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;UTC_DATE()&amp;amp;UTC_TIME()&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;当前日期和 当前时间&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;IF(expr,v1,v2))&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;IF(expr,v1,v2)如果表达式expr是TRUE（expr&amp;lt;&amp;gt;0 and expr&amp;lt;&amp;gt;NULL），则IF()的返回值为v1；否则返回值为v2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;IFNULL(V1,V2)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;IFNULL(V1,V2)假如v1不为NULL，则IFNULL(V1,V2)的返回值为v1；否则其返回值为v2&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 15 Nov 2015 05:06:15 +0800</pubDate>
+        <link>/2015/11/15/Mysql-func2/</link>
+        <guid isPermaLink="true">/2015/11/15/Mysql-func2/</guid>
+        
+        
+        <category>Mysql</category>
+        
+      </item>
+    
+      <item>
+        <title>Mysql 函数</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;聚合函数&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#scalar-&quot; id=&quot;markdown-toc-scalar-&quot;&gt;Scalar 函数&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;日期相关&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;这里主要记录下Mysql函数的一些用法&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;聚合函数&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;聚合函数都是在先筛选完了再在结果上再次筛选,在GROUP BY之后,在where条件之后&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;AVG()&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT Customer FROM Orders
+   WHERE OrderPrice&amp;gt;(SELECT AVG(OrderPrice) FROM Orders)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;COUNT()&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT COUNT(column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;COUNT(DISTINCT column_name) 函数返回指定列的不同值的数目：&lt;/p&gt;
+
+        &lt;p&gt;SELECT COUNT(DISTINCT column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;COUNT(*) 函数返回表中的记录数：&lt;/p&gt;
+
+        &lt;p&gt;SELECT COUNT(*) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;FIRST()&amp;amp;LAST()&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT FIRST(column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT LAST(column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;MAX()&amp;amp;MIN()&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT MAX(column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT MIN(column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;SUM()&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SUM 函数返回数值列的总数（总额）&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT SUM(column_name) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;GROUP BY&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT Customer,SUM(OrderPrice) FROM Orders
+   GROUP BY Customer&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;GROUP BY相当于多个where语句的结果合并起来&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;我们也可以对一个以上的列应用 GROUP BY 语句，就像这样：&lt;/p&gt;
+
+        &lt;p&gt;SELECT Customer,OrderDate,SUM(OrderPrice) FROM Orders
+   GROUP BY Customer,OrderDate&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;HAVING&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;having在聚合函数之后，where在聚合函数之前&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;WHERE 关键字无法与合计函数一起使用&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT Customer,SUM(OrderPrice) FROM Orders
+   WHERE Customer IN (‘a’,’b’)
+   GROUP BY Customer
+   HAVING SUM(OrderPrice)&amp;lt;2000&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;scalar-&quot;&gt;Scalar 函数&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Scalar 函数的操作面向某个单一的值，并返回基于输入值的一个单一的值，可以和where连用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;UCASE()&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT UCASE(column_name) FROM table_name&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LCASE()&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT LCASE(column_name) FROM table_name&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;MID()&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT MID(column_name,start[,length]) FROM table_name&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;LEN()&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT LEN(column_name) FROM table_name&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ROUND()&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT ROUND(column_name,decimals) FROM table_name&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;column_name:必需。要舍入的字段。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;decimals:必需。规定要返回的小数位数。&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;日期相关&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;NOW()    返回当前的日期和时间&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CURDATE()	返回当前的日期&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;CURTIME()	返回当前的时间&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DATE()	提取日期或日期/时间表达式的日期部分&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT ProductName, DATE(OrderDate) AS OrderDate FROM Orders&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;EXTRACT()	返回日期/时间按的单独部分，比如年、月、日、小时、分钟等等&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;EXTRACT(unit FROM date) unit可以是year、date等&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DATE_ADD()	给日期添加指定的时间间隔&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;DATE_ADD(date,INTERVAL expr type)date 参数是合法的日期表达式。expr 参数是您希望添加的时间间隔。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;SELECT OrderId,DATE_ADD(OrderDate,INTERVAL 2 DAY) AS OrderPayDate FROM Orders&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DATE_SUB()	从日期减去指定的时间间隔&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DATEDIFF()	返回两个日期之间的天数&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SELECT DATEDIFF(‘2008-12-30’,’2008-12-29’) AS DiffDate&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DATE_FORMAT()	用不同的格式显示日期/时间&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;DATE_FORMAT(date,format) date 参数是合法的日期。format 规定日期/时间的输出格式。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 12 Nov 2015 04:51:25 +0800</pubDate>
+        <link>/2015/11/12/MySQL-func/</link>
+        <guid isPermaLink="true">/2015/11/12/MySQL-func/</guid>
+        
+        
+        <category>Mysql</category>
+        
+      </item>
     
       <item>
         <title>Mysql 库&amp;表&amp;属性命令</title>
@@ -465,1260 +1688,6 @@ CREATE TABLE Persons
         
         
         <category>Mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>Mysql 基础语句&amp;限制语句</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;基础语句&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;基础语句&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;这里主要记录下Mysql中的基础操作语句和一些限制语句&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;基础语句&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;SELECT&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT 列名称 FROM 表名称&lt;/p&gt;
-
-        &lt;p&gt;SELECT LastName,FirstName FROM Persons&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT 列名称 FROM 表名称 WHERE 列 运算符 值&lt;/p&gt;
-
-        &lt;p&gt;SQL使用单引号来环绕文本值,如果是数值，不使用引号。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;文本值：&lt;/p&gt;
-
-        &lt;p&gt;这是正确的：&lt;/p&gt;
-
-        &lt;p&gt;SELECT * FROM Persons WHERE FirstName=’Bush’&lt;/p&gt;
-
-        &lt;p&gt;这是错误的：&lt;/p&gt;
-
-        &lt;p&gt;SELECT * FROM Persons WHERE FirstName=Bush&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;数值：&lt;/p&gt;
-
-        &lt;p&gt;这是正确的：&lt;/p&gt;
-
-        &lt;p&gt;SELECT * FROM Persons WHERE Year&amp;gt;1965&lt;/p&gt;
-
-        &lt;p&gt;这是错误的：&lt;/p&gt;
-
-        &lt;p&gt;SELECT * FROM Persons WHERE Year&amp;gt;’1965’&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;AND 和 OR 可在 WHERE 子语句中把两个或多个条件结合起来&lt;/p&gt;
-
-        &lt;p&gt;SELECT * FROM Persons WHERE (FirstName=’Thomas’ OR FirstName=’William’)
- AND LastName=’Carter&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;INSERT INTO&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;INSERT INTO 表名称 VALUES (值1, 值2,….)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;INSERT INTO table_name (列1, 列2,…) VALUES (值1, 值2,….) AND LastName=’Carter&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;更新某一行中的若干列&lt;/p&gt;
-
-        &lt;p&gt;UPDATE Person SET Address = ‘Zhongshan 23’, City = ‘Nanjing’
- WHERE LastName = ‘Wilson’&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;DELETE&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;DELETE FROM 表名称 WHERE 列名称 = 值&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;删除整个表数据&lt;/p&gt;
-
-        &lt;p&gt;DELETE * FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;DISTINCT&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;关键词 DISTINCT 用于返回唯一不同的值&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT DISTINCT 列名称 FROM 表名称&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;ORDER BY&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;ORDER BY 语句用于根据指定的列对结果集进行排序&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;以逆字母顺序显示公司名称，并以数字顺序显示顺序号：&lt;/p&gt;
-
-        &lt;p&gt;SELECT Company, OrderNumber FROM Orders ORDER BY Company DESC, OrderNumber ASC&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;基础语句&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;LIMIT&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT column_name(s) FROM table_name LIMIT number setp&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;LIKE&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;pattern格式：    %	： 替代一个或多个字符，
- _ ： 仅替代一个字符，
- [charlist] ： 字符列中的任何单一字符，
- [^charlist]或[!charlist] ： 不在字符列中的任何单一字符&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;IN&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,…)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;BETWEEN&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如需使用上面的例子显示范围之外的人，请使用 NOT 操作符：&lt;/p&gt;
-
-        &lt;p&gt;SELECT * FROM Persons WHERE LastName NOT BETWEEN ‘Adams’ AND ‘Carter’&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;AS&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;为列名称和表名称指定别名&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;列的 SQL Alias 语法&lt;/p&gt;
-
-        &lt;p&gt;SELECT column_name AS alias_name FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用表名称别名&lt;/p&gt;
-
-        &lt;p&gt;SELECT po.OrderID, p.LastName FROM Persons AS p, Product_Orders AS po WHERE p.LastName=’Adams’ AND p.FirstName=’John’&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 02 Nov 2015 05:23:41 +0800</pubDate>
-        <link>/2015/11/02/Mysql-base/</link>
-        <guid isPermaLink="true">/2015/11/02/Mysql-base/</guid>
-        
-        
-        <category>Mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>Django captcha 验证码</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;建立表单&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;验证表单&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;模板显示&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;登录功能中验证码是十分重要的，在这里就简单的介绍Django中验证码的实现&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;pip install  django-simple-captcha&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;配置&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- INSTALLED_APPS中加入captcha
-
- urlpatterns += patterns(&#39;&#39;,
- url(r&#39;^captcha/&#39;, include(&#39;captcha.urls&#39;)),
- )
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;建立表单&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;建立表单&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-from django.core.cache import cache
-from django import forms
-from captcha.fields import CaptchaField
-class TestForm(forms.Form):
- name=forms.CharField()
- def clean_name(self):
-     clean_name=self.cleaned_data[&#39;name&#39;]
-     if clean_name==&#39;shanyj&#39;:
-         return clean_name
-     else:
-         raise forms.ValidationError(&quot;aaaa!&quot;)
-class CForm(forms.Form):
- captcha = CaptchaField()
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;验证表单&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;验证表单&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
-def some_view(request):
- form2=&#39;&#39;
- if request.POST:
-     if request.POST.get(&#39;captcha_0&#39;,&#39;na&#39;)!=&#39;na&#39;:
-         form1=TestForm(request.POST)
-         form2=CForm(request.POST)
-         if form1.is_valid() and form2.is_valid():
-             cache.delete(&#39;pass&#39;)
-             return HttpResponse(&#39;ok&#39;)
-         else:
-             try:
-                 cache.incr(&#39;pass&#39;)
-             except:
-                 cache.set(&#39;pass&#39;,1,3600)
-     else:
-         form1=TestForm(request.POST)
-         if form1.is_valid():
-             cache.delete(&#39;pass&#39;)
-             return HttpResponse(&#39;ok&#39;)
-         else:
-             try:
-                 cache.incr(&#39;pass&#39;)
-             except:
-                 cache.set(&#39;pass&#39;,1,3600)
- else:
-     form1=TestForm()
- if cache.get(&#39;pass&#39;)&amp;gt;3:
-     form2=CForm()
- return render_to_response(&#39;template.html&#39;,RequestContext(request,{&#39;form1&#39;:form1,&#39;form&#39;:form2}))
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;模板显示&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;模板显示&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- { % load staticfiles % }
-
- &amp;lt; form action=&#39;.&#39; method=&#39;POST&#39; &amp;gt;{ % csrf_token % }
-     { { form1 } }
-     { % if form.captcha % }
-     { { form.captcha } }
-     { % endif % }
-     &amp;lt; input type=&quot;submit&quot; /&amp;gt;
-     &amp;lt; button class=&#39;captcha-refresh&#39;&amp;gt;刷新&amp;lt; /button&amp;gt;
-     { % if form.captcha.errors % }
-     &lt;p&gt;{ { form.captcha.errors } }&lt;/p&gt;
-     { % endif % }
- 
-
- &amp;lt; script type=&quot;text/javascript&quot; src=&#39;{ % static &quot;js/jquery.js&quot; % }&#39;&amp;gt;
- &amp;lt; script type=&quot;text/javascript&quot;&amp;gt;
- $(&#39;.captcha-refresh&#39;).click(function(){
-     form = $(this).parents(&#39;form&#39;);
-     $.getJSON(&#39;/captcha/refresh/&#39;, {}, function(json) {
-         $(&#39;.captcha&#39;).attr(&#39;url&#39;,json.image_url);
-         $(&#39;.captcha&#39;).attr(&#39;src&#39;,json.image_url);
-         $(&#39;#id_captcha_0&#39;).attr(&#39;value&#39;,json.image_url.split(&#39;/&#39;)[3]);
-     });
-     return false;
- });
- &amp;lt; /script&amp;gt;
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Wed, 28 Oct 2015 04:23:34 +0800</pubDate>
-        <link>/2015/10/28/Django-captcha/</link>
-        <guid isPermaLink="true">/2015/10/28/Django-captcha/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 静态文件</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装和调用&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#mediastatic&quot; id=&quot;markdown-toc-mediastatic&quot;&gt;media&amp;amp;static&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;使用&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;静态文件指像css,js,images之类的文件,在Django里面静态文件的处理十分简单，这里就mark一下&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;安装和调用&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;installapp中加入 django.contrib.staticfiles&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;TEMPLATE_CONTEXT_PROCESSORS中加入’django.core.context_processors.media’&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;mediastatic&quot;&gt;media&amp;amp;static&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;静态文件的处理又包括STATIC和MEDIA两类&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;MEDIA:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;指用户上传的文件，比如在Model里面的FileFIeld，ImageField上传的文件&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如果定义MEDIA_ROOT=c:\temp\media，那么File=models.FileField(upload_to=”abc/”)，上传的文件就会被保存到c:\temp\media\abc&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;MEDIA_ROOT必须是本地路径的绝对路径,MEDIA_ROOT=os.path.join(PROJECT_PATH,’media/’).replace(‘\’,’/’)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;MEDIA_URL是指从浏览器访问时的地址前缀，MEDIA_URL=”/media/”&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;STATIC:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;主要指的是如css,js,images这样文件&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;STATIC_ROOT与MEDIA_ROOT位置不能一样&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;在每个app所在文夹均可以建立一个static文件夹，
-         然后当运行collectstatic时，Django会遍历INSTALL_APPS里面所有app的static文件夹，
-         将里面所有的文件复制到STATIC_ROOT&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;一般在和templates相同的位置上建立static和media目录&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;使用&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;settings配置&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-    MEDIA_URL=&quot;/media/&quot;
-    STATIC_URL=&quot;/static/&quot;
-    STATICFILES_DIRS = (
-        os.path.join(os.path.dirname(__file__), &quot;static&quot;),
-    )
-
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;view调用：render_to_response(‘hello.html’,RequestContext(request))&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;模板调用&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-     { % load staticfiles % }
-    &amp;lt; img src=&quot;{ % static &#39;images/hi.jpg&#39; % }&quot; / &amp;gt;
- &lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Fri, 23 Oct 2015 03:43:42 +0800</pubDate>
-        <link>/2015/10/23/Python-static/</link>
-        <guid isPermaLink="true">/2015/10/23/Python-static/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 进程间通信</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#queue&quot; id=&quot;markdown-toc-queue&quot;&gt;Queue&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#pipe&quot; id=&quot;markdown-toc-pipe&quot;&gt;Pipe&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#pool&quot; id=&quot;markdown-toc-pool&quot;&gt;Pool&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;这里主要讲解下python中进程间通信的一些手段&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;queue&quot;&gt;Queue&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;put方法用以插入数据到队列中，put方法还有两个可选参数：blocked和timeout。
-如果blocked为True（默认值），并且timeout为正值，该方法会阻塞timeout指定的时间，直到该队列有剩余的空间。
-如果超时，会抛出Queue.Full异常。如果blocked为False，但该Queue已满，会立即抛出Queue.Full异常&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;get方法可以从队列读取并且删除一个元素。同样，get方法有两个可选参数：blocked和timeout。
-如果blocked为True（默认值），并且timeout为正值，那么在等待时间内没有取到任何元素，会抛出Queue.Empty异常。
-如果blocked为False，有两种情况存在，如果Queue有一个值可用，则立即返回该值，否则，如果队列为空，则立即抛出Queue.Empty异常&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-import multiprocessing
-def writer_proc(q):
-    try:
-        q.put(1, block = False)
-    except:
-        pass
-def reader_proc(q):
-    try:
-        print q.get(block = False)
-    except:
-        pass
-if __name__ == &quot;__main__&quot;:
-    q = multiprocessing.Queue()
-    writer = multiprocessing.Process(target=writer_proc, args=(q,))
-    writer.start()
-    reader = multiprocessing.Process(target=reader_proc, args=(q,))
-    reader.start()
-    reader.join()
-    writer.join()
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;pipe&quot;&gt;Pipe&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Pipe方法返回(conn1, conn2)代表一个管道的两个端&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Pipe方法有duplex参数，如果duplex参数为True(默认值)，那么这个管道是全双工模式，也就是说conn1和conn2均可收发。
-duplex为False，conn1只负责接受消息，conn2只负责发送消息&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;send和recv方法分别是发送和接受消息的方法。
-例如，在全双工模式下，可以调用conn1.send发送消息，conn1.recv接收消息。
-如果没有消息可接收，recv方法会一直阻塞。如果管道已经被关闭，那么recv方法会抛出EOFError&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-def proc1(pipe):
-    while True:
-        for i in xrange(10000):
-            print &quot;send: %s&quot; %(i)
-            pipe.send(i)
-            time.sleep(1)
-
-def proc2(pipe):
-    while True:
-        print &quot;proc2 rev:&quot;, pipe.recv()
-        time.sleep(1)
-
-if __name__ == &quot;__main__&quot;:
-    pipe = multiprocessing.Pipe()
-    p1 = multiprocessing.Process(target=proc1, args=(pipe[0],))
-    p2 = multiprocessing.Process(target=proc2, args=(pipe[1],))
-    p1.start()
-    p2.start()
-    p1.join()
-    p2.join()
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;pool&quot;&gt;Pool&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Pool可以提供指定数量的进程，供用户调用，当有新的请求提交到pool中时，如果池还没有满，
-那么就会创建一个新的进程用来执行该请求；但如果池中的进程数已经达到规定最大值，那么该请求就会等待，直到池中有进程结束，才会创建新的进程来它&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;apply_async(func[, args[, kwds[, callback]]]) 它是非阻塞，apply(func[, args[, kwds]])是阻塞的&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;close() : 关闭pool，使其不在接受新的任务。只接受apply_async(func, (msg, ))剩余的&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;terminate() : 结束工作进程，不在处理未完成的任务&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;join() : 主进程阻塞，等待子进程的退出， join方法要在close或terminate之后使用&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;非阻塞例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-import multiprocessing
-import time
-def func(msg):
-    print &quot;msg:&quot;, msg
-    time.sleep(3)
-    print &quot;end&quot;
-
-if __name__ == &quot;__main__&quot;:
-    pool = multiprocessing.Pool(processes = 3)
-    for i in xrange(4):
-        msg = &quot;hello %d&quot; %(i)
-        pool.apply_async(func, (msg, ))   #维持执行的进程总数为processes，当一个进程执行完毕后会添加新的进程进去
-
-    pool.close()
-    pool.join()   #调用join之前，先调用close函数，否则会出错。执行完close后不会有新的进程加入到pool,join函数等待所有子进程结束
-    print &quot;Sub-process(es) done.&quot;
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;阻塞例子&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-def func(msg):
-    print &quot;msg:&quot;, msg
-    time.sleep(3)
-    print &quot;end&quot;
-
-if __name__ == &quot;__main__&quot;:
-    pool = multiprocessing.Pool(processes = 3)
-    for i in xrange(4):
-        msg = &quot;hello %d&quot; %(i)
-        pool.apply(func, (msg, ))
-
-    pool.close()
-    pool.join()
-    print &quot;Sub-process(es) done.&quot;
-
-结果:
-msg: hello 0
-end
-msg: hello 1
-end
-msg: hello 2
-end
-msg: hello 3
-end
-Sub-process(es) done.
- &lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Tue, 20 Oct 2015 06:03:33 +0800</pubDate>
-        <link>/2015/10/20/Python-Procon/</link>
-        <guid isPermaLink="true">/2015/10/20/Python-Procon/</guid>
-        
-        
-        <category>Python</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 进程及同步</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;进程模块&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#with&quot; id=&quot;markdown-toc-with&quot;&gt;with语句&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#lock&quot; id=&quot;markdown-toc-lock&quot;&gt;lock&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#semaphore&quot; id=&quot;markdown-toc-semaphore&quot;&gt;Semaphore&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#event&quot; id=&quot;markdown-toc-event&quot;&gt;Event&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;这里主要讲解下python中进程和进程同步的一些知识&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;进程模块&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;创建进程的类：Process([group [, target [, name [, args [, kwargs]]]]])，target表示调用对象，args表示调用对象的位置参数元组。
-kwargs表示调用对象的字典。name为别名&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;方法：is_alive()、join([timeout])、run()、start()、terminate()&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;属性：authkey、daemon（要通过start()设置）、exitcode(进程在运行时为None、如果为–N，表示被信号N结束）、name、pid&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-import multiprocessing
-import time
-def worker(interval):
-    n = 5
-    while n &amp;gt; 0:
-        print(&quot;The time is {0}&quot;.format(time.ctime()))
-        time.sleep(interval)
-        n -= 1
-if __name__ == &quot;__main__&quot;:
-    p = multiprocessing.Process(target = worker, args = (3,))
-    p.start()
-    print &quot;p.pid:&quot;, p.pid
-    print &quot;p.name:&quot;, p.name
-    print &quot;p.is_alive:&quot;, p.is_alive()
-
-print(&quot;The number of CPU is:&quot; + str(multiprocessing.cpu_count()))
-for p in multiprocessing.active_children():
-    print(&quot;child   p.name:&quot; + p.name + &quot;\tp.id&quot; + str(p.pid))
-print &quot;END!!!!!!!!!!!!!!!!!&quot;
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;将进程定义为类&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-import multiprocessing
-import time
-class ClockProcess(multiprocessing.Process):
-    def __init__(self, interval):
-        multiprocessing.Process.__init__(self)
-        self.interval = interval
-
-    def run(self):
-        n = 5
-        while n &amp;gt; 0:
-            print(&quot;the time is {0}&quot;.format(time.ctime()))
-            time.sleep(self.interval)
-            n -= 1
-if __name__ == &#39;__main__&#39;:
-    p = ClockProcess(3)
-    p.start()
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;当子进程设置了daemon=True属性，主进程结束，它们就随着结束了&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;with&quot;&gt;with语句&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;with 语句适用于对资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，
-释放资源，比如文件使用后自动关闭、线程中锁的自动获取和释放等&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;with所求值的对象必须有一个__enter__()方法，一个__exit__()方法。
-紧跟with后面的语句被求值后，返回对象的__enter__()方法被调用，这个方法的返回值将被赋值给as后面的变量。
-当with后面的代码块全部被执行完之后，将调用前面返回对象的__exit__()方法&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-class Sample:
-    def __enter__(self):
-        print &quot;In&quot;
-        return &quot;Foo&quot;
-    def __exit__(self, type,value, trace):
-        print &quot;out&quot;
-def get_sample():
-    return Sample()
-with get_sample() as sample:
-    print &quot;sample:&quot;
-    print sample
-
-结果
-In
-sample:
-Foo
-out
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;lock&quot;&gt;lock&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Lock对象的状态可以为locked和unlocked
-使用acquire()设置为locked状态；
-使用release()设置为unlocked状态&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果当前的状态为unlocked，则acquire()会将状态改为locked然后立即返回。
-当状态为locked的时候，acquire()将被阻塞直到另一个线程中调用release()来将状态改为unlocked，然后acquire()才可以再次将状态置为locked&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-import multiprocessing
-import sys
-def worker_with(lock, f):
-    with lock:
-        fs = open(f, &#39;a+&#39;)
-        n = 10
-        while n &amp;gt; 1:
-            fs.write(&quot;Lockd acquired via with\n&quot;)
-            n -= 1
-        fs.close()
-
-def worker_no_with(lock, f):
-    lock.acquire()
-    try:
-        fs = open(f, &#39;a+&#39;)
-        n = 10
-        while n &amp;gt; 1:
-            fs.write(&quot;Lock acquired directly\n&quot;)
-            n -= 1
-        fs.close()
-    finally:
-        lock.release()
-
-if __name__ == &quot;__main__&quot;:
-    lock = multiprocessing.Lock()
-    f = &quot;file.txt&quot;
-    w = multiprocessing.Process(target = worker_with, args=(lock, f))
-    nw = multiprocessing.Process(target = worker_no_with, args=(lock, f))
-    w.start()
-    nw.start()
-    print &quot;end&quot;
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Lock.acquire(blocking=True, timeout=-1),blocking参数表示是否阻塞当前线程等待，timeout表示阻塞时的等待时间 。
-如果成功地获得lock，则acquire()函数返回True，否则返回False，timeout超时时如果还没有获得lock仍然返回False&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;semaphore&quot;&gt;Semaphore&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Semaphore管理一个内置的计数器，
-每当调用acquire()时内置计数器-1；
-调用release() 时内置计数器+1&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;计数器不能小于0；当计数器为0时，acquire()将阻塞线程直到其他线程调用release()&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-def worker(s, i):
-    s.acquire()
-    print(multiprocessing.current_process().name + &quot;acquire&quot;);
-    time.sleep(i)
-    print(multiprocessing.current_process().name + &quot;release\n&quot;);
-    s.release()
-
-if __name__ == &quot;__main__&quot;:
-    s = multiprocessing.Semaphore(2)
-    for i in range(5):
-        p = multiprocessing.Process(target = worker, args=(s, i*2))
-        p.start()
- &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;event&quot;&gt;Event&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Event内部包含了一个标志位，初始的时候为false。
-可以使用使用set()来将其设置为true；
-或者使用clear()将其从新设置为false&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;可以使用is_set()来检查标志位的状态&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;另一个最重要的函数就是wait(timeout=None)，用来阻塞当前线程，直到event的内部标志位被设置为true或者timeout超时&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;例子&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-def wait_for_event_timeout(e, t):
-    print(&quot;wait_for_event_timeout:starting&quot;)
-    e.wait(t)  //或e.wait()
-    print(&quot;wait_for_event_timeout:e.is_set-&amp;gt;&quot; + str(e.is_set()))
-
-if __name__ == &quot;__main__&quot;:
-    e = multiprocessing.Event()
-    w2 = multiprocessing.Process(name = &quot;non-block&quot;,
-            target = wait_for_event_timeout,
-            args = (e, 2))
-    w2.start()
-    time.sleep(3)
-    e.set()
-    print(&quot;main: event is set&quot;)
- &lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Mon, 19 Oct 2015 05:02:32 +0800</pubDate>
-        <link>/2015/10/19/Python-Pro/</link>
-        <guid isPermaLink="true">/2015/10/19/Python-Pro/</guid>
-        
-        
-        <category>Python</category>
-        
-      </item>
-    
-      <item>
-        <title>Python 装饰器</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;使用方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;其他&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;装饰器可以对一个函数、方法或者类进行加工,个人理解为一个闭包，下面就来看一下装饰器的几种使用方法&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;使用方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;无参数装饰器&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;相当于foo=deco(foo)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- def deco(func):
-     print(&quot;deco&quot;)
-     return func
-
- @deco
- def foo():
-     print(&quot;foo&quot;)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;装饰器有参，函数无参&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;相当于foo = deco(argv)(foo)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- def deco(argv):
-     def decorator(func):
-         print(&quot;decorator&quot;)
-         return func
-     print(argv)
-     return decorator
-
- @deco(&quot;123&quot;)
- def foo():
-     print(&quot;foo&quot;)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;装饰器、函数都有参&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;相当于foo = deco(argv)(foo)(data)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- from functools import wraps
-
- def deco(argv):
-     def decorator(func):
-         @wraps(func)
-         def wrapper(*args, **kwargs):
-             return func(*args, **kwargs)
-         print(&quot;decorator&quot;)
-         return wrapper
-     print(argv)
-     return decorator
-
- @deco(&quot;123&quot;)
- def foo(data):
-     &quot;this is foo&quot;
-     print(&quot;foo&quot;)
-     print(data)
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;其他&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;注意多个装饰器的执行顺序，应该是先执行下面的，然后是上面的。这里应先执行deco1，然后是deco2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;
-    @deco2
-    @deco1
- &lt;/code&gt;&lt;/pre&gt;
-</description>
-        <pubDate>Fri, 16 Oct 2015 03:43:42 +0800</pubDate>
-        <link>/2015/10/16/Python-deco/</link>
-        <guid isPermaLink="true">/2015/10/16/Python-deco/</guid>
-        
-        
-        <category>Python</category>
-        
-      </item>
-    
-      <item>
-        <title>Django 通用视图</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;重定向&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;显示model&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;这次mark一下Django通用视图的一些基本用法和简单地配置&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;重定向&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;直接重定向&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- from django.views.generic import TemplateView
- url(&#39;^about/$&#39;,TemplateView.as_view(template_name=&quot;hello.html&quot;))
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重定向并赋值&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- url(&#39;^about1/$&#39;,HomePageView.as_view())
-
- class HomePageView(TemplateView):
-     template_name = &quot;hello.html&quot;
-
-     #设置格外参数
-     def get_context_data(self, **kwargs):
-         context = super(HomePageView, self).get_context_data(**kwargs)
-         context[&#39;next&#39;]=&#39;aaaaaaaaaaa&#39;
-         return context
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;model&quot;&gt;显示model&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;显示model&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- url(&#39;^showpub/$&#39;,PubDetailView.as_view())
-
- from django.views.generic.list import ListView
- # 默认渲染 应用名/类名_list.html即books/publisher_list（小写）
-
- class PubDetailView(ListView):
-     model=Publisher
-     # model指定模型 queryset处理 因此可以在url中传任意参数供queryset处理
-     queryset=Publisher.objects.filter(name=&#39;name&#39;)
-
-     template_name = &#39;hello.html&#39;
-     #模版中对应model的是object_list
-
-     def get_context_data(self, **kwargs):
-         context=super(PubDetailView,self).get_context_data(**kwargs)
-         context[&#39;next&#39;]=Publisher.objects.all
-         # Publisher.objects.all 后面没有括号;这表示这是一个函数的调用,并没有真正调用它(通用视图将渲染时调用它)
-         return context
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;模板显示&lt;/p&gt;
-
-    &lt;pre&gt;&lt;code&gt;
- { % for object in object_list % }
- &amp;lt; h1 &amp;gt;标题：{ { object.name } }&amp;lt; /h1 &amp;gt;
- &amp;lt; p &amp;gt;内容：{ { object.address } }&amp;lt; /p &amp;gt;
- &amp;lt; p &amp;gt;发表人: { { object.city } }&amp;lt; /p &amp;gt;
- { % endfor % }
- &lt;/code&gt;&lt;/pre&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Mon, 12 Oct 2015 05:02:18 +0800</pubDate>
-        <link>/2015/10/12/Django-normal/</link>
-        <guid isPermaLink="true">/2015/10/12/Django-normal/</guid>
-        
-        
-        <category>Django</category>
-        
-      </item>
-    
-      <item>
-        <title>Python Queue模块</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;三种队列&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;队列存取&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;其他方法&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-4&quot; id=&quot;markdown-toc-section-4&quot;&gt;　示例&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;Queue类
-是一个队列的同步实现,
-队列长度可为无限或者有限,下面就mark一下具体的使用方法&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;三种队列&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;queue模块有三种队列&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;python queue模块的FIFO队列先进先出。Queue.Queue(maxsize)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;LIFO类似于堆。即先进后出。Queue.LifoQueue(maxsize)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;还有一种是优先级队列级别越低越先出来。Queue.PriorityQueue(maxsize)&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;队列存取&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;q.put(10)：
-调用队列对象的put()方法在队尾插入一个项目。put()有两个参数，第一个item为必需的，为插入项目的值；第二个block为可选参数，默认为
-1。如果队列当前为满且block为1，put()方法就使调用线程暂停,直到空出一个数据单元。如果block为0，put方法将引发Full异常&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;q.get()：
-调用队列对象的get()方法从队头删除并返回一个项目。可选参数为block，默认为True。如果队列为空且block为True，get()就使调用线程暂停，直至有项目可用。
-如果队列为空且block为False，队列将引发Empty异常&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;其他方法&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.qsize() : 返回队列的大小&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.empty() : 如果队列为空,返回True,反之False&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.full() : 如果队列满了,返回True,反之False&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.get_nowait() : 相当Queue.get(False)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.put_nowait(item) : 相当Queue.put(item, False)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.task_done() : 在完成一项工作之后,Queue.task_done() 函数向任务已经完成的队列发送一个信号Queue.join() 实际上意味着等到队列为空,再执行别的操作.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Queue.join() : 保持阻塞状态，直到处理了队列中的所有项目为止。在将一个项目添加到该队列时，未完成的任务的总数就会增加。
-当使用者线程调用 task_done() 以表示检索了该项目、并完成了所有的工作时，那么未完成的任务的总数就会减少。
-当未完成的任务的总数减少到零时，join() 就会结束阻塞状态。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;　示例&lt;/h3&gt;
-
-&lt;p&gt;　* 示例&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;
-    def worker():
-        while True:
-            item = q.get()
-            do_work(item)
-            q.task_done()
-    q = Queue()
-    for i in range(num_worker_threads):
-         t = Thread(target=worker)
-         t.daemon = True
-         t.start()
-    for item in source():
-        q.put(item)
-    q.join()
- &lt;/code&gt;&lt;/pre&gt;
-
-</description>
-        <pubDate>Fri, 09 Oct 2015 04:21:12 +0800</pubDate>
-        <link>/2015/10/09/Python-Queue/</link>
-        <guid isPermaLink="true">/2015/10/09/Python-Queue/</guid>
-        
-        
-        <category>Python</category>
         
       </item>
     
