@@ -5,8 +5,8 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Jan 2016 15:40:35 +0800</pubDate>
-    <lastBuildDate>Mon, 11 Jan 2016 15:40:35 +0800</lastBuildDate>
+    <pubDate>Mon, 11 Jan 2016 15:41:27 +0800</pubDate>
+    <lastBuildDate>Mon, 11 Jan 2016 15:41:27 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -86,7 +86,7 @@ urlpatterns = patterns(
         &lt;p&gt;curl -X POST -d
 “code=lrKz7kEXJMtYePDLnKKAp10rQ0m9iZ
 &amp;amp;client_id=syj
-&amp;amp;client_secret=mnHzgZRzbvT920C25o7FnGYiaBWPbG7wemU3u5U8in4ffVB5gKjDzpka0t2uFdyocK8RjotfdmZC5b4Soy3AaxFhlRNfZc0db2d2Vn4ukeumNjGV4GSv88OCUc5CTSGo
+&amp;amp;client_secret=mnHzgZRzbvT920C25o7FnGY
 &amp;amp;grant_type=authorization_code
 &amp;amp;redirect_uri=http://localhost:8001/”
 http://localhost:8001/o/token/&lt;/p&gt;
