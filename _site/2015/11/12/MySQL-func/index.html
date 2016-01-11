@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mysql 函数</title>
+	<meta name="description" content="Mysql 函数">
+	
+	<link rel="canonical" href="/2015/11/12/MySQL-func/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Mysql 函数</h1>
+        <p>Nov 12, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">聚合函数</a></li>
+      <li><a href="#scalar-" id="markdown-toc-scalar-">Scalar 函数</a></li>
+      <li><a href="#section-2" id="markdown-toc-section-2">日期相关</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>这里主要记录下Mysql函数的一些用法</p>
+
+<hr />
+
+<h3 id="section-1">聚合函数</h3>
+
+<ul>
+  <li>
+    <p>聚合函数都是在先筛选完了再在结果上再次筛选,在GROUP BY之后,在where条件之后</p>
+  </li>
+  <li>
+    <p><strong>AVG()</strong></p>
+
+    <ul>
+      <li>SELECT Customer FROM Orders
+   WHERE OrderPrice&gt;(SELECT AVG(OrderPrice) FROM Orders)</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>COUNT()</strong></p>
+
+    <ul>
+      <li>
+        <p>COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）</p>
+      </li>
+      <li>
+        <p>SELECT COUNT(column_name) FROM table_name</p>
+      </li>
+      <li>
+        <p>COUNT(DISTINCT column_name) 函数返回指定列的不同值的数目：</p>
+
+        <p>SELECT COUNT(DISTINCT column_name) FROM table_name</p>
+      </li>
+      <li>
+        <p>COUNT(*) 函数返回表中的记录数：</p>
+
+        <p>SELECT COUNT(*) FROM table_name</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>FIRST()&amp;LAST()</strong></p>
+
+    <ul>
+      <li>
+        <p>SELECT FIRST(column_name) FROM table_name</p>
+      </li>
+      <li>
+        <p>SELECT LAST(column_name) FROM table_name</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>MAX()&amp;MIN()</strong></p>
+
+    <ul>
+      <li>
+        <p>SELECT MAX(column_name) FROM table_name</p>
+      </li>
+      <li>
+        <p>SELECT MIN(column_name) FROM table_name</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>SUM()</strong></p>
+
+    <ul>
+      <li>
+        <p>SUM 函数返回数值列的总数（总额）</p>
+      </li>
+      <li>
+        <p>SELECT SUM(column_name) FROM table_name</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>GROUP BY</strong></p>
+
+    <ul>
+      <li>
+        <p>SELECT Customer,SUM(OrderPrice) FROM Orders
+   GROUP BY Customer</p>
+      </li>
+      <li>
+        <p>GROUP BY相当于多个where语句的结果合并起来</p>
+      </li>
+      <li>
+        <p>我们也可以对一个以上的列应用 GROUP BY 语句，就像这样：</p>
+
+        <p>SELECT Customer,OrderDate,SUM(OrderPrice) FROM Orders
+   GROUP BY Customer,OrderDate</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>HAVING</strong></p>
+
+    <ul>
+      <li>
+        <p>having在聚合函数之后，where在聚合函数之前</p>
+      </li>
+      <li>
+        <p>WHERE 关键字无法与合计函数一起使用</p>
+      </li>
+      <li>
+        <p>SELECT Customer,SUM(OrderPrice) FROM Orders
+   WHERE Customer IN (‘a’,’b’)
+   GROUP BY Customer
+   HAVING SUM(OrderPrice)&lt;2000</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="scalar-">Scalar 函数</h3>
+
+<ul>
+  <li>
+    <p>Scalar 函数的操作面向某个单一的值，并返回基于输入值的一个单一的值，可以和where连用</p>
+  </li>
+  <li>
+    <p>UCASE()</p>
+
+    <ul>
+      <li>SELECT UCASE(column_name) FROM table_name</li>
+    </ul>
+  </li>
+  <li>
+    <p>LCASE()</p>
+
+    <ul>
+      <li>SELECT LCASE(column_name) FROM table_name</li>
+    </ul>
+  </li>
+  <li>
+    <p>MID()</p>
+
+    <ul>
+      <li>SELECT MID(column_name,start[,length]) FROM table_name</li>
+    </ul>
+  </li>
+  <li>
+    <p>LEN()</p>
+
+    <ul>
+      <li>SELECT LEN(column_name) FROM table_name</li>
+    </ul>
+  </li>
+  <li>
+    <p>ROUND()</p>
+
+    <ul>
+      <li>
+        <p>SELECT ROUND(column_name,decimals) FROM table_name</p>
+      </li>
+      <li>
+        <p>column_name:必需。要舍入的字段。</p>
+      </li>
+      <li>
+        <p>decimals:必需。规定要返回的小数位数。</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="section-2">日期相关</h3>
+
+<ul>
+  <li>
+    <p>NOW()    返回当前的日期和时间</p>
+  </li>
+  <li>
+    <p>CURDATE()	返回当前的日期</p>
+  </li>
+  <li>
+    <p>CURTIME()	返回当前的时间</p>
+  </li>
+  <li>
+    <p>DATE()	提取日期或日期/时间表达式的日期部分</p>
+
+    <ul>
+      <li>SELECT ProductName, DATE(OrderDate) AS OrderDate FROM Orders</li>
+    </ul>
+  </li>
+  <li>
+    <p>EXTRACT()	返回日期/时间按的单独部分，比如年、月、日、小时、分钟等等</p>
+
+    <ul>
+      <li>EXTRACT(unit FROM date) unit可以是year、date等</li>
+    </ul>
+  </li>
+  <li>
+    <p>DATE_ADD()	给日期添加指定的时间间隔</p>
+
+    <ul>
+      <li>
+        <p>DATE_ADD(date,INTERVAL expr type)date 参数是合法的日期表达式。expr 参数是您希望添加的时间间隔。</p>
+      </li>
+      <li>
+        <p>SELECT OrderId,DATE_ADD(OrderDate,INTERVAL 2 DAY) AS OrderPayDate FROM Orders</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>DATE_SUB()	从日期减去指定的时间间隔</p>
+  </li>
+  <li>
+    <p>DATEDIFF()	返回两个日期之间的天数</p>
+
+    <ul>
+      <li>SELECT DATEDIFF(‘2008-12-30’,’2008-12-29’) AS DiffDate</li>
+    </ul>
+  </li>
+  <li>
+    <p>DATE_FORMAT()	用不同的格式显示日期/时间</p>
+
+    <ul>
+      <li>DATE_FORMAT(date,format) date 参数是合法的日期。format 规定日期/时间的输出格式。</li>
+    </ul>
+  </li>
+</ul>
+
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/11/12/MySQL-func" data-title="Mysql 函数" data-url="gaohaoyang.github.io/2015/11/12/MySQL-func/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>

@@ -2,80 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2015-10-11-Django-normal.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/2015-10-22-Python-static.md" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/16/Set-up-Blog/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/16/Set-up-Blog/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/21/Django-manage/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/21/Django-manage/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/24/Django-login-and-lgout/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/24/Django-login-and-lgout/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/04/29/Django-Auth/index.html" afterPath="$PROJECT_DIR$/_site/2015/04/29/Django-Auth/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/02/Django-Signal/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/02/Django-Signal/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/03/Django-GenericForeignKey/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/03/Django-GenericForeignKey/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/07/Django-Ootput/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/07/Django-Ootput/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/12/Django-MiddleClass/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/12/Django-MiddleClass/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/13/Django-Site/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/13/Django-Site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/16/Django-Flatpage/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/16/Django-Flatpage/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/18/Django-Security/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/18/Django-Security/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/21/Django-Rebuild-db/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/21/Django-Rebuild-db/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/25/Django-Local/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/25/Django-Local/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/28/Django-Cache/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/28/Django-Cache/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/05/30/Django-RedisBoard/index.html" afterPath="$PROJECT_DIR$/_site/2015/05/30/Django-RedisBoard/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/03/Django-Session/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/03/Django-Session/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/07/Django-Permission/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/07/Django-Permission/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/12/Django-Databases/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/12/Django-Databases/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/14/Redis-Intruduction/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/14/Redis-Intruduction/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/17/Redis-key/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/17/Redis-key/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/21/Redis-String/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/21/Redis-String/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/22/Redis-Hash/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/22/Redis-Hash/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/25/Redis-Set/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/25/Redis-Set/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/06/29/Redis-List/index.html" afterPath="$PROJECT_DIR$/_site/2015/06/29/Redis-List/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/04/APScheduler/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/04/APScheduler/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/05/Redis-ZSet/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/05/Redis-ZSet/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/08/Redis-ServerCommand/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/08/Redis-ServerCommand/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/12/Redis-Sort/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/12/Redis-Sort/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/14/Redis-HY&amp;ML&amp;S/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/14/Redis-HY&amp;ML&amp;S/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/19/Redis-cli&amp;ben&amp;t/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/19/Redis-cli&amp;ben&amp;t/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/21/Redis-Shard&amp;save/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/21/Redis-Shard&amp;save/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/27/Redis-python/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/27/Redis-python/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/07/31/Python-Selenium/index.html" afterPath="$PROJECT_DIR$/_site/2015/07/31/Python-Selenium/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/02/Curl/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/02/Curl/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/05/Celery-task/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/05/Celery-task/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/08/Celery-Shard/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/08/Celery-Shard/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/12/Git-Base/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/12/Git-Base/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/13/Git-Super/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/13/Git-Super/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/16/Django-Tree/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/16/Django-Tree/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/20/Python-AES/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/20/Python-AES/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/22/Django-django-redis/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/22/Django-django-redis/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/27/Elasticsearch-base/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/27/Elasticsearch-base/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/08/29/Elasticsearch-Cluster/index.html" afterPath="$PROJECT_DIR$/_site/2015/08/29/Elasticsearch-Cluster/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/01/Elasticsearch-search/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/01/Elasticsearch-search/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/03/Elasticsearch-Mapping/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/03/Elasticsearch-Mapping/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/08/Elasticsearch-search&amp;sort/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/08/Elasticsearch-search&amp;sort/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/09/Elasticsearch-sea&amp;agg/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/09/Elasticsearch-sea&amp;agg/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/13/Elasticsearch-index/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/13/Elasticsearch-index/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/16/Elasticsearch-shard/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/16/Elasticsearch-shard/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/20/Python-Collection/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/20/Python-Collection/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/22/Django-pageinator/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/22/Django-pageinator/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/26/Django-User/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/26/Django-User/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/09/30/Python-requests/index.html" afterPath="$PROJECT_DIR$/_site/2015/09/30/Python-requests/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/10/09/Python-Queue/index.html" afterPath="$PROJECT_DIR$/_site/2015/10/09/Python-Queue/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/10/16/Python-deco/index.html" afterPath="$PROJECT_DIR$/_site/2015/10/16/Python-deco/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/10/19/Python-Pro/index.html" afterPath="$PROJECT_DIR$/_site/2015/10/19/Python-Pro/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/10/20/Python-Procon/index.html" afterPath="$PROJECT_DIR$/_site/2015/10/20/Python-Procon/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/10/28/Django-captcha/index.html" afterPath="$PROJECT_DIR$/_site/2015/10/28/Django-captcha/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/11/02/Mysql-base/index.html" afterPath="$PROJECT_DIR$/_site/2015/11/02/Mysql-base/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/11/03/Mysql-join/index.html" afterPath="$PROJECT_DIR$/_site/2015/11/03/Mysql-join/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/2015/11/07/Mysql-orders/index.html" afterPath="$PROJECT_DIR$/_site/2015/11/07/Mysql-orders/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/demo/index.html" afterPath="$PROJECT_DIR$/_site/demo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="$PROJECT_DIR$/_site/page2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page3/index.html" afterPath="$PROJECT_DIR$/_site/page3/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page4/index.html" afterPath="$PROJECT_DIR$/_site/page4/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page5/index.html" afterPath="$PROJECT_DIR$/_site/page5/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page6/index.html" afterPath="$PROJECT_DIR$/_site/page6/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page7/index.html" afterPath="$PROJECT_DIR$/_site/page7/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="shanyj.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,11 +33,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-11-06-Mysql-orders.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="2015-11-06-Mysql-orders.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_posts/2015-11-06-Mysql-orders.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.0534759">
+            <state vertical-scroll-proportion="-109.80769">
               <caret line="249" column="24" selection-start-line="249" selection-start-column="24" selection-end-line="249" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2015-10-13-Django-normal.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2015-10-13-Django-normal.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.34759358">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -449,13 +386,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/2015-05-20-Django-Rebuild-db.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-05-24-Django-Local.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -810,8 +740,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-11-06-Mysql-orders.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.0534759">
+        <state vertical-scroll-proportion="-109.80769">
           <caret line="249" column="24" selection-start-line="249" selection-start-column="24" selection-end-line="249" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-10-13-Django-normal.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.34759358">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
