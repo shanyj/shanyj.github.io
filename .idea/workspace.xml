@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1a3a397-fb5e-41de-8c44-647cd2b3cb27" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2015-12-08-oauth.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2105-12-09-Django-auth.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/page2/index.html" afterPath="$PROJECT_DIR$/_site/page2/index.html" />
@@ -33,31 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="2015-11-06-Mysql-orders.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-11-06-Mysql-orders.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-143.65384">
-              <caret line="249" column="24" selection-start-line="249" selection-start-column="24" selection-end-line="249" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="学习oauth.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="学习oauth.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../project/学习oauth.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9039488">
-              <caret line="229" column="44" selection-start-line="229" selection-start-column="44" selection-end-line="229" selection-end-column="44" />
+            <state vertical-scroll-proportion="-18.75">
+              <caret line="150" column="3" selection-start-line="150" selection-start-column="3" selection-end-line="150" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2015-12-08-oauth.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_posts/2015-12-08-oauth.md">
+      <file leaf-file-name="2105-12-09-Django-auth.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/_posts/2105-12-09-Django-auth.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.807693">
-              <caret line="182" column="3" selection-start-line="182" selection-start-column="3" selection-end-line="182" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.80748665">
+              <caret line="161" column="3" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -71,7 +61,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/_posts/2015-08-19-Python-AES.md" />
         <option value="$PROJECT_DIR$/_posts/2015-08-22-Elasticsearch-base.md" />
         <option value="$PROJECT_DIR$/_posts/2015-05-09-Django-MiddleClass.md" />
         <option value="$PROJECT_DIR$/_posts/2015-08-28-Elasticsearch-Cluster.md" />
@@ -122,6 +111,7 @@
         <option value="$PROJECT_DIR$/_posts/2015-11-06-Mysql-orders.md" />
         <option value="$PROJECT_DIR$/_posts/2015-10-13-Django-normal.md" />
         <option value="$PROJECT_DIR$/_posts/2015-12-08-oauth.md" />
+        <option value="$PROJECT_DIR$/_posts/2105-12-09-Django-auth.md" />
       </list>
     </option>
   </component>
@@ -276,7 +266,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project/学习oauth.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../shanyjoauth" />
     <property name="FullScreen" value="false" />
   </component>
   <component name="RunManager">
@@ -476,27 +466,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-06-Django-Permission.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04812834">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-11-Django-Databases.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04812834">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-06-13-Redis-Intruduction.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.04812834">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-06-16-Redis-key.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04812834">
@@ -697,6 +666,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.791666">
           <caret line="1155" column="40" selection-start-line="1155" selection-start-column="40" selection-end-line="1155" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -724,13 +694,6 @@
     <entry file="file://$PROJECT_DIR$/../../project/学习celery.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0565635">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../project/学习笔记.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.854856">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
@@ -823,26 +786,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-12-08-oauth.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.9197862">
+          <caret line="182" column="3" selection-start-line="182" selection-start-column="3" selection-end-line="182" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2015-11-06-Mysql-orders.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-143.65384">
+        <state vertical-scroll-proportion="3.9946525">
           <caret line="249" column="24" selection-start-line="249" selection-start-column="24" selection-end-line="249" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2015-12-08-oauth.md">
+    <entry file="file://$PROJECT_DIR$/../../project/学习笔记.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.807693">
-          <caret line="182" column="3" selection-start-line="182" selection-start-column="3" selection-end-line="182" selection-end-column="3" />
+        <state vertical-scroll-proportion="-11.854856">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2015-12-05-Django-rest4.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="32" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project/学习websocket.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.3692636">
+          <caret line="178" column="39" selection-start-line="178" selection-start-column="39" selection-end-line="178" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../project/学习oauth.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9039488">
-          <caret line="229" column="44" selection-start-line="229" selection-start-column="44" selection-end-line="229" selection-end-column="44" />
+        <state vertical-scroll-proportion="-18.75">
+          <caret line="150" column="3" selection-start-line="150" selection-start-column="3" selection-end-line="150" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2105-12-09-Django-auth.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.80748665">
+          <caret line="161" column="3" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
           <folding />
         </state>
       </provider>

@@ -5,9 +5,241 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Jan 2016 10:54:27 +0800</pubDate>
-    <lastBuildDate>Mon, 11 Jan 2016 10:54:27 +0800</lastBuildDate>
+    <pubDate>Mon, 11 Jan 2016 15:40:35 +0800</pubDate>
+    <lastBuildDate>Mon, 11 Jan 2016 15:40:35 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Django django-oauth-toolkit</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#token&quot; id=&quot;markdown-toc-token&quot;&gt;授权&amp;amp;token&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#api&quot; id=&quot;markdown-toc-api&quot;&gt;制作api&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#django-user&quot; id=&quot;markdown-toc-django-user&quot;&gt;替代django user&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rest&quot; id=&quot;markdown-toc-rest&quot;&gt;rest联用&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;最近对secfile和其他系统如网络账号进行对接,使用了oauth2.0协议,再次记录一下&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+
+#终端
+pip install django-oauth-toolkit django-cors-headers
+
+#settings.py
+INSTALLED_APPS = (
+    &#39;oauth2_provider&#39;,
+    &#39;corsheaders&#39;,
+)
+
+MIDDLEWARE_CLASSES = (
+    &#39;corsheaders.middleware.CorsMiddleware&#39;,
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+#urls.py
+urlpatterns = patterns(
+    url(r&#39;^o/&#39;, include(&#39;oauth2_provider.urls&#39;, namespace=&#39;oauth2_provider&#39;)),
+)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;创建app&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;http://localhost:8000/o/applications/&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;token&quot;&gt;授权&amp;amp;token&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;授权&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;http://localhost:8000/o/authorize?response_type=code&amp;amp;state=whatever&amp;amp;client_id=syj&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;生成access_token&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;curl -X POST -d
+“code=lrKz7kEXJMtYePDLnKKAp10rQ0m9iZ
+&amp;amp;client_id=syj
+&amp;amp;client_secret=mnHzgZRzbvT920C25o7FnGYiaBWPbG7wemU3u5U8in4ffVB5gKjDzpka0t2uFdyocK8RjotfdmZC5b4Soy3AaxFhlRNfZc0db2d2Vn4ukeumNjGV4GSv88OCUc5CTSGo
+&amp;amp;grant_type=authorization_code
+&amp;amp;redirect_uri=http://localhost:8001/”
+http://localhost:8001/o/token/&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;redirect_url要和创建app时的一样&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;code为请求授权返回的授权码&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;api&quot;&gt;制作api&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;制作api&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+from oauth2_provider.views.generic import ProtectedResourceView
+class ApiEndpoint(ProtectedResourceView):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(&#39;Hello, OAuth2!&#39;)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要加?access_token=才能正确访问&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;django-user&quot;&gt;替代django user&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置settings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+AUTHENTICATION_BACKENDS = (
+    &#39;oauth2_provider.backends.OAuth2Backend&#39;,
+    #&#39;django.contrib.auth.backends.ModelBackend&#39;      也可以不注释用来登陆admin
+)
+
+MIDDLEWARE_CLASSES = (
+    &#39;...&#39;,
+    &#39;django.contrib.auth.middleware.SessionAuthenticationMiddleware&#39;,
+    &#39;oauth2_provider.middleware.OAuth2TokenMiddleware&#39;,
+    &#39;...&#39;,
+)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;顺序&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;（1）.当SessionAuthenticationMiddleware存在时必须在OAuth2TokenMiddleware之前&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;（2）.SessionAuthenticationMiddleware不是必须的&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;（3）当OAuth2TokenMiddleware在 AuthenticationMiddleware之前或 AuthenticationMiddleware不存在，则只有token验证&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;（4）OAuth2TokenMiddleware在AuthenticationMiddleware之后，则先账号密码验证，通过的话就没事了，如果没通过在用token&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;login_required&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;视图保护&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+from django.contrib.auth.decorators import login_required
+@login_required()
+def secret_page(request, *args, **kwargs):
+    return HttpResponse(&#39;Secret contents!&#39;, status=200)
+
+urlpatterns = patterns(
+    url(r&#39;^secret$&#39;, &#39;my.views.secret_page&#39;, name=&#39;secret&#39;),
+)
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;curl -H “Authorization: Bearer 123456” -X GET http://localhost:8000/secret&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;rest&quot;&gt;rest联用&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+OAUTH2_PROVIDER = {
+    &#39;SCOPES&#39;: {&#39;read&#39;: &#39;Read scope&#39;, &#39;write&#39;: &#39;Write scope&#39;, &#39;groups&#39;: &#39;Access to your groups&#39;}
+}
+REST_FRAMEWORK = {
+    &#39;DEFAULT_AUTHENTICATION_CLASSES&#39;: (
+        &#39;oauth2_provider.ext.rest_framework.OAuth2Authentication&#39;,
+    )，
+    &#39;DEFAULT_PERMISSION_CLASSES&#39;: (
+        &#39;rest_framework.permissions.IsAuthenticated&#39;,
+    )
+}
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;permission_classes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
+api_view里加入
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    permission_classes = [permissions.IsAuthenticated, TokenHasScope]
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;以password方式建立applications&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;curl -X POST -d “grant_type=password&amp;amp;username=&lt;user_name&gt;&amp;amp;password=&lt;password&gt;&quot;
+ -u&quot;&lt;client_id&gt;:&lt;client_secret&gt;&quot; http://localhost:8000/o/token/&lt;/client_secret&gt;&lt;/client_id&gt;&lt;/password&gt;&lt;/user_name&gt;&lt;/p&gt;
+
+    &lt;p&gt;获取token&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;curl -H “Authorization: Bearer &lt;your_access_token&gt;&quot; http://localhost:8000/users/&lt;/your_access_token&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在authorize时可以添加scope属性,&amp;amp;scope=read&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 10 Dec 2015 05:01:59 +0800</pubDate>
+        <link>/2015/12/10/Django-auth/</link>
+        <guid isPermaLink="true">/2015/12/10/Django-auth/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
     
       <item>
         <title>oauth基础</title>
@@ -1550,347 +1782,6 @@ except StopIteration:
         <pubDate>Thu, 12 Nov 2015 04:51:25 +0800</pubDate>
         <link>/2015/11/12/MySQL-func/</link>
         <guid isPermaLink="true">/2015/11/12/MySQL-func/</guid>
-        
-        
-        <category>Mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>Mysql 库&amp;表&amp;属性命令</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;库&amp;amp;表&amp;amp;属性命令&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;这里主要记录下Mysql中的Mysql库&amp;amp;表&amp;amp;属性命令的一些用法&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;库&amp;amp;表&amp;amp;属性命令&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;SELECT INTO&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT INTO 语句从一个表中选取数据，然后把数据插入另一个表中&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT column_name(s) INTO new_table_name [IN externaldatabase] FROM old_tablename&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;IN 子句可用于向另一个数据库中拷贝表&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT * INTO Persons IN ‘Backup.mdb’ FROM Persons&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CREATE DATABASE&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;CREATE DATABASE 用于创建数据库&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;CREATE DATABASE database_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CREATE TABLE&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;CREATE DATABASE 用于创建数据库
-        &lt;pre&gt;&lt;code&gt;
- CREATE TABLE 表名称
- (
- 列名称1 数据类型,
- 列名称2 数据类型,
- 列名称3 数据类型,
- ....
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;NOT NULL&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;NOT NULL 约束强制列不接受 NULL 值
-        &lt;pre&gt;&lt;code&gt;
- CREATE TABLE Persons
- (
- Id_P int NOT NULL,
- LastName varchar(255) NOT NULL,
- FirstName varchar(255),
- Address varchar(255),
- City varchar(255)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;UNIQUE&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;UNIQUE 约束唯一标识数据库表中的每条记录
-        &lt;pre&gt;&lt;code&gt;
- CREATE TABLE Persons
- (
- Id_P int NOT NULL,
- City varchar(255),
- UNIQUE (Id_P)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;如果需要命名 UNIQUE 约束，以及为多个列定义 UNIQUE 约束
-        &lt;pre&gt;&lt;code&gt;
- CREATE TABLE Persons
- (
- Id_P int NOT NULL,
- City varchar(255),
- CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;当表已被创建时，如需在 “Id_P” 列创建 UNIQUE 约束，请使用下列 SQL：&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE Persons ADD UNIQUE (Id_P)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如需命名 UNIQUE 约束，并定义多个列的 UNIQUE 约束，请使用下面的 SQL 语法：&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE Persons ADD CONSTRAINT uc_PersonID UNIQUE (Id_P,LastName)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如需撤销 UNIQUE 约束，请使用下面的 SQL:&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE Persons DROP INDEX uc_PersonID&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;PRIMARY KEY&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;PRIMARY KEY 约束唯一标识数据库表中的每条记录
-        &lt;pre&gt;&lt;code&gt;
- CREATE TABLE Persons
- (
- Id_P int NOT NULL,
- City varchar(255),
- PRIMARY KEY (Id_P)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;FOREIGN KEY&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;一个表中的 FOREIGN KEY 指向另一个表中的 PRIMARY KEY
-        &lt;pre&gt;&lt;code&gt;
- CREATE TABLE Orders
- (
- Id_O int NOT NULL,
- Id_P int,
- PRIMARY KEY (Id_O),
- FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CHECK&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;CHECK 约束用于限制列中的值的范围
-        &lt;pre&gt;&lt;code&gt;
-CREATE TABLE Persons
- (
- Id_P int NOT NULL,
- City varchar(255),
- CHECK (Id_P&amp;gt;0)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;DEFAULT&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;创建 DEFAULT 约束
-        &lt;pre&gt;&lt;code&gt;
-CREATE TABLE Persons
- (
- Id_P int NOT NULL,
- City varchar(255) DEFAULT &#39;Sandnes&#39;
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如果在表已存在的情况下为 “City” 列创建 DEFAULT 约束，请使用下面的 SQL&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE Persons
- ALTER City SET DEFAULT ‘SANDNES’&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;如需撤销 DEFAULT 约束，请使用下面的 SQL&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE Persons
- ALTER City DROP DEFAULT&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;CREATE INDEX&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;在表上创建一个简单的索引&lt;/p&gt;
-
-        &lt;p&gt;CREATE INDEX index_name
- ON table_name (column_name)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;在表上创建一个唯一的索引。唯一的索引意味着两个行不能拥有相同的索引值。&lt;/p&gt;
-
-        &lt;p&gt;CREATE UNIQUE INDEX index_name
- ON table_name (column_name)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;假如您希望索引不止一个列，您可以在括号中列出这些列的名称，用逗号隔开：&lt;/p&gt;
-
-        &lt;p&gt;CREATE INDEX PersonIndex
- ON Person (LastName, FirstName)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;删除&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE table_name DROP INDEX index_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;DROP&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;DROP TABLE 语句用于删除表（表的结构、属性以及索引也会被删除）：&lt;/p&gt;
-
-        &lt;p&gt;DROP TABLE 表名称&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;DROP DATABASE 语句用于删除数据库:&lt;/p&gt;
-
-        &lt;p&gt;DROP DATABASE 数据库名称&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SQL TRUNCATE TABLE 语句&lt;/p&gt;
-
-        &lt;p&gt;如果我们仅仅需要除去表内的数据&lt;/p&gt;
-
-        &lt;p&gt;TRUNCATE TABLE 表名称&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;ALTER&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;如需在表中添加列，请使用下列语法&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE table_name
- ADD column_name datatype&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;要删除表中的列，请使用下列语法&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE table_name
- DROP COLUMN column_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;要改变表中列的数据类型，请使用下列语法&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE table_name
- ALTER COLUMN column_name datatype&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;AUTO INCREMENT&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;通常希望在每次插入新记录时，自动地创建主键字段的值
-        &lt;pre&gt;&lt;code&gt;
-CREATE TABLE Persons
- (
- P_Id int NOT NULL AUTO_INCREMENT,
- LastName varchar(255) NOT NULL,
- FirstName varchar(255),
- Address varchar(255),
- City varchar(255),
- PRIMARY KEY (P_Id)
- )
- &lt;/code&gt;&lt;/pre&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;默认地，AUTO_INCREMENT 的开始值是 1，每条新记录递增 1&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;要让 AUTO_INCREMENT 序列以其他的值起始，请使用下列 SQL 语法：&lt;/p&gt;
-
-        &lt;p&gt;ALTER TABLE Persons AUTO_INCREMENT=100&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;VIEW&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;视图是基于 SQL 语句的结果集的可视化的表&lt;/p&gt;
-
-        &lt;p&gt;CREATE VIEW view_name AS
- SELECT column_name(s)
- FROM table_name
- WHERE condition&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;使用下面的语法来更新视图&lt;/p&gt;
-
-        &lt;p&gt;CREATE OR REPLACE VIEW view_name AS
- SELECT column_name(s)
- FROM table_name
- WHERE condition&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;删除&lt;/p&gt;
-
-        &lt;p&gt;DROP VIEW view_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Sat, 07 Nov 2015 03:52:26 +0800</pubDate>
-        <link>/2015/11/07/Mysql-orders/</link>
-        <guid isPermaLink="true">/2015/11/07/Mysql-orders/</guid>
         
         
         <category>Mysql</category>

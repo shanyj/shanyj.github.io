@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Django django-oauth-toolkit</title>
+	<meta name="description" content="Django django-oauth-toolkit">
+	
+	<link rel="canonical" href="/2015/12/10/Django-auth/">
+	<link rel="alternate" type="application/rss+xml" title="ShanYJ" href="/feed.xml" />
+	
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+
+
+	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/index.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/railscasts.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://apps.bdimg.com/libs/highlight.js/8.4/styles/monokai.min.css"> -->
+	<!-- <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/languages/dos.min.js"></script> -->
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/8.4/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	<script>
+	var _hmt = _hmt || [];
+	(function() {
+	  var hm = document.createElement("script");
+	  hm.src = "//hm.baidu.com/hm.js?b636473d6ffa17615f94e5db1459ea81";
+	  var s = document.getElementsByTagName("script")[0]; 
+	  s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+</head>
+
+ <!--  <body data-spy="scroll" data-target="#myAffix"> -->
+  <body>
+
+    <header>
+
+<!-- navbar -->
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">ShanYJ</a>
+      <p class="navbar-text">╭(╯^╰)╮吉吉的blog</p>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+
+        
+          <li>
+        
+        
+          
+            
+              <li>
+            
+            <!--<a href="/demo/"><span class="glyphicon glyphicon-play"></span> Demo</a></li>-->
+          
+        
+          
+            
+              <li>
+            
+            <!--<a href="/about/"><span class="glyphicon glyphicon-heart"></span> About</a></li>-->
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+</header>
+
+
+    <div id="main" class="container main">
+      <div class="row">
+  <div id="myArticle" class="col-sm-9">
+    <div class="post-area post">
+      <header>
+        <h1>Django django-oauth-toolkit</h1>
+        <p>Dec 10, 2015</p>
+      </header>
+      <hr>
+      <article>
+        <ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">序</a>    <ul>
+      <li><a href="#section-1" id="markdown-toc-section-1">安装</a></li>
+      <li><a href="#token" id="markdown-toc-token">授权&amp;token</a></li>
+      <li><a href="#api" id="markdown-toc-api">制作api</a></li>
+      <li><a href="#django-user" id="markdown-toc-django-user">替代django user</a></li>
+      <li><a href="#rest" id="markdown-toc-rest">rest联用</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">序</h2>
+
+<p>最近对secfile和其他系统如网络账号进行对接,使用了oauth2.0协议,再次记录一下</p>
+
+<hr />
+
+<h3 id="section-1">安装</h3>
+
+<ul>
+  <li>安装</li>
+</ul>
+<pre><code>
+
+#终端
+pip install django-oauth-toolkit django-cors-headers
+
+#settings.py
+INSTALLED_APPS = (
+    'oauth2_provider',
+    'corsheaders',
+)
+
+MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+#urls.py
+urlpatterns = patterns(
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+)
+ </code></pre>
+
+<ul>
+  <li>
+    <p>创建app</p>
+
+    <ul>
+      <li>http://localhost:8000/o/applications/</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="token">授权&amp;token</h3>
+
+<ul>
+  <li>
+    <p>授权</p>
+
+    <ul>
+      <li>http://localhost:8000/o/authorize?response_type=code&amp;state=whatever&amp;client_id=syj</li>
+    </ul>
+  </li>
+  <li>
+    <p>生成access_token</p>
+
+    <ul>
+      <li>
+        <p>curl -X POST -d
+“code=lrKz7kEXJMtYePDLnKKAp10rQ0m9iZ
+&amp;client_id=syj
+&amp;client_secret=mnHzgZRzbvT920C25o7FnGYiaBWPbG7wemU3u5U8in4ffVB5gKjDzpka0t2uFdyocK8RjotfdmZC5b4Soy3AaxFhlRNfZc0db2d2Vn4ukeumNjGV4GSv88OCUc5CTSGo
+&amp;grant_type=authorization_code
+&amp;redirect_uri=http://localhost:8001/”
+http://localhost:8001/o/token/</p>
+      </li>
+      <li>
+        <p>redirect_url要和创建app时的一样</p>
+      </li>
+      <li>
+        <p>code为请求授权返回的授权码</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="api">制作api</h3>
+
+<ul>
+  <li>制作api</li>
+</ul>
+<pre><code>
+from oauth2_provider.views.generic import ProtectedResourceView
+class ApiEndpoint(ProtectedResourceView):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('Hello, OAuth2!')
+ </code></pre>
+
+<ul>
+  <li>需要加?access_token=才能正确访问</li>
+</ul>
+
+<hr />
+
+<h3 id="django-user">替代django user</h3>
+
+<ul>
+  <li>配置settings</li>
+</ul>
+<pre><code>
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    #'django.contrib.auth.backends.ModelBackend'      也可以不注释用来登陆admin
+)
+
+MIDDLEWARE_CLASSES = (
+    '...',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
+    '...',
+)
+ </code></pre>
+
+<ul>
+  <li>
+    <p>顺序</p>
+
+    <ul>
+      <li>
+        <p>（1）.当SessionAuthenticationMiddleware存在时必须在OAuth2TokenMiddleware之前</p>
+      </li>
+      <li>
+        <p>（2）.SessionAuthenticationMiddleware不是必须的</p>
+      </li>
+      <li>
+        <p>（3）当OAuth2TokenMiddleware在 AuthenticationMiddleware之前或 AuthenticationMiddleware不存在，则只有token验证</p>
+      </li>
+      <li>
+        <p>（4）OAuth2TokenMiddleware在AuthenticationMiddleware之后，则先账号密码验证，通过的话就没事了，如果没通过在用token</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>login_required</p>
+
+    <ul>
+      <li>视图保护</li>
+    </ul>
+  </li>
+</ul>
+<pre><code>
+from django.contrib.auth.decorators import login_required
+@login_required()
+def secret_page(request, *args, **kwargs):
+    return HttpResponse('Secret contents!', status=200)
+
+urlpatterns = patterns(
+    url(r'^secret$', 'my.views.secret_page', name='secret'),
+)
+ </code></pre>
+
+<ul>
+  <li>curl -H “Authorization: Bearer 123456” -X GET http://localhost:8000/secret</li>
+</ul>
+
+<hr />
+
+<h3 id="rest">rest联用</h3>
+
+<ul>
+  <li>配置</li>
+</ul>
+<pre><code>
+OAUTH2_PROVIDER = {
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+    )，
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+ </code></pre>
+
+<ul>
+  <li>permission_classes</li>
+</ul>
+<pre><code>
+from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope
+api_view里加入
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    permission_classes = [permissions.IsAuthenticated, TokenHasScope]
+ </code></pre>
+
+<ul>
+  <li>
+    <p>以password方式建立applications</p>
+  </li>
+  <li>
+    <p>curl -X POST -d “grant_type=password&amp;username=<user_name>&amp;password=<password>"
+ -u"<client_id>:<client_secret>" http://localhost:8000/o/token/</client_secret></client_id></password></user_name></p>
+
+    <p>获取token</p>
+  </li>
+  <li>
+    <p>curl -H “Authorization: Bearer <your_access_token>" http://localhost:8000/users/</your_access_token></p>
+  </li>
+  <li>
+    <p>在authorize时可以添加scope属性,&amp;scope=read</p>
+  </li>
+</ul>
+
+
+      </article>
+      <hr>
+      <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_copy" data-cmd="copy" title="分享到复制网址"></a></div>
+      <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    </div>
+    <div class="post-area post comment">
+      <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/2015/12/10/Django-auth" data-title="Django django-oauth-toolkit" data-url="gaohaoyang.github.io/2015/12/10/Django-auth/"></div>
+      
+      <!-- 多说评论框 end -->
+    </div>
+  </div>
+
+  <div id="content" class="col-sm-3">
+    <!-- <div id="myAffix" class="shadow-bottom-center hidden-xs" data-spy="affix" data-offset-top="0" data-offset-bottom="-20"> -->
+    <div id="myAffix" class="shadow-bottom-center hidden-xs" >
+      <div class="categories-list-header">
+        Content
+      </div>
+      <div class="content-text"></div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    
+    <div id="top" data-toggle="tooltip" data-placement="left" title="回到顶部">
+      <a href="javascript:;">
+        <div class="arrow"></div>
+        <div class="stick"></div>
+      </a>
+    </div>
+
+    <footer class="">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a href="mailto:shanyunji1@126.com"><span class="glyphicon glyphicon-envelope"></span> shanyunji1@126.com</a>
+          <span class="point"> · </span>
+          <span>╭(╯^╰)╮吉吉的博客</span>
+          <span class="point"> · </span>
+          <span>&copy; 2015 Shanyj</span>
+          <span class="point"> · </span>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"hygblog"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+<!-- 多说公共JS代码 end -->
+
+<!-- 在新窗口中打开 -->
+  <script type="text/javascript">
+    function addBlankTargetForLinks () {
+      $('a[href^="http"]').each(function(){
+          $(this).attr('target', '_blank');
+      });
+    }
+    $(document).bind('DOMNodeInserted', function(event) {
+      addBlankTargetForLinks();
+    });
+  </script>
+  </body>
+</html>
