@@ -5,9 +5,207 @@
     <description>╭(╯^╰)╮吉吉的博客</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 11 Jan 2016 15:41:27 +0800</pubDate>
-    <lastBuildDate>Mon, 11 Jan 2016 15:41:27 +0800</lastBuildDate>
+    <pubDate>Thu, 14 Jan 2016 10:40:16 +0800</pubDate>
+    <lastBuildDate>Thu, 14 Jan 2016 10:40:16 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Django django-bootstrap-toolkit</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;安装&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;模板组成&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#model&quot; id=&quot;markdown-toc-model&quot;&gt;处理model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#section-3&quot; id=&quot;markdown-toc-section-3&quot;&gt;分页&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
+
+&lt;p&gt;之前使用bootstrap的aceadmin框架对前端页面进行了美化，于是搜了下bootstrap在django里的一些应用，在这里mark一下&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;安装&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装&amp;amp;配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+pip install django-bootstrap-toolkit
+
+#在app中添加
+&#39;bootstrap_toolkit&#39;,
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;模板组成&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;head&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+ &amp;lt; head &amp;gt;
+    { % bootstrap_stylesheet_tag % }
+    { % bootstrap_stylesheet_tag &quot;responsive&quot; % }
+    &amp;lt; style type=&quot;text/css&quot;&amp;gt;
+        body {
+            padding-top: 60px;
+        }
+    &amp;lt; /style&amp;gt;
+    &amp;lt; script src=&quot;//html5shim.googlecode.com/svn/trunk/html5.js&quot;&amp;gt;
+    &amp;lt; script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js&quot;&amp;gt;
+    { % bootstrap_javascript_tag % }
+&amp;lt; /head &amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;导航栏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+&amp;lt; div class=&quot;navbar navbar-fixed-top&quot;&amp;gt;
+    &amp;lt; div class=&quot;navbar-inner&quot;&amp;gt;
+        &amp;lt; div class=&quot;container&quot;&amp;gt;
+            &amp;lt; a class=&quot;brand&quot; href=&quot;/&quot;&amp;gt;django-bootstrap-toolkit&amp;lt; /a&amp;gt;
+            &amp;lt; ul class=&quot;nav&quot;&amp;gt;
+                &amp;lt; li&amp;gt;&lt;a&gt;Home&lt;/a&gt;&amp;lt; /li&amp;gt;
+                &amp;lt; li class=&quot;dropdown&quot;&amp;gt;
+                    &amp;lt; a href=&quot;#&quot; class=&quot;dropdown-toggle&quot; data-toggle=&quot;dropdown&quot;&amp;gt;Forms&amp;lt; b class=&quot;caret&quot;&amp;gt;&amp;lt; /b&amp;gt;&amp;lt; /a&amp;gt;
+                    &amp;lt; ul class=&quot;dropdown-menu&quot;&amp;gt;
+                        &amp;lt; li&amp;gt;&amp;lt; a&amp;gt;Vertical&amp;lt; /a&amp;gt;&amp;lt; /li&amp;gt;
+                        &amp;lt; li&amp;gt;&amp;lt; a&amp;gt;Horizontal&amp;lt; /a&amp;gt;&amp;lt; /li&amp;gt;
+                        &amp;lt; li&amp;gt;&amp;lt; a&amp;gt;Inline&amp;lt; /a&amp;gt;&amp;lt; /li&amp;gt;
+                        &amp;lt; li&amp;gt;&amp;lt; a&amp;gt;Search&amp;lt; /a&amp;gt;&amp;lt; /li&amp;gt;
+                        &amp;lt; li&amp;gt;&amp;lt; a&amp;gt;Using template&amp;lt; /a&amp;gt;&amp;lt; /li&amp;gt;
+                    &amp;lt; /ul&amp;gt;
+                &amp;lt; /li&amp;gt;
+                &amp;lt; li&amp;gt;&amp;lt; a&amp;gt;Formset&amp;lt; /a&amp;gt;&amp;lt; /li&amp;gt;
+            &amp;lt; /ul&amp;gt;
+        &amp;lt; /div&amp;gt;
+    &amp;lt; /div&amp;gt;
+&amp;lt; /div&amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;页脚&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+&amp;lt; div class=&quot;container&quot;&amp;gt;
+    { % bootstrap_messages % }
+    &amp;lt; footer class=&quot;row&quot;&amp;gt;
+        &amp;lt; div class=&quot;span6&quot;&amp;gt;
+            &amp;lt; p&amp;gt;This is &amp;lt; a href=&quot;https://github.com/dyve/django-bootstrap-toolkit&quot;&amp;gt;django-bootstrap-toolkit&amp;lt; /a&amp;gt;&amp;lt; /p&amp;gt;
+        &amp;lt; /div&amp;gt;
+        &amp;lt; div class=&quot;span6&quot; style=&quot;text-align:right&quot;&amp;gt;
+            &amp;lt; p&amp;gt;
+                &amp;copy; &amp;lt; a href=&quot;http://twitter.com/dyve&quot;&amp;gt;Dylan Verheul&amp;lt; /a&amp;gt; 2012
+                |
+                &amp;lt; a href=&quot;https://raw.github.com/dyve/django-bootstrap-toolkit/master/LICENSE&quot;&amp;gt;license&amp;lt; /a&amp;gt;
+            &amp;lt; /p&amp;gt;
+        &amp;lt; /div&amp;gt;
+    &amp;lt; /footer&amp;gt;
+&amp;lt; /div&amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;处理model&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;普通方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+def hello(request):
+    form=TestForm（）
+    layout = request.GET.get(&#39;layout&#39;, &#39;&#39;)
+    if layout != &#39;search&#39;:
+        layout = &#39;inline&#39;
+    return render_to_response(&#39;hello.html&#39;,RequestContext(request, {
+        &#39;form&#39;: form,
+        &#39;layout&#39;: &#39;inline&#39;,
+    }))
+
+
+    &amp;lt; form class=&quot;form-{ { layout } }&quot; action=&quot;&quot; method=&quot;post&quot;&amp;gt;
+        { % csrf_token % }
+        { { form|as_bootstrap:layout } }
+    &amp;lt; input type=&quot;submit&quot; value=&quot;Submit&quot; class=&quot;btn btn-primary&quot;&amp;gt;
+    &amp;lt; /form&amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用formset&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+from django.forms.formsets import formset_factory
+def hello(request):
+    form=formset_factory(TestForm)
+    layout = request.GET.get(&#39;layout&#39;, &#39;&#39;)
+    if layout != &#39;search&#39;:
+        layout = &#39;inline&#39;
+    return render_to_response(&#39;hello.html&#39;,RequestContext(request, {
+        &#39;form&#39;: form,
+        &#39;layout&#39;: &#39;inline&#39;,
+    }))
+
+   &amp;lt; form class=&quot;form-{ { layout } }&quot; action=&quot;&quot; method=&quot;post&quot;&amp;gt;
+        { % csrf_token % }
+        { % bootstrap_formset formset=form layout=layout % }
+        &amp;lt; input type=&quot;submit&quot; value=&quot;Submit&quot; class=&quot;btn btn-primary&quot;&amp;gt;
+    &amp;lt; /form&amp;gt;
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;分页&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+def demo_pagination(request):
+    lines = []
+    for i in range(10000):
+        lines.append(u&#39;Line %s&#39; % (i + 1))
+    paginator = Paginator(lines, 10)
+    page = request.GET.get(&#39;page&#39;)
+    try:
+        show_lines = paginator.page(page)
+    except PageNotAnInteger:
+        show_lines = paginator.page(1)
+    except EmptyPage:
+        show_lines = paginator.page(paginator.num_pages)
+    return render_to_response(&#39;pagination.html&#39;, RequestContext(request, {
+        &#39;lines&#39;: show_lines,
+    }))
+ &lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;模板&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+ &amp;lt; table class=&quot;table&quot;&amp;gt;
+        { % for line in lines % }
+            &amp;lt; tr&amp;gt;
+                &amp;lt; td&amp;gt;{ { line } }&amp;lt; /td&amp;gt;
+            &amp;lt; /tr&amp;gt;
+        { % endfor % }
+&amp;lt; /table&amp;gt;
+{ { lines|pagination } }
+{ % bootstrap_pagination lines url=&quot;/pagination?page=1&amp;amp;flop=flip&quot; extra=&quot;q=foo&quot; size=&quot;mini&quot; align=&quot;right&quot; % }
+{ % bootstrap_pagination lines url=&quot;/pagination?page=1&quot; align=&quot;center&quot; size=&quot;large&quot; % }
+ &lt;/code&gt;&lt;/pre&gt;
+</description>
+        <pubDate>Tue, 15 Dec 2015 04:41:25 +0800</pubDate>
+        <link>/2015/12/15/Django-boot/</link>
+        <guid isPermaLink="true">/2015/12/15/Django-boot/</guid>
+        
+        
+        <category>Django</category>
+        
+      </item>
     
       <item>
         <title>Django django-oauth-toolkit</title>
@@ -1532,256 +1730,6 @@ except StopIteration:
         <pubDate>Sun, 15 Nov 2015 05:06:15 +0800</pubDate>
         <link>/2015/11/15/Mysql-func2/</link>
         <guid isPermaLink="true">/2015/11/15/Mysql-func2/</guid>
-        
-        
-        <category>Mysql</category>
-        
-      </item>
-    
-      <item>
-        <title>Mysql 函数</title>
-        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
-  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;序&lt;/a&gt;    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-1&quot; id=&quot;markdown-toc-section-1&quot;&gt;聚合函数&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#scalar-&quot; id=&quot;markdown-toc-scalar-&quot;&gt;Scalar 函数&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;#section-2&quot; id=&quot;markdown-toc-section-2&quot;&gt;日期相关&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;序&lt;/h2&gt;
-
-&lt;p&gt;这里主要记录下Mysql函数的一些用法&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;聚合函数&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;聚合函数都是在先筛选完了再在结果上再次筛选,在GROUP BY之后,在where条件之后&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;AVG()&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT Customer FROM Orders
-   WHERE OrderPrice&amp;gt;(SELECT AVG(OrderPrice) FROM Orders)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;COUNT()&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;COUNT(column_name) 函数返回指定列的值的数目（NULL 不计入）&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT COUNT(column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;COUNT(DISTINCT column_name) 函数返回指定列的不同值的数目：&lt;/p&gt;
-
-        &lt;p&gt;SELECT COUNT(DISTINCT column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;COUNT(*) 函数返回表中的记录数：&lt;/p&gt;
-
-        &lt;p&gt;SELECT COUNT(*) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;FIRST()&amp;amp;LAST()&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT FIRST(column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT LAST(column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;MAX()&amp;amp;MIN()&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT MAX(column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT MIN(column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;SUM()&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SUM 函数返回数值列的总数（总额）&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT SUM(column_name) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;GROUP BY&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT Customer,SUM(OrderPrice) FROM Orders
-   GROUP BY Customer&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;GROUP BY相当于多个where语句的结果合并起来&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;我们也可以对一个以上的列应用 GROUP BY 语句，就像这样：&lt;/p&gt;
-
-        &lt;p&gt;SELECT Customer,OrderDate,SUM(OrderPrice) FROM Orders
-   GROUP BY Customer,OrderDate&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;HAVING&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;having在聚合函数之后，where在聚合函数之前&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;WHERE 关键字无法与合计函数一起使用&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT Customer,SUM(OrderPrice) FROM Orders
-   WHERE Customer IN (‘a’,’b’)
-   GROUP BY Customer
-   HAVING SUM(OrderPrice)&amp;lt;2000&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;scalar-&quot;&gt;Scalar 函数&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Scalar 函数的操作面向某个单一的值，并返回基于输入值的一个单一的值，可以和where连用&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;UCASE()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT UCASE(column_name) FROM table_name&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LCASE()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT LCASE(column_name) FROM table_name&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;MID()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT MID(column_name,start[,length]) FROM table_name&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;LEN()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT LEN(column_name) FROM table_name&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ROUND()&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT ROUND(column_name,decimals) FROM table_name&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;column_name:必需。要舍入的字段。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;decimals:必需。规定要返回的小数位数。&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;日期相关&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;NOW()    返回当前的日期和时间&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;CURDATE()	返回当前的日期&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;CURTIME()	返回当前的时间&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DATE()	提取日期或日期/时间表达式的日期部分&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT ProductName, DATE(OrderDate) AS OrderDate FROM Orders&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;EXTRACT()	返回日期/时间按的单独部分，比如年、月、日、小时、分钟等等&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;EXTRACT(unit FROM date) unit可以是year、date等&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DATE_ADD()	给日期添加指定的时间间隔&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;DATE_ADD(date,INTERVAL expr type)date 参数是合法的日期表达式。expr 参数是您希望添加的时间间隔。&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;SELECT OrderId,DATE_ADD(OrderDate,INTERVAL 2 DAY) AS OrderPayDate FROM Orders&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DATE_SUB()	从日期减去指定的时间间隔&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DATEDIFF()	返回两个日期之间的天数&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;SELECT DATEDIFF(‘2008-12-30’,’2008-12-29’) AS DiffDate&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DATE_FORMAT()	用不同的格式显示日期/时间&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;DATE_FORMAT(date,format) date 参数是合法的日期。format 规定日期/时间的输出格式。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Thu, 12 Nov 2015 04:51:25 +0800</pubDate>
-        <link>/2015/11/12/MySQL-func/</link>
-        <guid isPermaLink="true">/2015/11/12/MySQL-func/</guid>
         
         
         <category>Mysql</category>
